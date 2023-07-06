@@ -23,5 +23,24 @@ module.exports = {
       { allowConstantExport: true },
     ],
     '@typescript-eslint/no-non-null-assertion': 'off',
+    "semi": "error",
+    "no-multiple-empty-lines": ["error", { "max": 1, "maxBOF": 0 }],
+    "array-bracket-spacing": ["error", "always", { "objectsInArrays": false, "singleValue": false }],
+    "arrow-spacing": ["error", { "before": true, "after": true }],
+    "quotes": ["error", "single"],
+    "indent": [
+      "error",
+      2,
+      { "SwitchCase": 1 }
+    ],
+    "arrow-parens": [
+      "error",
+      "always"
+    ],
+    "object-curly-spacing": [
+      "error",
+      "always"
+    ],
+    "no-unused-vars": "warn"
   },
 }
