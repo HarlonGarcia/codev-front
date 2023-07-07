@@ -1,9 +1,22 @@
-import { styled } from "../../styles";
+import { styled } from '../../styles';
+import { Wrapper } from '../../styles/wrapper';
 
-const Container = styled("div", {
-  backgroundColor: "$primary",
+const Container = styled(Wrapper, {
+  backgroundColor: '$primary',
 });
 
-const HomeTitle = styled("h1", {});
+const Hero = styled('section', {
+  padding: '2.5rem',
+});
 
-export { Container, HomeTitle };
+const Title = styled('h1', {
+  variants: {
+    font: {
+      code: {
+        fontFamily: '$code',
+      },
+    }
+  },
+});
+
+export { Container, Hero, Title };
