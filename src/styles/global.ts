@@ -1,7 +1,7 @@
-import { globalCss } from ".";
+import { globalCss } from '.';
 
 export const globalStyles = globalCss({
-  "@font-face": [
+  '@font-face': [
     {
       fontFamily: 'Raleway',
     },
@@ -9,15 +9,25 @@ export const globalStyles = globalCss({
       fontFamily: 'Fira Code',
     }
   ],
-  "*": {
+  '*': {
     margin: 0,
     padding: 0,
-    boxSizing: "border-box",
+    boxSizing: 'border-box',
     '-webkit-font-smoothing': 'antialiased',
   },
   body: {
-    backgroundColor: "$primary",
-    color: "$text",
     fontFamily: '$default',
+    backgroundColor: '$primary',
+    color: '$text',
+  },
+  'h1, h2, h3, h4, h5, h6': {
+    color: '$title',
+  },
+  a: {
+    textDecoration: 'none',
+  },
+  button: {
+    cursor: 'pointer',
+    backgroundColor: 'transparent',
   },
 });

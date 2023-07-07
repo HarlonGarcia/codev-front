@@ -1,5 +1,7 @@
-import { HomeTitle } from "./styles";
+import * as S from './styles';
 
 export default function Home() {
-  return <HomeTitle>Home</HomeTitle>;
+  return <S.Container>
+    <S.Title>Home works</S.Title>
+  </S.Container>;
 }
