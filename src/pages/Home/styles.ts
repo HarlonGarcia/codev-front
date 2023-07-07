@@ -5,6 +5,18 @@ const Container = styled(Wrapper, {
   backgroundColor: '$primary',
 });
 
-const Title = styled('h1', {});
+const Hero = styled('section', {
+  padding: '2.5rem',
+});
 
-export { Container, Title };
+const Title = styled('h1', {
+  variants: {
+    font: {
+      code: {
+        fontFamily: '$code',
+      },
+    }
+  },
+});
+
+export { Container, Hero, Title };
