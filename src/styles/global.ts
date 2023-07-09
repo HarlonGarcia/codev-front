@@ -20,7 +20,7 @@ export const globalStyles = globalCss({
     backgroundColor: '$primary',
     color: '$text',
   },
-  'h1, h2, h3, h4, h5, h6': {
+  'h1, h2': {
     color: '$title',
   },
   a: {
@@ -29,5 +29,11 @@ export const globalStyles = globalCss({
   button: {
     cursor: 'pointer',
     backgroundColor: 'transparent',
+    outline: 'none',
+    border: 'none',
   },
+  code: {
+    fontFamily: '$code',
+    color: '$highlight',
+  }
 });
