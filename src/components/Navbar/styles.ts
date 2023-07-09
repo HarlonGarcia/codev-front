@@ -14,6 +14,12 @@ const Container = styled('header', {
 
   backgroundColor: 'rgba(0, 0, 0, 0.4)',
   backdropFilter: 'blur(5px)',
+
+  '& > h3': {
+    background: 'linear-gradient(to right bottom, rgb(88, 28, 135), rgb(192, 38, 211), rgb(217, 70, 239))',
+    backgroundClip: 'text',
+    color: 'transparent'
+  }
 });
 
 const Navigation = styled('nav', {
