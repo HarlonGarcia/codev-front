@@ -4,6 +4,7 @@ $title: #8625df;
 $text: #c392ef;
 $highlight: #50fa7b;
 $error: #ff5555;
+$glass: linear-gradient(to left bottom, rgba(5, 2, 25, 0.1), rgba(65, 86, 114, 0.1), rgba(5, 2, 25, 0.1));
 
 $xs: 460px;
 $sm: 580px;
@@ -27,8 +28,7 @@ $md: 750px;
   box-shadow: 0px 0px 2px rgba(129, 140, 248, 0.3);
   transition: transform 100ms ease-in-out;
 
-  background: 
-    linear-gradient(to left bottom, rgba(5, 2, 25, 0.1), rgba(65, 86, 114, 0.1), rgba(5, 2, 25, 0.1));
+  background: $glass;
 
   backdrop-filter: blur(4px);
 
@@ -38,11 +38,10 @@ $md: 750px;
     align-items: center;
 
     gap: 0.75rem;
-    padding: 1rem 1rem 0 0.5rem;
-    margin-bottom: 1rem;
+    padding: 1rem 0.5rem;
+    margin-bottom: 0.5rem;
 
     > button {
-      padding: 0.375rem 0.5rem;
       color: $text;
       transition: all 250ms ease-in-out;
 
@@ -146,11 +145,30 @@ $md: 750px;
 }
 
 [cmdk-list] {
-  max-height: 400px;
+  max-height: 300px;
   overflow: auto;
+
   overscroll-behavior: contain;
   transition: 100ms ease-in-out;
   transition-property: height;
+
+  overflow-y: auto;
+  
+  scrollbar-width: thin;
+  scrollbar-color: $text transparent;
+  
+  &::-webkit-scrollbar {
+    width: 2px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background-color: $text;
+    border-radius: 6px;
+  }
 }
 
 *:not([hidden]) + [cmdk-group] {

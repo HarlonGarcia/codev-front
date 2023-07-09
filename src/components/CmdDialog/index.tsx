@@ -1,5 +1,6 @@
 import { Command } from 'cmdk';
 import { FaCodeBranch, FaInfoCircle, FaBook, FaUserCircle, FaCopy, FaGithub } from 'react-icons/fa';
+import { AiFillHome } from 'react-icons/ai';
 import { IoClose } from 'react-icons/io5';
 
 import './styles.scss';
@@ -11,33 +12,41 @@ interface CmdDialogProps {
 
 const goToCommands = [
   {
+    icon: <AiFillHome />,
+    title: 'Ínicio',
+    keys: ['H'],
+    action: () => {
+      console.log('Challenges');
+    }
+  },
+  {
     icon: <FaCodeBranch />,
-    title: 'Challenges',
-    keys: [ 'S', 'D' ],
+    title: 'Desafios',
+    keys: ['C'],
     action: () => {
       console.log('Challenges');
     }
   },
   {
     icon: <FaInfoCircle />,
-    title: 'About',
-    keys: [ 'S', 'A' ],
+    title: 'Sobre',
+    keys: ['A'],
     action: () => {
       console.log('Challenges');
     }
   },
   {
     icon: <FaBook />,
-    title: 'Tips',
-    keys: [ 'S', 'T' ],
+    title: 'Dicas',
+    keys: ['T'],
     action: () => {
       console.log('Tips');
     }
   },
   {
     icon: <FaUserCircle />,
-    title: 'My profile',
-    keys: [ 'S', 'SPACE' ],
+    title: 'Meu perfil',
+    keys: [ 'F', 'SPACE' ],
     action: () => {
       console.log('Tips');
     }
@@ -48,7 +57,7 @@ const extraCommands = [
   {
     icon: <FaCopy />,
     title: 'Copiar url',
-    keys: [ 'S', 'C' ],
+    keys: ['U'],
     action: () => {
       console.log('Challenges');
     }
@@ -56,7 +65,7 @@ const extraCommands = [
   {
     icon: <FaGithub />,
     title: 'Ver github',
-    keys: [ 'S', 'G' ],
+    keys: ['G'],
     action: () => {
       console.log('Challenges');
     }

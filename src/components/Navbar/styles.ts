@@ -12,8 +12,10 @@ const Container = styled('header', {
 
   padding: '0 2rem',
 
-  backgroundColor: 'rgba(0, 0, 0, 0.4)',
-  backdropFilter: 'blur(5px)',
+  backgroundColor: '$glass',
+  borderBottom: '1px solid rgba(49, 46, 129, 0.1)',
+  boxShadow: '0px 0px 1px rgba(129, 140, 248, 0.1)',
+  backdropFilter: 'blur(4px)',
 
   '& > h3': {
     background: 'linear-gradient(to right bottom, rgb(88, 28, 135), rgb(192, 38, 211), rgb(217, 70, 239))',
@@ -26,26 +28,26 @@ const Navigation = styled('nav', {
   display: 'none',
   alignItems: 'center',
 
-  gap: '1rem',
+  gap: '2rem',
+
+  '& > a': {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '0.5rem',
+
+    fontWeight: 600,
+    color: '$text',
+
+    transition: 'all 250ms ease-in-out',
+
+    '&:hover': {
+      color: '$title',
+    },
+  },
 
   '@xs': {
     display: 'flex',
   }
 });
 
-const Menu = styled('button', {
-  height: '1.75rem',
-  width: '1.75rem',
-
-  display: 'flex',
-
-  backgroundColor: 'rgba(20, 20, 20, 0.2)',
-  border: '1px solid $title',
-  borderRadius: '0.25rem',
-
-  '@xs': {
-    display: 'none',
-  }
-});
-
-export { Container, Navigation, Menu };
+export { Container, Navigation };

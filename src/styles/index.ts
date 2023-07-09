@@ -7,6 +7,7 @@ const colors = {
   text: '#c392ef',
   highlight: '#50fa7b',
   error: '#ff5555',
+  glass: 'linear-gradient(to left bottom, rgba(5, 2, 25, 0.1), rgba(65, 86, 114, 0.1), rgba(5, 2, 25, 0.1))',
 };
 
 const fonts = {
