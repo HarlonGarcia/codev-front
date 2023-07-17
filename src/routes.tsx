@@ -6,7 +6,8 @@ import Challenges from './pages/Challenges';
 import Navbar from './components/Navbar';
 import CmdDialog from './components/CmdDialog';
 import { useDispatch } from 'react-redux';
-import { openCommanderModal } from './store/features/commander-slice';
+import { closeCommanderModal, openCommanderModal } from './store/features/commander-slice';
+import { extraShortcuts, goToShortcuts } from './utils/shortcuts';
 
 export default function AppRoutes() {
   const dispatch = useDispatch();
@@ -16,6 +17,20 @@ export default function AppRoutes() {
       if (event.key.toUpperCase() === 'K' && (event.metaKey || event.ctrlKey)) {
         event.preventDefault();
         dispatch(openCommanderModal());
+      } else {  
+        const keyPressed = event.key.toUpperCase();
+
+        if (goToShortcuts[keyPressed]) {
+          event.preventDefault();
+          
+          goToShortcuts[keyPressed].action();
+          dispatch(closeCommanderModal());
+        }
+
+        if (extraShortcuts[keyPressed]) {
+          event.preventDefault();
+          extraShortcuts[keyPressed].action();
+        }
       }
     };
 

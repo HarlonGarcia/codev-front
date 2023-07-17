@@ -1,4 +1,3 @@
-import { NavigateFunction } from 'react-router-dom';
 import { AiFillHome } from 'react-icons/ai';
 import { FaBook, FaCodeBranch, FaCopy, FaGithub, FaInfoCircle, FaUserCircle } from 'react-icons/fa';
 
@@ -8,66 +7,55 @@ interface ShortcutInfo {
   icon: JSX.Element;
   title: string;
   keys: string[];
-}
-
-interface RouteShortcut extends ShortcutInfo {
-  goTo: (navigate: NavigateFunction) => void; // eslint-disable-line no-unused-vars
-}
-
-interface ExtraShortcut extends ShortcutInfo {
   action: () => void;
 }
 
-interface RoutesShortcuts {
-  [key: string]: RouteShortcut;
+interface Shortcuts {
+  [key: string]: ShortcutInfo;
 }
 
-interface ExtraShortcuts {
-  [key: string]: ExtraShortcut;
-}
-
-export const goToShortcuts: RoutesShortcuts = {
+export const goToShortcuts: Shortcuts = {
   H: {
     icon: <AiFillHome />,
     title: 'Ínicio',
     keys: ['H'],
-    goTo: (navigate) => {
-      navigate('/');
+    action: () => {
+      location.href ='/';
     }
   },
   C: {
     icon: <FaCodeBranch />,
     title: 'Desafios',
     keys: ['C'],
-    goTo: (navigate) => { navigate('/challenges'); }
+    action: () => { location.href ='/challenges'; }
   },
   A: {
     icon: <FaInfoCircle />,
     title: 'Sobre',
     keys: ['A'],
-    goTo: (navigate) => {
-      navigate('/about');
+    action: () => {
+      location.href ='/about';
     }
   },
   T: {
     icon: <FaBook />,
     title: 'Dicas',
     keys: ['T'],
-    goTo: (navigate) => {
-      navigate('/tips');
+    action: () => {
+      location.href ='/tips';
     }
   },
   Q: {
     icon: <FaUserCircle />,
     title: 'Meu perfil',
     keys: ['Q'],
-    goTo: (navigate) => {
-      navigate('/my_account');
+    action: () => {
+      location.href ='/my_account';
     }
   },
 };
 
-export const extraShortcuts: ExtraShortcuts = {
+export const extraShortcuts: Shortcuts = {
   U: {
     icon: <FaCopy />,
     title: 'Copiar url',
