@@ -1,97 +1,37 @@
 import { Command } from 'cmdk';
-import { FaCodeBranch, FaInfoCircle, FaBook, FaUserCircle, FaCopy, FaGithub } from 'react-icons/fa';
-import { AiFillHome } from 'react-icons/ai';
 import { IoClose } from 'react-icons/io5';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import './styles.scss';
+import { goToShortcuts, extraShortcuts } from '../../utils/shortcuts';
+import { useCustomSelector } from '../../store/useCustomSelector';
+import { toggleCommanderModal } from '../../store/features/commander-slice';
 
-interface CmdDialogProps {
-  open: boolean;
-  setOpen: (open: boolean) => void; // eslint-disable-line no-unused-vars
-}
+export default function CmdDialog() {
+  const { isOpen } = useCustomSelector((state) => state.commander);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-const goToCommands = [
-  {
-    icon: <AiFillHome />,
-    title: 'Ínicio',
-    keys: ['H'],
-    action: () => {
-      console.log('Challenges');
-    }
-  },
-  {
-    icon: <FaCodeBranch />,
-    title: 'Desafios',
-    keys: ['C'],
-    action: () => {
-      console.log('Challenges');
-    }
-  },
-  {
-    icon: <FaInfoCircle />,
-    title: 'Sobre',
-    keys: ['A'],
-    action: () => {
-      console.log('Challenges');
-    }
-  },
-  {
-    icon: <FaBook />,
-    title: 'Dicas',
-    keys: ['T'],
-    action: () => {
-      console.log('Tips');
-    }
-  },
-  {
-    icon: <FaUserCircle />,
-    title: 'Meu perfil',
-    keys: [ 'F', 'SPACE' ],
-    action: () => {
-      console.log('Tips');
-    }
-  },
-];
-
-const extraCommands = [
-  {
-    icon: <FaCopy />,
-    title: 'Copiar url',
-    keys: ['U'],
-    action: () => {
-      console.log('Challenges');
-    }
-  },
-  {
-    icon: <FaGithub />,
-    title: 'Ver github',
-    keys: ['G'],
-    action: () => {
-      console.log('Challenges');
-    }
-  },
-];
-
-export default function CmdDialog({ open, setOpen }: CmdDialogProps) {
-  const handleClose = () => {
-    setOpen(!open);
+  const toggleModal = () => {
+    dispatch(toggleCommanderModal());
   };
 
   return (
-    <Command.Dialog open={open} onOpenChange={setOpen}>
+    <Command.Dialog open={isOpen} onOpenChange={toggleModal}>
       <div className='commands_header'>
         <Command.Input placeholder='O que você deseja?' />
-        <button onClick={handleClose}>
+        <button onClick={toggleModal}>
           <IoClose />
         </button>
       </div>
 
       <Command.List>
         <Command.Group heading="Ir para">
-          {goToCommands.map((command) => (
+          {Object.values(goToShortcuts).map((command) => (
             <Command.Item
-              key={command.title}
-              onClick={command.action}
+              key={command.keys[0]}
+              onMouseDown={() => command.goTo(navigate)}
             >
               <div className='commands_info'>
                 {command.icon}
@@ -109,10 +49,10 @@ export default function CmdDialog({ open, setOpen }: CmdDialogProps) {
         </Command.Group>
         <Command.Group heading="Extra">
           {
-            extraCommands.map((command) => (
+            Object.values(extraShortcuts).map((command) => (
               <Command.Item
-                key={command.title}
-                onClick={command.action}
+                key={command.keys[0]}
+                onMouseDown={command.action}
               >
                 <div className='commands_info'>
                   {command.icon}

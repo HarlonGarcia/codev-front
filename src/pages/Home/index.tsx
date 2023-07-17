@@ -1,7 +1,36 @@
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
 import * as S from './styles';
 import Typer from '../../components/Typer';
+import { extraShortcuts, goToShortcuts } from '../../utils/shortcuts';
+import { closeCommanderModal } from '../../store/features/commander-slice';
 
 export default function Home() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      const keyPressed = event.key.toUpperCase();
+
+      if (goToShortcuts[keyPressed]) {
+        event.preventDefault();
+        goToShortcuts[keyPressed].goTo?.(navigate);
+        dispatch(closeCommanderModal());
+      }
+
+      if (extraShortcuts[keyPressed]) {
+        event.preventDefault();
+        extraShortcuts[keyPressed].action();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [ navigate, dispatch ]);
+
   const userOS = () => {
     if (navigator.userAgent.indexOf('Mac') != -1) {
       return '⌘';
