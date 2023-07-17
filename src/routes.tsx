@@ -1,29 +1,31 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Home from './pages/Home';
 import Challenges from './pages/Challenges';
 import Navbar from './components/Navbar';
 import CmdDialog from './components/CmdDialog';
+import { useDispatch } from 'react-redux';
+import { openCommanderModal } from './store/features/commander-slice';
 
 export default function AppRoutes() {
-  const [ isDialogOpened, setIsDialogOpened ] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'k' && (event.metaKey || event.ctrlKey)) {
+      if (event.key.toUpperCase() === 'K' && (event.metaKey || event.ctrlKey)) {
         event.preventDefault();
-        setIsDialogOpened((prevState) => !prevState);
+        dispatch(openCommanderModal());
       }
     };
 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [dispatch]);
 
   return (
     <BrowserRouter>
-      <CmdDialog open={isDialogOpened} setOpen={setIsDialogOpened} />
+      <CmdDialog />
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />
