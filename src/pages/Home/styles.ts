@@ -2,7 +2,6 @@ import { styled } from '../../styles';
 import { Wrapper } from '../../styles/wrapper';
 
 const Container = styled(Wrapper, {
-  minHeight: '100vh',
   backgroundColor: '$primary',
   background: 'linear-gradient(to top left, rgba(124, 58, 237, 0.1), rgb(2, 1, 10))'
 });
