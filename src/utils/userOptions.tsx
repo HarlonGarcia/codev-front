@@ -1,4 +1,4 @@
-import { FaCode } from 'react-icons/fa6';
+import { FaCode, FaUsers } from 'react-icons/fa6';
 import { MdEdit } from 'react-icons/md';
 
 export interface UserOption {
@@ -19,5 +19,10 @@ export const options: UserOption[] = [
     label: 'Editar informações',
     icon: <MdEdit />,
     isAuthorizationRequired: (role) => role === 'admin',
+  }, 
+  {
+    label: 'Encontrar amigos',
+    icon: <FaUsers />,
+    redirectUrl: '/users'
   }
 ];

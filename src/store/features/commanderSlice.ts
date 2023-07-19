@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 interface CommanderState {
-  isOpen: boolean;
+  isModalOpened: boolean;
 }
 
 const initialState: CommanderState = {
-  isOpen: false,
+  isModalOpened: false,
 };
 
 export const commanderSlice = createSlice({
@@ -13,16 +13,17 @@ export const commanderSlice = createSlice({
   initialState,
   reducers: {
     closeCommanderModal: (state: CommanderState) => {
-      state.isOpen = false;
+      state.isModalOpened = false;
     },
     openCommanderModal: (state: CommanderState) => {
-      state.isOpen = true;
+      state.isModalOpened = true;
     },
     toggleCommanderModal: (state: CommanderState) => {
-      state.isOpen = !state.isOpen;
+      state.isModalOpened = !state.isModalOpened;
     },
   },
 });
 
-export const { closeCommanderModal, openCommanderModal, toggleCommanderModal } = commanderSlice.actions;
+export const { closeCommanderModal, openCommanderModal, toggleCommanderModal } =  commanderSlice.actions;
+
 export const commanderReducer = commanderSlice.reducer;

@@ -1,53 +1,61 @@
-import { useEffect } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import Home from './pages/Home';
-import Challenges from './pages/Challenges';
-import MyAccount from './pages/MyAccount';
 import Navbar from './components/Navbar';
 import CmdDialog from './components/CmdDialog';
-import { closeCommanderModal, openCommanderModal } from './store/features/commander-slice';
+import { closeCommanderModal, openCommanderModal } from './store/features/commanderSlice';
 import { extraShortcuts, goToShortcuts } from './utils/shortcuts';
+import { useCustomSelector } from './store/useCustomSelector';
+
+const Home = React.lazy(() => import('./pages/Home'));
+const Challenges = React.lazy(() => import('./pages/Challenges'));
+const MyAccount = React.lazy(() => import('./pages/MyAccount'));
+const Users = React.lazy(() => import('./pages/Users'));
 
 export default function AppRoutes() {
   const dispatch = useDispatch();
+  const { isModalOpened } = useCustomSelector((state) => state.commander);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key.toUpperCase() === 'K' && (event.metaKey || event.ctrlKey)) {
+      const isSpecialKeyDown = (event.metaKey || event.ctrlKey);
+      const keyPressed = event.key.toUpperCase();
+      
+      if (isSpecialKeyDown && keyPressed === 'K') {
         event.preventDefault();
         dispatch(openCommanderModal());
-      } else {  
-        const keyPressed = event.key.toUpperCase();
+      }   
 
-        if (goToShortcuts[keyPressed]) {
-          event.preventDefault();
-          
-          goToShortcuts[keyPressed].action();
-          dispatch(closeCommanderModal());
-        }
+      if (isSpecialKeyDown && goToShortcuts[keyPressed]) {
+        event.preventDefault();
+        
+        goToShortcuts[keyPressed].action();
+        dispatch(closeCommanderModal());
+      }
 
-        if (extraShortcuts[keyPressed]) {
-          event.preventDefault();
-          extraShortcuts[keyPressed].action();
-        }
+      if (isSpecialKeyDown && extraShortcuts[keyPressed]) {
+        event.preventDefault();
+        extraShortcuts[keyPressed].action();
       }
     };
 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [dispatch]);
+  }, [ dispatch, isModalOpened ]);
 
   return (
     <BrowserRouter>
       <CmdDialog />
       <Navbar />
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/challenges' element={<Challenges />} />
-        <Route path='/my_account' element={<MyAccount />} />
-      </Routes>
+      <Suspense>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/challenges' element={<Challenges />} />
+          <Route path='/my_account' element={<MyAccount />} />
+          <Route path='/users' element={<Users />} />
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 }

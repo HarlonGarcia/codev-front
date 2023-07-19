@@ -5,10 +5,10 @@ import { useDispatch } from 'react-redux';
 import './styles.scss';
 import { goToShortcuts, extraShortcuts } from '../../utils/shortcuts';
 import { useCustomSelector } from '../../store/useCustomSelector';
-import { toggleCommanderModal } from '../../store/features/commander-slice';
+import { toggleCommanderModal } from '../../store/features/commanderSlice';
 
 export default function CmdDialog() {
-  const { isOpen } = useCustomSelector((state) => state.commander);
+  const { isModalOpened } = useCustomSelector((state) => state.commander);
   const dispatch = useDispatch();
 
   const toggleModal = () => {
@@ -16,9 +16,13 @@ export default function CmdDialog() {
   };
 
   return (
-    <Command.Dialog open={isOpen} onOpenChange={toggleModal}>
+    <Command.Dialog open={isModalOpened} onOpenChange={toggleModal}>
       <div className='commands_header'>
-        <Command.Input placeholder='O que você deseja?' />
+        
+        <Command.Input 
+          placeholder='O que você deseja?'
+        />
+
         <button onClick={toggleModal}>
           <IoClose />
         </button>
@@ -28,7 +32,7 @@ export default function CmdDialog() {
         <Command.Group heading="Ir para">
           {Object.values(goToShortcuts).map((command) => (
             <Command.Item
-              key={command.keys[0]}
+              key={command.title}
               onMouseDown={command.action}
             >
               <div className='commands_info'>
@@ -49,7 +53,7 @@ export default function CmdDialog() {
           {
             Object.values(extraShortcuts).map((command) => (
               <Command.Item
-                key={command.keys[0]}
+                key={command.title}
                 onMouseDown={command.action}
               >
                 <div className='commands_info'>

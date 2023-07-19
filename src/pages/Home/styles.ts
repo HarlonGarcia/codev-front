@@ -36,8 +36,7 @@ const Instruction = styled('p', {
     boxShadow: '0px 0px 2px $highlight',
     borderRadius: '0.25rem',
   },
-  '& > span > span': {
-    fontFamily: '$code',
+  '& > span > *': {
     fontSize: '.875rem',
     fontWeight: 900,
     background: 'conic-gradient(at left bottom, rgb(139, 92, 246), rgb(249, 168, 212), rgb(191, 219, 254))',

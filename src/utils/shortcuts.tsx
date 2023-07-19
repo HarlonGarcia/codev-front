@@ -18,7 +18,7 @@ export const goToShortcuts: Shortcuts = {
   H: {
     icon: <AiFillHome />,
     title: 'Ínicio',
-    keys: ['H'],
+    keys: [ '⌘', 'H' ],
     action: () => {
       location.href ='/';
     }
@@ -26,13 +26,13 @@ export const goToShortcuts: Shortcuts = {
   C: {
     icon: <FaCodeBranch />,
     title: 'Desafios',
-    keys: ['C'],
+    keys: [ '⌘', 'C' ],
     action: () => { location.href ='/challenges'; }
   },
   A: {
     icon: <FaInfoCircle />,
     title: 'Sobre',
-    keys: ['A'],
+    keys: [ '⌘', 'A' ],
     action: () => {
       location.href ='/about';
     }
@@ -40,7 +40,7 @@ export const goToShortcuts: Shortcuts = {
   T: {
     icon: <FaBook />,
     title: 'Dicas',
-    keys: ['T'],
+    keys: [ '⌘', 'T' ],
     action: () => {
       location.href ='/tips';
     }
@@ -48,7 +48,7 @@ export const goToShortcuts: Shortcuts = {
   Q: {
     icon: <FaUserCircle />,
     title: 'Meu perfil',
-    keys: ['Q'],
+    keys: [ '⌘', 'Q' ],
     action: () => {
       location.href ='/my_account';
     }
@@ -59,7 +59,7 @@ export const extraShortcuts: Shortcuts = {
   U: {
     icon: <FaCopy />,
     title: 'Copiar url',
-    keys: ['U'],
+    keys: [ '⌘', 'U' ],
     action: () => {
       navigator.clipboard.writeText(URL_DEPLOY).then().catch((error) => console.log(error));
     }
@@ -67,7 +67,7 @@ export const extraShortcuts: Shortcuts = {
   G: {
     icon: <FaGithub  />,
     title: 'Ver github',
-    keys: ['G'],
+    keys: [ '⌘', 'G' ],
     action: () => {
       window.open(URL_REPOSITORY, '_blank');
     }
