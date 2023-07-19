@@ -33,4 +33,10 @@ export const { styled, theme, globalCss, getCssText } = createStitches({
     md: '(min-width: 750px)',
     lg: '(min-width: 880px)',
   },
+  utils: {
+    wrapperPadding: (value: string) => ({
+      padding: value,
+      paddingTop: `calc($navbarHeight + ${value})`,
+    }),
+  }
 });

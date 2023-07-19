@@ -1,7 +1,6 @@
 import { Command } from 'cmdk';
 import { IoClose } from 'react-icons/io5';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 
 import './styles.scss';
 import { goToShortcuts, extraShortcuts } from '../../utils/shortcuts';
@@ -10,7 +9,6 @@ import { toggleCommanderModal } from '../../store/features/commander-slice';
 
 export default function CmdDialog() {
   const { isOpen } = useCustomSelector((state) => state.commander);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const toggleModal = () => {
@@ -31,7 +29,7 @@ export default function CmdDialog() {
           {Object.values(goToShortcuts).map((command) => (
             <Command.Item
               key={command.keys[0]}
-              onMouseDown={() => command.goTo(navigate)}
+              onMouseDown={command.action}
             >
               <div className='commands_info'>
                 {command.icon}

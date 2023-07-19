@@ -1,6 +1,6 @@
 import { styled } from '../../styles';
-import { Wrapper } from '../../styles/wrapper';
+import { WrapperWithPadding } from '../../styles/wrapper';
 
-const Container = styled(Wrapper, {});
+const Container = styled(WrapperWithPadding, {});
 
 export { Container };
