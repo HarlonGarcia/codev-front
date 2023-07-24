@@ -2,13 +2,6 @@ import * as S from './styles';
 import Typer from '../../components/Typer';
 
 export default function Home() {
-  const userOS = () => {
-    if (navigator.userAgent.indexOf('Mac') != -1) {
-      return '⌘';
-    }
-    return 'Win';
-  };
-
   return (
     <S.Container>
       <S.Section>
@@ -18,7 +11,7 @@ export default function Home() {
         </S.Title>
         <S.Instruction>
           Pressione{' '}
-          <span><span>{userOS()}</span></span>
+          <span><span>⌘</span></span>
           +
           <span><span>K</span></span>
           {' '}pra abrir a lista de comandos
