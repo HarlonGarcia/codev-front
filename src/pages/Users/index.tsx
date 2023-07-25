@@ -1,4 +1,4 @@
-import { ElementType, useCallback, useMemo, useState } from 'react';
+import { ElementType, useCallback, useEffect, useMemo, useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { debounce } from 'lodash';
 import { useDispatch } from 'react-redux';
@@ -14,7 +14,9 @@ export default function Users() {
   const [ searchTerm, setSearchTerm ] = useState('');
   const dispatch = useDispatch<AppDispatch>();
 
-  const { isLoading } = useCustomSelector((state) => state.users);
+  const { isLoading, users } = useCustomSelector((state) => state.users);
+
+  console.log(users);
 
   const getUsers = useCallback((searchTerm = '') => {
     const filters = {
@@ -38,6 +40,10 @@ export default function Users() {
     }
   };
 
+  useEffect(() => {
+    getUsers();
+  }, []);
+
   return (
     <S.Container>
       <Input.Root>
@@ -53,6 +59,14 @@ export default function Users() {
           disabled={isLoading}
         />
       </Input.Root>
+      {isLoading && <strong>Carregando...</strong>}
+      {users.map((user) => (
+        <div key={user.id}>
+          <span>{user.id}</span><br></br>
+          <span>{user.name}</span><br></br>
+          <span>{user.email}</span><br></br>
+        </div>
+      ))}
     </S.Container>
   );
 }
