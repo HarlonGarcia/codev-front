@@ -3,20 +3,19 @@ import { FaSearch } from 'react-icons/fa';
 import { debounce } from 'lodash';
 import { useDispatch } from 'react-redux';
 
+import * as S from './styles';
 import { getAllUsers } from '../../store/features/usersSlice';
 import { Input } from '../../components/Input';
-import * as S from './styles';
 import { MIN_SEARCH_LENGTH } from '../../utils/constants';
 import { AppDispatch } from '../../store';
 import { useCustomSelector } from '../../store/useCustomSelector';
+import UserCard from '../../components/UserCard';
 
 export default function Users() {
   const [ searchTerm, setSearchTerm ] = useState('');
   const dispatch = useDispatch<AppDispatch>();
 
   const { isLoading, users } = useCustomSelector((state) => state.users);
-
-  console.log(users);
 
   const getUsers = useCallback((searchTerm = '') => {
     const filters = {
@@ -28,7 +27,7 @@ export default function Users() {
 
   const getUsersWithDebounce = useMemo(() => debounce(getUsers, 500), [getUsers]);
 
-  const isSearchTermValid = (searchTerm: string) => searchTerm.length > MIN_SEARCH_LENGTH;
+  const isSearchTermValid = (searchTerm: string) => searchTerm.length === 0 || searchTerm.length > MIN_SEARCH_LENGTH;
 
   const handleSearch = (event: React.FormEvent<HTMLInputElement>) => {
     const searchTerm = event.currentTarget.value;
@@ -55,18 +54,15 @@ export default function Users() {
         />
         <Input.Action 
           icon={(FaSearch as ElementType)} 
-          onClick={() => console.log('Oi')}
-          disabled={isLoading}
+          onClick={() => getUsers(searchTerm)}
+          disabled={isLoading || !isSearchTermValid(searchTerm)}
         />
       </Input.Root>
-      {isLoading && <strong>Carregando...</strong>}
-      {users.map((user) => (
-        <div key={user.id}>
-          <span>{user.id}</span><br></br>
-          <span>{user.name}</span><br></br>
-          <span>{user.email}</span><br></br>
-        </div>
-      ))}
+      <S.UserList>
+        {users.map((user) => (
+          <UserCard key={user.id} user={user} />
+        ))}
+      </S.UserList>
     </S.Container>
   );
 }

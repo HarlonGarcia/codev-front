@@ -8,6 +8,7 @@ const colors = {
   highlight: '#50fa7b',
   error: '#ff5555',
   glass: 'linear-gradient(to left bottom, rgba(5, 2, 25, 0.1), rgba(65, 86, 114, 0.1), rgba(5, 2, 25, 0.1))',
+  shadow: 'rgba(5, 2, 25, 0.4)',
 };
 
 const fonts = {
