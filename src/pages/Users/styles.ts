@@ -7,14 +7,18 @@ const Container = styled(WrapperWithPadding, {
 });
 
 const UserList = styled('section', {
-  display: 'grid',
-  gridTemplateColumns: '1fr',
+  display: 'flex',
+  flexWrap: 'wrap',
+  justifyContent: 'center',
   gap: '1rem',
-  
+
+  maxWidth: '68rem',
+
   '@xs': {
-    gridTemplateColumns: 'repeat(auto-fit, minmax(16rem, 1fr))',
-    padding: '1rem',
-  }
+    gap: '1rem',
+    padding: '0 1rem',
+    maxWidth: '100%',
+  },
 });
 
 export { Container, UserList };

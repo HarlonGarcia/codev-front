@@ -4,6 +4,8 @@ const Root = styled('div', {
   display: 'flex',
   justifyContent: 'space-between',
 
+  width: '100%',
+
   padding: '0.75rem',
 
   background: '$secondary',
@@ -13,7 +15,21 @@ const Root = styled('div', {
     display: 'flex',
     alignItems: 'center',
     gap: '1rem',
-  }
+  },
+
+  '@xs': {
+    flexDirection: 'column',
+    width: '47.5%',
+    maxWidth: '12rem',
+    padding: '1.25rem 0.75rem',
+
+    boxShadow: '0px 2px 6px rgba(5, 0, 10, 0.4)',
+
+    '& > div': {
+      flexDirection: 'column',
+      alignItems: 'center',
+    }
+  },
 });
 
 const Avatar = styled('img', {
@@ -21,6 +37,11 @@ const Avatar = styled('img', {
   height: '3rem',
   
   borderRadius: '50%',
+
+  '@xs': {
+    width: '5rem',
+    height: '5rem',
+  },
 });
 
 const Content = styled('div', {
@@ -28,8 +49,20 @@ const Content = styled('div', {
   flexDirection: 'column',
 
   '& > strong': {
-    fontSize: '0.875rem',
     marginBottom: '0.5rem',
+    color: '$text',
+    textTransform: 'capitalize',
+    fontSize: '0.875rem',
+    fontWeight: 600,
+  },
+
+  '@xs': {
+    alignItems: 'center',
+    marginBottom: '1.25rem',
+    
+    '& > strong': {
+      marginBottom: '0.75rem',
+    },
   },
 });
 
@@ -53,11 +86,11 @@ const Labels = styled('ul', {
   },
 
   '@xs': {
-    gap: '0.5rem',
+    gap: '0.75rem',
   },
 });
 
-const Links = styled('div', {
+const LinksPopover = styled('div', {
   position: 'relative',
   display: 'flex',
   padding: '0.25rem',
@@ -78,34 +111,35 @@ const Links = styled('div', {
       width: '1.75rem',
       height: '1.75rem',
     },
+  },
+
+  '@xs': {
+    display: 'none !important',
   }
 });
 
-const MenuContext = styled('div', {
-  position: 'absolute',
-  bottom: '-1.625rem',
-  right: '-0.75rem',
-
-  display: 'flex',
-  alignItems: 'center',
+const Contacts = styled('div', {
+  display: 'none !important',
+  justifyContent: 'center',
+  flexDirection: 'row !important',
   gap: '0.75rem',
 
-  padding: '0.5rem',
-  backgroundColor: '$primary',
-  borderRadius: '0.5rem',
-
-  '& > a': {
-    display: 'flex',
-    alignItems: 'center',
-
+  '& > a > *': {
+    width: '1.25rem',
+    height: '1.25rem',
+  
     color: '$text',
-
-    transition: 'color 0.2s ease-in-out',
+    cursor: 'pointer',
+    transition: 'all 0.3s ease-in-out',
 
     '&:hover': {
-      color: '$highlight',
-    }
+      color: '$title',
+    },
+  },
+
+  '@xs': {
+    display: 'flex !important',
   },
 });
 
-export { Root, Avatar, Content, Labels, Links, MenuContext };
+export { Root, Avatar, Content, Labels, LinksPopover, Contacts };

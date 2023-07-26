@@ -1,22 +1,15 @@
-import { useState } from 'react';
-import { FaGithub } from 'react-icons/fa';
-import { ImLink } from 'react-icons/im';
-import { MdExpandMore } from 'react-icons/md';
-
 import * as S from './styles';
 import { User } from '../../types/User';
+import CardPopover from './CardPopover';
+
+import { FaGithub } from 'react-icons/fa';
+import { ImLink } from 'react-icons/im';
 
 interface UserCardProps {
   user: User;
 }
 
 export default function UserCard({ user }: UserCardProps) {
-  const [ isMenuOpen, setIsMenuOpen ] = useState(false);
-
-  const toggleLinksMenu = () => {
-    setIsMenuOpen((prev) => !prev);
-  };
-
   return (
     <S.Root>
       <div>
@@ -30,25 +23,24 @@ export default function UserCard({ user }: UserCardProps) {
           </S.Labels>
         </S.Content>
       </div>
-      <S.Links>
-        <button onClick={toggleLinksMenu}>
-          <MdExpandMore />
-        </button>
-        {isMenuOpen ? (
-          <S.MenuContext>
-            {user.githubUrl && (
-              <a href="">
-                <FaGithub />
-              </a>
-            )}
-            {user.githubUrl && (
-              <a href="">
-                <ImLink />
-              </a>
-            )}
-          </S.MenuContext>
-        ) : null}
-      </S.Links>
+      <S.LinksPopover>
+        <CardPopover 
+          github={user.githubUrl}
+          additional={user.additionalUrl}
+        />
+      </S.LinksPopover>
+      <S.Contacts>
+        {user.githubUrl && (
+          <a href={user.githubUrl} target='_black' rel='noopener noreferrer'>
+            <FaGithub />
+          </a>
+        )}
+        {user.additionalUrl && (
+          <a href={user.additionalUrl} target='_black' rel='noopener noreferrer'>
+            <ImLink />
+          </a>
+        )}
+      </S.Contacts>
     </S.Root>
   );
 }
