@@ -15,6 +15,15 @@ export const globalStyles = globalCss({
     boxSizing: 'border-box',
     '-webkit-font-smoothing': 'antialiased',
   },
+  '*::-webkit-scrollbar': {
+    width: '0.375rem',
+  },
+  '*::-webkit-scrollbar-track': {
+    background: '$primary',
+  },
+  '*::-webkit-scrollbar-thumb': {
+    backgroundColor: '$secondary',
+  },
   body: {
     fontFamily: '$default',
     backgroundColor: '$primary',

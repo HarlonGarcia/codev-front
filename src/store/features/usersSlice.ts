@@ -25,7 +25,6 @@ const initialState: UsersState = {
 
 export const getAllUsers = createAsyncThunk('users/getAllUsers', async (filters: Filters) => {
   const response = await api.get('/users', { params: filters });
-  console.log('data', response);
 
   return response.data ?? [];
 });
