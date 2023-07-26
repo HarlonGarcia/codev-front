@@ -6,6 +6,7 @@ const Root = styled('div', {
 
   maxWidth: '24rem',
   margin: '0 auto',
+  marginBottom: '1.5rem',
 
   border: '2px solid transparent',
   borderRadius: '0.375rem',
