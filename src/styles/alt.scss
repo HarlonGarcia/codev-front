@@ -6,6 +6,21 @@
   padding: 0.875rem;
   margin-bottom: 1.5rem;
 
+  h1, h2, h3 {
+    margin-top: 1.5rem;
+  }
+
+  h4, h5, h6 {
+    margin-top: 1rem;
+  }
+
+  blockquote {
+    margin: 1rem 0;
+    padding: 0.5rem 1rem;
+    border-left: 0.25rem solid #8625df;
+    border-radius: 0.375rem;
+  }
+
   background-color: rgba(5, 2, 25, 0.4);
   border: 1px solid rgba(30, 20, 50, 0.4);
   border-radius: 0.375rem;

@@ -2,15 +2,16 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { api } from '../../api';
 import { Challenge } from '../../types/Challenge';
+import { ChallengeDt0 } from '../../types/dto/ChallengeDto';
 
-interface ChallengesState {
+interface ChallengeState {
   challenges: Challenge[];
   currentChallenge: Challenge | null;
   isLoading: boolean;
   isError: boolean;
 }
 
-const initialState: ChallengesState = {
+const initialState: ChallengeState = {
   challenges: [],
   currentChallenge: null,
   isLoading: false,
@@ -29,7 +30,13 @@ export const getChallengeById = createAsyncThunk('challenges/getChallengeById', 
   return response.data ?? {};
 });
 
-export const challengesSlice = createSlice({
+export const createChallenge = createAsyncThunk('challenges/createChallenge', async (challenge: ChallengeDt0) => {
+  const response = await api.post('/challenges', challenge);
+
+  return response.data ?? {};
+});
+
+export const challengeSlice = createSlice({
   name: 'challenges',
   initialState,
   reducers: {},
@@ -57,7 +64,19 @@ export const challengesSlice = createSlice({
       state.isLoading = false;
       state.isError = true;
     });
+
+    addCase(createChallenge.pending, (state) => {
+      state.isLoading = true;
+    });
+    addCase(createChallenge.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.challenges = [ ...state.challenges, action.payload ];
+    });
+    addCase(createChallenge.rejected, (state) => {
+      state.isLoading = false;
+      state.isError = true;
+    });
   }
 });
 
-export const challengesReducer = challengesSlice.reducer;
+export const challengesReducer = challengeSlice.reducer;

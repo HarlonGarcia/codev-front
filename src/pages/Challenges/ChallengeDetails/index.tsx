@@ -6,7 +6,7 @@ import { PiCodeDuotone } from 'react-icons/pi';
 import * as S from './styles';
 import Markdown from '../../../components/Markdown';
 import { AppDispatch } from '../../../store';
-import { getChallengeById } from '../../../store/features/challengesSlice';
+import { getChallengeById } from '../../../store/features/challengeSlice';
 import { useCustomSelector } from '../../../store/useCustomSelector';
 
 export default function ChallengeDetails() {

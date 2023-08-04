@@ -32,6 +32,10 @@ const Info = styled('div', {
     fontWeight: 400,
     fontSize: '1rem',
 
+    '& > strong': {
+      textTransform: 'capitalize',
+    },
+
     '@xs': {
       fontSize: '1.25rem',
     },
