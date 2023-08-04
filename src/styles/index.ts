@@ -6,6 +6,7 @@ const colors = {
   title: '#8625df',
   text: '#c392ef',
   highlight: '#50fa7b',
+  alert: '#DBF227',
   error: '#ff5555',
   glass: 'linear-gradient(to left bottom, rgba(5, 2, 25, 0.1), rgba(65, 86, 114, 0.1), rgba(5, 2, 25, 0.1))',
   shadow: 'rgba(5, 2, 25, 0.4)',

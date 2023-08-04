@@ -10,6 +10,7 @@ import { useCustomSelector } from './store/useCustomSelector';
 
 const Home = React.lazy(() => import('./pages/Home'));
 const Challenges = React.lazy(() => import('./pages/Challenges'));
+const ChallengeDetails = React.lazy(() => import('./pages/Challenges/ChallengeDetails'));
 const MyAccount = React.lazy(() => import('./pages/MyAccount'));
 const Users = React.lazy(() => import('./pages/Users'));
 
@@ -52,6 +53,7 @@ export default function AppRoutes() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/challenges' element={<Challenges />} />
+          <Route path='/challenges/:id' element={<ChallengeDetails />} />
           <Route path='/my_account' element={<MyAccount />} />
           <Route path='/users' element={<Users />} />
         </Routes>
