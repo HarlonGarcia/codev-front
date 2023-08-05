@@ -16,7 +16,12 @@ const UnorderedList = styled('ul', {
   display: 'flex',
   flexDirection: 'column',
   gap: '0.25rem',
-  listStyle: 'none',
+  paddingLeft: '1rem',
+  listStyle: 'circle inside',
+
+  '& > li': {
+    lineHeight: '140%',
+  }
 });
 
 const BlockQuote = styled('blockquote', {
