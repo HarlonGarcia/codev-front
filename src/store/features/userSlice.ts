@@ -7,7 +7,7 @@ interface Filters {
   startsWith?: string;
 }
 
-interface UsersState {
+interface UserState {
   users: User[];
   filters: Filters,
   currentUser: User | null;
@@ -15,7 +15,7 @@ interface UsersState {
   isError: boolean;
 }
 
-const initialState: UsersState = {
+const initialState: UserState = {
   users: [],
   filters: {},
   currentUser: null,
@@ -29,7 +29,7 @@ export const getAllUsers = createAsyncThunk('users/getAllUsers', async (filters:
   return response.data ?? [];
 });
 
-export const usersSlice = createSlice({
+export const userSlice = createSlice({
   name: 'users',
   initialState,
   reducers: {},
@@ -48,4 +48,4 @@ export const usersSlice = createSlice({
   }
 });
 
-export const usersReducer = usersSlice.reducer;
+export const usersReducer = userSlice.reducer;

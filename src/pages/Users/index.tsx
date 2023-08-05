@@ -4,7 +4,7 @@ import { debounce } from 'lodash';
 import { useDispatch } from 'react-redux';
 
 import * as S from './styles';
-import { getAllUsers } from '../../store/features/usersSlice';
+import { getAllUsers } from '../../store/features/userSlice';
 import { Input } from '../../components/Input';
 import { MIN_SEARCH_LENGTH } from '../../utils/constants';
 import { AppDispatch } from '../../store';

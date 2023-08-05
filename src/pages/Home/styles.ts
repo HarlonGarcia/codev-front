@@ -1,7 +1,7 @@
 import { styled } from '../../styles';
-import { Wrapper } from '../../styles/wrapper';
+import { WrapperWithPadding } from '../../styles/wrapper';
 
-const Container = styled(Wrapper, {
+const Container = styled(WrapperWithPadding, {
   backgroundColor: '$primary',
   background: 'linear-gradient(to top left, rgba(124, 58, 237, 0.1), rgb(2, 1, 10))'
 });

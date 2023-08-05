@@ -10,6 +10,14 @@ const Wrapper = styled(WrapperDefault, {
 
 const WrapperWithPadding = styled(WrapperDefault, {
   wrapperPadding: '2rem',
+
+  '@sm': {
+    wrapperPadding: '3rem',
+  },
+
+  '@lg': {
+    wrapperPadding: '4rem',
+  }
 });
 
 export { Wrapper, WrapperWithPadding };
