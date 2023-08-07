@@ -1,0 +1,76 @@
+{
+  "translation": {
+    "pages": {
+      "home": {
+        "instruction": {
+          "press": "Pressione",
+          "action": "para abrir a lista de comandos"
+        }
+      },
+      "my_account": {
+        "options": {
+          "challenges": "Desafios que estou participando",
+          "info": "Editar informações",
+          "friends": "Encontrar amigos"
+        },
+        "logout": "Sair"
+      },
+      "challenges": {
+        "create": {
+          "title": "Título",
+          "description": {
+            "label": "Descrição",
+            "placeholder": "Como funciona o seu *desafio*?"
+          },
+          "category": "Escolha uma categoria",
+          "status": {
+            "label": "Escolha o status",
+            "in_progress": "Em progresso",
+            "to_begin": "Não iniciado"
+          },
+          "submit": "Criar novo desafio"
+        },
+        "details": {
+          "title": "Título não informado",
+          "description": "Descrição não informada",
+          "info": {
+            "created": "Criado por",
+            "author": "Autor não informado"
+          },
+          "join": "Participar do desafio"
+        }
+      },
+      "users": {
+        "search": {
+          "placeholder": "Buscar usuário"
+        }
+      }
+    },
+    "components": {
+      "commander": {
+        "modal": {
+          "input": "O que você deseja?",
+          "go_to": "Ir para",
+          "extra": "Extra"
+        },
+        "commands": {
+          "home": "Ínicio",
+          "challenges": "Desafios",
+          "about": "Sobre",
+          "tips": "Dicas",
+          "profile": "Meu perfil",
+          "copy": "Copiar url",
+          "github": "Ver github"
+        }
+      },
+      "menu": {
+        "home": "Ínicio",
+        "challenges": "Desafios"
+      },
+      "navbar": {
+        "home": "Ínicio",
+        "challenges": "Desafios"
+      }
+    }
+  }
+}

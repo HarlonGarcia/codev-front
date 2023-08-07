@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { FaGithub } from 'react-icons/fa';
 import { ImLink } from 'react-icons/im';
 
+import { useTranslation } from 'react-i18next';
 import { UserOption, options } from '../../utils/userOptions';
 import * as S from './styles';
 
@@ -17,6 +18,7 @@ const links = [
 ];
 
 export default function MyAccount() {
+  const { t } = useTranslation('translation', { keyPrefix: 'pages.my_account' });
   const navigate = useNavigate();
 
   const handleActions = (item: UserOption) => {
@@ -41,10 +43,10 @@ export default function MyAccount() {
           </S.AccountInfo>       
         </S.AccountHeader>
         <S.AccountContent>
-          {options.map((option) => (
-            <S.Option key={option.label} onClick={() => handleActions(option)}>
+          {options.map((option, index) => (
+            <S.Option key={index} onClick={() => handleActions(option)}>
               {option.icon}
-              <span>{option.label}</span>
+              {option.label}
             </S.Option>
           ))}
           <S.Divider />
@@ -56,7 +58,7 @@ export default function MyAccount() {
           ))}
         </S.AccountContent>
         <S.AccountFooter>
-          <button>Logout</button>
+          <button>{t('logout')}</button>
         </S.AccountFooter>
       </div>
     </S.Container>

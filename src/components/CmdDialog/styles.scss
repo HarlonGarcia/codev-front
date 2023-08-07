@@ -171,6 +171,10 @@ $md: 750px;
   }
 }
 
+[cmdk-group] {
+  margin-bottom: 1rem;
+}
+
 *:not([hidden]) + [cmdk-group] {
   margin-top: 8px;
 }

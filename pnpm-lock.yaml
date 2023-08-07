@@ -23,6 +23,9 @@ dependencies:
   cmdk:
     specifier: ^0.2.0
     version: 0.2.0(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0)
+  i18next:
+    specifier: ^23.4.1
+    version: 23.4.1
   lodash:
     specifier: ^4.17.21
     version: 4.17.21
@@ -32,6 +35,9 @@ dependencies:
   react-dom:
     specifier: ^18.2.0
     version: 18.2.0(react@18.2.0)
+  react-i18next:
+    specifier: ^13.0.3
+    version: 13.0.3(i18next@23.4.1)(react-dom@18.2.0)(react@18.2.0)
   react-icons:
     specifier: ^4.10.1
     version: 4.10.1(react@18.2.0)
@@ -2167,6 +2173,18 @@ packages:
       react-is: 16.13.1
     dev: false
 
+  /html-parse-stringify@3.0.1:
+    resolution: {integrity: sha512-KknJ50kTInJ7qIScF3jeaFRpMpE8/lfiTdzf/twXyPBLAGrLRTmkz3AdTnKeh40X8k9L2fdYwEp/42WGXIRGcg==}
+    dependencies:
+      void-elements: 3.1.0
+    dev: false
+
+  /i18next@23.4.1:
+    resolution: {integrity: sha512-07ekE7hbUrbxTYj97VnBzyhKcGURTJC9p4iWTwCVC8t63T+YrgqQmb/n1LBQMivZYwR61pqS+PC0G2rtENycyQ==}
+    dependencies:
+      '@babel/runtime': 7.22.6
+    dev: false
+
   /ignore@5.2.4:
     resolution: {integrity: sha512-MAb38BcSbH0eHNBxn7ql2NH/kX33OkB3lZ1BNdh7ENeRChHTYsTvWrMubiIAMNS2llXEEgZ1MUOBtXChP3kaFQ==}
     engines: {node: '>= 4'}
@@ -2906,6 +2924,26 @@ packages:
       scheduler: 0.23.0
     dev: false
 
+  /react-i18next@13.0.3(i18next@23.4.1)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-/t4kt4Y2o+21hbvx+o9zpVnmoiud7KLDncyZFGN0U6TGAWYaXdTsp/ytAHFcKKSAODg4noIMaOO3X7bMgCqLHw==}
+    peerDependencies:
+      i18next: '>= 23.2.3'
+      react: '>= 16.8.0'
+      react-dom: '*'
+      react-native: '*'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.22.6
+      html-parse-stringify: 3.0.1
+      i18next: 23.4.1
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
   /react-icons@4.10.1(react@18.2.0):
     resolution: {integrity: sha512-/ngzDP/77tlCfqthiiGNZeYFACw85fUjZtLbedmJ5DTlNDIwETxhwBzdOJ21zj4iJdvc0J3y7yOsX3PpxAJzrw==}
     peerDependencies:
@@ -3521,6 +3559,11 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
+
+  /void-elements@3.1.0:
+    resolution: {integrity: sha512-Dhxzh5HZuiHQhbvTW9AMetFfBHDMYpo23Uo9btPXgdYP+3T5S+p+jgNy7spra+veYhBP2dCSgxR/i2Y02h5/6w==}
+    engines: {node: '>=0.10.0'}
+    dev: false
 
   /which@2.0.2:
     resolution: {integrity: sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==}

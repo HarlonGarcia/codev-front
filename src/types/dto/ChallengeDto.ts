@@ -2,6 +2,6 @@ export interface ChallengeDt0 {
   title: string;
   description: string;
   categoryId: number | undefined;
-  authorId: number;
+  authorId: string;
   status: string | undefined;
 }

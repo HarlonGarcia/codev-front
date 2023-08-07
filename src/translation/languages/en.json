@@ -1,0 +1,76 @@
+{
+  "translation": {
+    "pages": {
+      "home": {
+        "instruction": {
+          "press": "Press",
+          "action": "to open the command list"
+        }
+      },
+      "my_account": {
+        "options": {
+          "challenges": "Challenges I am taking part in",
+          "info": "Edit information",
+          "friends": "Meet friends"
+        },
+        "logout": "Logout"
+      },
+      "challenges": {
+        "create": {
+          "title": "Title",
+          "description": {
+            "label": "Description",
+            "placeholder": "Tell us about this **challenge**?"
+          },
+          "category": "Choose a category",
+          "status": {
+            "label": "Choose a status",
+            "in_progress": "In progress",
+            "to_begin": "Not started"
+          },
+          "submit": "Create new challenge"
+        },
+        "details": {
+          "title": "Title not found",
+          "description": "Description not found",
+          "info": {
+            "created": "Created by",
+            "author": "Author not found"
+          },
+          "join": "Join challenge"
+        }
+      },
+      "users": {
+        "search": {
+          "placeholder": "Search users"
+        }
+      }
+    },
+    "components": {
+      "commander": {
+        "modal": {
+          "input": "What do you want?",
+          "go_to": "Go to",
+          "extra": "Extra"
+        },
+        "commands": {
+          "home": "Home",
+          "challenges": "Challenges",
+          "about": "About",
+          "tips": "Tips",
+          "profile": "My profile",
+          "copy": "Copy url",
+          "github": "View github"
+        },
+        "menu": {
+          "home": "Home",
+          "challenges": "Challenges"
+        },
+        "navbar": {
+          "home": "Home",
+          "challenges": "Challenges"
+        }
+      }
+    }
+  }
+}
