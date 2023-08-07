@@ -1,11 +1,12 @@
 import { AiFillHome } from 'react-icons/ai';
 import { FaBook, FaCodeBranch, FaCopy, FaGithub, FaInfoCircle, FaUserCircle } from 'react-icons/fa';
+import { Translation } from 'react-i18next';
 
 import { URL_DEPLOY, URL_REPOSITORY } from './constants';
 
 interface ShortcutInfo {
   icon: JSX.Element;
-  title: string;
+  title: JSX.Element;
   keys: string[];
   action: () => void;
 }
@@ -17,7 +18,7 @@ interface Shortcuts {
 export const goToShortcuts: Shortcuts = {
   H: {
     icon: <AiFillHome />,
-    title: 'Ínicio',
+    title: <Translation>{(t) => <span>{t('components.commander.commands.home')}</span>}</Translation>,
     keys: [ '⌘', 'H' ],
     action: () => {
       location.href ='/';
@@ -25,13 +26,13 @@ export const goToShortcuts: Shortcuts = {
   },
   C: {
     icon: <FaCodeBranch />,
-    title: 'Desafios',
+    title: <Translation>{(t) => <span>{t('components.commander.commands.challenges')}</span>}</Translation>,
     keys: [ '⌘', 'C' ],
     action: () => { location.href ='/challenges'; }
   },
   A: {
     icon: <FaInfoCircle />,
-    title: 'Sobre',
+    title: <Translation>{(t) => <span>{t('components.commander.commands.about')}</span>}</Translation>,
     keys: [ '⌘', 'A' ],
     action: () => {
       location.href ='/about';
@@ -39,7 +40,7 @@ export const goToShortcuts: Shortcuts = {
   },
   T: {
     icon: <FaBook />,
-    title: 'Dicas',
+    title: <Translation>{(t) => <span>{t('components.commander.commands.tips')}</span>}</Translation>,
     keys: [ '⌘', 'T' ],
     action: () => {
       location.href ='/tips';
@@ -47,7 +48,7 @@ export const goToShortcuts: Shortcuts = {
   },
   Q: {
     icon: <FaUserCircle />,
-    title: 'Meu perfil',
+    title: <Translation>{(t) => <span>{t('components.commander.commands.profile')}</span>}</Translation>,
     keys: [ '⌘', 'Q' ],
     action: () => {
       location.href ='/my_account';
@@ -58,7 +59,7 @@ export const goToShortcuts: Shortcuts = {
 export const extraShortcuts: Shortcuts = {
   U: {
     icon: <FaCopy />,
-    title: 'Copiar url',
+    title: <Translation>{(t) => <span>{t('components.commander.commands.copy')}</span>}</Translation>,
     keys: [ '⌘', 'U' ],
     action: () => {
       navigator.clipboard.writeText(URL_DEPLOY).then().catch((error) => console.log(error));
@@ -66,7 +67,7 @@ export const extraShortcuts: Shortcuts = {
   },
   G: {
     icon: <FaGithub  />,
-    title: 'Ver github',
+    title: <Translation>{(t) => <span>{t('components.commander.commands.github')}</span>}</Translation>,
     keys: [ '⌘', 'G' ],
     action: () => {
       window.open(URL_REPOSITORY, '_blank');

@@ -1,6 +1,7 @@
 import { Command } from 'cmdk';
 import { IoClose } from 'react-icons/io5';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import './styles.scss';
 import { goToShortcuts, extraShortcuts } from '../../utils/shortcuts';
@@ -8,6 +9,7 @@ import { useCustomSelector } from '../../store/useCustomSelector';
 import { toggleCommanderModal } from '../../store/features/commanderSlice';
 
 export default function CmdDialog() {
+  const { t } = useTranslation('translation', { keyPrefix: 'components.commander.modal' });
   const { isModalOpened } = useCustomSelector((state) => state.commander);
   const dispatch = useDispatch();
 
@@ -20,7 +22,7 @@ export default function CmdDialog() {
       <div className='commands_header'>
         
         <Command.Input 
-          placeholder='O que você deseja?'
+          placeholder={t('input')}
         />
 
         <button onClick={toggleModal}>
@@ -29,17 +31,15 @@ export default function CmdDialog() {
       </div>
 
       <Command.List>
-        <Command.Group heading="Ir para">
-          {Object.values(goToShortcuts).map((command) => (
+        <Command.Group heading={t('go_to')}>
+          {Object.values(goToShortcuts).map((command, index) => (
             <Command.Item
-              key={command.title}
+              key={index}
               onMouseDown={command.action}
             >
               <div className='commands_info'>
                 {command.icon}
-                <span>
-                  {command.title}
-                </span>
+                {command.title}
               </div>
               <div className='commands_keys'>
                 {command.keys.map((key) => (
@@ -49,16 +49,16 @@ export default function CmdDialog() {
             </Command.Item>
           ))}
         </Command.Group>
-        <Command.Group heading="Extra">
+        <Command.Group heading={t('extra')}>
           {
-            Object.values(extraShortcuts).map((command) => (
+            Object.values(extraShortcuts).map((command, index) => (
               <Command.Item
-                key={command.title}
+                key={index}
                 onMouseDown={command.action}
               >
                 <div className='commands_info'>
                   {command.icon}
-                  <span>{command.title}</span>
+                  {command.title}
                 </div>
                 <div className='commands_keys'>
                   {command.keys.map((key) => (

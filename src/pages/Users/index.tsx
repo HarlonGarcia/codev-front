@@ -2,6 +2,7 @@ import { ElementType, useCallback, useEffect, useMemo, useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { debounce } from 'lodash';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import * as S from './styles';
 import { getAllUsers } from '../../store/features/userSlice';
@@ -12,6 +13,7 @@ import { useCustomSelector } from '../../store/useCustomSelector';
 import UserCard from '../../components/UserCard';
 
 export default function Users() {
+  const { t } = useTranslation('translation', { keyPrefix: 'pages.users' });
   const [ searchTerm, setSearchTerm ] = useState('');
   const dispatch = useDispatch<AppDispatch>();
 
@@ -47,7 +49,7 @@ export default function Users() {
     <S.Container>
       <Input.Root>
         <Input.Content 
-          placeholder='Buscar' 
+          placeholder={t('search.placeholder')}
           value={searchTerm} 
           onChange={handleSearch} 
           disabled={isLoading}

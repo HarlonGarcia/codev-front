@@ -1,8 +1,10 @@
 import { FaCode, FaUsers } from 'react-icons/fa6';
 import { MdEdit } from 'react-icons/md';
 
+import { Translation } from 'react-i18next';
+
 export interface UserOption {
-  label: string;
+  label: JSX.Element;
   icon: JSX.Element;
   redirectUrl?: string;
   action?: () => void;
@@ -11,17 +13,17 @@ export interface UserOption {
 
 export const options: UserOption[] = [
   {
-    label: 'Desafios que estou participando',
+    label: <Translation>{(t) => <span>{t('pages.my_account.options.challenges')}</span>}</Translation>,
     icon: <FaCode />,
     redirectUrl: '/challenges'
   },
   {
-    label: 'Editar informações',
+    label: <Translation>{(t) => <span>{t('pages.my_account.options.info')}</span>}</Translation>,
     icon: <MdEdit />,
     isAuthorizationRequired: (role) => role === 'admin',
   }, 
   {
-    label: 'Encontrar amigos',
+    label: <Translation>{(t) => <span>{t('pages.my_account.options.friends')}</span>}</Translation>,
     icon: <FaUsers />,
     redirectUrl: '/users'
   }

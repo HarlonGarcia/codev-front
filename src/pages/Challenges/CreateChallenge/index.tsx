@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import * as Toggle from '@radix-ui/react-toggle';
 import { PiCircleDashedBold } from 'react-icons/pi';
+import { useTranslation } from 'react-i18next';
 
 import * as S from './styles';
 import useChallengeForm from '../../../hooks/useChallengeForm';
@@ -16,6 +17,7 @@ const defaultInputOptions = {
 };
 
 export default function CreateChallenge() {
+  const { t } = useTranslation('translation', { keyPrefix: 'pages.challenges.create' });
   const [ searchTerm, setSearchTerm ] = useState('');
   const [ challengeStatus, setChallengeStatus ] = useState(false);
 
@@ -51,7 +53,7 @@ export default function CreateChallenge() {
       title,
       description,
       categoryId: category?.id,
-      authorId: 1,
+      authorId: '',
       status: challengeStatus ? 'IN_PROGRESS' : 'TO_BEGIN',
     };
 
@@ -77,7 +79,7 @@ export default function CreateChallenge() {
     <S.Container>
       <S.Form onSubmit={handleSubmit}>
         <S.InputGroup>
-          <label>Título</label>
+          <label>{t('title')}</label>
           <input
             id='title'
             type="text"
@@ -88,19 +90,19 @@ export default function CreateChallenge() {
           />
         </S.InputGroup>
         <S.InputGroup>
-          <label>Descrição</label>
+          <label>{t('description.label')}</label>
           <textarea
             id='description'
             value={description}
             onChange={handleInputChange}
-            placeholder='Como funciona o seu *desafio*?'
+            placeholder={t('description.placeholder')}
             required
             {...defaultInputOptions}
           />
         </S.InputGroup>
         <S.Group>
           <div>
-            <label>Escolha uma categoria</label>
+            <label>{t('category')}</label>
             <input
               id='category'
               type="text" 
@@ -122,20 +124,20 @@ export default function CreateChallenge() {
             </ul>
           </div>
           <div>
-            <label>Escolha o status</label>
+            <label>{t('status.label')}</label>
             <Toggle.Root 
               className="toggle" 
               data-state={challengeStatus ? 'off' : 'on'} 
               onClick={handleStatusChange}
             >
               <PiCircleDashedBold />
-              <small>{challengeStatus ? 'Em progresso' : 'Não iniciado'}</small>
+              <small>{challengeStatus ? t('status.in_progress') : t('status.to_begin')}</small>
             </Toggle.Root>
           </div>
         </S.Group>
         <S.Submit 
           type="submit"
-          value={'Criar novo desafio'} 
+          value={t('submit')} 
         />
       </S.Form>
     </S.Container>

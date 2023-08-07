@@ -2,6 +2,7 @@ import { useCallback, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { PiCodeDuotone } from 'react-icons/pi';
+import { useTranslation } from 'react-i18next';
 
 import * as S from './styles';
 import Markdown from '../../../components/Markdown';
@@ -11,10 +12,11 @@ import { useCustomSelector } from '../../../store/useCustomSelector';
 
 export default function ChallengeDetails() {
   const { id } = useParams();
+  const { t } = useTranslation('translation', { keyPrefix: 'pages.challenges.details' });
   const dispatch = useDispatch<AppDispatch>();
 
   const { currentChallenge: challenge } = useCustomSelector((state) => state.challenges);
-
+  
   const getChallenge = useCallback(() => {
     if (id) dispatch(getChallengeById(id));
   }, [ dispatch, id ]);
@@ -26,13 +28,16 @@ export default function ChallengeDetails() {
   if (!challenge) return;
   return (
     <S.Container>
-      <h2>{challenge?.title || 'Title not found'}</h2>
-      <Markdown content={challenge.description || 'No description'} />
+      <h2>{challenge?.title || t('title')}</h2>
+      <Markdown content={challenge.description || t('description')} />
       <S.Footer>
         <S.Info>
-          <h3>Desafio criado por{' '}
-            <strong>{challenge.author.name || 'No author'}</strong>
-          </h3>
+          {challenge.author.name ? (
+            <h3>{t('info.created') + ' '}
+              <strong>{challenge.author.name}</strong>
+            </h3>
+          ) : (<h3>{t('info.author') + ' '}</h3>)}
+          
           <S.Technologies>
             {
               [ 'Java', 'SQL' ].map((tech, index) => (
@@ -48,7 +53,7 @@ export default function ChallengeDetails() {
             <PiCodeDuotone />
           </span>
           <strong>
-            Participar do desafio
+            {t('join')}
           </strong>
         </S.JoinChallengeButton>
       </S.Footer>
