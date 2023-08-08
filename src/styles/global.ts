@@ -14,6 +14,11 @@ export const globalStyles = globalCss({
     padding: 0,
     boxSizing: 'border-box',
     '-webkit-font-smoothing': 'antialiased',
+    
+    '&::selection': {
+      color: '$secondary',
+      backgroundColor: '$title',
+    }
   },
   '*::-webkit-scrollbar': {
     width: '0.375rem',

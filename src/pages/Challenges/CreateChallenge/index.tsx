@@ -53,7 +53,7 @@ export default function CreateChallenge() {
       title,
       description,
       categoryId: category?.id,
-      authorId: '',
+      authorId: 'd68df48e-3c5d-43af-9736-72ea22cc9aad',
       status: challengeStatus ? 'IN_PROGRESS' : 'TO_BEGIN',
     };
 

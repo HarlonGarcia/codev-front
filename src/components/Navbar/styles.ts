@@ -11,11 +11,12 @@ const Container = styled('header', {
   justifyContent: 'space-between',
 
   padding: '0 2rem',
+  zIndex: 1000,
 
   backgroundColor: '$glass',
-  borderBottom: '1px solid rgba(49, 46, 129, 0.1)',
+  borderBottom: '1px solid rgba(49, 46, 129, 0.2)',
   boxShadow: '0px 0px 1px rgba(129, 140, 248, 0.1)',
-  backdropFilter: 'blur(4px)',
+  backdropFilter: 'blur(6px)',
 
   '& > h3': {
     background: 'linear-gradient(to right bottom, rgb(88, 28, 135), rgb(192, 38, 211), rgb(217, 70, 239))',

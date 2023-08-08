@@ -8,7 +8,7 @@ const colors = {
   highlight: '#50fa7b',
   alert: '#DBF227',
   error: '#ff5555',
-  glass: 'linear-gradient(to left bottom, rgba(5, 2, 25, 0.1), rgba(65, 86, 114, 0.1), rgba(5, 2, 25, 0.1))',
+  glass: 'linear-gradient(to left bottom, rgba(5, 2, 8, 0.3), rgba(10, 0, 10, 0.3), rgba(5, 2, 8, 0.3))',
   shadow: 'rgba(5, 2, 25, 0.4)',
 };
 
@@ -34,6 +34,9 @@ export const { styled, theme, globalCss, getCssText } = createStitches({
     sm: '(min-width: 580px)',
     md: '(min-width: 750px)',
     lg: '(min-width: 880px)',
+    xl: '(min-width: 1080px)',
+    xl2: '(min-width: 1260px)',
+    xl3: '(min-width: 1440px)',
   },
   utils: {
     wrapperPadding: (value: string) => ({

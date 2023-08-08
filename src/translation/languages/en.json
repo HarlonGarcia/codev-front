@@ -16,6 +16,15 @@
         "logout": "Logout"
       },
       "challenges": {
+        "main": {
+          "status": {
+            "to_begin": "To begin",
+            "in_progress": "In progress",
+            "finished": "Finished",
+            "canceled": "Canceled"
+          },
+          "join": "Join challenge"
+        },
         "create": {
           "title": "Title",
           "description": {
