@@ -16,6 +16,15 @@
         "logout": "Sair"
       },
       "challenges": {
+        "main": {
+          "status": {
+            "to_begin": "Não iniciado",
+            "in_progress": "Em progresso",
+            "finished": "Finalizado",
+            "canceled": "Cancelado"
+          },
+          "join": "Participar do desafio"
+        },
         "create": {
           "title": "Título",
           "description": {

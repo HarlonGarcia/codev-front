@@ -2,7 +2,7 @@ import { User } from './User';
 import { ChallengeStatus } from './enums/ChallengeStatus';
 
 export interface Challenge {
-  id: number;
+  id: string;
   title: string;
   description: string;
   status: ChallengeStatus;
