@@ -17,6 +17,7 @@
       },
       "challenges": {
         "main": {
+          "title": "Title not found",
           "status": {
             "to_begin": "To begin",
             "in_progress": "In progress",

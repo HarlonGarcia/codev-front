@@ -17,6 +17,7 @@
       },
       "challenges": {
         "main": {
+          "title": "Título não informado",
           "status": {
             "to_begin": "Não iniciado",
             "in_progress": "Em progresso",
