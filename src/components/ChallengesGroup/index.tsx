@@ -47,7 +47,7 @@ export default function ChallengesGroup({ category }: ChallengesGroupProps) {
       const element = carouselRef.current as HTMLDivElement;
       setCarouselWidth(element.scrollWidth - element.offsetWidth);
     }
-  }, []);
+  }, [category]);
 
   const { challenges } = useCustomSelector((state) => state.challenges);
 
