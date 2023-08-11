@@ -40,9 +40,9 @@ export default function ChallengeDetails() {
           
           <S.Technologies>
             {
-              [ 'Java', 'SQL' ].map((tech, index) => (
-                <li key={tech + index}>
-                  {tech}
+              challenge.technologies.map((technology, index) => (
+                <li key={technology.id + index}>
+                  {technology.name}
                 </li>
               ))
             }

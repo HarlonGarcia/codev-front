@@ -49,10 +49,15 @@ const Technologies = styled('ul', {
   listStyle: 'none',
   
   '& > li': {
-    fontSize: '0.875rem',
     padding: '0.5rem 0.75rem',
-    borderRadius: '0.5rem',
+
     backgroundColor: '$secondary',
+
+    fontSize: '0.875rem',
+    fontFamily: '$code',
+    textTransform: 'uppercase',
+    
+    borderRadius: '0.5rem',
   },
 
   '@sm': {

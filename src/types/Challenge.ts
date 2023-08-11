@@ -1,4 +1,5 @@
 import { Category } from './Category';
+import { Technology } from './Technology';
 import { User } from './User';
 import { ChallengeStatus } from './enums/ChallengeStatus';
 
@@ -8,7 +9,7 @@ export interface Challenge {
   description: string;
   status: ChallengeStatus;
   category: Category;
-  technologies: string[];
+  technologies: Technology[];
   author: User;
   createdAt: Date;
   updatedAt: Date;
