@@ -5,6 +5,20 @@
         "instruction": {
           "press": "Press",
           "action": "to open the command list"
+        },
+        "goals": {
+          "title": "Elevate your code skills",
+          "description": "First of all, practice! Nothing better than a project to put into practice what you have learned. So, with these challenges you can...",
+          "cards": {
+            "solution": "Find solutions to real problems",
+            "code": "Turn ideas into code",
+            "compare": "See other solutions"
+          }
+        },
+        "latest": {
+          "title": "Latest challenges",
+          "badge": "New",
+          "link": "Go to challenges"
         }
       },
       "my_account": {

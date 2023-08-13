@@ -5,6 +5,20 @@
         "instruction": {
           "press": "Pressione",
           "action": "para abrir a lista de comandos"
+        },
+        "goals": {
+          "title": "Aumente seu nível na programação",
+          "description": "Antes de tudo, pratique! Nada melhor do que um projeto para pôr em prática o que você aprendeu. Portanto, com esses desafios você consegue...",
+          "cards": {
+            "solution": "Encontre soluções para problemas reais",
+            "code": "Converta idéias em código",
+            "compare": "Veja outras soluções"
+          }
+        },
+        "latest": {
+          "title": "Desafios adicionados recentemente",
+          "badge": "Novo",
+          "link": "Ver desafios"
         }
       },
       "my_account": {

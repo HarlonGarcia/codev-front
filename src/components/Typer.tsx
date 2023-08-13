@@ -26,7 +26,7 @@ export default function Typer() {
   return (
     <>
       <TypeIt getBeforeInit={getBeforeInit} options={{afterComplete}} /><br />
-      {error && <CodeError>error: failed to push</CodeError>}
+      {error && <CodeError>error: failed to push to codev</CodeError>}
     </>
   );
 }

@@ -33,8 +33,8 @@ const Challenge = styled('div', {
 
   padding: '2rem',
   
-  width: '20rem',
-  minWidth: '20rem',
+  width: '24rem',
+  minWidth: '24rem',
   
   background: '$glass',
   border: '1px solid $shadow',
@@ -50,11 +50,6 @@ const Challenge = styled('div', {
       transform: 'scale(0.98)',
     }
   },
-
-  '@lg': {
-    width: '24rem',
-    minWidth: '24rem',
-  }
 });
 
 const ChallengeHeader = styled('div', {
