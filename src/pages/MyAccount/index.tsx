@@ -3,7 +3,7 @@ import { FaGithub } from 'react-icons/fa';
 import { ImLink } from 'react-icons/im';
 
 import { useTranslation } from 'react-i18next';
-import { UserOption, options } from '../../utils/userOptions';
+import { UserOption, options } from '../../utils/userOptions/accountOptions';
 import * as S from './styles';
 
 const links = [

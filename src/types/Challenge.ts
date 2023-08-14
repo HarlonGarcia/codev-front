@@ -8,9 +8,11 @@ export interface Challenge {
   title: string;
   description: string;
   status: ChallengeStatus;
-  category: Category;
+  category: Category | undefined;
   technologies: Technology[];
   author: User;
   createdAt: Date;
   updatedAt: Date;
 }
+
+export type ChallengeDto = Pick<Challenge, 'title' | 'description' | 'category' | 'status'>
