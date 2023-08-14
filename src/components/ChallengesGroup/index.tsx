@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Translation, useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { GrStatusGoodSmall } from 'react-icons/gr';
@@ -51,7 +51,9 @@ export default function ChallengesGroup({ category }: ChallengesGroupProps) {
 
   const { challenges } = useCustomSelector((state) => state.challenges);
 
-  const filteredChallenges = challenges.filter((challenge) => challenge.category.id === category.id);
+  const filteredChallenges = useMemo(() => {
+    return challenges.filter((challenge) => challenge.category.id === category.id);
+  }, [ challenges, category.id ]); 
 
   const handleChallengeClick = (id: string) => {
     navigate(`/challenges/${id}`);
@@ -70,12 +72,14 @@ export default function ChallengesGroup({ category }: ChallengesGroupProps) {
           className='carousel_inner'
           drag="x"
           dragConstraints={{ left: -carouselWidth, right: 0 }}
-          initial={{ x: 100 }}
-          animate={{ x: 0 }}
-          transition={{ duration: 0.8 }}
+          initial={{ x: 100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 1 }}
         >
           {filteredChallenges.map((challenge) => (
-            <S.Challenge key={challenge.id}>
+            <S.Challenge 
+              key={challenge.id}
+            >
               <S.ChallengeHeader>
                 <h2>{challenge.title || t('title')}</h2>
                 {challenge.status &&
@@ -85,7 +89,11 @@ export default function ChallengesGroup({ category }: ChallengesGroupProps) {
                   </span>
                 }
               </S.ChallengeHeader>
-              <S.Image src="https://picsum.photos/id/237/200/300" alt={challenge.title} />
+              <S.Image 
+                src="https://picsum.photos/id/237/200/300" 
+                alt={challenge.title}
+                loading='lazy'
+              />
               <S.JoinChallenge onClick={() => handleChallengeClick(challenge.id)}>
                 {t('join')}
               </S.JoinChallenge>

@@ -2,10 +2,12 @@ import { styled } from '../../styles';
 import { floating, floating2 } from '../../styles/global';
 import { WrapperWithPadding } from '../../styles/wrapper';
 
+import { motion } from 'framer-motion';
+
 const Container = styled(WrapperWithPadding, {
 });
 
-const Section = styled('section', {
+const Section = styled(motion.section, {
   display: 'flex',
   flexDirection: 'column',
 
@@ -68,7 +70,7 @@ const Hero = styled(Section, {
     backgroundImage: 'radial-gradient(ellipse at center, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 1) 80%), url(/images/programming.jpg)',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-    opacity: 0.12,
+    opacity: 0.1,
     position: 'absolute',
     top: 0,
     left: 0,
@@ -162,7 +164,7 @@ const Paragraph = styled('p', {
   }
 });
 
-const Possibilities = styled('ul', {
+const Possibilities = styled(motion.ul, {
   display: 'flex',
   flexWrap: 'wrap',
   justifyContent: 'center',
@@ -171,7 +173,7 @@ const Possibilities = styled('ul', {
   listStyle: 'none',
 });
 
-const CardItem = styled('li', {
+const CardItem = styled(motion.li, {
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',

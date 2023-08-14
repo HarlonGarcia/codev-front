@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import Navbar from './components/Navbar';
 import CmdDialog from './components/CmdDialog';
 import { closeCommanderModal, openCommanderModal } from './store/features/commanderSlice';
-import { extraShortcuts, goToShortcuts } from './utils/shortcuts';
+import { extraShortcuts, goToShortcuts } from './utils/userOptions/shortcuts';
 import { useCustomSelector } from './store/useCustomSelector';
 
 const Home = React.lazy(() => import('./pages/Home'));

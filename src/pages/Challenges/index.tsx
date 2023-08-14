@@ -14,8 +14,10 @@ export default function Challenges() {
   const { categories } = useCustomSelector((state) => state.categories);
 
   useEffect(() => {
-    dispatch(getAllCategories());
-    dispatch(getAllChallenges());
+    Promise.all([
+      dispatch(getAllCategories()), 
+      dispatch(getAllChallenges())
+    ]);
   }, [dispatch]);
 
   return (

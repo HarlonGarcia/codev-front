@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { styled } from '../../styles';
 
 const Container = styled('div', {
@@ -27,7 +28,7 @@ const Container = styled('div', {
   }
 });
 
-const Challenge = styled('div', {
+const Challenge = styled(motion.div, {
   display: 'flex',
   flexDirection: 'column',
 
