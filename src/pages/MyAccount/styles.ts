@@ -2,9 +2,6 @@ import { styled } from '../../styles';
 import { WrapperWithPadding } from '../../styles/wrapper';
 
 const Container = styled(WrapperWithPadding, {
-  backgroundColor: '$primary',
-  background: 'linear-gradient(to top left, rgba(124, 58, 237, 0.1), rgb(2, 1, 10))',
-
   '& > div': {
     maxWidth: '30rem',
     margin: '0 auto',

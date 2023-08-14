@@ -5,9 +5,6 @@ const Container = styled(WrapperWithPadding, {
   display: 'flex',
   flexDirection: 'column',
 
-  backgroundColor: '$primary',
-  background: 'linear-gradient(to top left, rgba(124, 58, 237, 0.15), rgb(2, 1, 10))',
-
   '& > div': {
     '& > .separator': {
       margin: '3rem',
@@ -22,6 +19,14 @@ const Container = styled(WrapperWithPadding, {
       display: 'none',
     }
   },
+
+  '@md': {
+    '& > div': {
+      '& > .separator': {
+        margin: '4rem 3rem',
+      }
+    },
+  }
 });
 
 export { Container };

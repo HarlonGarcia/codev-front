@@ -4,8 +4,15 @@ import { api } from '../../api';
 import { Challenge } from '../../types/Challenge';
 import { ChallengeDt0 } from '../../types/dto/ChallengeDto';
 
+interface Filters {
+  orderBy?: string;
+  page?: number;
+  size?: number;
+}
+
 interface ChallengeState {
   challenges: Challenge[];
+  latestChallenges: Challenge[];
   currentChallenge: Challenge | null;
   isLoading: boolean;
   isError: boolean;
@@ -13,6 +20,7 @@ interface ChallengeState {
 
 const initialState: ChallengeState = {
   challenges: [],
+  latestChallenges: [],
   currentChallenge: null,
   isLoading: false,
   isError: false,
@@ -20,6 +28,12 @@ const initialState: ChallengeState = {
 
 export const getAllChallenges = createAsyncThunk('challenges/getAllChallenges', async () => {
   const response = await api.get('/challenges');
+
+  return response.data ?? [];
+});
+
+export const getChallenges = createAsyncThunk('challenges/getChallenges', async (filters?: Filters) => {
+  const response = await api.get('/challenges', { params: filters });
 
   return response.data ?? [];
 });
@@ -49,6 +63,18 @@ export const challengeSlice = createSlice({
       state.challenges = action.payload;
     });
     addCase(getAllChallenges.rejected, (state) => {
+      state.isLoading = false;
+      state.isError = true;
+    });
+    
+    addCase(getChallenges.pending, (state) => {
+      state.isLoading = true;
+    });
+    addCase(getChallenges.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.latestChallenges = action.payload;
+    });
+    addCase(getChallenges.rejected, (state) => {
       state.isLoading = false;
       state.isError = true;
     });

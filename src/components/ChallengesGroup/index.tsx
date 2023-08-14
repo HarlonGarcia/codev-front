@@ -85,7 +85,7 @@ export default function ChallengesGroup({ category }: ChallengesGroupProps) {
                   </span>
                 }
               </S.ChallengeHeader>
-              <S.Image src="http://placekitten.com/400/300" alt={challenge.title} />
+              <S.Image src="https://picsum.photos/id/237/200/300" alt={challenge.title} />
               <S.JoinChallenge onClick={() => handleChallengeClick(challenge.id)}>
                 {t('join')}
               </S.JoinChallenge>

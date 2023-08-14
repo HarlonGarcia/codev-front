@@ -9,14 +9,19 @@ const Wrapper = styled(WrapperDefault, {
 });
 
 const WrapperWithPadding = styled(WrapperDefault, {
-  wrapperPadding: '2rem',
+  wrapperPadding: '2.5rem',
 
   '@sm': {
-    wrapperPadding: '3rem',
+    wrapperPadding: '3.5rem',
   },
 
   '@lg': {
-    wrapperPadding: '4rem',
+    wrapperPadding: '4.5rem',
+  },
+
+  '@xl3': {
+    maxWidth: '100rem',
+    margin: '0 auto',
   }
 });
 
