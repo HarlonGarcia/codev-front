@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
 import './styles.scss';
-import { goToShortcuts, extraShortcuts } from '../../utils/shortcuts';
+import { goToShortcuts, extraShortcuts } from '../../utils/userOptions/shortcuts';
 import { useCustomSelector } from '../../store/useCustomSelector';
 import { toggleCommanderModal } from '../../store/features/commanderSlice';
 

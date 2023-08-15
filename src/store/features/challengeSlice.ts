@@ -1,8 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { api } from '../../api';
-import { Challenge } from '../../types/Challenge';
-import { ChallengeDt0 } from '../../types/dto/ChallengeDto';
+import { Challenge, ChallengeDto } from '../../types/Challenge';
 
 interface Filters {
   orderBy?: string;
@@ -27,7 +26,12 @@ const initialState: ChallengeState = {
 };
 
 export const getAllChallenges = createAsyncThunk('challenges/getAllChallenges', async () => {
-  const response = await api.get('/challenges');
+  const response = await api.get('/challenges', {
+    params: {
+      page: 0,
+      size: 50,
+    },
+  });
 
   return response.data ?? [];
 });
@@ -44,8 +48,18 @@ export const getChallengeById = createAsyncThunk('challenges/getChallengeById', 
   return response.data ?? {};
 });
 
-export const createChallenge = createAsyncThunk('challenges/createChallenge', async (challenge: ChallengeDt0) => {
-  const response = await api.post('/challenges', challenge);
+export const createChallenge = createAsyncThunk('challenges/createChallenge', async (challenge: ChallengeDto) => {
+  const categoryId = challenge.category?.id;
+
+  if (challenge['category'] !== undefined) {
+    delete challenge['category'];
+  }
+  
+  const response = await api.post('/challenges', {
+    ...challenge,
+    authorId: '1',
+    categoryId,
+  });
 
   return response.data ?? {};
 });

@@ -10,6 +10,8 @@ import { useCustomSelector } from '../../../store/useCustomSelector';
 import { AppDispatch } from '../../../store';
 import { getAllCategories } from '../../../store/features/categorySlice';
 import { createChallenge } from '../../../store/features/challengeSlice';
+import { ChallengeDto } from '../../../types/Challenge';
+import { ChallengeStatus as status } from '../../../types/enums/ChallengeStatus';
 
 const defaultInputOptions = {
   spellCheck: false,
@@ -49,12 +51,11 @@ export default function CreateChallenge() {
       return category.name.toLowerCase() === formData.category.toLowerCase();
     });
 
-    const payload = {
+    const payload: ChallengeDto = {
       title,
       description,
-      categoryId: category?.id,
-      authorId: 'd68df48e-3c5d-43af-9736-72ea22cc9aad',
-      status: challengeStatus ? 'IN_PROGRESS' : 'TO_BEGIN',
+      category,
+      status: challengeStatus ? status.IN_PROGRESS : status.IN_PROGRESS,
     };
 
     dispatch(createChallenge(payload));
