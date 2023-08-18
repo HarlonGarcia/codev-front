@@ -31,7 +31,7 @@ export default function CreateChallenge() {
     handleInputChange,
     changeFormPayload
   } = useChallengeForm();
-
+                
   const { title, description } = formData;
 
   const handleCategorySearch = (event: React.ChangeEvent<HTMLInputElement>) => {

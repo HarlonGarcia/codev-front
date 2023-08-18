@@ -29,7 +29,7 @@ export const getAllChallenges = createAsyncThunk('challenges/getAllChallenges', 
   const response = await api.get('/challenges', {
     params: {
       page: 0,
-      size: 50,
+      size: 100,
     },
   });
 
