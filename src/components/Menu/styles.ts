@@ -30,15 +30,15 @@ const PopoverTrigger = styled('button', {
     transition: 'all 250ms ease-in-out',
   },
 
-  '@xs': {
+  '@sm': {
     display: 'none',
   }
 });
 
 const Content = styled('div', {
   position: 'absolute',
-  top: '0',
-  right: '-8px',
+  top: '12px',
+  right: '-10px',
 
   display: 'flex',
   flexDirection: 'column',
@@ -72,7 +72,7 @@ const Option = styled('a', {
 
   '&:hover': {
     color: '$title',
-  }
+  },
 });
 
 export { PopoverTrigger, Content, Option };

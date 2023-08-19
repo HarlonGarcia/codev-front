@@ -9,7 +9,11 @@ const Wrapper = styled(WrapperDefault, {
 });
 
 const WrapperWithPadding = styled(WrapperDefault, {
-  wrapperPadding: '2.5rem',
+  wrapperPadding: '2rem',
+  
+  '@xs': {
+    wrapperPadding: '2.5rem',
+  },
 
   '@sm': {
     wrapperPadding: '3.5rem',

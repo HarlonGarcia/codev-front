@@ -1,17 +1,20 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { commanderReducer } from './features/commanderSlice';
-import { usersReducer } from './features/userSlice';
-import { challengesReducer } from './features/challengeSlice';
+
+import { authReducer } from './features/authSlice';
 import { categoriesReducer } from './features/categorySlice';
+import { challengesReducer } from './features/challengeSlice';
+import { commanderReducer } from './features/commanderSlice';
 import { technologiesReducer } from './features/technologySlice';
+import { usersReducer } from './features/userSlice';
 
 export const store = configureStore({
   reducer: {
-    commander: commanderReducer,
-    users: usersReducer,
-    challenges: challengesReducer,
+    auth: authReducer,
     categories: categoriesReducer,
+    challenges: challengesReducer,
+    commander: commanderReducer,
     technologies: technologiesReducer,
+    users: usersReducer,
   },
 });
 

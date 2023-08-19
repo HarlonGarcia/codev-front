@@ -24,7 +24,7 @@ const Section = styled(motion.section, {
       width: '100%',
       textAlign: 'center',
       margin: 0,
-      padding: '200px 0',
+      padding: '140px 0',
       
       backgroundImage: 'linear-gradient(to bottom, transparent, $primary)',
     },
@@ -54,6 +54,10 @@ const Section = styled(motion.section, {
 
     '& > a': {
       fontSize: '1.25rem',
+    },
+
+    '& .latest_challenges > .expand_challenges': {
+      padding: '200px 0',
     },
   }
 });
@@ -208,13 +212,17 @@ const CardItem = styled(motion.li, {
   },
 
   '@sm': {
-    width: '16rem',
+    width: '12rem',
   },
 
   '@md': {
     transition: 'all 0.2s ease-in-out',
     animation: `${floating} 3s ease-in-out infinite`,
-  }
+  },
+
+  '@xl': {
+    width: '16rem',
+  },
 });
 
 const LatestChallenges = styled('div', {

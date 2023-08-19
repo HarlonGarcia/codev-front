@@ -68,6 +68,19 @@
         "search": {
           "placeholder": "Search users"
         }
+      },
+      "signin": {
+        "title": "Welcome back!",
+        "description": "Log in to continue",
+        "form": {
+          "email": "Email",
+          "password": "Password",
+          "login": "Log in"
+        },
+        "alert": {
+          "error": "Something went wrong...",
+          "invalid": "Invalid email or password"
+        }
       }
     },
     "components": {
@@ -88,11 +101,13 @@
         },
         "menu": {
           "home": "Home",
-          "challenges": "Challenges"
+          "challenges": "Challenges",
+          "signin": "Log in"
         },
         "navbar": {
           "home": "Home",
-          "challenges": "Challenges"
+          "challenges": "Challenges",
+          "signin": "Log in"
         }
       }
     }

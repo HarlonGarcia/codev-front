@@ -5,17 +5,29 @@ import { PiCircleDashedBold } from 'react-icons/pi';
 import { useTranslation } from 'react-i18next';
 
 import * as S from './styles';
-import useChallengeForm from '../../../hooks/useChallengeForm';
 import { useCustomSelector } from '../../../store/useCustomSelector';
 import { AppDispatch } from '../../../store';
 import { getAllCategories } from '../../../store/features/categorySlice';
 import { createChallenge } from '../../../store/features/challengeSlice';
 import { ChallengeDto } from '../../../types/Challenge';
 import { ChallengeStatus as status } from '../../../types/enums/ChallengeStatus';
+import useForm from '../../../hooks/useForm';
 
 const defaultInputOptions = {
   spellCheck: false,
   autoComplete: 'off',
+};
+
+interface CreateChallengeForm {
+  title: string;
+  description: string;
+  category: string;
+}
+
+const initialFormState: CreateChallengeForm = {
+  title: '',
+  description: '',
+  category: '',
 };
 
 export default function CreateChallenge() {
@@ -30,7 +42,7 @@ export default function CreateChallenge() {
     formData,
     handleInputChange,
     changeFormPayload
-  } = useChallengeForm();
+  } = useForm<CreateChallengeForm>(initialFormState);
                 
   const { title, description } = formData;
 

@@ -3,9 +3,13 @@ import TypeIt from 'typeit-react';
 import { styled } from '../styles';
 
 const CodeError = styled('small', {
-  fontSize: '1.25rem',
+  fontSize: '1rem',
   fontFamily: '$code',
   color: '$error',
+  
+  '@sm': {
+    fontSize: '1.25rem',
+  }
 });
 
 export default function Typer() {
@@ -26,7 +30,7 @@ export default function Typer() {
   return (
     <>
       <TypeIt getBeforeInit={getBeforeInit} options={{afterComplete}} /><br />
-      {error && <CodeError>error: failed to push to codev</CodeError>}
+      {error && <CodeError>error: failed to push</CodeError>}
     </>
   );
 }
