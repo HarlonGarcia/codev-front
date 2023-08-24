@@ -52,7 +52,7 @@ export default function ChallengesGroup({ category }: ChallengesGroupProps) {
   const { challenges } = useCustomSelector((state) => state.challenges);
 
   const filteredChallenges = useMemo(() => {
-    return challenges.filter((challenge) => challenge.category.id === category.id);
+    return challenges.filter((challenge) => challenge.category?.id === category.id);
   }, [ challenges, category.id ]); 
 
   const handleChallengeClick = (id: string) => {

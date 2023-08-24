@@ -11,7 +11,7 @@ const Container = styled('header', {
   justifyContent: 'space-between',
 
   padding: '0 2rem',
-  zIndex: 1000,
+  zIndex: 2,
 
   backgroundColor: '$glass',
   borderBottom: '1px solid rgba(49, 46, 129, 0.2)',
@@ -46,7 +46,7 @@ const Navigation = styled('nav', {
     },
   },
 
-  '@xs': {
+  '@sm': {
     display: 'flex',
   }
 });
