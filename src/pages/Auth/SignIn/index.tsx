@@ -56,15 +56,20 @@ export default function SignIn() {
       }
     };
 
+    const isTokenRetrieved = auth.token.toString().length > 0;
+
     if (auth.isError) {
-      toast.error(t('alert.invalid'));
-      return;
+      return toast.error(t('alert.invalid'));
     }
 
-    if(!!auth.token && authenticate(authResponse)){
+    if (isTokenRetrieved && authenticate(authResponse)){
       localStorage.setItem('_credentials', JSON.stringify(auth.token));
       navigate('/');
       return;
+    }
+
+    if (formData.email !== '' || formData.password !== '') {
+      return toast.error(t('alert.invalid'));
     }
   };
 

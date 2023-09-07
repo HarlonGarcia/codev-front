@@ -81,6 +81,25 @@
           "error": "Algo deu errado...",
           "invalid": "Email ou senha incorretos"
         }
+      },
+      "dashboard": {
+        "users": {
+          "modal": {
+            "view": {
+              "title": "Dados do usuário",
+              "info": {
+                "name": "Nome",
+                "email": "Email",
+                "github": "Url do github",
+                "additional": "Url adicional",
+                "created": "Criado em",
+                "updated": "Atualizado em"
+              },
+              "cancel": "Cancelar",
+              "delete": "Deletar"
+            }
+          }
+        }
       }
     },
     "components": {
@@ -108,7 +127,8 @@
       "navbar": {
         "home": "Ínicio",
         "challenges": "Desafios",
-        "signin": "Fazer login"
+        "signin": "Fazer login",
+        "dashboard": "Dashboard"
       }
     }
   }

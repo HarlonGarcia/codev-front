@@ -81,6 +81,25 @@
           "error": "Something went wrong...",
           "invalid": "Invalid email or password"
         }
+      },
+      "dashboard": {
+        "users": {
+          "modal": {
+            "view": {
+              "title": "User information",
+              "info": {
+                "name": "Name",
+                "email": "Email",
+                "github": "Github url",
+                "additional": "Additional url",
+                "created": "Created at",
+                "updated": "Updated at"
+              },
+              "cancel": "Cancel",
+              "delete": "Delete"
+            }
+          }
+        }
       }
     },
     "components": {
@@ -107,7 +126,8 @@
         "navbar": {
           "home": "Home",
           "challenges": "Challenges",
-          "signin": "Log in"
+          "signin": "Log in",
+          "dashboard": "Dashboard"
         }
       }
     }

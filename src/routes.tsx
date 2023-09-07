@@ -12,10 +12,13 @@ import { useCustomSelector } from './store/useCustomSelector';
 const Challenges = React.lazy(() => import('./pages/Challenges'));
 const ChallengeDetails = React.lazy(() => import('./pages/Challenges/ChallengeDetails'));
 const CreateChallenge = React.lazy(() => import('./pages/Challenges/CreateChallenge'));
+const Dashboard = React.lazy(() => import('./pages/Dashboard'));
 const Home = React.lazy(() => import('./pages/Home'));
 const MyAccount = React.lazy(() => import('./pages/MyAccount'));
 const SignIn = React.lazy(() => import('./pages/Auth/SignIn'));
-const Users = React.lazy(() => import('./pages/Users'));
+
+const DashboardUsers = React.lazy(() => import('./pages/Dashboard/tabs/Users'));
+const DashboardChallenges = React.lazy(() => import('./pages/Dashboard/tabs/Challenges'));
 
 const redirectPath = '/signIn';
 
@@ -90,14 +93,10 @@ export default function AppRoutes() {
               </RequireAuth>
             }
           />
-          <Route
-            path='/users'
-            element={
-              <RequireAuth loginPath={redirectPath}>
-                <Users />
-              </RequireAuth>
-            }
-          />
+          <Route path='/dashboard' element={<Dashboard />}>
+            <Route index element={<DashboardUsers />} />
+            <Route path='challenges' element={<DashboardChallenges />} />
+          </Route>
         </Routes>
       </Suspense>
     </BrowserRouter>

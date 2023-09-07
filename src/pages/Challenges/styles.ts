@@ -11,7 +11,7 @@ const Container = styled(WrapperWithPadding, {
       height: '1px',
       backgroundColor: '$secondary',
       background: '-webkit-linear-gradient(left, rgba(5, 2, 25, 0.4) 0%, rgba(124, 58, 237, 0.3) 50%, rgba(5, 2, 25, 0.4) 100%)',
-    } 
+    },
   },
 
   '& > div:last-child': {

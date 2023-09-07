@@ -17,6 +17,23 @@ const Container = styled('header', {
   borderBottom: '1px solid rgba(49, 46, 129, 0.2)',
   boxShadow: '0px 0px 1px rgba(129, 140, 248, 0.1)',
   backdropFilter: 'blur(6px)',
+});
+
+const Main = styled('div', {
+  display: 'flex',
+  alignItems: 'center',
+  gap: '0.5rem',
+
+  '& > button': {
+    display: 'flex',
+    alignItems: 'center',
+    color: '$title',
+
+    '& > *': {
+      width: '1.25rem',
+      height: '1.25rem',
+    }
+  },
 
   '& > h3': {
     background: 'linear-gradient(to right bottom, rgb(88, 28, 135), rgb(192, 38, 211), rgb(217, 70, 239))',
@@ -51,4 +68,4 @@ const Navigation = styled('nav', {
   }
 });
 
-export { Container, Navigation };
+export { Container, Main, Navigation };
