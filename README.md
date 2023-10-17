@@ -17,18 +17,17 @@ Run the following command to clone the repository and enter the project folder:
 git clone https://github.com/HarlonGarcia/codev-front.git && cd codev-front
 ```
 
-Next, install the dependencies and run the project:
+Next, let's run the project:
 
 ```bash
+docker compose up -d
+# or
 pnpm install && pnpm dev
-or
-npm install && npm run dev
-or
-yarn install && yarn dev
 ```
 
-## Be a contributors :sparkles:
+## Be a contributor :sparkles:
 
+First of all, I would like to thank [Breno Duarte](https://github.com/brenooduarte) for being the first contributor to the project. :tada:
 Contributors are welcome! Feel free to open a pull request or submit an issue.
 
 ## Related links
