@@ -18,7 +18,7 @@ $md: 750px;
   height: 400px;
   width: 300px;
 
-  padding: 0.5rem;
+  padding: 0.75rem;
 
   border-radius: 0.75rem;
   overflow: hidden;
@@ -37,8 +37,8 @@ $md: 750px;
     align-items: center;
 
     gap: 0.75rem;
-    padding: 1rem 0.5rem;
-    margin-bottom: 0.5rem;
+    padding: 1.25rem 0.75rem;
+    margin-bottom: 0.75rem;
 
     > button {
       color: $text;
@@ -72,10 +72,10 @@ $md: 750px;
 
 [cmdk-input] {
   width: 100%;
-  padding: 0.5rem;
+  padding: 0.625rem;
 
   font-family: 'Raleway';
-  font-size: 0.875rem;
+  font-size: 0.925rem;
   font-weight: 600;
   letter-spacing: 1px;
   
@@ -180,7 +180,7 @@ $md: 750px;
 
 [cmdk-group-heading] {
   user-select: none;
-  font-size: 12px;
+  font-size: 14px;
   padding: 0 8px;
   display: flex;
   align-items: center;
@@ -188,7 +188,7 @@ $md: 750px;
 }
 
 [cmdk-empty] {
-  font-size: 14px;
+  font-size: 16px;
   display: flex;
   align-items: center;
   justify-content: center;

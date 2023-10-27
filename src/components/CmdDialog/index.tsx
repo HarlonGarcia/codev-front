@@ -1,7 +1,7 @@
-import { Command } from 'cmdk';
 import { IoClose } from 'react-icons/io5';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { Command } from 'cmdk';
 
 import './styles.scss';
 import { goToShortcuts, extraShortcuts } from '../../utils/userOptions/shortcuts';
@@ -10,8 +10,9 @@ import { toggleCommanderModal } from '../../store/features/commanderSlice';
 
 export default function CmdDialog() {
   const { t } = useTranslation('translation', { keyPrefix: 'components.commander.modal' });
-  const { isModalOpened } = useCustomSelector((state) => state.commander);
+
   const dispatch = useDispatch();
+  const { isModalOpened } = useCustomSelector((state) => state.commander);
 
   const toggleModal = () => {
     dispatch(toggleCommanderModal());
@@ -20,11 +21,9 @@ export default function CmdDialog() {
   return (
     <Command.Dialog open={isModalOpened} onOpenChange={toggleModal}>
       <div className='commands_header'>
-        
         <Command.Input 
           placeholder={t('input')}
         />
-
         <button onClick={toggleModal}>
           <IoClose />
         </button>
