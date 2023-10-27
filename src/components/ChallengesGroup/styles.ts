@@ -124,7 +124,13 @@ const JoinChallenge = styled('button', {
   '&:hover': {
     color: '$secondary',
     background: '$title',
-  }
+  },
+  
+  '&:disabled': {
+    color: '$error',
+    background: '$secondary',
+    cursor: 'not-allowed',
+  },
 });
 
 export { Container, Challenge, ChallengeHeader, Image, JoinChallenge };

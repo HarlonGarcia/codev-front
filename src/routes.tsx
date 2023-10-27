@@ -57,7 +57,7 @@ export default function AppRoutes() {
       <Suspense>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/signIn' element={<SignIn />} />
+          <Route path='/signin' element={<SignIn />} />
           <Route
             path='/challenges'
             element={

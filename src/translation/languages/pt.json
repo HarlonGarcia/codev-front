@@ -1,5 +1,10 @@
 {
   "translation": {
+    "global": {
+      "alert": {
+        "auth_required": "Essa ação requer que você esteja logado"
+      }
+    },
     "pages": {
       "home": {
         "instruction": {

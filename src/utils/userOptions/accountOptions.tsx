@@ -1,6 +1,5 @@
 import { FaCode, FaUsers } from 'react-icons/fa6';
 import { MdEdit } from 'react-icons/md';
-
 import { Translation } from 'react-i18next';
 
 export interface UserOption {
@@ -20,7 +19,7 @@ export const options: UserOption[] = [
   {
     label: <Translation>{(t) => <span>{t('pages.my_account.options.info')}</span>}</Translation>,
     icon: <MdEdit />,
-    isAuthorizationRequired: (role) => role === 'admin',
+    isAuthorizationRequired: (role) => role.toLowerCase() === 'admin',
   }, 
   {
     label: <Translation>{(t) => <span>{t('pages.my_account.options.friends')}</span>}</Translation>,

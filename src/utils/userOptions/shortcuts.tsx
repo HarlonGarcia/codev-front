@@ -28,7 +28,9 @@ export const goToShortcuts: Shortcuts = {
     icon: <FaCodeBranch />,
     title: <Translation>{(t) => <span>{t('components.commander.commands.challenges')}</span>}</Translation>,
     keys: [ '⌘', 'C' ],
-    action: () => { location.href ='/challenges'; }
+    action: () => {
+      location.href ='/challenges';
+    }
   },
   A: {
     icon: <FaInfoCircle />,

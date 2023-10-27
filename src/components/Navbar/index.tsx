@@ -1,3 +1,4 @@
+import { useIsAuthenticated } from 'react-auth-kit';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { FaCodeBranch } from 'react-icons/fa';
@@ -9,6 +10,7 @@ import Menu from '../Menu';
 
 export default function Navbar() {
   const { t } = useTranslation('translation', { keyPrefix: 'components.navbar' });
+  const isAuthenticated = useIsAuthenticated();
 
   return (
     <S.Container>
@@ -18,14 +20,18 @@ export default function Navbar() {
           <AiFillHome />
           <span>{t('home')}</span>
         </Link>
-        <Link to='/challenges'>
-          <FaCodeBranch />
-          <span>{t('challenges')}</span>
-        </Link>
-        <Link to='/signin'>
-          <FiLogIn />
-          <span>{t('signin')}</span>
-        </Link>
+        {isAuthenticated() && (
+          <Link to='/challenges'>
+            <FaCodeBranch />
+            <span>{t('challenges')}</span>
+          </Link>
+        )}
+        {!isAuthenticated() && (
+          <Link to='/signin'>
+            <FiLogIn />
+            <span>{t('signin')}</span>
+          </Link>
+        )}
       </S.Navigation>
       <Menu />
     </S.Container>

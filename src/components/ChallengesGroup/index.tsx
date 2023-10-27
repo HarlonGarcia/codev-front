@@ -36,11 +36,17 @@ const statusIcons = {
 };
 
 export default function ChallengesGroup({ category }: ChallengesGroupProps) {
-  const { t } = useTranslation('translation', { keyPrefix: 'pages.challenges.main' });
+  const { t } = useTranslation('translation');
   const navigate = useNavigate();
 
-  const [ carouselWidth, setCarouselWidth ] = useState(0);
   const carouselRef = useRef(null);
+  const [ carouselWidth, setCarouselWidth ] = useState(0);
+  
+  const { challenges } = useCustomSelector((state) => state.challenges);
+
+  const filteredChallenges = useMemo(() => {
+    return challenges.filter((challenge) => challenge.category?.id === category.id);
+  }, [ challenges, category.id ]);
 
   useEffect(() => {
     if (carouselRef.current) {
@@ -48,16 +54,6 @@ export default function ChallengesGroup({ category }: ChallengesGroupProps) {
       setCarouselWidth(element.scrollWidth - element.offsetWidth);
     }
   }, [category]);
-
-  const { challenges } = useCustomSelector((state) => state.challenges);
-
-  const filteredChallenges = useMemo(() => {
-    return challenges.filter((challenge) => challenge.category?.id === category.id);
-  }, [ challenges, category.id ]); 
-
-  const handleChallengeClick = (id: string) => {
-    navigate(`/challenges/${id}`);
-  };
 
   if (filteredChallenges.length <= 0) return;
   return (
@@ -77,11 +73,9 @@ export default function ChallengesGroup({ category }: ChallengesGroupProps) {
           transition={{ duration: 1 }}
         >
           {filteredChallenges.map((challenge) => (
-            <S.Challenge 
-              key={challenge.id}
-            >
+            <S.Challenge key={challenge.id}>
               <S.ChallengeHeader>
-                <h2>{challenge.title || t('title')}</h2>
+                <h2>{challenge.title || t('pages.challenges.main.title')}</h2>
                 {challenge.status &&
                   <span className={statusIcons[challenge.status]?.color}>
                     {statusIcons[challenge.status]?.label}
@@ -94,8 +88,11 @@ export default function ChallengesGroup({ category }: ChallengesGroupProps) {
                 alt={challenge.title}
                 loading='lazy'
               />
-              <S.JoinChallenge onClick={() => handleChallengeClick(challenge.id)}>
-                {t('join')}
+              <S.JoinChallenge
+                onClick={() => navigate(`/challenges/${challenge.id}`)}
+                disabled={challenge.status === 'FINISHED'}
+              >
+                {t('pages.challenges.main.join')}
               </S.JoinChallenge>
             </S.Challenge>
           ))}

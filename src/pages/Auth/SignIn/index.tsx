@@ -4,6 +4,7 @@ import { useSignIn } from 'react-auth-kit';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { BiSolidLogInCircle } from 'react-icons/bi';
+import { useTranslation } from 'react-i18next';
 
 import * as S from './styles';
 import { EXPIRES_IN } from '../../../utils/constants';
@@ -11,7 +12,6 @@ import { AppDispatch } from '../../../store';
 import { useCustomSelector } from '../../../store/useCustomSelector';
 import { signIn } from '../../../store/features/authSlice';
 import useForm from '../../../hooks/useForm';
-import { useTranslation } from 'react-i18next';
 
 interface SignInForm {
   email: string;
