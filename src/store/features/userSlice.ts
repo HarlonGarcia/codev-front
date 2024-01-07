@@ -23,7 +23,7 @@ const initialState: UserState = {
   isError: false,
 };
 
-export const getAllUsers = createAsyncThunk('users/getAllUsers', async (filters: Filters) => {
+export const getUsers = createAsyncThunk('users/getUsers', async (filters: Filters) => {
   const response = await api.get('/users', { params: filters });
 
   return response.data ?? [];
@@ -34,14 +34,14 @@ export const userSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getAllUsers.pending, (state) => {
+    builder.addCase(getUsers.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(getAllUsers.fulfilled, (state, action) => {
+    builder.addCase(getUsers.fulfilled, (state, action) => {
       state.isLoading = false;
       state.users = action.payload;
     });
-    builder.addCase(getAllUsers.rejected, (state) => {
+    builder.addCase(getUsers.rejected, (state) => {
       state.isLoading = false;
       state.isError = true;
     });

@@ -4,9 +4,9 @@ import { useDispatch } from 'react-redux';
 import * as S from './styles';
 import { useCustomSelector } from '../../store/useCustomSelector';
 import { AppDispatch } from '../../store';
-import { getAllCategories } from '../../store/features/categorySlice';
+import { getCategories } from '../../store/features/categorySlice';
 import ChallengesGroup from '../../components/ChallengesGroup';
-import { getAllChallenges } from '../../store/features/challengeSlice';
+import { getChallenges } from '../../store/features/challengeSlice';
 
 export default function Challenges() {
   const dispatch = useDispatch<AppDispatch>();
@@ -15,8 +15,8 @@ export default function Challenges() {
 
   useEffect(() => {
     Promise.all([
-      dispatch(getAllCategories()), 
-      dispatch(getAllChallenges())
+      dispatch(getCategories()), 
+      dispatch(getChallenges())
     ]);
   }, [dispatch]);
 

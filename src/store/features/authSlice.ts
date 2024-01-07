@@ -7,9 +7,17 @@ interface AuthState {
   isError: boolean;
 }
 
-interface AuthPayload {
+interface SignInPayload {
   username: string;
   password: string;
+}
+
+interface SignUpPayload {
+  name: string;
+  email: string;
+  password: string;
+  githubUrl: string;
+  additionalUrl?: string;
 }
 
 const initialState: AuthState = {
@@ -18,10 +26,16 @@ const initialState: AuthState = {
   isError: false,
 };
 
-export const signIn = createAsyncThunk('auth/signIn', async (authPayload: AuthPayload) => {
-  const response = await axios.post(`${import.meta.env.VITE_API_URL}/users/login`, authPayload);
+export const signIn = createAsyncThunk('auth/signIn', async (signInPayload: SignInPayload) => {
+  const response = await axios.post(`${import.meta.env.VITE_API_URL}/users/login`, signInPayload);
 
-  return response.data ?? [];
+  return response.data.token ?? '';
+});
+
+export const signUp = createAsyncThunk('auth/signUp', async (signUpPayload: SignUpPayload) => {
+  const response = await axios.post(`${import.meta.env.VITE_API_URL}/users`, signUpPayload);
+
+  return response.data.token ?? '';
 });
 
 export const authSlice = createSlice({
@@ -38,6 +52,19 @@ export const authSlice = createSlice({
       state.token = action.payload;
     });
     addCase(signIn.rejected, (state) => {
+      state.isLoading = false;
+      state.isError = true;
+    });
+
+    addCase(signUp.pending, (state) => {
+      state.isLoading = true;
+    });
+    addCase(signUp.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.isError = false;
+      state.token = action.payload;
+    });
+    addCase(signUp.rejected, (state) => {
       state.isLoading = false;
       state.isError = true;
     });

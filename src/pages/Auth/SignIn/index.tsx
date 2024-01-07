@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSignIn } from 'react-auth-kit';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
@@ -74,7 +74,11 @@ export default function SignIn() {
 
   return (
     <S.Container>
-      <S.Header>
+      <S.Header
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5 }}
+      >
         <h2>{t('title')}</h2>
         <p>{t('description')}</p>
       </S.Header>
@@ -101,12 +105,18 @@ export default function SignIn() {
             required
           />
         </S.InputGroup>
-        <button type="submit">
+        <Link to={'/signup'}>{t('signup')}</Link>
+        <S.SubmitButton
+          type="submit"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
           <span>
             {t('form.login')}
           </span>
           <BiSolidLogInCircle />
-        </button>
+        </S.SubmitButton>
       </S.Form>
     </S.Container>
   );

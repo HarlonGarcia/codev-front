@@ -75,16 +75,59 @@
         }
       },
       "signin": {
-        "title": "Bem vindo de volta!",
+        "title": "Bem vindo!",
         "description": "Faça login para continuar",
         "form": {
           "email": "Email",
           "password": "Senha",
           "login": "Entrar"
         },
+        "signup": "Ainda não tem conta? Cadastre-se",
         "alert": {
           "error": "Algo deu errado...",
           "invalid": "Email ou senha incorretos"
+        }
+      },
+      "signup": {
+        "alert": {
+          "error": "Algo deu errado...",
+          "password": "As senhas não conferem",
+          "github": "Link do github inválido"
+        },
+        "form": {
+          "title": "Cadastrar-se",
+          "description": "Pratique, aprenda e interaja com outros desenvolvedores",
+          "fields": {
+            "name": {
+              "label": "Como você deseja ser chamado?",
+              "placeholder": "Seu nome"
+            },
+            "email": {
+              "label": "Seu melhor email",
+              "placeholder": "seu@email"
+            },
+            "username": {
+              "label": "Escolha um nome de usuário",
+              "placeholder": "seu_usuario"
+            },
+            "password": {
+              "label": "Sua senha",
+              "placeholder": "123@&#*"
+            },
+            "confirmationPassword": {
+              "label": "Confirme sua senha",
+              "placeholder": "123@&#*"
+            },
+            "githubUrl": {
+              "label": "Qual link do seu github?",
+              "placeholder": "https://github.com/dev"
+            },
+            "additionalUrl": {
+              "label": "Qual link do seu portfólio? (opcional)",
+              "placeholder": "www.portfolio.com"
+            }
+          },
+          "submit": "Continuar"
         }
       }
     },
@@ -113,7 +156,8 @@
       "navbar": {
         "home": "Ínicio",
         "challenges": "Desafios",
-        "signin": "Fazer login"
+        "signin": "Fazer login",
+        "logout": "Fazer logout"
       }
     }
   }
