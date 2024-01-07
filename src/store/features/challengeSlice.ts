@@ -25,7 +25,7 @@ const initialState: ChallengeState = {
   isError: false,
 };
 
-export const getAllChallenges = createAsyncThunk('challenges/getAllChallenges', async () => {
+export const getChallenges = createAsyncThunk('challenges/getChallenges', async () => {
   const response = await api.get('/challenges', {
     params: {
       page: 0,
@@ -36,7 +36,7 @@ export const getAllChallenges = createAsyncThunk('challenges/getAllChallenges', 
   return response.data ?? [];
 });
 
-export const getChallenges = createAsyncThunk('challenges/getChallenges', async (filters?: Filters) => {
+export const getFilteredChallenges = createAsyncThunk('challenges/getFilteredChallenges', async (filters?: Filters) => {
   const response = await api.get('/challenges', { params: filters });
 
   return response.data ?? [];
@@ -69,26 +69,26 @@ export const challengeSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: ({ addCase }) => {
-    addCase(getAllChallenges.pending, (state) => {
-      state.isLoading = true;
-    });
-    addCase(getAllChallenges.fulfilled, (state, action) => {
-      state.isLoading = false;
-      state.challenges = action.payload;
-    });
-    addCase(getAllChallenges.rejected, (state) => {
-      state.isLoading = false;
-      state.isError = true;
-    });
-    
     addCase(getChallenges.pending, (state) => {
       state.isLoading = true;
     });
     addCase(getChallenges.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.latestChallenges = action.payload;
+      state.challenges = action.payload;
     });
     addCase(getChallenges.rejected, (state) => {
+      state.isLoading = false;
+      state.isError = true;
+    });
+    
+    addCase(getFilteredChallenges.pending, (state) => {
+      state.isLoading = true;
+    });
+    addCase(getFilteredChallenges.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.latestChallenges = action.payload;
+    });
+    addCase(getFilteredChallenges.rejected, (state) => {
       state.isLoading = false;
       state.isError = true;
     });

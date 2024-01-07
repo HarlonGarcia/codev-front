@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import * as S from './styles';
 import { useCustomSelector } from '../../../store/useCustomSelector';
 import { AppDispatch } from '../../../store';
-import { getAllCategories } from '../../../store/features/categorySlice';
+import { getCategories } from '../../../store/features/categorySlice';
 import { createChallenge } from '../../../store/features/challengeSlice';
 import { ChallengeDto } from '../../../types/Challenge';
 import { ChallengeStatus as status } from '../../../types/enums/ChallengeStatus';
@@ -85,7 +85,7 @@ export default function CreateChallenge() {
   };
   
   useEffect(() => {
-    dispatch(getAllCategories());
+    dispatch(getCategories());
   }, []);
 
   return (

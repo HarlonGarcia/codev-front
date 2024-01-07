@@ -31,11 +31,12 @@ const Navigation = styled('nav', {
 
   gap: '2rem',
 
-  '& > a': {
+  '& > a, & > button': {
     display: 'flex',
     alignItems: 'center',
     gap: '0.5rem',
 
+    fontSize: '1rem',
     fontWeight: 600,
     color: '$text',
 

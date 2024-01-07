@@ -1,17 +1,24 @@
+import { motion } from 'framer-motion';
 import { styled } from '../../../styles';
-import { WrapperWithPadding } from '../../../styles/wrapper';
+import { WrapperDefault } from '../../../styles/wrapper';
 
-const Container = styled(WrapperWithPadding, {
-});
-
-const Header = styled('header', {
+const Container = styled(WrapperDefault, {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  gap: '0.75rem',
+  justifyContent: 'center',
+
+  backgroundImage: 'radial-gradient(at 100% 58%, hsla(240,100%,21%,0.29) 0px, transparent 50%), radial-gradient(at 6% 100%, hsla(283,100%,17%,0.43) 0px, transparent 50%)',
+});
+
+const Header = styled(motion.header, {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  gap: '0.625rem',
 
   fontSize: '0.925rem',
-  marginBottom: '2.5rem',
+  marginBottom: '2.75rem',
 
   '& > *': {
     textAlign: 'center',
@@ -27,41 +34,64 @@ const Form = styled('form', {
   flexDirection: 'column',
   gap: '1.75rem',
   
-  maxWidth: '26rem',
-  margin: '0 auto',
-  
-  '& > button': {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: '0.5rem',
+  width: '20rem',
 
-    width: '100%',
-    padding: '0.75rem',
-    margin: '0 auto',
-    marginTop: '0.75rem',
-
-    color: '$secondary',
-    backgroundColor: '$title',
-    borderRadius: '0.5rem',
-
-    fontSize: '0.925rem',
+  '& > a': {
+    fontSize: '1rem',
     fontWeight: '600',
-
-    transition: 'all 0.3s ease-in-out',
+    color: '$text',
+    textDecoration: 'underline',
+    textDecorationColor: 'rgba(255, 220, 255, 0.5)',
 
     '&:hover': {
-      filter: 'brightness(0.8)',
+      cursor: 'pointer',
+      color: '$title',
+      textDecorationColor: 'rgba(165, 100, 255, 0.5)',
     },
+  },
 
-    '&:focus': {
-      filter: 'brightness(0.4)',
-    },
+  '@sm': {
+    minWidth: '28rem',
+  }
+});
 
-    '& > svg': {
-      height: '1.25rem',
-      width: '1.25rem',
+const SubmitButton = styled(motion.button, {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  gap: '0.5rem',
+
+  width: '50%',
+  padding: '0.75rem',
+  margin: '0 auto',
+  marginTop: '0.75rem',
+
+  color: '$primary',
+  backgroundColor: '$highlight',
+  borderRadius: '0.25rem',
+
+  fontSize: '0.825rem',
+  fontWeight: '800',
+
+  transition: 'all 0.3s ease-in-out',
+
+  '&:hover': {
+    backgroundColor: 'rgba(50, 255, 130, 1)',
+    boxShadow: '0px 0px 24px 2px rgba(50, 255, 120, 0.3)',
+
+    '> svg': {
+      transform: 'translateX(3px)',
     },
+  },
+
+  '&:focus': {
+    filter: 'brightness(0.5)',
+  },
+
+  '& > svg': {
+    height: '0.8rem',
+    width: '0.8rem',
+    transition: 'all 0.3s ease-in-out',
   },
 
   '@xs': {
@@ -106,4 +136,4 @@ const InputGroup = styled('div', {
   }
 });
 
-export { Container, Header, Form, InputGroup };
+export { Container, Header, Form, SubmitButton, InputGroup };

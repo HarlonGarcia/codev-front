@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
 import * as S from './styles';
-import { getAllUsers } from '../../store/features/userSlice';
+import { getUsers } from '../../store/features/userSlice';
 import { Input } from '../../components/Input';
 import { MIN_SEARCH_LENGTH } from '../../utils/constants';
 import { AppDispatch } from '../../store';
@@ -19,15 +19,15 @@ export default function Users() {
 
   const { isLoading, users } = useCustomSelector((state) => state.users);
 
-  const getUsers = useCallback((searchTerm = '') => {
+  const getAllUsers = useCallback((searchTerm = '') => {
     const filters = {
       startsWith: searchTerm,
     };
 
-    dispatch(getAllUsers(filters));
+    dispatch(getUsers(filters));
   }, []);
 
-  const getUsersWithDebounce = useMemo(() => debounce(getUsers, 500), [getUsers]);
+  const getUsersWithDebounce = useMemo(() => debounce(getAllUsers, 500), [getUsers]);
 
   const isSearchTermValid = (searchTerm: string) => searchTerm.length === 0 || searchTerm.length > MIN_SEARCH_LENGTH;
 
@@ -42,7 +42,7 @@ export default function Users() {
   };
 
   useEffect(() => {
-    getUsers();
+    getAllUsers();
   }, []);
 
   return (
@@ -56,7 +56,7 @@ export default function Users() {
         />
         <Input.Action 
           icon={(FaSearch as ElementType)} 
-          onClick={() => getUsers(searchTerm)}
+          onClick={() => getAllUsers(searchTerm)}
           disabled={isLoading || !isSearchTermValid(searchTerm)}
         />
       </Input.Root>

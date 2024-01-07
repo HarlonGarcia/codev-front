@@ -15,7 +15,7 @@ const initialState: CategoryState = {
   isError: false,
 };
 
-export const getAllCategories = createAsyncThunk('categories/getAllCategories', async () => {
+export const getCategories = createAsyncThunk('categories/getCategories', async () => {
   const response = await api.get('/categories');
 
   return response.data ?? [];
@@ -26,14 +26,14 @@ export const categorySlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: ({ addCase }) => {
-    addCase(getAllCategories.pending, (state) => {
+    addCase(getCategories.pending, (state) => {
       state.isLoading = true;
     });
-    addCase(getAllCategories.fulfilled, (state, action) => {
+    addCase(getCategories.fulfilled, (state, action) => {
       state.isLoading = false;
       state.categories = action.payload;
     });
-    addCase(getAllCategories.rejected, (state) => {
+    addCase(getCategories.rejected, (state) => {
       state.isLoading = false;
       state.isError = true;
     });

@@ -8,9 +8,10 @@ import * as S from './styles';
 import Typer from '../../components/Typer';
 import { useCustomSelector } from '../../store/useCustomSelector';
 import { AppDispatch } from '../../store';
-import { getChallenges } from '../../store/features/challengeSlice';
+import { getFilteredChallenges } from '../../store/features/challengeSlice';
 import { defaultTransition } from '../../utils/animations';
 import { possibilities } from '../../utils/userOptions/possibilitiesCards';
+import { useIsAuthenticated } from 'react-auth-kit';
 
 const cardsContainer = {
   hidden: { opacity: 1 },
@@ -35,16 +36,21 @@ export default function Home() {
   const { t } = useTranslation('translation', { keyPrefix: 'pages.home' });
 
   const dispatch = useDispatch<AppDispatch>();
+  const isAuthenticated = useIsAuthenticated();
   const { latestChallenges } = useCustomSelector((state) => state.challenges);
 
   useEffect(() => {
+    if (!isAuthenticated()) {
+      return;
+    }
+
     const filters = {
       orderBy: 'LATEST',
       page: 0,
       size: 4,
     };
 
-    dispatch(getChallenges(filters));
+    dispatch(getFilteredChallenges(filters));
   }, [dispatch]);
 
   return (

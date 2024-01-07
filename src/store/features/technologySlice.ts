@@ -15,7 +15,7 @@ const initialState: TechnologyState = {
   isError: false,
 };
 
-export const getAllTechnologies = createAsyncThunk('technologies/getAllTechnologies', async () => {
+export const getTechnologies = createAsyncThunk('technologies/getTechnologies', async () => {
   const response = await api.get('/technologies');
 
   return response.data ?? [];
@@ -26,14 +26,14 @@ export const technologySlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: ({ addCase }) => {
-    addCase(getAllTechnologies.pending, (state) => {
+    addCase(getTechnologies.pending, (state) => {
       state.isLoading = true;
     });
-    addCase(getAllTechnologies.fulfilled, (state, action) => {
+    addCase(getTechnologies.fulfilled, (state, action) => {
       state.isLoading = false;
       state.technologies = action.payload;
     });
-    addCase(getAllTechnologies.rejected, (state) => {
+    addCase(getTechnologies.rejected, (state) => {
       state.isLoading = false;
       state.isError = true;
     });

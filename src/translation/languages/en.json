@@ -82,9 +82,52 @@
           "password": "Password",
           "login": "Log in"
         },
+        "signup": "Don't have an account? Sign up",
         "alert": {
           "error": "Something went wrong...",
           "invalid": "Invalid email or password"
+        }
+      },
+      "signup": {
+        "alert": {
+          "error": "Something went wrong...",
+          "password": "Passwords don't match",
+          "github": "Invalid github url"
+        },
+        "form": {
+          "title": "Sign up",
+          "description": "Practice, learn and interact with other developers",
+          "fields": {
+            "name": {
+              "label": "How do you want to be called?",
+              "placeholder": "Your name"
+            },
+            "email": {
+              "label": "Your best email",
+              "placeholder": "your@email"
+            },
+            "username": {
+              "label": "Choose a username",
+              "placeholder": "your_username"
+            },
+            "password": {
+              "label": "Your password",
+              "placeholder": "123@&#*"
+            },
+            "confirmationPassword": {
+              "label": "Confirm your password",
+              "placeholder": "123@&#*"
+            },
+            "githubUrl": {
+              "label": "What's your github url?",
+              "placeholder": "https://github.com/dev"
+            },
+            "additionalUrl": {
+              "label": "What's your portfolio url? (optional)",
+              "placeholder": "www.portfolio.com"
+            }
+          },
+          "submit": "Continue"
         }
       }
     },
@@ -112,7 +155,8 @@
         "navbar": {
           "home": "Home",
           "challenges": "Challenges",
-          "signin": "Log in"
+          "signin": "Log in",
+          "logout": "Log out"
         }
       }
     }

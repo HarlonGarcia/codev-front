@@ -29,4 +29,4 @@ const WrapperWithPadding = styled(WrapperDefault, {
   }
 });
 
-export { Wrapper, WrapperWithPadding };
+export { WrapperDefault, Wrapper, WrapperWithPadding };
