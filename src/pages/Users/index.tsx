@@ -10,7 +10,7 @@ import { Input } from '../../components/Input';
 import { MIN_SEARCH_LENGTH } from '../../utils/constants';
 import { AppDispatch } from '../../store';
 import { useCustomSelector } from '../../store/useCustomSelector';
-import UserCard from '../../components/UserCard';
+import UserCard from './UserCard';
 
 export default function Users() {
   const { t } = useTranslation('translation', { keyPrefix: 'pages.users' });

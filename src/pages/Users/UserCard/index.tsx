@@ -1,5 +1,5 @@
 import * as S from './styles';
-import { User } from '../../types/User';
+import { User } from '../../../types/User';
 import CardPopover from './CardPopover';
 
 import { FaGithub } from 'react-icons/fa';
