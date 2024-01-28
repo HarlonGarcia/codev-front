@@ -4,43 +4,34 @@ import { api } from '../../api';
 import { IUser } from '../../types/User';
 import { getUrl } from '../utils';
 
-interface Filters {
-  startsWith?: string;
-}
-
 interface UserState {
-  users: IUser[];
-  filters: Filters;
+  items: IUser[];
   currentUser: IUser | null;
   isLoading: boolean;
   isError: boolean;
 }
 
 const initialState: UserState = {
-  users: [],
-  filters: {},
+  items: [],
   currentUser: null,
   isLoading: false,
   isError: false,
 };
 
-export const getUsers = createAsyncThunk(
-  'users/getUsers',
-  async (filters: Filters) => {
-    const response = await api.get(getUrl('users'), { params: filters });
+export const getUsers = createAsyncThunk('user/getUsers', async () => {
+  const { data } = await api.get(getUrl('users'));
 
-    return response.data ?? [];
-  },
-);
+  return data ?? [];
+});
 
-export const getMe = createAsyncThunk('auth/getMe', async () => {
+export const getMe = createAsyncThunk('user/getMe', async () => {
   const { data } = await api.get(getUrl('me'));
 
   return data;
 });
 
 export const userSlice = createSlice({
-  name: 'users',
+  name: 'user',
   initialState,
   reducers: {},
   extraReducers: ({ addCase }) => {
@@ -49,7 +40,7 @@ export const userSlice = createSlice({
     });
     addCase(getUsers.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.users = action.payload;
+      state.items = action.payload;
     });
     addCase(getUsers.rejected, (state) => {
       state.isLoading = false;
@@ -70,4 +61,4 @@ export const userSlice = createSlice({
   },
 });
 
-export const usersReducer = userSlice.reducer;
+export const userReducer = userSlice.reducer;

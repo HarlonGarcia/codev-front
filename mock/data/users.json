@@ -1,14 +1,14 @@
 [
   {
     "id": 0,
-    "name": "Breno",
-    "email": "breno@gmail.com",
-    "githubUrl": "github.com/BrenoDuarte"
+    "name": "Fulano",
+    "email": "fulano@gmail.com",
+    "githubUrl": "github.com/fulano"
   },
   {
     "id": 1,
-    "name": "Harlon",
-    "email": "harlondesigner@gmail.com",
-    "githubUrl": "github.com/HarlonGarcia"
+    "name": "John Doe",
+    "email": "john@gmail.com",
+    "githubUrl": "github.com/johndoe"
   }
 ]

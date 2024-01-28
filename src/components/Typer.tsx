@@ -12,13 +12,21 @@ const CodeError = styled('small', {
   }
 });
 
+const ANIMATION_SPEED = 100;
+
 export default function Typer() {
   const [error, setError] = useState(false);
 
-  const getBeforeInit = (instance: Node | any) => {
-    instance.type('Let\'s go, dev').pause(750).move(-3).pause(200)
-    .delete(4).pause(100).type('co').pause(100).move(3).type('!')
-    .pause(1000).delete(12).pause(100).type("<code>git push</code>").pause(300);
+  const animateText = (instance: Node | any) => {
+    instance
+      .type('Let\'s go, dev')
+      .pause(ANIMATION_SPEED * 7.5).move(-3)
+      .pause(ANIMATION_SPEED * 2).delete(4)
+      .pause(ANIMATION_SPEED).type('co')
+      .pause(ANIMATION_SPEED).move(3).type('!')
+      .pause(ANIMATION_SPEED * 10).delete(12)
+      .pause(ANIMATION_SPEED).type("<code>git push</code>")
+      .pause(ANIMATION_SPEED * 3);
 
     return instance;
   };
@@ -29,7 +37,7 @@ export default function Typer() {
 
   return (
     <>
-      <TypeIt getBeforeInit={getBeforeInit} options={{afterComplete}} /><br />
+      <TypeIt getBeforeInit={animateText} options={{afterComplete}} /><br />
       {error && <CodeError>error: failed to push</CodeError>}
     </>
   );

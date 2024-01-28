@@ -1,8 +1,24 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import { api } from '../../api';
 import { IChallenge, IChallengeDto } from '../../types/Challenge';
 import { getUrl } from '../utils';
+import { api } from '../../api';
+
+import { store } from '..';
+
+interface ChallengeState {
+  items: IChallenge[];
+  currentChallenge: IChallenge | null;
+  isLoading: boolean;
+  isError: boolean;
+}
+
+const initialState: ChallengeState = {
+  items: [],
+  currentChallenge: null,
+  isLoading: false,
+  isError: false,
+};
 
 interface Filters {
   orderBy?: string;
@@ -10,29 +26,16 @@ interface Filters {
   size?: number;
 }
 
-interface ChallengeState {
-  challenges: IChallenge[];
-  latestChallenges: IChallenge[];
-  currentChallenge: IChallenge | null;
-  isLoading: boolean;
-  isError: boolean;
-}
-
-const initialState: ChallengeState = {
-  challenges: [],
-  latestChallenges: [],
-  currentChallenge: null,
-  isLoading: false,
-  isError: false,
-};
-
 export const getChallenges = createAsyncThunk(
-  'challenges/getChallenges',
-  async () => {
+  'challenge/getChallenges',
+  async (filters?: Filters) => {
+    const { page = 0, size = 100, orderBy } = filters ?? {};
+
     const { data } = await api.get(getUrl('challenges'), {
       params: {
-        page: 0,
-        size: 100,
+        page,
+        size,
+        orderBy: orderBy ?? undefined,
       },
     });
 
@@ -40,17 +43,8 @@ export const getChallenges = createAsyncThunk(
   },
 );
 
-export const getFilteredChallenges = createAsyncThunk(
-  'challenges/getFilteredChallenges',
-  async (filters?: Filters) => {
-    const { data } = await api.get(getUrl('challenges'), { params: filters });
-
-    return data ?? [];
-  },
-);
-
 export const getChallengeById = createAsyncThunk(
-  'challenges/getChallengeById',
+  'challenge/getChallengeById',
   async (challengeId: string) => {
     const { data } = await api.get(getUrl('challenge_by_id', { challengeId }));
 
@@ -58,8 +52,34 @@ export const getChallengeById = createAsyncThunk(
   },
 );
 
+export const joinChallenge = createAsyncThunk(
+  'challenge/joinChallenge',
+  async (challengeId?: string) => {
+    const userId = store.getState().users.currentUser?.id;
+    console.log('joinChallenge', challengeId, userId);
+
+    if (!challengeId || !userId) {
+      throw new Error('The user or challenge is not valid.');
+    }
+
+    const config = {
+      headers: {
+        'x-user-id': userId,
+      },
+    };
+
+    const response = await api.post(
+      getUrl('join_challenge', { challengeId }),
+      undefined,
+      config,
+    );
+
+    return response;
+  },
+);
+
 export const createChallenge = createAsyncThunk(
-  'challenges/createChallenge',
+  'challenge/createChallenge',
   async (challenge: IChallengeDto) => {
     const categoryId = challenge.category?.id;
 
@@ -78,7 +98,7 @@ export const createChallenge = createAsyncThunk(
 );
 
 export const challengeSlice = createSlice({
-  name: 'challenges',
+  name: 'challenge',
   initialState,
   reducers: {},
   extraReducers: ({ addCase }) => {
@@ -87,21 +107,9 @@ export const challengeSlice = createSlice({
     });
     addCase(getChallenges.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.challenges = action.payload;
+      state.items = action.payload;
     });
     addCase(getChallenges.rejected, (state) => {
-      state.isLoading = false;
-      state.isError = true;
-    });
-
-    addCase(getFilteredChallenges.pending, (state) => {
-      state.isLoading = true;
-    });
-    addCase(getFilteredChallenges.fulfilled, (state, action) => {
-      state.isLoading = false;
-      state.latestChallenges = action.payload;
-    });
-    addCase(getFilteredChallenges.rejected, (state) => {
       state.isLoading = false;
       state.isError = true;
     });
@@ -118,12 +126,23 @@ export const challengeSlice = createSlice({
       state.isError = true;
     });
 
+    addCase(joinChallenge.pending, (state) => {
+      state.isLoading = true;
+    });
+    addCase(joinChallenge.fulfilled, (state) => {
+      state.isLoading = false;
+    });
+    addCase(joinChallenge.rejected, (state) => {
+      state.isLoading = false;
+      state.isError = true;
+    });
+
     addCase(createChallenge.pending, (state) => {
       state.isLoading = true;
     });
     addCase(createChallenge.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.challenges = [ ...state.challenges, action.payload ];
+      state.items = [ ...state.items, action.payload ];
     });
     addCase(createChallenge.rejected, (state) => {
       state.isLoading = false;
@@ -132,4 +151,4 @@ export const challengeSlice = createSlice({
   },
 });
 
-export const challengesReducer = challengeSlice.reducer;
+export const challengeReducer = challengeSlice.reducer;

@@ -12,7 +12,7 @@ const Wrapper = styled('div', {
   },
 
   '& > span': {
-    fontSize: '0.8625rem',
+    fontSize: '0.875rem',
     color: '$error',
   },
 

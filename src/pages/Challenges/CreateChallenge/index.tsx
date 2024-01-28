@@ -1,73 +1,48 @@
 import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { PiCircleDashedBold } from 'react-icons/pi';
 import { useDispatch } from 'react-redux';
 
+import { zodResolver } from '@hookform/resolvers/zod';
 import * as Toggle from '@radix-ui/react-toggle';
 
+import { Input } from '../../../components/shared/Input';
 import { AppDispatch } from '../../../store';
-import { getCategories } from '../../../store/features/categorySlice';
-import { createChallenge } from '../../../store/features/challengeSlice';
+import { getCategories } from '../../../store/slices/category';
+import { createChallenge } from '../../../store/slices/challenge';
 import { useSelector } from '../../../store/useSelector';
 import { IChallengeDto } from '../../../types/Challenge';
 import {
   IChallengeStatus as status,
 } from '../../../types/enums/ChallengeStatus';
 import * as S from './styles';
-
-const defaultInputOptions = {
-  spellCheck: false,
-  autoComplete: 'off',
-};
-
-interface CreateChallengeForm {
-  title: string;
-  description: string;
-  category: string;
-}
-
-const initialFormState: CreateChallengeForm = {
-  title: '',
-  description: '',
-  category: '',
-};
+import { CreateChallengeSchema, createChallengeSchema } from './validation';
 
 export default function CreateChallenge() {
   const { t } = useTranslation();
-  const [ searchTerm, setSearchTerm ] = useState('');
+  const dispatch = useDispatch<AppDispatch>();
   const [ challengeStatus, setChallengeStatus ] = useState(false);
 
-  const dispatch = useDispatch<AppDispatch>();
-  const { categories } = useSelector((state) => state.categories);
+  const { items: categories } = useSelector((state) => state.categories);
 
   const {
-    handleInputChange,
-    changeFormPayload
-  } = useForm<CreateChallengeForm>(initialFormState);
+    formState: {
+      errors: formErrors,
+    },
+    register,
+    handleSubmit,
+  } = useForm<CreateChallengeSchema>({
+    resolver: zodResolver(createChallengeSchema),
+  });
 
-  const { title, description } = formData;
-
-  const handleCategorySearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(event.target.value);
-    handleInputChange(event);
-  };
-
-  const handleCategoryValue = (categoryName: string) => {
-    setSearchTerm(categoryName);
-    changeFormPayload('category', categoryName);
-  };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
+  const onSubmit: SubmitHandler<CreateChallengeSchema> = (formValues) => {
     const category = categories.find((category) => {
-      return category.name.toLowerCase() === formData.category.toLowerCase();
+      return category.name.toLowerCase() === formValues.category.toLowerCase();
     });
 
     const payload: IChallengeDto = {
-      title,
-      description,
+      ...formValues,
       category,
       status: challengeStatus ? status.IN_PROGRESS : status.IN_PROGRESS,
     };
@@ -79,68 +54,33 @@ export default function CreateChallenge() {
     setChallengeStatus((prevState) => !prevState);
   };
 
-  const getFilteredCategories = () => {
-    return categories.filter(({ name }) => {
-      const categoryName = name.toLowerCase();
-      return categoryName
-        .includes(searchTerm.toLowerCase()) && name !== searchTerm;
-    });
-  };
-
   useEffect(() => {
     dispatch(getCategories());
   }, [dispatch]);
 
   return (
     <S.Container>
-      <S.Form onSubmit={handleSubmit}>
-        <S.InputGroup>
-          <label>{t('pages.create_challenge.fields.title.label')}</label>
-          <input
-            id='title'
-            type="text"
-            value={title}
-            onChange={handleInputChange}
-            required
-            {...defaultInputOptions}
-          />
-        </S.InputGroup>
+      <S.Form onSubmit={handleSubmit(onSubmit)}>
+        <Input
+          {...register('title')}
+          label={t('pages.create_challenge.fields.title.label')}
+          error={formErrors.title?.message}
+        />
         <S.InputGroup>
           <label>{t('pages.create_challenge.fields.description.label')}</label>
           <textarea
-            id='description'
-            value={description}
-            onChange={handleInputChange}
+            {...register('description')}
             placeholder={
               t('pages.create_challenge.fields.description.placeholder')
             }
-            required
-            {...defaultInputOptions}
           />
         </S.InputGroup>
         <S.Group>
-          <div>
-            <label>{t('pages.create_challenge.fields.category.label')}</label>
-            <input
-              id='category'
-              type="text"
-              value={searchTerm}
-              onChange={handleCategorySearch}
-              {...defaultInputOptions}
-            />
-            <ul>
-              {searchTerm.length > 0 && getFilteredCategories()
-                .map(({ name }) => (
-                  <li
-                    key={name}
-                    onClick={() => handleCategoryValue(name)}
-                  >
-                    {name}
-                  </li>
-                ))
-              }
-            </ul>
-          </div>
+          <Input
+            {...register('category')}
+            label={t('pages.create_challenge.fields.category.label')}
+            error={formErrors.category?.message}
+          />
           <div>
             <label>{t('pages.create_challenge.fields.status.label')}</label>
             <Toggle.Root
@@ -149,11 +89,13 @@ export default function CreateChallenge() {
               onClick={handleStatusChange}
             >
               <PiCircleDashedBold />
-              <small>{
-                challengeStatus
-                  ? t('global.challenges.status.in_progress')
-                  : t('global.challenges.status.to_begin')
-              }</small>
+              <small>
+                {
+                  challengeStatus
+                    ? t('global.challenges.status.in_progress')
+                    : t('global.challenges.status.to_begin')
+                }
+              </small>
             </Toggle.Root>
           </div>
         </S.Group>

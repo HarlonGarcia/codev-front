@@ -11,7 +11,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { Input } from '../../../components/shared/Input';
 import { AppDispatch } from '../../../store';
-import { signIn } from '../../../store/features/authSlice';
+import { signIn } from '../../../store/slices/auth';
+import { getMe } from '../../../store/slices/user';
 import { useSelector } from '../../../store/useSelector';
 import * as S from './styles';
 import { SignInSchema, signInSchema } from './validation';
@@ -54,8 +55,9 @@ export default function SignIn() {
       return;
     }
 
+    dispatch(getMe());
     navigate('/');
-  }, [ token, navigate ]);
+  }, [ dispatch, navigate, token ]);
 
   return (
     <S.Container>

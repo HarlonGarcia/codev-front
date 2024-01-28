@@ -5,19 +5,19 @@ import { ITechnology } from '../../types/Technology';
 import { getUrl } from '../utils';
 
 interface TechnologyState {
-  technologies: ITechnology[];
+  items: ITechnology[];
   isLoading: boolean;
   isError: boolean;
 }
 
 const initialState: TechnologyState = {
-  technologies: [],
+  items: [],
   isLoading: false,
   isError: false,
 };
 
 export const getTechnologies = createAsyncThunk(
-  'technologies/getTechnologies',
+  'technology/getTechnologies',
   async () => {
     const response = await api.get(getUrl('technologies'));
 
@@ -26,7 +26,7 @@ export const getTechnologies = createAsyncThunk(
 );
 
 export const technologySlice = createSlice({
-  name: 'technologies',
+  name: 'technology',
   initialState,
   reducers: {},
   extraReducers: ({ addCase }) => {
@@ -35,7 +35,7 @@ export const technologySlice = createSlice({
     });
     addCase(getTechnologies.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.technologies = action.payload;
+      state.items = action.payload;
     });
     addCase(getTechnologies.rejected, (state) => {
       state.isLoading = false;
@@ -44,4 +44,4 @@ export const technologySlice = createSlice({
   },
 });
 
-export const technologiesReducer = technologySlice.reducer;
+export const technologyReducer = technologySlice.reducer;

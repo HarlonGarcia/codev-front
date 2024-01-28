@@ -10,6 +10,12 @@ interface AuthState {
   isError: boolean;
 }
 
+const initialState: AuthState = {
+  token: '',
+  isLoading: false,
+  isError: false,
+};
+
 interface SignInParams {
   payload: {
     email: string;
@@ -30,12 +36,6 @@ interface SignUpParams {
   // eslint-disable-next-line no-unused-vars
   saveAuthData: (data: IAuthPayload) => void;
 }
-
-const initialState: AuthState = {
-  token: '',
-  isLoading: false,
-  isError: false,
-};
 
 export const signIn = createAsyncThunk(
   'auth/signIn',

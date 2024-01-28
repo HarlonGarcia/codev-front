@@ -5,19 +5,19 @@ import { ICategory } from '../../types/Category';
 import { getUrl } from '../utils';
 
 interface CategoryState {
-  categories: ICategory[];
+  items: ICategory[];
   isLoading: boolean;
   isError: boolean;
 }
 
 const initialState: CategoryState = {
-  categories: [],
+  items: [],
   isLoading: false,
   isError: false,
 };
 
 export const getCategories = createAsyncThunk(
-  'categories/getCategories',
+  'category/getCategories',
   async () => {
     const { data } = await api.get(getUrl('categories'));
 
@@ -26,7 +26,7 @@ export const getCategories = createAsyncThunk(
 );
 
 export const categorySlice = createSlice({
-  name: 'categories',
+  name: 'category',
   initialState,
   reducers: {},
   extraReducers: ({ addCase }) => {
@@ -35,7 +35,7 @@ export const categorySlice = createSlice({
     });
     addCase(getCategories.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.categories = action.payload;
+      state.items = action.payload;
     });
     addCase(getCategories.rejected, (state) => {
       state.isLoading = false;
@@ -44,4 +44,4 @@ export const categorySlice = createSlice({
   },
 });
 
-export const categoriesReducer = categorySlice.reducer;
+export const categoryReducer = categorySlice.reducer;

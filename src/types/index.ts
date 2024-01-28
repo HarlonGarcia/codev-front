@@ -1,3 +1,12 @@
+export interface IShortcuts {
+  [key: string]: {
+    icon: JSX.Element;
+    title: JSX.Element;
+    keys: string[];
+    action: () => void;
+  };
+}
+
 export interface IAuthPayload {
   auth: {
     token: string;

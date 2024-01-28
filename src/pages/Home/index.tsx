@@ -7,8 +7,8 @@ import { motion } from 'framer-motion';
 
 import Typer from '../../components/Typer';
 import { AppDispatch } from '../../store';
-import { getFilteredChallenges } from '../../store/features/challengeSlice';
-import { getTechnologies } from '../../store/features/technologySlice';
+import { getChallenges } from '../../store/slices/challenge';
+import { getTechnologies } from '../../store/slices/technology';
 import { useSelector } from '../../store/useSelector';
 import { defaultTransition } from '../../utils/animations';
 import * as S from './styles';
@@ -51,10 +51,8 @@ export default function Home() {
 
   const dispatch = useDispatch<AppDispatch>();
 
-  const { technologies } = useSelector((state) => state.technologies);
-  const { latestChallenges: challenges } = useSelector(
-    (state) => state.challenges
-  );
+  const { items: technologies } = useSelector((state) => state.technologies);
+  const { items: challenges } = useSelector((state) => state.challenges);
 
   const hydratedTechnologies = useMemo(() => {
     const technologiesWithIcons = technologies.map((technology) => {
@@ -73,7 +71,7 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(getTechnologies());
-    dispatch(getFilteredChallenges({
+    dispatch(getChallenges({
       orderBy: 'latest',
       page: 0,
       size: 4,
