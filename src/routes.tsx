@@ -10,6 +10,7 @@ import { closeCommanderModal, openCommanderModal } from './store/features/comman
 import { extraShortcuts, goToShortcuts } from './utils/userOptions/shortcuts';
 import { useCustomSelector } from './store/useCustomSelector';
 import { ADMIN, USER } from './utils/constants';
+import PageNotFound from './pages/PageNotFound';
 
 const Challenges = React.lazy(() => import('./pages/Challenges'));
 const ChallengeDetails = React.lazy(() => import('./pages/Challenges/ChallengeDetails'));
@@ -116,6 +117,11 @@ export default function AppRoutes() {
                 <Users />
               </RequireAuth>
             }
+          />
+
+          <Route
+            path='*'
+            element={<PageNotFound />}
           />
         </Routes>
       </Suspense>

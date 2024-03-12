@@ -48,7 +48,6 @@ export const authSlice = createSlice({
     });
     addCase(signIn.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.isError = false;
       state.token = action.payload;
     });
     addCase(signIn.rejected, (state) => {
@@ -61,7 +60,6 @@ export const authSlice = createSlice({
     });
     addCase(signUp.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.isError = false;
       state.token = action.payload;
     });
     addCase(signUp.rejected, (state) => {

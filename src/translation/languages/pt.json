@@ -129,6 +129,11 @@
           },
           "submit": "Continuar"
         }
+      },
+      "not_found": {
+        "title": "Página não encontrada",
+        "description": "A página que você está procurando não existe.",
+        "go_back": "Voltar para o ínicio"
       }
     },
     "components": {

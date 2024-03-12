@@ -40,7 +40,6 @@ export default function SignUp() {
   const authenticate = useSignIn();
 
   const { token, isError } = useCustomSelector((state) => state.auth);
-
   const {
     formData,
     handleInputChange,
@@ -185,7 +184,6 @@ export default function SignUp() {
             required={false}
           />
         </S.Field>
-
         <S.SubmitButton
           type='submit'
           initial={{ opacity: 0 }}

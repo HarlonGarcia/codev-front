@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSignIn } from 'react-auth-kit';
 import { useDispatch } from 'react-redux';
-import { toast } from 'react-toastify';
 import { BiSolidLogInCircle } from 'react-icons/bi';
 import { useTranslation } from 'react-i18next';
 
@@ -39,7 +38,7 @@ export default function SignIn() {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-  
+
     dispatch(signIn({
       username: formData.email,
       password: formData.password,
@@ -56,11 +55,6 @@ export default function SignIn() {
       }
     };
 
-    if (auth.isError) {
-      toast.error(t('alert.invalid'));
-      return;
-    }
-
     if(!!auth.token && authenticate(authResponse)){
       localStorage.setItem('_credentials', JSON.stringify(auth.token));
       navigate('/');
@@ -70,7 +64,7 @@ export default function SignIn() {
 
   useEffect(() => {
     handleAuthResponse();
-  }, [ auth.token, auth.isError ]);
+  }, [auth]);
 
   return (
     <S.Container>
