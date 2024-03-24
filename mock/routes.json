@@ -1,0 +1,10 @@
+{
+  "/users": "/users",
+  "/users/:id": "/users/:id",
+  "/users/login": "/users/0",
+
+  "/categories": "/categories",
+  "/challenges": "/challenges",
+  "/challenges/:id": "/challenges/:id"
+}
+

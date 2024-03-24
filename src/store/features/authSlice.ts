@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { getUrl } from '../utils';
 
 interface AuthState {
   token: string;
@@ -27,13 +28,19 @@ const initialState: AuthState = {
 };
 
 export const signIn = createAsyncThunk('auth/signIn', async (signInPayload: SignInPayload) => {
-  const response = await axios.post(`${import.meta.env.VITE_API_URL}/users/login`, signInPayload);
+  const response = await axios.post(
+    getUrl('login'),
+    signInPayload
+  );
 
   return response.data.token ?? '';
 });
 
 export const signUp = createAsyncThunk('auth/signUp', async (signUpPayload: SignUpPayload) => {
-  const response = await axios.post(`${import.meta.env.VITE_API_URL}/users`, signUpPayload);
+  const response = await axios.post(
+    getUrl('signup'), 
+    signUpPayload
+  );
 
   return response.data.token ?? '';
 });

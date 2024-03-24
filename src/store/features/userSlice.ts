@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { User } from '../../types/User';
 import { api } from '../../api';
+import { getUrl } from '../utils';
 
 interface Filters {
   startsWith?: string;
@@ -24,7 +25,7 @@ const initialState: UserState = {
 };
 
 export const getUsers = createAsyncThunk('users/getUsers', async (filters: Filters) => {
-  const response = await api.get('/users', { params: filters });
+  const response = await api.get(getUrl('users'), { params: filters });
 
   return response.data ?? [];
 });

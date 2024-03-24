@@ -1,0 +1,14 @@
+[
+  {
+    "id": 0,
+    "name": "Breno",
+    "email": "breno@gmail.com",
+    "githubUrl": "github.com/BrenoDuarte"
+  },
+  {
+    "id": 1,
+    "name": "Harlon",
+    "email": "harlondesigner@gmail.com",
+    "githubUrl": "github.com/HarlonGarcia"
+  }
+]

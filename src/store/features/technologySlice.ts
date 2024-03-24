@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { api } from '../../api';
 import { Technology } from '../../types/Technology';
+import { getUrl } from '../utils';
 
 interface TechnologyState {
   technologies: Technology[];
@@ -16,7 +17,7 @@ const initialState: TechnologyState = {
 };
 
 export const getTechnologies = createAsyncThunk('technologies/getTechnologies', async () => {
-  const response = await api.get('/technologies');
+  const response = await api.get(getUrl('technologies'));
 
   return response.data ?? [];
 });

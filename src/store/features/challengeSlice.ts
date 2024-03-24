@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { api } from '../../api';
 import { Challenge, ChallengeDto } from '../../types/Challenge';
+import { getUrl } from '../utils';
 
 interface Filters {
   orderBy?: string;
@@ -26,26 +27,26 @@ const initialState: ChallengeState = {
 };
 
 export const getChallenges = createAsyncThunk('challenges/getChallenges', async () => {
-  const response = await api.get('/challenges', {
+  const { data } = await api.get(getUrl('challenges'), {
     params: {
       page: 0,
       size: 100,
     },
   });
 
-  return response.data ?? [];
+  return data ?? [];
 });
 
 export const getFilteredChallenges = createAsyncThunk('challenges/getFilteredChallenges', async (filters?: Filters) => {
-  const response = await api.get('/challenges', { params: filters });
+  const { data } = await api.get(getUrl('challenges'), { params: filters });
 
-  return response.data ?? [];
+  return data ?? [];
 });
 
 export const getChallengeById = createAsyncThunk('challenges/getChallengeById', async (id: string) => {
-  const response = await api.get(`/challenges/${id}`);
+  const { data } = await api.get(getUrl('challenges', id));
 
-  return response.data ?? {};
+  return data ?? {};
 });
 
 export const createChallenge = createAsyncThunk('challenges/createChallenge', async (challenge: ChallengeDto) => {
@@ -55,13 +56,13 @@ export const createChallenge = createAsyncThunk('challenges/createChallenge', as
     delete challenge['category'];
   }
   
-  const response = await api.post('/challenges', {
+  const { data } = await api.post(getUrl('challenges'), {
     ...challenge,
     authorId: '1',
     categoryId,
   });
 
-  return response.data ?? {};
+  return data ?? {};
 });
 
 export const challengeSlice = createSlice({

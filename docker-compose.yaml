@@ -1,10 +1,24 @@
 version: '3.8'
 
 services:
-  app:
-    build: .
-    ports:
-      - "5173:5173"
-    volumes:
-      - .:/app
-      - /app/node_modules
+    frontend:
+        build:
+            context: .
+            dockerfile: docker/frontend/Dockerfile
+        restart: unless-stopped
+        working_dir: /app
+        volumes:
+            - ./:/app
+        environment:
+            VITE_API_URL: http://0.0.0.0:5001
+        ports:
+            - 5173:5173
+    mock:
+        build: docker/mock/
+        working_dir: /app
+        command: 'json-server --host 0.0.0.0 ./mock/database.js --routes ./mock/routes.json --config ./mock/server.json'
+        volumes:
+            - ./mock:/app/mock
+        ports:
+            - 5001:5001
+            

@@ -37,21 +37,21 @@ export default function Home() {
 
   const dispatch = useDispatch<AppDispatch>();
   const isAuthenticated = useIsAuthenticated();
-  const { latestChallenges } = useCustomSelector((state) => state.challenges);
+  const { latestChallenges: challenges } = useCustomSelector((state) => state.challenges);
 
   useEffect(() => {
     if (!isAuthenticated()) {
       return;
     }
 
-    const filters = {
+    dispatch(getFilteredChallenges({
       orderBy: 'LATEST',
       page: 0,
       size: 4,
-    };
-
-    dispatch(getFilteredChallenges(filters));
+    }));
   }, [dispatch]);
+
+  console.log(challenges);
 
   return (
     <S.Container>
@@ -92,7 +92,7 @@ export default function Home() {
           transition={{ duration: 2.5 }}
         >
           {possibilities.map((possibility, index) => (
-            <S.CardItem 
+            <S.CardItem
               key={possibility.id}
               animation={index % 2 !== 0 ? 'diff' : undefined}
               variants={cardItem}
@@ -103,7 +103,7 @@ export default function Home() {
           ))}
         </S.Possibilities>
       </S.Section>
-      {latestChallenges.length > 0 && (
+      {challenges.length > 0 && (
         <S.Section
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -114,7 +114,7 @@ export default function Home() {
           </S.Title>
           <div className='latest_challenges'>
             <S.LatestChallenges>
-              {latestChallenges.map((challenge) => (
+              {challenges.map((challenge) => (
                 <div key={challenge.id}>
                   <small>
                     {challenge.title}

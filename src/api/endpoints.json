@@ -1,0 +1,9 @@
+{
+  "login": "http://127.0.0.1:8080/users/login",
+  "signup": "http://127.0.0.1:8080/users",
+  "users": "http://127.0.0.1:8080/users",
+
+  "challenges": "http://0.0.0.0:5001/challenges",
+  "categories": "http://0.0.0.0:5001/categories",
+  "technologies": "http://0.0.0.0:5001/technologies"
+}

@@ -1,0 +1,30 @@
+[
+  {
+    "id": "0",
+    "name": "ReactJS",
+    "description": "JavaScript Library",
+    "documentationLink": "https://reactjs.org/docs/getting-started",
+    "color": "#61DAFB"
+  },
+  {
+    "id": "1",
+    "name": "TailwindCSS",
+    "description": "CSS Framework",
+    "documentationLink": "https://tailwindcss.com/docs",
+    "color": "#38B2AC"
+  },
+  {
+    "id": "2",
+    "name": "Quarkus",
+    "description": "Quarkus is a Kubernetes Native Java stack tailored for GraalVM & OpenJDK HotSpot, crafted from the best of breed Java libraries and standards.",
+    "documentationLink": "https://quarkus.io/guides/",
+    "color": "#F2C94C"
+  },
+  {
+    "id": "3",
+    "name": "Docker",
+    "description": "Docker is a platform for developers and sysadmins to develop, ship, and run applications.",
+    "documentationLink": "https://docs.docker.com/",
+    "color": "#2496ED"
+  }
+]

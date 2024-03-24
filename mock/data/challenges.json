@@ -1,0 +1,98 @@
+[
+  {
+    "id": "0",
+    "title": "Modern Admin Dashboard",
+    "description": "Dashboard to control users",
+    "status": "IN_PROGRESS",
+    "category": {
+      "id": 1,
+      "name": "Frontend"
+    },
+    "technologies": [
+      {
+        "id": "0",
+        "name": "ReactJS",
+        "description": "JavaScript Library",
+        "documentationLink": "https://reactjs.org/docs/getting-started",
+        "color": "#61DAFB"
+      },
+      {
+        "id": "1",
+        "name": "TailwindCSS",
+        "description": "CSS Framework",
+        "documentationLink": "https://tailwindcss.com/docs",
+        "color": "#38B2AC"
+      }
+    ],
+    "author": {
+      "id": 0,
+      "name": "Breno",
+      "email": "breno@gmail.com",
+      "githubUrl": "github.com/BrenoDuarte"
+    }
+  },
+  {
+    "id": "1",
+    "title": "Ecommerce API",
+    "description": "An ecommerce API to control products and orders",
+    "status": "FINISHED",
+    "category": {
+      "id": 0,
+      "name": "Backend"
+    },
+    "technologies": [
+      {
+        "id": "2",
+        "name": "Quarkus",
+        "description": "Quarkus is a Kubernetes Native Java stack tailored for GraalVM & OpenJDK HotSpot, crafted from the best of breed Java libraries and standards.",
+        "documentationLink": "https://quarkus.io/guides/",
+        "color": "#F2C94C"
+      },
+      {
+        "id": "3",
+        "name": "Docker",
+        "description": "Docker is a platform for developers and sysadmins to develop, ship, and run applications.",
+        "documentationLink": "https://docs.docker.com/",
+        "color": "#2496ED"
+      }
+    ],
+    "author": {
+      "id": 1,
+      "name": "Harlon",
+      "email": "harlondesigner@gmail.com",
+      "githubUrl": "github.com/HarlonGarcia"
+    }
+  },
+  {
+    "id": "3",
+    "title": "Shopping Landing Page",
+    "description": "Landing page to sell products",
+    "status": "IN_PROGRESS",
+    "category": {
+      "id": 1,
+      "name": "Frontend"
+    },
+    "technologies": [
+      {
+        "id": "0",
+        "name": "ReactJS",
+        "description": "JavaScript Library",
+        "documentationLink": "https://reactjs.org/docs/getting-started",
+        "color": "#61DAFB"
+      },
+      {
+        "id": "1",
+        "name": "TailwindCSS",
+        "description": "CSS Framework",
+        "documentationLink": "https://tailwindcss.com/docs",
+        "color": "#38B2AC"
+      }
+    ],
+    "author": {
+      "id": 1,
+      "name": "Harlon",
+      "email": "harlondesigner@gmail.com",
+      "githubUrl": "github.com/HarlonGarcia"
+    }
+  }
+]
