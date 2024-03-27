@@ -13,12 +13,16 @@
         },
         "goals": {
           "title": "Elevate your code skills",
-          "description": "First of all, practice! Nothing better than a project to put into practice what you have learned. So, with these challenges you can...",
+          "description": "First of all, practice! Nothing better than a project to put into practice what you have learned.",
           "cards": {
             "solution": "Find solutions to real problems",
             "code": "Turn ideas into code",
             "compare": "See other solutions"
           }
+        },
+        "technologies": {
+          "title": "Be up-to-date",
+          "description": "Here you can be up to date with the latest technologies and trends in the market."
         },
         "latest": {
           "title": "Latest challenges",

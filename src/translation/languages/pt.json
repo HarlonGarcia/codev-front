@@ -13,12 +13,16 @@
         },
         "goals": {
           "title": "Aumente seu nível na programação",
-          "description": "Antes de tudo, pratique! Nada melhor do que um projeto para pôr em prática o que você aprendeu. Portanto, com esses desafios você consegue...",
+          "description": "Antes de tudo, pratique! Nada melhor do que um projeto para pôr em prática o que você aprendeu",
           "cards": {
             "solution": "Encontre soluções para problemas reais",
             "code": "Converta idéias em código",
             "compare": "Veja outras soluções"
           }
+        },
+        "technologies": {
+          "title": "Esteja por dentro das tecnologias",
+          "description": "Aprenda e pratique com as tecnologias mais utilizadas no mercado"
         },
         "latest": {
           "title": "Desafios adicionados recentemente",

@@ -2,29 +2,85 @@
   {
     "id": "0",
     "name": "ReactJS",
-    "description": "JavaScript Library",
     "documentationLink": "https://reactjs.org/docs/getting-started",
-    "color": "#61DAFB"
+    "color": "#61DAFB",
+    "slug": "react"
   },
   {
     "id": "1",
-    "name": "TailwindCSS",
-    "description": "CSS Framework",
-    "documentationLink": "https://tailwindcss.com/docs",
-    "color": "#38B2AC"
+    "name": "Quarkus",
+    "documentationLink": "https://quarkus.io/guides/",
+    "color": "#F2C94C",
+    "slug": "quarkus"
   },
   {
     "id": "2",
-    "name": "Quarkus",
-    "description": "Quarkus is a Kubernetes Native Java stack tailored for GraalVM & OpenJDK HotSpot, crafted from the best of breed Java libraries and standards.",
-    "documentationLink": "https://quarkus.io/guides/",
-    "color": "#F2C94C"
+    "name": "Docker",
+    "documentationLink": "https://docs.docker.com/",
+    "color": "#2496ED",
+    "slug": "docker"
   },
   {
     "id": "3",
-    "name": "Docker",
-    "description": "Docker is a platform for developers and sysadmins to develop, ship, and run applications.",
-    "documentationLink": "https://docs.docker.com/",
-    "color": "#2496ED"
+    "name": "VueJS",
+    "documentationLink": "https://vuejs.org/v2/guide/",
+    "color": "#41B883",
+    "slug": "vue"
+  },
+  {
+    "id": "4",
+    "name": "Angular",
+    "documentationLink": "https://angular.io/docs",
+    "color": "#DD0031",
+    "slug": "angular"
+  },
+  {
+    "id": "5",
+    "name": "Java",
+    "documentationLink": "https://docs.oracle.com/en/java/",
+    "color": "#007396",
+    "slug": "java"
+  },
+  {
+    "id": "6",
+    "name": "Spring",
+    "documentationLink": "https://spring.io/guides",
+    "color": "#6DB33F",
+    "slug": "spring"
+  },
+  {
+    "id": "7",
+    "name": "Javascript",
+    "documentationLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+    "color": "#F7DF1E",
+    "slug": "js"
+  },
+  {
+    "id": "8",
+    "name": "Typescript",
+    "documentationLink": "https://www.typescriptlang.org/docs/",
+    "color": "#007ACC",
+    "slug": "ts"
+  },
+  {
+    "id": "9",
+    "name": "Node",
+    "documentationLink": "https://nodejs.org/en/docs/",
+    "color": "#68A063",
+    "slug": "node"
+  },
+  {
+    "id": "10",
+    "name": "Python",
+    "documentationLink": "https://docs.python.org/3/",
+    "color": "#3776AB",
+    "slug": "python"
+  },
+  {
+    "id": "11",
+    "name": "TailwindCSS",
+    "documentationLink": "https://tailwindcss.com/docs",
+    "color": "#38B2AC",
+    "slug": "tailwind"
   }
 ]
