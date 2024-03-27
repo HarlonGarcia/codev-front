@@ -5,8 +5,8 @@ import { GrStatusGoodSmall } from 'react-icons/gr';
 import { motion } from 'framer-motion';
 
 import * as S from './styles';
-import { useCustomSelector } from '../../store/useCustomSelector';
-import { Category } from '../../types/Category';
+import { useCustomSelector } from '../../../../store/useCustomSelector';
+import { Category } from '../../../../types/Category';
 
 interface ChallengesGroupProps {
   category: Category;

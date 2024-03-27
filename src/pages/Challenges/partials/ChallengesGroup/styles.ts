@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { styled } from '../../styles';
+import { styled } from '../../../../styles';
 
 const Container = styled('div', {
   '& > h2': {

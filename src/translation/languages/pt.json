@@ -13,15 +13,20 @@
         },
         "goals": {
           "title": "Aumente seu nível na programação",
-          "description": "Antes de tudo, pratique! Nada melhor do que um projeto para pôr em prática o que você aprendeu. Portanto, com esses desafios você consegue...",
+          "description": "Descubra por que a prática através de projetos é essencial para consolidar habilidades em web desenvolvimento, abrangendo desde o frontend com os principais frameworks, até backend, além do uso de outros tipos de ferramentas",
           "cards": {
             "solution": "Encontre soluções para problemas reais",
             "code": "Converta idéias em código",
             "compare": "Veja outras soluções"
           }
         },
+        "technologies": {
+          "title": "Explorando as principais stacks",
+          "description": "Pratique com as principais linguagens e tecnologias do mercado, como React, Angular, Vue, Node, Quarkus, Docker, entre outras"
+        },
         "latest": {
           "title": "Desafios adicionados recentemente",
+          "description": "Comece agora por uma variedade de projetos práticos que irão te ajudar a solidificar conhecimentos em diferentes áreas do web desenvolvimento",
           "badge": "Novo",
           "link": "Ver desafios"
         }

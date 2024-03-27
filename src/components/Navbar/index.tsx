@@ -21,7 +21,9 @@ export default function Navbar() {
 
   return (
     <S.Container>
-      <h3>Codev</h3>
+      <Link to='/'>
+        <h3>Codev</h3>
+      </Link>
       <S.Navigation>
         <Link to='/'>
           <AiFillHome />

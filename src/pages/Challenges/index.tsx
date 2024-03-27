@@ -5,7 +5,7 @@ import * as S from './styles';
 import { useCustomSelector } from '../../store/useCustomSelector';
 import { AppDispatch } from '../../store';
 import { getCategories } from '../../store/features/categorySlice';
-import ChallengesGroup from '../../components/ChallengesGroup';
+import ChallengesGroup from './partials/ChallengesGroup';
 import { getChallenges } from '../../store/features/challengeSlice';
 
 export default function Challenges() {

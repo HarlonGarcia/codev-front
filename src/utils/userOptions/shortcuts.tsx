@@ -32,10 +32,10 @@ export const goToShortcuts: Shortcuts = {
       location.href ='/challenges';
     }
   },
-  A: {
+  S: {
     icon: <FaInfoCircle />,
     title: <Translation>{(t) => <span>{t('components.commander.commands.about')}</span>}</Translation>,
-    keys: [ '⌘', 'A' ],
+    keys: [ '⌘', 'S' ],
     action: () => {
       location.href ='/about';
     }

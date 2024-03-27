@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -12,32 +12,50 @@ import { getFilteredChallenges } from '../../store/features/challengeSlice';
 import { defaultTransition } from '../../utils/animations';
 import { possibilities } from '../../utils/userOptions/possibilitiesCards';
 import { useIsAuthenticated } from 'react-auth-kit';
+import { getTechnologies } from '../../store/features/technologySlice';
+import { technologiesIcons as techIcons } from './utils/icons';
 
-const cardsContainer = {
+const containerVariant = {
   hidden: { opacity: 1 },
   visible: {
     opacity: 1,
     transition: {
       delayChildren: 0.3,
-      staggerChildren: 0.2
-    }
-  }
+      staggerChildren: 0.2,
+    },
+  },
 };
 
-const cardItem = {
+const itemVariant = {
   hidden: { y: 20, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1
-  }
+  visible: { y: 0, opacity: 1 },
 };
 
 export default function Home() {
   const { t } = useTranslation('translation', { keyPrefix: 'pages.home' });
 
-  const dispatch = useDispatch<AppDispatch>();
   const isAuthenticated = useIsAuthenticated();
+  const dispatch = useDispatch<AppDispatch>();
+
   const { latestChallenges: challenges } = useCustomSelector((state) => state.challenges);
+  const { technologies } = useCustomSelector((state) => state.technologies);
+
+  const hydratedTechnologies = useMemo(() => {
+    return technologies.map((technology) => {
+      const techSlug = Object.keys(techIcons).find(
+        (key) => technology.slug.toLowerCase().includes(key)
+      );
+
+      return {
+        ...technology,
+        logo: techSlug && techIcons[techSlug],
+      };
+    }).slice(0, 12);
+  }, [technologies]);
+
+  useEffect(() => {
+    dispatch(getTechnologies());
+  }, [dispatch]);
 
   useEffect(() => {
     if (!isAuthenticated()) {
@@ -50,8 +68,6 @@ export default function Home() {
       size: 4,
     }));
   }, [dispatch]);
-
-  console.log(challenges);
 
   return (
     <S.Container>
@@ -86,7 +102,7 @@ export default function Home() {
           {t('goals.description')}
         </S.Paragraph>
         <S.Possibilities
-          variants={cardsContainer}
+          variants={containerVariant}
           initial="hidden"
           animate="visible"
           transition={{ duration: 2.5 }}
@@ -95,13 +111,37 @@ export default function Home() {
             <S.CardItem
               key={possibility.id}
               animation={index % 2 !== 0 ? 'diff' : undefined}
-              variants={cardItem}
+              variants={itemVariant}
             >
               {possibility.label}
               {possibility.icon}
             </S.CardItem>
           ))}
         </S.Possibilities>
+      </S.Section>
+      <S.Section 
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={defaultTransition}
+      >
+        <S.Title>
+          {t('technologies.title')}
+        </S.Title>
+        <S.Paragraph>
+          {t('technologies.description')}
+        </S.Paragraph>
+        {technologies.length > 0 && (
+          <S.Technologies>
+            {hydratedTechnologies.map(({ name, color, logo }, index) => (
+              <S.Tech key={index}>
+                <span style={{ color }}>
+                  {logo}
+                </span>
+                <small>{name}</small>
+              </S.Tech>
+            ))}
+          </S.Technologies>
+        )}
       </S.Section>
       {challenges.length > 0 && (
         <S.Section
@@ -112,6 +152,9 @@ export default function Home() {
           <S.Title>
             {t('latest.title')}
           </S.Title>
+          <S.Paragraph>
+            {t('latest.description')}
+          </S.Paragraph>
           <div className='latest_challenges'>
             <S.LatestChallenges>
               {challenges.map((challenge) => (

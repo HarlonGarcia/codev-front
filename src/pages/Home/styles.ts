@@ -105,7 +105,7 @@ const Title = styled('h1', {
   
   '@lg': {
     fontSize: '2rem',
-    marginBottom: '2.5rem',
+    marginBottom: '1.75rem',
   },
 });
 
@@ -225,6 +225,49 @@ const CardItem = styled(motion.li, {
   },
 });
 
+const Technologies = styled(motion.ul, {
+  display: 'grid',
+  gridTemplateColumns: 'repeat(2, 1fr)',
+  gap: '1rem',
+
+  margin: '0 auto',
+
+  '@sm': {
+    gridTemplateColumns: 'repeat(3, 1fr)',
+  },
+  '@md': {
+    gridTemplateColumns: 'repeat(4, 1fr)',
+  },
+  '@xl2': {
+    width: '60rem',
+  },
+});
+
+const Tech = styled(motion.li, {
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+  gap: '0.375rem',
+
+  padding: '1rem',
+  
+  background: '$secondary',
+  color: '$text',
+  borderRadius: '0.375rem',
+
+  '& > span': {
+    fontSize: '2rem',
+  },
+  '& > small': {
+    fontSize: '1rem',
+  },
+
+  '@md': {
+    padding: '2rem',
+  },
+});
+
 const LatestChallenges = styled('div', {
   display: 'flex',
   flexDirection: 'column',
@@ -298,5 +341,7 @@ export {
   Paragraph, 
   Possibilities, 
   CardItem,
+  Technologies,
+  Tech,
   LatestChallenges
 };

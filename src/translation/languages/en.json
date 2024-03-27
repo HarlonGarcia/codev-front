@@ -13,17 +13,22 @@
         },
         "goals": {
           "title": "Elevate your code skills",
-          "description": "First of all, practice! Nothing better than a project to put into practice what you have learned. So, with these challenges you can...",
+          "description": "Discover why practicing through projects is essential to solidify your skills, covering from frontend with major frameworks to backend, as well as the use of other types of tools",
           "cards": {
             "solution": "Find solutions to real problems",
             "code": "Turn ideas into code",
             "compare": "See other solutions"
           }
         },
+        "technologies": {
+          "title": "Exploring stacks",
+          "description": "Practice with the major languages and technologies in the market, such as React, Angular, Vue, Node, Quarkus, Docker, among others"
+        },
         "latest": {
-          "title": "Latest challenges",
+          "title": "Recently added challenges",
+          "description": "Start now with a variety of practical projects that will help you solidify knowledge in different areas of web development",
           "badge": "New",
-          "link": "Go to challenges"
+          "link": "View challenges"
         }
       },
       "my_account": {
