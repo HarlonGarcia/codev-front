@@ -1,6 +1,6 @@
+import { Translation } from 'react-i18next';
 import { AiFillHome } from 'react-icons/ai';
 import { FaBook, FaCodeBranch, FaCopy, FaGithub, FaInfoCircle, FaUserCircle } from 'react-icons/fa';
-import { Translation } from 'react-i18next';
 
 import { URL_DEPLOY, URL_REPOSITORY } from '../constants';
 

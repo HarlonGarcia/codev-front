@@ -1,15 +1,15 @@
 export default function CompareSvg() {
   return (
-    <svg 
-      fill="#50fa7b" 
-      height="30px" 
-      width="30px" 
-      version="1.1" 
-      id="Layer_1" 
-      xmlns="http://www.w3.org/2000/svg" 
+    <svg
+      fill="#50fa7b"
+      height="30px"
+      width="30px"
+      version="1.1"
+      id="Layer_1"
+      xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
       viewBox="0 0 512 512"
-      enableBackground="new 0 0 512 512" 
+      enableBackground="new 0 0 512 512"
       xmlSpace="preserve"
     >
       <path d="M426.7,341.3c-29.1,0-54.8,14.7-70.2,36.9L167.4,278.1c1.9-7.1,3.3-14.4,3.3-22.1c0-7.7-1.3-15-3.3-22.1l189.1-100.1

@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+
 import { styled } from '../../../../styles';
 
 const Container = styled('div', {
@@ -14,7 +15,7 @@ const Container = styled('div', {
     '& > .carousel_inner': {
       display: 'flex',
       gap: '2rem',
-      
+
       '@xl3': {
         gap: '3.25rem',
       }
@@ -33,14 +34,14 @@ const Challenge = styled(motion.div, {
   flexDirection: 'column',
 
   padding: '2rem',
-  
+
   width: '24rem',
   minWidth: '24rem',
-  
+
   background: '$glass',
   border: '1px solid $shadow',
   borderRadius: '0.5rem',
-  
+
   boxShadow: '0 0px 3px rgba(124, 58, 237, 0.5)',
   transition: 'all 0.3s ease-in-out',
 
@@ -57,7 +58,7 @@ const ChallengeHeader = styled('div', {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  
+
   marginBottom: '1.5rem',
 
   '& > h2': {
@@ -81,7 +82,7 @@ const ChallengeHeader = styled('div', {
   '& .yellow': {
     color: '$alert',
   },
-  
+
   '& .green': {
     color: '$highlight',
   },
@@ -96,10 +97,10 @@ const Image = styled('img', {
   height: '16rem',
 
   marginBottom: '1.5rem',
-  
+
   borderRadius: '0.25rem',
   transition: 'transform 0.3s ease-in-out',
-  
+
   objectFit: 'cover',
   pointerEvents: 'none',
   userSelect: 'none',
@@ -108,7 +109,7 @@ const Image = styled('img', {
 
 const JoinChallenge = styled('button', {
   width: '100%',
-  
+
   padding: '0.75rem',
   margin: '0 auto',
 
@@ -125,7 +126,7 @@ const JoinChallenge = styled('button', {
     color: '$secondary',
     background: '$title',
   },
-  
+
   '&:disabled': {
     color: '$error',
     background: '$secondary',

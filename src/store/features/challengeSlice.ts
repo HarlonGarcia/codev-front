@@ -26,44 +26,56 @@ const initialState: ChallengeState = {
   isError: false,
 };
 
-export const getChallenges = createAsyncThunk('challenges/getChallenges', async () => {
-  const { data } = await api.get(getUrl('challenges'), {
-    params: {
-      page: 0,
-      size: 100,
-    },
-  });
+export const getChallenges = createAsyncThunk(
+  'challenges/getChallenges',
+  async () => {
+    const { data } = await api.get(getUrl('challenges'), {
+      params: {
+        page: 0,
+        size: 100,
+      },
+    });
 
-  return data ?? [];
-});
+    return data ?? [];
+  },
+);
 
-export const getFilteredChallenges = createAsyncThunk('challenges/getFilteredChallenges', async (filters?: Filters) => {
-  const { data } = await api.get(getUrl('challenges'), { params: filters });
+export const getFilteredChallenges = createAsyncThunk(
+  'challenges/getFilteredChallenges',
+  async (filters?: Filters) => {
+    const { data } = await api.get(getUrl('challenges'), { params: filters });
 
-  return data ?? [];
-});
+    return data ?? [];
+  },
+);
 
-export const getChallengeById = createAsyncThunk('challenges/getChallengeById', async (id: string) => {
-  const { data } = await api.get(getUrl('challenges', id));
+export const getChallengeById = createAsyncThunk(
+  'challenges/getChallengeById',
+  async (challengeId: string) => {
+    const { data } = await api.get(getUrl('challenge_by_id', { challengeId }));
 
-  return data ?? {};
-});
+    return data ?? {};
+  },
+);
 
-export const createChallenge = createAsyncThunk('challenges/createChallenge', async (challenge: ChallengeDto) => {
-  const categoryId = challenge.category?.id;
+export const createChallenge = createAsyncThunk(
+  'challenges/createChallenge',
+  async (challenge: ChallengeDto) => {
+    const categoryId = challenge.category?.id;
 
-  if (challenge['category'] !== undefined) {
-    delete challenge['category'];
-  }
-  
-  const { data } = await api.post(getUrl('challenges'), {
-    ...challenge,
-    authorId: '1',
-    categoryId,
-  });
+    if (challenge['category'] !== undefined) {
+      delete challenge['category'];
+    }
 
-  return data ?? {};
-});
+    const { data } = await api.post(getUrl('challenges'), {
+      ...challenge,
+      authorId: '1',
+      categoryId,
+    });
+
+    return data ?? {};
+  },
+);
 
 export const challengeSlice = createSlice({
   name: 'challenges',
@@ -81,7 +93,7 @@ export const challengeSlice = createSlice({
       state.isLoading = false;
       state.isError = true;
     });
-    
+
     addCase(getFilteredChallenges.pending, (state) => {
       state.isLoading = true;
     });
@@ -117,7 +129,7 @@ export const challengeSlice = createSlice({
       state.isLoading = false;
       state.isError = true;
     });
-  }
+  },
 });
 
 export const challengesReducer = challengeSlice.reducer;

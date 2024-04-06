@@ -12,18 +12,18 @@ export const commanderSlice = createSlice({
   name: 'commander',
   initialState,
   reducers: {
-    closeCommanderModal: (state: CommanderState) => {
+    closeModal: (state: CommanderState) => {
       state.isModalOpened = false;
     },
-    openCommanderModal: (state: CommanderState) => {
+    openModal: (state: CommanderState) => {
       state.isModalOpened = true;
     },
-    toggleCommanderModal: (state: CommanderState) => {
+    toggleModal: (state: CommanderState) => {
       state.isModalOpened = !state.isModalOpened;
     },
   },
 });
 
-export const { closeCommanderModal, openCommanderModal, toggleCommanderModal } =  commanderSlice.actions;
+export const { closeModal, openModal, toggleModal } = commanderSlice.actions;
 
 export const commanderReducer = commanderSlice.reducer;

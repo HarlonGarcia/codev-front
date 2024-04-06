@@ -1,7 +1,8 @@
-import * as Popover from '@radix-ui/react-popover';
-import { MdExpandMore } from 'react-icons/md';
 import { FaGithub } from 'react-icons/fa';
 import { ImLink } from 'react-icons/im';
+import { MdExpandMore } from 'react-icons/md';
+
+import * as Popover from '@radix-ui/react-popover';
 
 import './styles.scss';
 

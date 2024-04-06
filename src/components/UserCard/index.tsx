@@ -1,9 +1,9 @@
-import * as S from './styles';
-import { User } from '../../types/User';
-import CardPopover from './CardPopover';
-
 import { FaGithub } from 'react-icons/fa';
 import { ImLink } from 'react-icons/im';
+
+import { User } from '../../types/User';
+import CardPopover from './CardPopover';
+import * as S from './styles';
 
 interface UserCardProps {
   user: User;
@@ -24,7 +24,7 @@ export default function UserCard({ user }: UserCardProps) {
         </S.Content>
       </div>
       <S.LinksPopover>
-        <CardPopover 
+        <CardPopover
           github={user.githubUrl}
           additional={user.additionalUrl}
         />

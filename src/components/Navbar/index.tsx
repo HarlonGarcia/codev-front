@@ -1,22 +1,25 @@
-import { useIsAuthenticated, useSignOut } from 'react-auth-kit';
-
-import { Link } from 'react-router-dom';
+import useIsAuthenticated from 'react-auth-kit/hooks/useIsAuthenticated';
+import useSignOut from 'react-auth-kit/hooks/useSignOut';
 import { useTranslation } from 'react-i18next';
-import { FaCodeBranch } from 'react-icons/fa';
 import { AiFillHome } from 'react-icons/ai';
+import { FaCodeBranch } from 'react-icons/fa';
 import { RiLogoutBoxRFill } from 'react-icons/ri';
+import { Link } from 'react-router-dom';
 
-import * as S from './styles';
 import Menu from '../Menu';
+import * as S from './styles';
 
 export default function Navbar() {
-  const { t } = useTranslation('translation', { keyPrefix: 'components.navbar' });
+  const { t } = useTranslation('translation', {
+    keyPrefix: 'components.navbar',
+  });
+
   const isAuthenticated = useIsAuthenticated();
   const signOut = useSignOut();
 
   const handleLogout = () => {
-    localStorage.clear();
     signOut();
+    window.location.reload();
   };
 
   return (
@@ -29,7 +32,7 @@ export default function Navbar() {
           <AiFillHome />
           <span>{t('home')}</span>
         </Link>
-        {isAuthenticated() && (
+        {isAuthenticated && (
           <>
             <Link to='/challenges'>
               <FaCodeBranch />
@@ -41,7 +44,7 @@ export default function Navbar() {
             </button>
           </>
         )}
-        {!isAuthenticated() && (
+        {!isAuthenticated && (
           <Link to='/signin'>
             <RiLogoutBoxRFill />
             <span>{t('signin')}</span>

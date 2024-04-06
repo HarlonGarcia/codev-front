@@ -10,7 +10,7 @@ const Wrapper = styled(WrapperDefault, {
 
 const WrapperWithPadding = styled(WrapperDefault, {
   wrapperPadding: '2rem',
-  
+
   '@xs': {
     wrapperPadding: '2.5rem',
   },

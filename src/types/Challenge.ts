@@ -1,7 +1,7 @@
 import { Category } from './Category';
+import { ChallengeStatus } from './enums/ChallengeStatus';
 import { Technology } from './Technology';
 import { User } from './User';
-import { ChallengeStatus } from './enums/ChallengeStatus';
 
 export interface Challenge {
   id: string;

@@ -25,7 +25,7 @@ const PopoverTrigger = styled('button', {
     height: '60%',
 
     margin: 'auto',
-    
+
     color: '$secondary',
     transition: 'all 250ms ease-in-out',
   },
@@ -45,9 +45,9 @@ const Content = styled('div', {
   gap: '1rem',
 
   width: '10rem',
-  
+
   padding: '1rem',
-  
+
   background: '$glass',
   border: '1px solid $secondary',
   borderRadius: '0.25rem',

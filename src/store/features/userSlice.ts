@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import { User } from '../../types/User';
 import { api } from '../../api';
+import { User } from '../../types/User';
 import { getUrl } from '../utils';
 
 interface Filters {
@@ -10,7 +10,7 @@ interface Filters {
 
 interface UserState {
   users: User[];
-  filters: Filters,
+  filters: Filters;
   currentUser: User | null;
   isLoading: boolean;
   isError: boolean;
@@ -24,29 +24,50 @@ const initialState: UserState = {
   isError: false,
 };
 
-export const getUsers = createAsyncThunk('users/getUsers', async (filters: Filters) => {
-  const response = await api.get(getUrl('users'), { params: filters });
+export const getUsers = createAsyncThunk(
+  'users/getUsers',
+  async (filters: Filters) => {
+    const response = await api.get(getUrl('users'), { params: filters });
 
-  return response.data ?? [];
+    return response.data ?? [];
+  },
+);
+
+export const getMe = createAsyncThunk('auth/getMe', async () => {
+  const { data } = await api.get(getUrl('me'));
+
+  return data;
 });
 
 export const userSlice = createSlice({
   name: 'users',
   initialState,
   reducers: {},
-  extraReducers: (builder) => {
-    builder.addCase(getUsers.pending, (state) => {
+  extraReducers: ({ addCase }) => {
+    addCase(getUsers.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(getUsers.fulfilled, (state, action) => {
+    addCase(getUsers.fulfilled, (state, action) => {
       state.isLoading = false;
       state.users = action.payload;
     });
-    builder.addCase(getUsers.rejected, (state) => {
+    addCase(getUsers.rejected, (state) => {
       state.isLoading = false;
       state.isError = true;
     });
-  }
+
+    addCase(getMe.pending, (state) => {
+      state.isLoading = true;
+    });
+    addCase(getMe.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.currentUser = action.payload;
+    });
+    addCase(getMe.rejected, (state) => {
+      state.isLoading = false;
+      state.isError = true;
+    });
+  },
 });
 
 export const usersReducer = userSlice.reducer;

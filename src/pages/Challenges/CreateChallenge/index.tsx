@@ -1,17 +1,18 @@
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import * as Toggle from '@radix-ui/react-toggle';
-import { PiCircleDashedBold } from 'react-icons/pi';
 import { useTranslation } from 'react-i18next';
+import { PiCircleDashedBold } from 'react-icons/pi';
+import { useDispatch } from 'react-redux';
 
-import * as S from './styles';
-import { useCustomSelector } from '../../../store/useCustomSelector';
+import * as Toggle from '@radix-ui/react-toggle';
+
+import useForm from '../../../hooks/useForm';
 import { AppDispatch } from '../../../store';
 import { getCategories } from '../../../store/features/categorySlice';
 import { createChallenge } from '../../../store/features/challengeSlice';
+import { useSelector } from '../../../store/useSelector';
 import { ChallengeDto } from '../../../types/Challenge';
 import { ChallengeStatus as status } from '../../../types/enums/ChallengeStatus';
-import useForm from '../../../hooks/useForm';
+import * as S from './styles';
 
 const defaultInputOptions = {
   spellCheck: false,
@@ -36,29 +37,29 @@ export default function CreateChallenge() {
   const [ challengeStatus, setChallengeStatus ] = useState(false);
 
   const dispatch = useDispatch<AppDispatch>();
-  const { categories } = useCustomSelector((state) => state.categories);
+  const { categories } = useSelector((state) => state.categories);
 
   const {
     formData,
     handleInputChange,
     changeFormPayload
   } = useForm<CreateChallengeForm>(initialFormState);
-                
+
   const { title, description } = formData;
 
   const handleCategorySearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
     handleInputChange(event);
   };
-  
+
   const handleCategoryValue = (categoryName: string) => {
     setSearchTerm(categoryName);
     changeFormPayload('category', categoryName);
   };
-  
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    
+
     const category = categories.find((category) => {
       return category.name.toLowerCase() === formData.category.toLowerCase();
     });
@@ -74,7 +75,7 @@ export default function CreateChallenge() {
   };
 
   const handleStatusChange = () => {
-    setChallengeStatus((prevState) => !prevState); 
+    setChallengeStatus((prevState) => !prevState);
   };
 
   const getFilteredCategories = () => {
@@ -83,7 +84,7 @@ export default function CreateChallenge() {
       return categoryName.includes(searchTerm.toLowerCase()) && name !== searchTerm;
     });
   };
-  
+
   useEffect(() => {
     dispatch(getCategories());
   }, []);
@@ -118,7 +119,7 @@ export default function CreateChallenge() {
             <label>{t('category')}</label>
             <input
               id='category'
-              type="text" 
+              type="text"
               value={searchTerm}
               onChange={handleCategorySearch}
               {...defaultInputOptions}
@@ -126,7 +127,7 @@ export default function CreateChallenge() {
             <ul>
               {searchTerm.length > 0 && getFilteredCategories()
                 .map(({ name }) => (
-                  <li 
+                  <li
                     key={name}
                     onClick={() => handleCategoryValue(name)}
                   >
@@ -138,9 +139,9 @@ export default function CreateChallenge() {
           </div>
           <div>
             <label>{t('status.label')}</label>
-            <Toggle.Root 
-              className="toggle" 
-              data-state={challengeStatus ? 'off' : 'on'} 
+            <Toggle.Root
+              className="toggle"
+              data-state={challengeStatus ? 'off' : 'on'}
               onClick={handleStatusChange}
             >
               <PiCircleDashedBold />
@@ -148,9 +149,9 @@ export default function CreateChallenge() {
             </Toggle.Root>
           </div>
         </S.Group>
-        <S.Submit 
+        <S.Submit
           type="submit"
-          value={t('submit')} 
+          value={t('submit')}
         />
       </S.Form>
     </S.Container>

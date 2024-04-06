@@ -20,7 +20,7 @@ const AccountHeader = styled('header', {
     flexDirection: 'row',
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
-    
+
     gap: '1.75rem',
   },
 });
@@ -83,12 +83,12 @@ const Option = styled('div', {
   display: 'flex',
   alignItems: 'center',
   gap: '0.75rem',
-  
+
   borderRadius: '0.25rem',
   cursor: 'pointer',
 
   transition: 'all 0.3s ease-in-out',
-  
+
   '&:hover': {
     color: '$title',
   },

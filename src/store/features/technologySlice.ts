@@ -16,11 +16,14 @@ const initialState: TechnologyState = {
   isError: false,
 };
 
-export const getTechnologies = createAsyncThunk('technologies/getTechnologies', async () => {
-  const response = await api.get(getUrl('technologies'));
+export const getTechnologies = createAsyncThunk(
+  'technologies/getTechnologies',
+  async () => {
+    const response = await api.get(getUrl('technologies'));
 
-  return response.data ?? [];
-});
+    return response.data ?? [];
+  },
+);
 
 export const technologySlice = createSlice({
   name: 'technologies',
@@ -38,7 +41,7 @@ export const technologySlice = createSlice({
       state.isLoading = false;
       state.isError = true;
     });
-  }
+  },
 });
 
 export const technologiesReducer = technologySlice.reducer;

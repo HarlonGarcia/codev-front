@@ -35,7 +35,7 @@ const Root = styled('div', {
 const Avatar = styled('img', {
   width: '3rem',
   height: '3rem',
-  
+
   borderRadius: '50%',
 
   '@xs': {
@@ -59,7 +59,7 @@ const Content = styled('div', {
   '@xs': {
     alignItems: 'center',
     marginBottom: '1.25rem',
-    
+
     '& > strong': {
       marginBottom: '0.75rem',
     },
@@ -94,14 +94,14 @@ const LinksPopover = styled('div', {
   position: 'relative',
   display: 'flex',
   padding: '0.25rem',
-  
+
   '& > button': {
     display: 'flex',
     alignItems: 'center',
-    
+
     borderRadius: '50%',
     transition: 'background-color 0.2s',
-    
+
     '&:hover': {
       backgroundColor: '$shadow',
     },
@@ -127,7 +127,7 @@ const Contacts = styled('div', {
   '& > a > *': {
     width: '1.25rem',
     height: '1.25rem',
-  
+
     color: '$text',
     cursor: 'pointer',
     transition: 'all 0.3s ease-in-out',

@@ -17,7 +17,7 @@ const InputGroup = styled('div', {
   gap: '0.75rem',
 
   marginBottom: '1.5rem',
-  
+
   '& > label': {
     color: '$title',
     fontSize: '1.125rem',
@@ -26,14 +26,14 @@ const InputGroup = styled('div', {
 
   '& > input, & > textarea': {
     padding: '0.5rem',
-    
+
     color: '$text',
     backgroundColor: '$secondary',
     border: 'none',
     borderRadius: '0.25rem',
     fontSize: '1rem',
     fontFamily: '$code',
-    
+
     outline: 'none',
     resize: 'none',
 
@@ -83,14 +83,14 @@ const Group = styled('div', {
   gridTemplateColumns: 'repeat(2, 1fr)',
 
   marginBottom: '2rem',
-  
+
   '& > div': {
     position: 'relative',
 
     display: 'flex',
     flexDirection: 'column',
     gap: '0.75rem',
-    
+
     '& > label': {
       color: '$title',
       fontSize: '1.125rem',
@@ -100,40 +100,40 @@ const Group = styled('div', {
     '& > input': {
       width: '100%',
       padding: '0.5rem',
-      
+
       color: '$text',
       backgroundColor: '$secondary',
       border: 'none',
       borderRadius: '0.25rem',
-      
+
       fontSize: '1rem',
       fontFamily: '$code',
 
       outline: 'none',
       resize: 'none',
     },
-  
+
     '& > ul': {
       position: 'absolute !important',
       width: '100%',
       height: 'fit-content',
       top: '6rem !important',
-  
+
       color: '$secondary',
       background: '$text',
       borderRadius: '0.25rem',
-  
+
       fontSize: '1rem',
       fontWeight: '600',
-  
+
       listStyle: 'none',
       overflow: 'hidden',
-  
+
       '& > li': {
         padding: '0.5rem',
         transition: 'all 0.3s ease-in-out',
         cursor: 'pointer',
-  
+
         '&:hover': {
           backgroundColor: '$title',
         },
@@ -181,14 +181,14 @@ const Group = styled('div', {
 
   '@xs': {
     marginBottom: '2.5rem',
-    
+
     '& > div ': {
       gap: '1rem',
 
       '& > input, & > ul > li': {
         padding: '0.75rem',
       },
-  
+
       '& > ul': {
         bottom: '-3.25rem',
       },
@@ -202,7 +202,7 @@ const Group = styled('div', {
       '& > input & > ul > li': {
         padding: '1rem',
       },
-    
+
       '& > ul': {
         bottom: '-3.5rem',
       },
@@ -212,7 +212,7 @@ const Group = styled('div', {
           width: '1.5rem',
           height: '1.5rem',
         },
-  
+
         '& > small': {
           height: 'fit-content',
           fontSize: '1.25rem',
@@ -234,7 +234,7 @@ const Group = styled('div', {
       '& > label': {
         fontSize: '1.5rem',
       },
-    } 
+    }
   },
 });
 
@@ -252,7 +252,7 @@ const Submit = styled('input', {
 
   transition: 'all 0.3s ease-in-out',
   cursor: 'pointer',
-  
+
   '&:hover': {
     color: '$secondary',
     backgroundColor: '$highlight',
