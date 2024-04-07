@@ -1,5 +1,4 @@
 import { useEffect, useMemo } from 'react';
-import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -23,9 +22,6 @@ import { technologiesIcons as techIcons } from './utils/icons';
 
 const WelcomeSection = () => {
   const { t } = useTranslation('translation', { keyPrefix: 'pages.home' });
-  const a = useAuthUser();
-
-  console.log(a);
 
   return (
     <S.Hero>
