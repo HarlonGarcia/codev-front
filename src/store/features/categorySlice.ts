@@ -16,11 +16,14 @@ const initialState: CategoryState = {
   isError: false,
 };
 
-export const getCategories = createAsyncThunk('categories/getCategories', async () => {
-  const { data } = await api.get(getUrl('categories'));
+export const getCategories = createAsyncThunk(
+  'categories/getCategories',
+  async () => {
+    const { data } = await api.get(getUrl('categories'));
 
-  return data ?? [];
-});
+    return data ?? [];
+  },
+);
 
 export const categorySlice = createSlice({
   name: 'categories',
@@ -38,7 +41,7 @@ export const categorySlice = createSlice({
       state.isLoading = false;
       state.isError = true;
     });
-  }
+  },
 });
 
 export const categoriesReducer = categorySlice.reducer;

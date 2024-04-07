@@ -1,4 +1,5 @@
 import { keyframes } from '@stitches/react';
+
 import { globalCss } from '.';
 
 export const floating = keyframes({
@@ -27,7 +28,7 @@ export const globalStyles = globalCss({
     padding: 0,
     boxSizing: 'border-box',
     '-webkit-font-smoothing': 'antialiased',
-    
+
     '&::selection': {
       color: '$secondary',
       backgroundColor: '$title',

@@ -1,12 +1,13 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Translation, useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
 import { GrStatusGoodSmall } from 'react-icons/gr';
+import { useNavigate } from 'react-router-dom';
+
 import { motion } from 'framer-motion';
 
-import * as S from './styles';
-import { useCustomSelector } from '../../../../store/useCustomSelector';
+import { useSelector } from '../../../../store/useSelector';
 import { Category } from '../../../../types/Category';
+import * as S from './styles';
 
 interface ChallengesGroupProps {
   category: Category;
@@ -14,22 +15,22 @@ interface ChallengesGroupProps {
 
 const statusIcons = {
   IN_PROGRESS: {
-    label: 
+    label:
       <Translation>{(t) => <span>{t('pages.challenges.main.status.in_progress')}</span>}</Translation>,
     color: 'green',
   },
   TO_BEGIN: {
-    label: 
+    label:
       <Translation>{(t) => <span>{t('pages.challenges.main.status.to_begin')}</span>}</Translation>,
     color: 'green',
   },
   FINISHED: {
-    label: 
+    label:
       <Translation>{(t) => <span>{t('pages.challenges.main.status.finished')}</span>}</Translation>,
     color: 'yellow',
   },
   CANCELED: {
-    label: 
+    label:
       <Translation>{(t) => <span>{t('pages.challenges.main.status.canceled')}</span>}</Translation>,
     color: 'red',
   },
@@ -41,8 +42,8 @@ export default function ChallengesGroup({ category }: ChallengesGroupProps) {
 
   const carouselRef = useRef(null);
   const [ carouselWidth, setCarouselWidth ] = useState(0);
-  
-  const { challenges } = useCustomSelector((state) => state.challenges);
+
+  const { challenges } = useSelector((state) => state.challenges);
 
   const filteredChallenges = useMemo(() => {
     return challenges.filter((challenge) => challenge.category?.id === category.id);
@@ -64,7 +65,7 @@ export default function ChallengesGroup({ category }: ChallengesGroupProps) {
         className='carousel'
         whileTap={{ cursor: 'grabbing' }}
       >
-        <motion.div 
+        <motion.div
           className='carousel_inner'
           drag="x"
           dragConstraints={{ left: -carouselWidth, right: 0 }}
@@ -83,8 +84,8 @@ export default function ChallengesGroup({ category }: ChallengesGroupProps) {
                   </span>
                 }
               </S.ChallengeHeader>
-              <S.Image 
-                src="https://picsum.photos/id/237/200/300" 
+              <S.Image
+                src="https://picsum.photos/id/237/200/300"
                 alt={challenge.title}
                 loading='lazy'
               />

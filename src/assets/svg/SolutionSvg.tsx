@@ -2,12 +2,12 @@ export default function SolutionSvg() {
   return (
     <svg
       version="1.1"
-      id="Uploaded to svgrepo.com" 
-      xmlns="http://www.w3.org/2000/svg" 
-      xmlnsXlink="http://www.w3.org/1999/xlink" 
-      width="40px" 
-      height="40px" 
-      viewBox="0 0 32 32" 
+      id="Uploaded to svgrepo.com"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
+      width="40px"
+      height="40px"
+      viewBox="0 0 32 32"
       xmlSpace="preserve"
     >
       <path style={{ fill: '#50fa7b ' }} d="M21,24c0,0.552-0.447,1-1,1h-8c-0.553,0-1-0.448-1-1s0.447-1,1-1h8C20.553,23,21,23.448,21,24z

@@ -1,5 +1,7 @@
-import axios from 'axios';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
+
+import { IAuthPayload } from '../../types';
 import { getUrl } from '../utils';
 
 interface AuthState {
@@ -8,17 +10,25 @@ interface AuthState {
   isError: boolean;
 }
 
-interface SignInPayload {
-  username: string;
-  password: string;
+interface SignInParams {
+  payload: {
+    email: string;
+    password: string;
+  },
+  // eslint-disable-next-line no-unused-vars
+  saveAuthData: (data: IAuthPayload) => void;
 }
 
-interface SignUpPayload {
-  name: string;
-  email: string;
-  password: string;
-  githubUrl: string;
-  additionalUrl?: string;
+interface SignUpParams {
+  payload: {
+    name: string;
+    email: string;
+    password: string;
+    githubUrl: string;
+    additionalUrl?: string;
+  },
+  // eslint-disable-next-line no-unused-vars
+  saveAuthData: (data: IAuthPayload) => void;
 }
 
 const initialState: AuthState = {
@@ -27,23 +37,45 @@ const initialState: AuthState = {
   isError: false,
 };
 
-export const signIn = createAsyncThunk('auth/signIn', async (signInPayload: SignInPayload) => {
-  const response = await axios.post(
-    getUrl('login'),
-    signInPayload
-  );
+export const signIn = createAsyncThunk(
+  'auth/signIn',
+  async ({ payload, saveAuthData }: SignInParams) => {
+    const { data, status } = await axios.post(getUrl('login'), payload);
 
-  return response.data.token ?? '';
-});
+    if (status === 200) {
+      saveAuthData({
+        auth: {
+          token: data.token,
+          type: 'Bearer',
+        },
+      });
 
-export const signUp = createAsyncThunk('auth/signUp', async (signUpPayload: SignUpPayload) => {
-  const response = await axios.post(
-    getUrl('signup'), 
-    signUpPayload
-  );
+      localStorage.setItem('_credentials', JSON.stringify(data.token));
+    }
 
-  return response.data.token ?? '';
-});
+    return data.token ?? '';
+  },
+);
+
+export const signUp = createAsyncThunk(
+  'auth/signUp',
+  async ({ payload, saveAuthData }: SignUpParams) => {
+    const { data, status } = await axios.post(getUrl('signup'), payload);
+
+    if (status === 201) {
+      saveAuthData({
+        auth: {
+          token: data.token,
+          type: 'Bearer',
+        },
+      });
+
+      localStorage.setItem('_credentials', JSON.stringify(data.token));
+    }
+
+    return data.token ?? '';
+  },
+);
 
 export const authSlice = createSlice({
   name: 'auth',
@@ -73,7 +105,7 @@ export const authSlice = createSlice({
       state.isLoading = false;
       state.isError = true;
     });
-  }
+  },
 });
 
 export const authReducer = authSlice.reducer;

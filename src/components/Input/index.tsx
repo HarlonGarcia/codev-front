@@ -1,6 +1,6 @@
-import InputRoot from './InputRoot';
-import InputContent from './InputContent';
 import InputAction from './InputAction';
+import InputContent from './InputContent';
+import InputRoot from './InputRoot';
 
 export const Input = {
   Root: InputRoot,

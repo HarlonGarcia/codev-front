@@ -1,8 +1,8 @@
+import { motion } from 'framer-motion';
+
 import { styled } from '../../styles';
 import { floating, floating2 } from '../../styles/global';
 import { WrapperWithPadding } from '../../styles/wrapper';
-
-import { motion } from 'framer-motion';
 
 const Container = styled(WrapperWithPadding, {
 });
@@ -13,29 +13,12 @@ const Section = styled(motion.section, {
 
   padding: '2rem',
 
-  '& .latest_challenges': {
-    position: 'relative',
-
-    '& > .expand_challenges': {
-      position: 'absolute',
-      bottom: 0,
-      left: 0,
-
-      width: '100%',
-      textAlign: 'center',
-      margin: 0,
-      padding: '140px 0',
-      
-      backgroundImage: 'linear-gradient(to bottom, transparent, $primary)',
-    },
-  },
-
   '& > a': {
     alignSelf: 'center',
- 
+
     fontSize: '1rem',
     fontWeight: 600,
-    
+
     color: '$highlight',
     transition: 'all 0.3s ease-in-out',
     cursor: 'pointer',
@@ -55,16 +38,12 @@ const Section = styled(motion.section, {
     '& > a': {
       fontSize: '1.25rem',
     },
-
-    '& .latest_challenges > .expand_challenges': {
-      padding: '200px 0',
-    },
   }
 });
 
 const Hero = styled(Section, {
   padding: '3rem',
-  
+
   position: 'relative',
   height: 'fit-content',
   width: '100%',
@@ -89,7 +68,7 @@ const Title = styled('h1', {
 
   fontWeight: 600,
   textAlign: 'center',
-  
+
   variants: {
     font: {
       code: {
@@ -102,7 +81,7 @@ const Title = styled('h1', {
     fontSize: '1.75rem',
     marginBottom: '1.5rem',
   },
-  
+
   '@lg': {
     fontSize: '2rem',
     marginBottom: '1.75rem',
@@ -151,18 +130,18 @@ const Paragraph = styled('p', {
   textAlign: 'center',
   marginBottom: '2rem',
   lineHeight: '130%',
-  
+
   '@xs': {
     fontSize: '1.25rem',
     marginBottom: '2.75rem',
   },
-  
+
   '@lg': {
     width: '80%',
 
     margin: '0 auto',
     marginBottom: '3.5rem',
-    
+
     fontSize: '1.5rem',
     lineHeight: '140%',
   }
@@ -251,7 +230,7 @@ const Tech = styled(motion.li, {
   gap: '0.375rem',
 
   padding: '1rem',
-  
+
   background: '$secondary',
   color: '$text',
   borderRadius: '0.375rem',
@@ -269,6 +248,29 @@ const Tech = styled(motion.li, {
 });
 
 const LatestChallenges = styled('div', {
+  position: 'relative',
+
+  '& > .expand_challenges': {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+
+    width: '100%',
+    textAlign: 'center',
+    margin: 0,
+    padding: '140px 0',
+
+    backgroundImage: 'linear-gradient(to bottom, transparent, $primary)',
+  },
+
+  '@lg': {
+    '& .expand_challenges': {
+      padding: '200px 0',
+    },
+  }
+});
+
+const ChallengeList = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
@@ -279,9 +281,9 @@ const LatestChallenges = styled('div', {
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: '1.25rem',
-    
+
     width: '90%',
-    
+
     letterSpacing: '120%',
     background: '$secondary',
     borderRadius: '0.5rem',
@@ -302,7 +304,7 @@ const LatestChallenges = styled('div', {
       borderRadius: '0.75rem',
     }
   },
-  
+
   '@md': {
     gap: '1.5rem',
 
@@ -322,7 +324,7 @@ const LatestChallenges = styled('div', {
       }
     }
   },
-  
+
   '@xl': {
     '& > div': {
       '& > small': {
@@ -333,15 +335,16 @@ const LatestChallenges = styled('div', {
 });
 
 export {
-  Container, 
-  Section, 
-  Hero, 
-  Title, 
-  Instruction, 
-  Paragraph, 
-  Possibilities, 
+  Container,
+  Section,
+  Hero,
+  Title,
+  Instruction,
+  Paragraph,
+  Possibilities,
   CardItem,
   Technologies,
   Tech,
-  LatestChallenges
+  LatestChallenges,
+  ChallengeList,
 };

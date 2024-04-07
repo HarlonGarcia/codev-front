@@ -19,7 +19,7 @@ const Container = styled(WrapperWithPadding, {
     marginBottom: '0.5rem',
     textTransform: 'uppercase',
   },
-  
+
   'p': {
     fontSize: '1rem',
     marginBottom: '1.5rem',

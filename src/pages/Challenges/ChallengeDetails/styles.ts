@@ -47,7 +47,7 @@ const Technologies = styled('ul', {
   flexWrap: 'wrap',
   gap: '0.5rem',
   listStyle: 'none',
-  
+
   '& > li': {
     padding: '0.5rem 0.75rem',
 
@@ -56,7 +56,7 @@ const Technologies = styled('ul', {
     fontSize: '0.875rem',
     fontFamily: '$code',
     textTransform: 'uppercase',
-    
+
     borderRadius: '0.5rem',
   },
 
@@ -80,11 +80,11 @@ const JoinChallengeButton = styled('button', {
   ,
   color: '$highlight',
   backgroundColor: '$secondary',
-  
+
   fontSize: '1.25rem',
   fontWeight: 600,
   borderRadius: '0.5rem',
-  
+
   transition: 'all 0.3s ease-in-out',
 
   '&:hover': {

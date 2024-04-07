@@ -34,7 +34,7 @@ const BlockQuote = styled('blockquote', {
   '@xs': {
     padding: '1rem 1.5rem',
   },
-  
+
   '@sm': {
     padding: '0.75rem 1.25rem',
   },

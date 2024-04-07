@@ -1,8 +1,8 @@
-import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { FaGithub } from 'react-icons/fa';
 import { ImLink } from 'react-icons/im';
+import { useNavigate } from 'react-router-dom';
 
-import { useTranslation } from 'react-i18next';
 import { UserOption, options } from '../../utils/userOptions/accountOptions';
 import * as S from './styles';
 
@@ -18,21 +18,21 @@ const links = [
 ];
 
 export default function MyAccount() {
-  const { t } = useTranslation('translation', { keyPrefix: 'pages.my_account' });
+  const { t } = useTranslation('translation', {
+    keyPrefix: 'pages.my_account',
+  });
   const navigate = useNavigate();
 
-  const handleActions = (item: UserOption) => {
-    if (item.action) item.action();
-    if (item.redirectUrl) {
-      navigate(item.redirectUrl);
-    }
+  const handleActions = ({ action, redirectUrl }: UserOption) => {
+    action && action();
+    redirectUrl && navigate(redirectUrl);
   };
 
   return (
     <S.Container>
       <div>
         <S.AccountHeader>
-          <S.Avatar src='https://picsum.photos/200' /> 
+          <S.Avatar src='https://picsum.photos/200' />
           <S.AccountInfo>
             <h2>John Doe</h2>
             <div>
@@ -40,7 +40,7 @@ export default function MyAccount() {
                 <span key={index}>{item}</span>
               ))}
             </div>
-          </S.AccountInfo>       
+          </S.AccountInfo>
         </S.AccountHeader>
         <S.AccountContent>
           {options.map((option, index) => (

@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+
 import { styled } from '../../../styles';
 import { WrapperDefault } from '../../../styles/wrapper';
 

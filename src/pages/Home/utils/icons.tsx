@@ -7,7 +7,6 @@ import {
   FaPython,
 } from 'react-icons/fa';
 import { FaJava } from 'react-icons/fa6';
-
 import {
   SiSpring,
   SiQuarkus,

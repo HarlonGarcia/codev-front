@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+
 import { styled } from '../../../styles';
 import { WrapperDefault } from '../../../styles/wrapper';
 
@@ -8,7 +9,8 @@ const Container = styled(WrapperDefault, {
   alignItems: 'center',
   justifyContent: 'center',
 
-  backgroundImage: 'radial-gradient(at 100% 58%, hsla(240,100%,21%,0.29) 0px, transparent 50%), radial-gradient(at 6% 100%, hsla(283,100%,17%,0.43) 0px, transparent 50%)',
+  // eslint-disable-next-line max-len
+  backgroundImage: 'radial-gradient(at 100% 58%, hsla(240,100%,21%,0.29) 0px, transparent 50%), radial-gradient(at 6% 100%, hsla(283,100%,17%,0.43) 0px transparent 50%)',
 });
 
 const Header = styled(motion.header, {
@@ -33,7 +35,7 @@ const Form = styled('form', {
   display: 'flex',
   flexDirection: 'column',
   gap: '1.75rem',
-  
+
   width: '20rem',
 
   '& > a': {
