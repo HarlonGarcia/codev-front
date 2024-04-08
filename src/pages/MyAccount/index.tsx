@@ -3,8 +3,8 @@ import { FaGithub } from 'react-icons/fa';
 import { ImLink } from 'react-icons/im';
 import { useNavigate } from 'react-router-dom';
 
-import { UserOption, options } from '../../utils/userOptions/accountOptions';
 import * as S from './styles';
+import { IUserOption, options } from './utils';
 
 const links = [
   {
@@ -23,7 +23,7 @@ export default function MyAccount() {
   });
   const navigate = useNavigate();
 
-  const handleActions = ({ action, redirectUrl }: UserOption) => {
+  const handleActions = ({ action, redirectUrl }: IUserOption) => {
     action && action();
     redirectUrl && navigate(redirectUrl);
   };

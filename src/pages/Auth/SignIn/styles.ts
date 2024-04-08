@@ -9,7 +9,6 @@ const Container = styled(WrapperDefault, {
   alignItems: 'center',
   justifyContent: 'center',
 
-  // eslint-disable-next-line max-len
   backgroundImage: 'radial-gradient(at 100% 58%, hsla(240,100%,21%,0.29) 0px, transparent 50%), radial-gradient(at 6% 100%, hsla(283,100%,17%,0.43) 0px transparent 50%)',
 });
 
@@ -105,37 +104,9 @@ const SubmitButton = styled(motion.button, {
   }
 });
 
-const InputGroup = styled('div', {
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '0.75rem',
-
-  '& > label': {
-    fontSize: '0.925rem',
-    color: '$highlight',
-  },
-
-  '& > input': {
-    padding: '0.75rem',
-
-    color: '$text',
-    backgroundColor: '$secondary',
-
-    fontFamily: '$code',
-    fontSize: '1rem',
-
-    borderRadius: '0.5rem',
-    border: 'none',
-    outline: 'none',
-  },
-
-  '@sm': {
-    gap: '1rem',
-
-    '& > label': {
-      fontSize: '1rem',
-    },
-  }
-});
-
-export { Container, Header, Form, SubmitButton, InputGroup };
+export {
+  Container,
+  Header,
+  Form,
+  SubmitButton,
+};

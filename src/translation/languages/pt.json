@@ -3,6 +3,13 @@
     "global": {
       "alert": {
         "auth_required": "Essa ação requer que você esteja logado"
+      },
+      "api": {
+        "default": "Ocorreu um erro inesperado",
+        "duplicate": "Esse recurso já existe",
+        "404": "Recurso não encontrado, contacte o suporte",
+        "401": "Necessário realizar login",
+        "500": "Ocorreu um erro interno no servidor"
       }
     },
     "pages": {
@@ -80,55 +87,61 @@
         }
       },
       "signin": {
+        "alert": {
+          "error": "Email ou senha incorretos"
+        },
         "title": "Bem vindo!",
         "description": "Faça login para continuar",
         "form": {
-          "email": "Email",
-          "password": "Senha",
+          "fields": {
+            "email": {
+              "label": "Email",
+              "error": "Insira um email válido"
+            },
+            "password": {
+              "label": "Senha",
+              "error": "Senha é obrigatória"
+            }
+          },
           "login": "Entrar"
         },
-        "signup": "Ainda não tem conta? Cadastre-se",
-        "alert": {
-          "error": "Algo deu errado...",
-          "invalid": "Email ou senha incorretos"
-        }
+        "signup": "Ainda não tem conta? Cadastre-se"
       },
       "signup": {
-        "alert": {
-          "error": "Algo deu errado...",
-          "password": "As senhas não conferem",
-          "github": "Link do github inválido"
-        },
         "form": {
           "title": "Cadastrar-se",
           "description": "Pratique, aprenda e interaja com outros desenvolvedores",
           "fields": {
             "name": {
               "label": "Como você deseja ser chamado?",
-              "placeholder": "Seu nome"
+              "placeholder": "Seu nome",
+              "error": "Nome é obrigatório"
             },
             "email": {
               "label": "Seu melhor email",
-              "placeholder": "seu@email"
-            },
-            "username": {
-              "label": "Escolha um nome de usuário",
-              "placeholder": "seu_usuario"
+              "placeholder": "seu@email",
+              "error": "Insira um email válido"
             },
             "password": {
               "label": "Sua senha",
-              "placeholder": "123@&#*"
+              "placeholder": "123@&#*",
+              "error": {
+                "min": "Senha deve ter no mínimo 6 caractéres",
+                "max": "Senha deve ter no máximo 20 caractéres"
+              }
             },
             "confirmationPassword": {
               "label": "Confirme sua senha",
-              "placeholder": "123@&#*"
+              "placeholder": "123@&#*",
+              "error": "Senhas não coincidem"
             },
             "githubUrl": {
               "label": "Qual link do seu github?",
-              "placeholder": "https://github.com/dev"
+              "placeholder": "https://github.com/dev",
+              "error": "Insira um link de github válido"
             },
             "additionalUrl": {
-              "label": "Qual link do seu portfólio? (opcional)",
+              "label": "Qual link do seu portfólio?",
               "placeholder": "www.portfolio.com"
             }
           },

@@ -8,6 +8,9 @@ dependencies:
   '@auth-kit/react-router':
     specifier: ^3.1.3
     version: 3.1.3(next@14.1.4)(react-dom@18.2.0)(react-router@6.14.1)(react@18.2.0)
+  '@hookform/resolvers':
+    specifier: ^3.3.4
+    version: 3.3.4(react-hook-form@7.51.2)
   '@radix-ui/react-popover':
     specifier: ^1.0.6
     version: 1.0.6(@types/react-dom@18.2.6)(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0)
@@ -80,6 +83,9 @@ dependencies:
   typeit-react:
     specifier: ^2.6.4
     version: 2.6.4
+  zod:
+    specifier: ^3.22.4
+    version: 3.22.4
 
 devDependencies:
   '@types/lodash':
@@ -627,6 +633,14 @@ packages:
       '@floating-ui/dom': 1.4.4
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
+  /@hookform/resolvers@3.3.4(react-hook-form@7.51.2):
+    resolution: {integrity: sha512-o5cgpGOuJYrd+iMKvkttOclgwRW86EsWJZZRC23prf0uU2i48Htq4PuT73AVb9ionFyZrwYEITuOFGF+BydEtQ==}
+    peerDependencies:
+      react-hook-form: ^7.0.0
+    dependencies:
+      react-hook-form: 7.51.2(react@18.2.0)
     dev: false
 
   /@humanwhocodes/config-array@0.11.10:
@@ -4869,6 +4883,10 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
     dev: true
+
+  /zod@3.22.4:
+    resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
+    dev: false
 
   /zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}

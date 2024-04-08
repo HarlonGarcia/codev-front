@@ -7,10 +7,7 @@ import { Command } from 'cmdk';
 import './styles.scss';
 import { toggleModal } from '../../store/features/commanderSlice';
 import { useSelector } from '../../store/useSelector';
-import {
-  goToShortcuts,
-  extraShortcuts,
-} from '../../utils/userOptions/shortcuts';
+import { goToShortcuts, extraShortcuts } from '../../utils';
 
 export default function CmdDialog() {
   const { t } = useTranslation('translation', {

@@ -5,22 +5,15 @@ import { useTranslation } from 'react-i18next';
 import { FaArrowRightLong } from 'react-icons/fa6';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 
+import { zodResolver } from '@hookform/resolvers/zod';
+
+import { Input } from '../../../components/shared/Input';
 import { AppDispatch } from '../../../store';
 import { signUp } from '../../../store/features/authSlice';
 import { useSelector } from '../../../store/useSelector';
 import * as S from './styles';
-import { validate } from './validation';
-
-interface SignUpForm {
-  name: string;
-  email: string;
-  password: string;
-  passwordConfirmation: string;
-  githubUrl: string;
-  additionalUrl?: string;
-}
+import { SignUpSchema, signUpSchema } from './validation';
 
 export default function SignUp() {
   const { t } = useTranslation('translation', { keyPrefix: 'pages.signup' });
@@ -32,21 +25,19 @@ export default function SignUp() {
   const { token } = useSelector((state) => state.auth);
 
   const {
+    formState: {
+      errors: formErrors,
+    },
     register,
     handleSubmit,
-  } = useForm<SignUpForm>();
+  } = useForm<SignUpSchema>({
+    resolver: zodResolver(signUpSchema),
+  });
 
-  const onSubmit: SubmitHandler<SignUpForm> = (data) => {
-    const { password, passwordConfirmation, additionalUrl } = data;
-
-    if (password !== passwordConfirmation) {
-      toast.error(t('alert.password'));
-      return;
-    }
-
+  const onSubmit: SubmitHandler<SignUpSchema> = (data) => {
     const payload = {
       ...data,
-      additionalUrl: additionalUrl || undefined,
+      additionalUrl: data.additionalUrl || undefined,
       passwordConfirmation: undefined,
     };
 
@@ -75,71 +66,47 @@ export default function SignUp() {
         <p>{t('form.description')}</p>
       </S.Header>
       <S.Form onSubmit={handleSubmit(onSubmit)}>
-        <S.Field>
-          <label htmlFor="name">{t('form.fields.name.label')}</label>
-          <input
-            type="text"
-            placeholder={t('form.fields.name.placeholder')}
-            autoComplete='off'
-            {...register('name', { required: true })}
-          />
-        </S.Field>
-
-        <S.Field>
-          <label htmlFor="email">{t('form.fields.email.label')}</label>
-          <input
-            type="email"
-            placeholder={t('form.fields.email.placeholder')}
-            {...register('email', { required: true })}
-          />
-        </S.Field>
-
-        <S.Field>
-          <label htmlFor="password">{t('form.fields.password.label')}</label>
-          <input
-            type="password"
-            placeholder={t('form.fields.password.placeholder')}
-            autoComplete='off'
-            {...register('password', { required: true, minLength: 6 })}
-          />
-        </S.Field>
-
-        <S.Field>
-          <label htmlFor="passwordConfirmation">
-            {t('form.fields.confirmationPassword.label')}
-          </label>
-          <input
-            type="password"
-            placeholder={t('form.fields.confirmationPassword.placeholder')}
-            autoComplete='off'
-            {...register('passwordConfirmation', { required: true })}
-          />
-        </S.Field>
-
-        <S.Field>
-          <label htmlFor="githubUrl">{t('form.fields.githubUrl.label')}</label>
-          <input
-            type="text"
-            placeholder={t('form.fields.githubUrl.placeholder')}
-            autoComplete='off'
-            {...register('githubUrl', {
-              required: true,
-              validate: (value) => validate.github(value),
-            })}
-          />
-        </S.Field>
-
-        <S.Field>
-          <label htmlFor="additionalUrl">
-            {t('form.fields.additionalUrl.label')}
-          </label>
-          <input
-            {...register('additionalUrl')}
-            type="text"
-            placeholder={t('form.fields.additionalUrl.placeholder')}
-            autoComplete='off'
-          />
-        </S.Field>
+        <Input
+          {...register('name')}
+          label={t('form.fields.name.label')}
+          placeholder={t('form.fields.name.placeholder')}
+          type='text'
+          error={formErrors.name?.message}
+        />
+        <Input
+          {...register('email')}
+          label={t('form.fields.email.label')}
+          placeholder={t('form.fields.email.placeholder')}
+          error={formErrors.email?.message}
+        />
+        <Input
+          {...register('password')}
+          label={t('form.fields.password.label')}
+          placeholder={t('form.fields.password.placeholder')}
+          type='password'
+          error={formErrors.password?.message}
+        />
+        <Input
+          {...register('passwordConfirmation')}
+          label={t('form.fields.confirmationPassword.label')}
+          placeholder={t('form.fields.confirmationPassword.placeholder')}
+          type='password'
+          error={formErrors.passwordConfirmation?.message}
+        />
+        <Input
+          {...register('githubUrl')}
+          label={t('form.fields.githubUrl.label')}
+          placeholder={t('form.fields.githubUrl.placeholder')}
+          type='text'
+          error={formErrors.githubUrl?.message}
+        />
+        <Input
+          {...register('additionalUrl')}
+          label={t('form.fields.additionalUrl.label')}
+          placeholder={t('form.fields.additionalUrl.placeholder')}
+          type='text'
+          error={formErrors.additionalUrl?.message}
+        />
         <S.SubmitButton
           type='submit'
           initial={{ opacity: 0 }}

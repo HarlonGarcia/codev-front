@@ -9,6 +9,16 @@ const PopoverTrigger = styled('button', {
   backgroundColor: '$primary',
   borderRadius: '0.25rem',
 
+  '& > *': {
+    width: '60%',
+    height: '60%',
+
+    margin: 'auto',
+
+    color: '$highlight',
+    transition: 'all 250ms ease-in-out',
+  },
+
   '&[data-state="open"]': {
     '& > *': {
       color: '$text',
@@ -18,16 +28,6 @@ const PopoverTrigger = styled('button', {
     '& > *': {
       color: '$title',
     }
-  },
-
-  '& > *': {
-    width: '60%',
-    height: '60%',
-
-    margin: 'auto',
-
-    color: '$secondary',
-    transition: 'all 250ms ease-in-out',
   },
 
   '@sm': {

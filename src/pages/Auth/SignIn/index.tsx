@@ -2,19 +2,21 @@ import { useEffect } from 'react';
 import useSignIn from 'react-auth-kit/hooks/useSignIn';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { BiSolidLogInCircle } from 'react-icons/bi';
+import { FaArrowRightLong } from 'react-icons/fa6';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
+import { zodResolver } from '@hookform/resolvers/zod';
+
+import { Input } from '../../../components/shared/Input';
 import { AppDispatch } from '../../../store';
 import { signIn } from '../../../store/features/authSlice';
 import { useSelector } from '../../../store/useSelector';
 import * as S from './styles';
+import { SignInSchema, signInSchema } from './validation';
 
-interface SignInForm {
-  email: string;
-  password: string;
-}
+const PASSWORD_MIN_LENGTH = 8;
 
 export default function SignIn() {
   const { t } = useTranslation('translation', { keyPrefix: 'pages.signin' });
@@ -26,15 +28,18 @@ export default function SignIn() {
   const { token } = useSelector((state) => state.auth);
 
   const {
+    formState: {
+      errors: formErrors,
+    },
     register,
     handleSubmit,
-  } = useForm<SignInForm>();
+  } = useForm<SignInSchema>({
+    resolver: zodResolver(signInSchema),
+  });
 
-  const onSubmit: SubmitHandler<SignInForm> = (payload) => {
-    const hasUnfilledField = Object.values(payload)
-      .every((value) => value.length <= 0);
-
-    if (hasUnfilledField) {
+  const onSubmit: SubmitHandler<SignInSchema> = (payload) => {
+    if (payload.password.length < PASSWORD_MIN_LENGTH) {
+      toast.error(t('alert.error'));
       return;
     }
 
@@ -63,20 +68,17 @@ export default function SignIn() {
         <p>{t('description')}</p>
       </S.Header>
       <S.Form onSubmit={handleSubmit(onSubmit)}>
-        <S.InputGroup>
-          <label htmlFor='email'>{t('form.email')}</label>
-          <input
-            {...register('email', { required: true })}
-            type='email'
-          />
-        </S.InputGroup>
-        <S.InputGroup>
-          <label htmlFor='password'>{t('form.password')}</label>
-          <input
-            {...register('password', { required: true })}
-            type='password'
-          />
-        </S.InputGroup>
+        <Input
+          {...register('email')}
+          label={t('form.fields.email.label')}
+          error={formErrors.email?.message}
+        />
+        <Input
+          {...register('password')}
+          label={t('form.fields.password.label')}
+          type='password'
+          error={formErrors.password?.message}
+        />
         <Link to={'/signup'}>{t('signup')}</Link>
         <S.SubmitButton
           type='submit'
@@ -85,7 +87,7 @@ export default function SignIn() {
           transition={{ duration: 0.5 }}
         >
           <span>{t('form.login')}</span>
-          <BiSolidLogInCircle />
+          <FaArrowRightLong />
         </S.SubmitButton>
       </S.Form>
     </S.Container>

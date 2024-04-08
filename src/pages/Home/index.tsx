@@ -11,8 +11,8 @@ import { getFilteredChallenges } from '../../store/features/challengeSlice';
 import { getTechnologies } from '../../store/features/technologySlice';
 import { useSelector } from '../../store/useSelector';
 import { defaultTransition } from '../../utils/animations';
-import { possibilities } from '../../utils/userOptions/possibilitiesCards';
 import * as S from './styles';
+import { possibilities } from './utils';
 import {
   containerVariants,
   itemVariants,

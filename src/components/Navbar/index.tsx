@@ -3,7 +3,7 @@ import useSignOut from 'react-auth-kit/hooks/useSignOut';
 import { useTranslation } from 'react-i18next';
 import { AiFillHome } from 'react-icons/ai';
 import { FaCodeBranch } from 'react-icons/fa';
-import { RiLogoutBoxRFill } from 'react-icons/ri';
+import { LuLogIn, LuLogOut } from 'react-icons/lu';
 import { Link } from 'react-router-dom';
 
 import Menu from '../Menu';
@@ -39,14 +39,14 @@ export default function Navbar() {
               <span>{t('challenges')}</span>
             </Link>
             <button onClick={handleLogout}>
-              <RiLogoutBoxRFill />
+              <LuLogOut />
               <span>{t('logout')}</span>
             </button>
           </>
         )}
         {!isAuthenticated && (
           <Link to='/signin'>
-            <RiLogoutBoxRFill />
+            <LuLogIn />
             <span>{t('signin')}</span>
           </Link>
         )}

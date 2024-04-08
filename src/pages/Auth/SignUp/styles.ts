@@ -47,34 +47,6 @@ const Form = styled('form', {
   },
 });
 
-const Field = styled('div', {
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '0.75rem',
-
-  '> label': {
-    fontSize: '0.925rem',
-    color: '$highlight',
-  },
-
-  '> input': {
-    padding: '0.75rem',
-    border: 'none',
-    outline: 'none',
-    borderRadius: '0.25rem',
-
-    color: '$text',
-    backgroundColor: '$secondary',
-
-    fontFamily: '$code',
-    fontSize: '1rem',
-
-    '&::placeholder': {
-      color: 'rgba(129, 140, 248, 0.2)',
-    },
-  },
-});
-
 const SubmitButton = styled(motion.button, {
   position: 'absolute',
   display: 'flex',
@@ -124,4 +96,4 @@ const SubmitButton = styled(motion.button, {
   }
 });
 
-export { Container, Header, Form, Field, SubmitButton };
+export { Container, Header, Form, SubmitButton };

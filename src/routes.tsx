@@ -10,8 +10,8 @@ import Navbar from './components/Navbar';
 import PageNotFound from './pages/PageNotFound';
 import { closeModal, openModal } from './store/features/commanderSlice';
 import { useSelector } from './store/useSelector';
+import { extraShortcuts, goToShortcuts } from './utils';
 import { ADMIN, USER } from './utils/constants';
-import { extraShortcuts, goToShortcuts } from './utils/userOptions/shortcuts';
 
 const Home = React.lazy(() => import('./pages/Home'));
 const MyAccount = React.lazy(() => import('./pages/MyAccount'));

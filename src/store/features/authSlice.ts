@@ -50,10 +50,10 @@ export const signIn = createAsyncThunk(
         },
       });
 
-      localStorage.setItem('_credentials', JSON.stringify(data.token));
+      return data.token;
     }
 
-    return data.token ?? '';
+    return undefined;
   },
 );
 
@@ -70,10 +70,10 @@ export const signUp = createAsyncThunk(
         },
       });
 
-      localStorage.setItem('_credentials', JSON.stringify(data.token));
+      return data.token;
     }
 
-    return data.token ?? '';
+    return undefined;
   },
 );
 

@@ -3,6 +3,13 @@
     "global": {
       "alert": {
         "auth_required": "This action requires you to be authenticated"
+      },
+      "api": {
+        "default": "An unexpected error occurred",
+        "duplicate": "This resource already exists",
+        "404": "Resource not found, please contact the support team",
+        "401": "Authentication required",
+        "500": "Internal server error"
       }
     },
     "pages": {
@@ -80,55 +87,61 @@
         }
       },
       "signin": {
+        "alert": {
+          "error": "Invalid email or password"
+        },
         "title": "Welcome back!",
         "description": "Log in to continue",
         "form": {
-          "email": "Email",
-          "password": "Password",
+          "fields": {
+            "email": {
+              "label": "Email",
+              "error": "It must be a valid email"
+            },
+            "password": {
+              "label": "Password",
+              "error": "Password is required"
+            }
+          },
           "login": "Log in"
         },
-        "signup": "Don't have an account? Sign up",
-        "alert": {
-          "error": "Something went wrong...",
-          "invalid": "Invalid email or password"
-        }
+        "signup": "Don't have an account? Sign up"
       },
       "signup": {
-        "alert": {
-          "error": "Something went wrong...",
-          "password": "Passwords don't match",
-          "github": "Invalid github url"
-        },
         "form": {
           "title": "Sign up",
           "description": "Practice, learn and interact with other developers",
           "fields": {
             "name": {
               "label": "How do you want to be called?",
-              "placeholder": "Your name"
+              "placeholder": "Your name",
+              "error": "Name is required"
             },
             "email": {
               "label": "Your best email",
-              "placeholder": "your@email"
-            },
-            "username": {
-              "label": "Choose a username",
-              "placeholder": "your_username"
+              "placeholder": "your@email",
+              "error": "It must be a valid email"
             },
             "password": {
               "label": "Your password",
-              "placeholder": "123@&#*"
+              "placeholder": "123@&#*",
+              "error": {
+                "min": "Password can't be less than 8 characters",
+                "max": "Password can't be more than 20 characters"
+              }
             },
             "confirmationPassword": {
               "label": "Confirm your password",
-              "placeholder": "123@&#*"
+              "placeholder": "123@&#*",
+              "error": "Passwords don't match"
             },
             "githubUrl": {
               "label": "What's your github url?",
-              "placeholder": "https://github.com/dev"
+              "placeholder": "https://github.com/dev",
+              "error": "It must be a valid Github URL"
             },
             "additionalUrl": {
-              "label": "What's your portfolio url? (optional)",
+              "label": "What's your portfolio url?",
               "placeholder": "www.portfolio.com"
             }
           },

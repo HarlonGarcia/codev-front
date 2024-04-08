@@ -10,6 +10,8 @@ i18next.use(initReactI18next).init({
     en,
     pt,
   },
+  ns: ['translation'],
+  debug: false,
   lng: 'pt',
   fallbackLng: 'pt',
   interpolation: {
