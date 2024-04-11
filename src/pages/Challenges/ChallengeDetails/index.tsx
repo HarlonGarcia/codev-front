@@ -12,7 +12,7 @@ import * as S from './styles';
 
 export default function ChallengeDetails() {
   const { id } = useParams();
-  const { t } = useTranslation('translation', { keyPrefix: 'pages.challenges.details' });
+  const { t } = useTranslation();
   const dispatch = useDispatch<AppDispatch>();
 
   const { currentChallenge: challenge } = useSelector((state) => state.challenges);
@@ -28,15 +28,15 @@ export default function ChallengeDetails() {
   if (!challenge) return;
   return (
     <S.Container>
-      <h2>{challenge?.title || t('title')}</h2>
-      <Markdown content={challenge.description || t('description')} />
+      <h2>{challenge?.title || t('pages.challenge_information.unknown_title')}</h2>
+      <Markdown content={challenge.description || t('pages.challenge_information.unknown_description')} />
       <S.Footer>
         <S.Info>
           {challenge.author.name ? (
-            <h3>{t('info.created') + ' '}
+            <h3>{t('pages.challenge_information.created_by') + ' '}
               <strong>{challenge.author.name}</strong>
             </h3>
-          ) : (<h3>{t('info.author') + ' '}</h3>)}
+          ) : (<h3>{t('pages.challenge_information.unknown_author') + ' '}</h3>)}
 
           <S.Technologies>
             {
@@ -53,7 +53,7 @@ export default function ChallengeDetails() {
             <PiCodeDuotone />
           </span>
           <strong>
-            {t('join')}
+            {t('pages.challenge_information.submit.label')}
           </strong>
         </S.JoinChallengeButton>
       </S.Footer>

@@ -1,9 +1,9 @@
 import CodeSvg from './CodeSvg';
-import CompareSvg from './CompareSvg';
+import NetworkSvg from './NetworkSvg';
 import SolutionSvg from './SolutionSvg';
 
 export const Svg = {
+  Solution: SolutionSvg,
   Code: CodeSvg,
-  Compare: CompareSvg,
-  Solution: SolutionSvg
+  Network: NetworkSvg,
 };

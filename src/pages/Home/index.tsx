@@ -21,7 +21,7 @@ import {
 import { technologiesIcons as techIcons } from './utils/icons';
 
 const WelcomeSection = () => {
-  const { t } = useTranslation('translation', { keyPrefix: 'pages.home' });
+  const { t } = useTranslation();
 
   return (
     <S.Hero>
@@ -35,11 +35,11 @@ const WelcomeSection = () => {
           <Typer />
         </S.Title>
         <S.Instruction>
-          {t('instruction.press') + ' '}
+          {t('pages.home.instructions.press') + ' '}
           <span><span>⌘</span></span>
           +
           <span><span>K</span></span>
-          {' ' + t('instruction.action')}
+          {' ' + t('pages.home.instructions.action')}
         </S.Instruction>
       </motion.div>
     </S.Hero>
@@ -47,7 +47,7 @@ const WelcomeSection = () => {
 };
 
 export default function Home() {
-  const { t } = useTranslation('translation', { keyPrefix: 'pages.home' });
+  const { t } = useTranslation();
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -84,8 +84,8 @@ export default function Home() {
     <S.Container>
       <WelcomeSection />
       <S.Section {...sectionAnimationProps}>
-        <S.Title>{t('goals.title')}</S.Title>
-        <S.Paragraph>{t('goals.description')}</S.Paragraph>
+        <S.Title>{t('pages.home.introduction.title')}</S.Title>
+        <S.Paragraph>{t('pages.home.introduction.description')}</S.Paragraph>
         <S.Possibilities
           variants={containerVariants}
           initial="hidden"
@@ -106,8 +106,8 @@ export default function Home() {
       </S.Section>
 
       <S.Section {...sectionAnimationProps}>
-        <S.Title>{t('technologies.title')}</S.Title>
-        <S.Paragraph>{t('technologies.description')}</S.Paragraph>
+        <S.Title>{t('pages.home.technologies.title')}</S.Title>
+        <S.Paragraph>{t('pages.home.technologies.description')}</S.Paragraph>
         <S.Technologies>
           {hydratedTechnologies.map(({ id, name, color, logo }) => (
             <S.Tech key={id}>
@@ -121,21 +121,21 @@ export default function Home() {
       </S.Section>
 
       <S.Section {...sectionAnimationProps}>
-        <S.Title>{t('latest.title')}</S.Title>
-        <S.Paragraph>{t('latest.description')}</S.Paragraph>
+        <S.Title>{t('pages.home.challenges.title')}</S.Title>
+        <S.Paragraph>{t('pages.home.challenges.description')}</S.Paragraph>
 
         <S.LatestChallenges>
           <S.ChallengeList>
             {challenges.map(({ id, title }) => (
               <div key={id}>
                 <small>{title}</small>
-                <span>{t('latest.badge')}</span>
+                <span>{t('pages.home.challenges.badge')}</span>
               </div>
             ))}
           </S.ChallengeList>
           <div className='expand_challenges' />
         </S.LatestChallenges>
-        <Link to='/challenges'>{t('latest.link')}</Link>
+        <Link to='/challenges'>{t('pages.home.challenges.button.text')}</Link>
       </S.Section>
     </S.Container>
   );

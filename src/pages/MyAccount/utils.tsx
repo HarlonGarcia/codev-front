@@ -16,7 +16,7 @@ export const options: IUserOption[] = [
   {
     label: (
       <Translation>
-        {(t) => <span>{t('pages.my_account.options.challenges')}</span>}
+        {(t) => <span>{t('pages.account.options.challenges')}</span>}
       </Translation>
     ),
     icon: <FaCode />,
@@ -25,7 +25,7 @@ export const options: IUserOption[] = [
   {
     label: (
       <Translation>
-        {(t) => <span>{t('pages.my_account.options.info')}</span>}
+        {(t) => <span>{t('pages.account.options.edit_information')}</span>}
       </Translation>
     ),
     icon: <MdEdit />,
@@ -34,7 +34,7 @@ export const options: IUserOption[] = [
   {
     label: (
       <Translation>
-        {(t) => <span>{t('pages.my_account.options.friends')}</span>}
+        {(t) => <span>{t('pages.account.options.connections')}</span>}
       </Translation>
     ),
     icon: <FaUsers />,

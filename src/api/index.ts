@@ -23,10 +23,13 @@ axios.interceptors.response.use(
     const { data, status } = error.response ?? {};
     const isDuplicatedKey = data?.message.includes('duplicate key');
 
-    const customMessage = t([ `global.api.${status}`, 'global.api.default' ]);
+    const customMessage = t([
+      `global.alerts.errors.${status}`,
+      'global.alerts.errors.default',
+    ]);
 
     if (isDuplicatedKey) {
-      toast.error(t('global.api.duplicate'));
+      toast.error(t('global.alerts.errors.duplicated_key'));
     }
 
     if (!isDuplicatedKey) {

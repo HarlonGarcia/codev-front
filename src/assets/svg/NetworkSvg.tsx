@@ -1,4 +1,4 @@
-export default function CompareSvg() {
+export default function NetworkSvg() {
   return (
     <svg
       fill="#50fa7b"

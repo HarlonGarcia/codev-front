@@ -16,7 +16,7 @@ import * as S from './styles';
 import { SignUpSchema, signUpSchema } from './validation';
 
 export default function SignUp() {
-  const { t } = useTranslation('translation', { keyPrefix: 'pages.signup' });
+  const { t } = useTranslation();
 
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
@@ -62,48 +62,48 @@ export default function SignUp() {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <h2>{t('form.title')}</h2>
-        <p>{t('form.description')}</p>
+        <h2>{t('pages.signup.title')}</h2>
+        <p>{t('pages.signup.description')}</p>
       </S.Header>
       <S.Form onSubmit={handleSubmit(onSubmit)}>
         <Input
           {...register('name')}
-          label={t('form.fields.name.label')}
-          placeholder={t('form.fields.name.placeholder')}
+          label={t('pages.signup.fields.name.label')}
+          placeholder={t('pages.signup.fields.name.placeholder')}
           type='text'
           error={formErrors.name?.message}
         />
         <Input
           {...register('email')}
-          label={t('form.fields.email.label')}
-          placeholder={t('form.fields.email.placeholder')}
+          label={t('pages.signup.fields.email.label')}
+          placeholder={t('pages.signup.fields.email.placeholder')}
           error={formErrors.email?.message}
         />
         <Input
           {...register('password')}
-          label={t('form.fields.password.label')}
-          placeholder={t('form.fields.password.placeholder')}
+          label={t('pages.signup.fields.password.label')}
+          placeholder={t('pages.signup.fields.password.placeholder')}
           type='password'
           error={formErrors.password?.message}
         />
         <Input
           {...register('passwordConfirmation')}
-          label={t('form.fields.confirmationPassword.label')}
-          placeholder={t('form.fields.confirmationPassword.placeholder')}
+          label={t('pages.signup.fields.confirmation_password.label')}
+          placeholder={t('pages.signup.fields.confirmation_password.placeholder')}
           type='password'
           error={formErrors.passwordConfirmation?.message}
         />
         <Input
           {...register('githubUrl')}
-          label={t('form.fields.githubUrl.label')}
-          placeholder={t('form.fields.githubUrl.placeholder')}
+          label={t('pages.signup.fields.github.label')}
+          placeholder={t('pages.signup.fields.github.placeholder')}
           type='text'
           error={formErrors.githubUrl?.message}
         />
         <Input
           {...register('additionalUrl')}
-          label={t('form.fields.additionalUrl.label')}
-          placeholder={t('form.fields.additionalUrl.placeholder')}
+          label={t('pages.signup.fields.additional.label')}
+          placeholder={t('pages.signup.fields.additional.placeholder')}
           type='text'
           error={formErrors.additionalUrl?.message}
         />
@@ -113,7 +113,7 @@ export default function SignUp() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <span>{t('form.submit')}</span>
+          <span>{t('pages.signup.submit.label')}</span>
           <FaArrowRightLong />
         </S.SubmitButton>
       </S.Form>

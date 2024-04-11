@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { PiCircleDashedBold } from 'react-icons/pi';
 import { useDispatch } from 'react-redux';
 
 import * as Toggle from '@radix-ui/react-toggle';
 
-import useForm from '../../../hooks/useForm';
 import { AppDispatch } from '../../../store';
 import { getCategories } from '../../../store/features/categorySlice';
 import { createChallenge } from '../../../store/features/challengeSlice';
@@ -32,7 +32,7 @@ const initialFormState: CreateChallengeForm = {
 };
 
 export default function CreateChallenge() {
-  const { t } = useTranslation('translation', { keyPrefix: 'pages.challenges.create' });
+  const { t } = useTranslation();
   const [ searchTerm, setSearchTerm ] = useState('');
   const [ challengeStatus, setChallengeStatus ] = useState(false);
 
@@ -40,7 +40,6 @@ export default function CreateChallenge() {
   const { categories } = useSelector((state) => state.categories);
 
   const {
-    formData,
     handleInputChange,
     changeFormPayload
   } = useForm<CreateChallengeForm>(initialFormState);
@@ -93,7 +92,7 @@ export default function CreateChallenge() {
     <S.Container>
       <S.Form onSubmit={handleSubmit}>
         <S.InputGroup>
-          <label>{t('title')}</label>
+          <label>{t('pages.create_challenge.fields.title.label')}</label>
           <input
             id='title'
             type="text"
@@ -104,19 +103,21 @@ export default function CreateChallenge() {
           />
         </S.InputGroup>
         <S.InputGroup>
-          <label>{t('description.label')}</label>
+          <label>{t('pages.create_challenge.fields.description.label')}</label>
           <textarea
             id='description'
             value={description}
             onChange={handleInputChange}
-            placeholder={t('description.placeholder')}
+            placeholder={
+              t('pages.create_challenge.fields.description.placeholder')
+            }
             required
             {...defaultInputOptions}
           />
         </S.InputGroup>
         <S.Group>
           <div>
-            <label>{t('category')}</label>
+            <label>{t('pages.create_challenge.fields.category.label')}</label>
             <input
               id='category'
               type="text"
@@ -138,20 +139,24 @@ export default function CreateChallenge() {
             </ul>
           </div>
           <div>
-            <label>{t('status.label')}</label>
+            <label>{t('pages.create_challenge.fields.status.label')}</label>
             <Toggle.Root
               className="toggle"
               data-state={challengeStatus ? 'off' : 'on'}
               onClick={handleStatusChange}
             >
               <PiCircleDashedBold />
-              <small>{challengeStatus ? t('status.in_progress') : t('status.to_begin')}</small>
+              <small>{
+                challengeStatus
+                  ? t('global.challenges.status.in_progress')
+                  : t('global.challenges.status.to_begin')
+              }</small>
             </Toggle.Root>
           </div>
         </S.Group>
         <S.Submit
           type="submit"
-          value={t('submit')}
+          value={t('pages.create_challenge.submit.label')}
         />
       </S.Form>
     </S.Container>

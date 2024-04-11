@@ -10,9 +10,7 @@ import Menu from '../Menu';
 import * as S from './styles';
 
 export default function Navbar() {
-  const { t } = useTranslation('translation', {
-    keyPrefix: 'components.navbar',
-  });
+  const { t } = useTranslation();
 
   const isAuthenticated = useIsAuthenticated();
   const signOut = useSignOut();
@@ -30,24 +28,24 @@ export default function Navbar() {
       <S.Navigation>
         <Link to='/'>
           <AiFillHome />
-          <span>{t('home')}</span>
+          <span>{t('components.navbar.home')}</span>
         </Link>
         {isAuthenticated && (
           <>
             <Link to='/challenges'>
               <FaCodeBranch />
-              <span>{t('challenges')}</span>
+              <span>{t('components.navbar.challenges')}</span>
             </Link>
             <button onClick={handleLogout}>
               <LuLogOut />
-              <span>{t('logout')}</span>
+              <span>{t('components.navbar.logout')}</span>
             </button>
           </>
         )}
         {!isAuthenticated && (
           <Link to='/signin'>
             <LuLogIn />
-            <span>{t('signin')}</span>
+            <span>{t('components.navbar.signin')}</span>
           </Link>
         )}
       </S.Navigation>

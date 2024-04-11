@@ -18,9 +18,7 @@ const links = [
 ];
 
 export default function MyAccount() {
-  const { t } = useTranslation('translation', {
-    keyPrefix: 'pages.my_account',
-  });
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const handleActions = ({ action, redirectUrl }: IUserOption) => {
@@ -58,7 +56,7 @@ export default function MyAccount() {
           ))}
         </S.AccountContent>
         <S.AccountFooter>
-          <button>{t('logout')}</button>
+          <button>{t('pages.account.logout')}</button>
         </S.AccountFooter>
       </div>
     </S.Container>

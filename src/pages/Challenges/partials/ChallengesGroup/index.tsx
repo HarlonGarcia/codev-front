@@ -16,22 +16,22 @@ interface ChallengesGroupProps {
 const statusIcons = {
   IN_PROGRESS: {
     label:
-      <Translation>{(t) => <span>{t('pages.challenges.main.status.in_progress')}</span>}</Translation>,
+      <Translation>{(t) => <span>{t('global.challenges.status.in_progress')}</span>}</Translation>,
     color: 'green',
   },
   TO_BEGIN: {
     label:
-      <Translation>{(t) => <span>{t('pages.challenges.main.status.to_begin')}</span>}</Translation>,
+      <Translation>{(t) => <span>{t('global.challenges.status.to_begin')}</span>}</Translation>,
     color: 'green',
   },
   FINISHED: {
     label:
-      <Translation>{(t) => <span>{t('pages.challenges.main.status.finished')}</span>}</Translation>,
+      <Translation>{(t) => <span>{t('global.challenges.status.finished')}</span>}</Translation>,
     color: 'yellow',
   },
   CANCELED: {
     label:
-      <Translation>{(t) => <span>{t('pages.challenges.main.status.canceled')}</span>}</Translation>,
+      <Translation>{(t) => <span>{t('global.challenges.status.canceled')}</span>}</Translation>,
     color: 'red',
   },
 };
@@ -46,7 +46,8 @@ export default function ChallengesGroup({ category }: ChallengesGroupProps) {
   const { challenges } = useSelector((state) => state.challenges);
 
   const filteredChallenges = useMemo(() => {
-    return challenges.filter((challenge) => challenge.category?.id === category.id);
+    return challenges.filter((challenge) =>
+      challenge.category?.id === category.id);
   }, [ challenges, category.id ]);
 
   useEffect(() => {
@@ -76,7 +77,9 @@ export default function ChallengesGroup({ category }: ChallengesGroupProps) {
           {filteredChallenges.map((challenge) => (
             <S.Challenge key={challenge.id}>
               <S.ChallengeHeader>
-                <h2>{challenge.title || t('pages.challenges.main.title')}</h2>
+                <h2>
+                  {challenge.title || t('pages.challenges.unknown_title')}
+                </h2>
                 {challenge.status &&
                   <span className={statusIcons[challenge.status]?.color}>
                     {statusIcons[challenge.status]?.label}
@@ -93,7 +96,7 @@ export default function ChallengesGroup({ category }: ChallengesGroupProps) {
                 onClick={() => navigate(`/challenges/${challenge.id}`)}
                 disabled={challenge.status === 'FINISHED'}
               >
-                {t('pages.challenges.main.join')}
+                {t('pages.challenges.see_challenge')}
               </S.JoinChallenge>
             </S.Challenge>
           ))}

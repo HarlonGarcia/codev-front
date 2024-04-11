@@ -17,7 +17,6 @@ const Home = React.lazy(() => import('./pages/Home'));
 const MyAccount = React.lazy(() => import('./pages/MyAccount'));
 const SignIn = React.lazy(() => import('./pages/Auth/SignIn'));
 const SignUp = React.lazy(() => import('./pages/Auth/SignUp'));
-const Users = React.lazy(() => import('./pages/Users'));
 const Challenges = React.lazy(() => import('./pages/Challenges'));
 const ChallengeDetails = React.lazy(
   () => import('./pages/Challenges/ChallengeDetails'),
@@ -106,18 +105,10 @@ export default function AppRoutes() {
             }
           />
           <Route
-            path='/my_account'
+            path='/account'
             element={
               <RequireAuth fallbackPath={fallbackPath}>
                 <MyAccount />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path='/users'
-            element={
-              <RequireAuth fallbackPath={fallbackPath}>
-                <Users />
               </RequireAuth>
             }
           />

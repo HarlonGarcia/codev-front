@@ -1,187 +1,108 @@
 {
   "translation": {
-    "global": {
-      "alert": {
-        "auth_required": "This action requires you to be authenticated"
-      },
-      "api": {
-        "default": "An unexpected error occurred",
-        "duplicate": "This resource already exists",
-        "404": "Resource not found, please contact the support team",
-        "401": "Authentication required",
-        "500": "Internal server error"
-      }
-    },
-    "pages": {
-      "home": {
-        "instruction": {
-          "press": "Press",
-          "action": "to open the command list"
-        },
-        "goals": {
-          "title": "Elevate your code skills",
-          "description": "Discover why practicing through projects is essential to solidify your skills, covering from frontend with major frameworks to backend, as well as the use of other types of tools",
-          "cards": {
-            "solution": "Find solutions to real problems",
-            "code": "Turn ideas into code",
-            "compare": "See other solutions"
-          }
-        },
-        "technologies": {
-          "title": "Exploring stacks",
-          "description": "Practice with the major languages and technologies in the market, such as React, Angular, Vue, Node, Quarkus, Docker, among others"
-        },
-        "latest": {
-          "title": "Recently added challenges",
-          "description": "Start now with a variety of practical projects that will help you solidify knowledge in different areas of web development",
-          "badge": "New",
-          "link": "View challenges"
-        }
-      },
-      "my_account": {
-        "options": {
-          "challenges": "Challenges I am taking part in",
-          "info": "Edit information",
-          "friends": "Meet friends"
-        },
-        "logout": "Logout"
-      },
-      "challenges": {
-        "main": {
-          "title": "Title not found",
-          "status": {
-            "to_begin": "To begin",
-            "in_progress": "In progress",
-            "finished": "Finished",
-            "canceled": "Canceled"
-          },
-          "join": "Join challenge"
-        },
-        "create": {
-          "title": "Title",
-          "description": {
-            "label": "Description",
-            "placeholder": "Tell us about this **challenge**?"
-          },
-          "category": "Choose a category",
-          "status": {
-            "label": "Choose a status",
-            "in_progress": "In progress",
-            "to_begin": "Not started"
-          },
-          "submit": "Create new challenge"
-        },
-        "details": {
-          "title": "Title not found",
-          "description": "Description not found",
-          "info": {
-            "created": "Created by",
-            "author": "Author not found"
-          },
-          "join": "Join challenge"
-        }
-      },
-      "users": {
-        "search": {
-          "placeholder": "Search users"
-        }
-      },
-      "signin": {
-        "alert": {
-          "error": "Invalid email or password"
-        },
-        "title": "Welcome back!",
-        "description": "Log in to continue",
-        "form": {
-          "fields": {
-            "email": {
-              "label": "Email",
-              "error": "It must be a valid email"
-            },
-            "password": {
-              "label": "Password",
-              "error": "Password is required"
-            }
-          },
-          "login": "Log in"
-        },
-        "signup": "Don't have an account? Sign up"
-      },
-      "signup": {
-        "form": {
-          "title": "Sign up",
-          "description": "Practice, learn and interact with other developers",
-          "fields": {
-            "name": {
-              "label": "How do you want to be called?",
-              "placeholder": "Your name",
-              "error": "Name is required"
-            },
-            "email": {
-              "label": "Your best email",
-              "placeholder": "your@email",
-              "error": "It must be a valid email"
-            },
-            "password": {
-              "label": "Your password",
-              "placeholder": "123@&#*",
-              "error": {
-                "min": "Password can't be less than 8 characters",
-                "max": "Password can't be more than 20 characters"
-              }
-            },
-            "confirmationPassword": {
-              "label": "Confirm your password",
-              "placeholder": "123@&#*",
-              "error": "Passwords don't match"
-            },
-            "githubUrl": {
-              "label": "What's your github url?",
-              "placeholder": "https://github.com/dev",
-              "error": "It must be a valid Github URL"
-            },
-            "additionalUrl": {
-              "label": "What's your portfolio url?",
-              "placeholder": "www.portfolio.com"
-            }
-          },
-          "submit": "Continue"
-        }
-      },
-      "not_found": {
-        "title": "Page not found",
-        "description": "The page you are looking for does not exist",
-        "go_back": "Go back"
-      }
-    },
-    "components": {
-      "commander": {
-        "modal": {
-          "input": "What do you want?",
-          "go_to": "Go to",
-          "extra": "Extra"
-        },
-        "commands": {
-          "home": "Home",
-          "challenges": "Challenges",
-          "about": "About",
-          "tips": "Tips",
-          "profile": "My profile",
-          "copy": "Copy url",
-          "github": "View github"
-        },
-        "menu": {
-          "home": "Home",
-          "challenges": "Challenges",
-          "signin": "Log in"
-        },
-        "navbar": {
-          "home": "Home",
-          "challenges": "Challenges",
-          "signin": "Log in",
-          "logout": "Log out"
-        }
-      }
-    }
+    "global.alerts.errors.default": "An unexpected error occurred",
+    "global.alerts.errors.duplicated_key": "This resource already exists",
+    "global.alerts.errors.401": "Authentication required",
+    "global.alerts.errors.404": "Resource not found, please contact the support team",
+    "global.alerts.errors.500": "Internal server error",
+
+    "global.challenges.status.to_begin": "Not started",
+    "global.challenges.status.in_progress": "In progress",
+    "global.challenges.status.finished": "Finished",
+    "global.challenges.status.canceled": "Canceled",
+
+    "pages.home.instructions.press": "Press",
+    "pages.home.instructions.action": "to open the command list",
+
+    "pages.home.introduction.title": "Elevate your code skills",
+    "pages.home.introduction.description": "Discover why practicing through projects is essential to solidify your skills, covering from frontend with major frameworks to backend, as well as the use of other types of tools",
+    "pages.home.introduction.cards.find_solutions": "Find solutions to real problems",
+    "pages.home.introduction.cards.coding": "Turn ideas into code",
+    "pages.home.introduction.cards.network": "Connect with other developers",
+
+    "pages.home.technologies.title": "Exploring stacks",
+    "pages.home.technologies.description": "Practice with the major languages and technologies in the market, such as React, Angular, Vue, Node, Quarkus, Docker, among others",
+
+    "pages.home.challenges.title": "Recently added challenges",
+    "pages.home.challenges.description": "Start now with a variety of practical projects that will help you solidify knowledge in different areas of web development",
+    "pages.home.challenges.badge": "New",
+    "pages.home.challenges.button.text": "View challenges",
+
+    "pages.account.options.challenges": "Challenges I am taking part in",
+    "pages.account.options.edit_information": "Edit information",
+    "pages.account.options.connections": "See my connections",
+    "pages.account.logout": "Log out",
+
+    "pages.challenges.unknown_title": "Title not found",
+    "pages.challenges.see_challenge": "See challenge",
+
+    "pages.create_challenge.fields.title.label": "Title",
+    "pages.create_challenge.fields.description.label": "Description",
+    "pages.create_challenge.fields.description.placeholder": "Tell us about this **challenge**?",
+    "pages.create_challenge.fields.category.label": "Select a category",
+    "pages.create_challenge.fields.status.label": "Select a status",
+    "pages.create_challenge.submit.label": "Create challenge",
+
+    "pages.challenge_information.unknown_title": "Title not found",
+    "pages.challenge_information.unknown_description": "Description not found",
+    "pages.challenge_information.unknown_author": "Author not found",
+    "pages.challenge_information.created_by": "Created by",
+    "pages.challenge_information.submit.label": "Join challenge",
+
+    "pages.signin.alerts.invalid_credentials": "Invalid email or password",
+    "pages.signin.title": "Welcome back!",
+    "pages.signin.description": "Log in to continue practicing and learning",
+    "pages.signin.fields.email.label": "Email",
+    "pages.signin.fields.email.error": "It must be a valid email",
+    "pages.signin.fields.password.label": "Password",
+    "pages.signin.fields.password.error": "Password is required",
+    "pages.signin.submit.label": "Log in",
+    "pages.signin.no_account": "Don't have an account? Sign up",
+
+    "pages.signup.title": "Sign up",
+    "pages.signup.description": "Practice, learn and interact with other developers",
+    "pages.signup.fields.name.label": "How do you want to be called?",
+    "pages.signup.fields.name.placeholder": "Your name",
+    "pages.signup.fields.name.error": "Name is required",
+    "pages.signup.fields.email.label": "Your best email",
+    "pages.signup.fields.email.placeholder": "your@email",
+    "pages.signup.fields.email.error": "It must be a valid email",
+    "pages.signup.fields.password.label": "Your password",
+    "pages.signup.fields.password.placeholder": "123@&#*",
+    "pages.signup.fields.password.error.min": "Password can't be less than 8 characters",
+    "pages.signup.fields.password.error.max": "Password can't be more than 20 characters",
+    "pages.signup.fields.confirmation_password.label": "Confirm your password",
+    "pages.signup.fields.confirmation_password.placeholder": "123@&#*",
+    "pages.signup.fields.confirmation_password.error": "Passwords don't match",
+    "pages.signup.fields.github.label": "What's your github url?",
+    "pages.signup.fields.github.placeholder": "github.com/your_name",
+    "pages.signup.fields.github.error": "It must be a valid Github URL",
+    "pages.signup.fields.additional.label": "What's your portfolio url?",
+    "pages.signup.fields.additional.placeholder": "www.portfolio.com",
+    "pages.signup.submit.label": "Continue",
+
+    "pages.not_found.title": "Page not found",
+    "pages.not_found.description": "The page you are looking for does not exist",
+    "pages.not_found.return": "Go back",
+
+    "components.commander.search.placeholder": "What do you want?",
+    "components.commander.headings.pages": "Go to",
+    "components.commander.headings.extra": "Extra",
+    "components.commander.commands.home": "Home",
+    "components.commander.commands.challenges": "Challenges",
+    "components.commander.commands.about": "About",
+    "components.commander.commands.tips": "Tips",
+    "components.commander.commands.profile": "My profile",
+    "components.commander.commands.copy_url": "Copy url",
+    "components.commander.commands.github": "View github",
+
+    "components.menu.home": "Ínicio",
+    "components.menu.challenges": "Desafios",
+    "components.menu.signin": "Fazer login",
+
+    "components.navbar.home": "Ínicio",
+    "components.navbar.challenges": "Desafios",
+    "components.navbar.signin": "Fazer login",
+    "components.navbar.logout": "Fazer logout"
   }
 }

@@ -9,7 +9,7 @@ import * as Popover from '@radix-ui/react-popover';
 import * as S from './styles';
 
 export default function Menu() {
-  const { t } = useTranslation('translation', { keyPrefix: 'components.menu' });
+  const { t } = useTranslation();
 
   return (
     <Popover.Root>
@@ -23,15 +23,15 @@ export default function Menu() {
           <S.Content>
             <S.Option href='/'>
               <AiFillHome />
-              <span>{t('home')}</span>
+              <span>{t('components.menu.home')}</span>
             </S.Option>
             <S.Option href='/challenges'>
               <FaCodeBranch />
-              <span>{t('challenges')}</span>
+              <span>{t('components.menu.challenges')}</span>
             </S.Option>
             <S.Option href='/signin'>
               <FiLogIn />
-              <span>{t('signin')}</span>
+              <span>{t('components.menu.signin')}</span>
             </S.Option>
           </S.Content>
         </Popover.Content>

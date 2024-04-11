@@ -6,26 +6,26 @@ export const possibilities = [{
   id: 'solution',
   label: (
     <Translation>
-      {(t) => <span>{t('pages.home.goals.cards.solution')}</span>}
+      {(t) => <span>{t('pages.home.introduction.cards.find_solutions')}</span>}
     </Translation>
   ),
   icon: <Svg.Solution />,
 },
 {
-  id: 'code',
+  id: 'coding',
   label: (
     <Translation>{
-      (t) => <span>{t('pages.home.goals.cards.code')}</span>}
+      (t) => <span>{t('pages.home.introduction.cards.coding')}</span>}
     </Translation>
   ),
   icon: <Svg.Code />,
 },
 {
-  id: 'compare',
+  id: 'network',
   label: (
     <Translation>
-      {(t) => <span>{t('pages.home.goals.cards.compare')}</span>}
+      {(t) => <span>{t('pages.home.introduction.cards.network')}</span>}
     </Translation>
   ),
-  icon: <Svg.Compare />,
+  icon: <Svg.Network />,
 }];

@@ -19,7 +19,7 @@ import { SignInSchema, signInSchema } from './validation';
 const PASSWORD_MIN_LENGTH = 8;
 
 export default function SignIn() {
-  const { t } = useTranslation('translation', { keyPrefix: 'pages.signin' });
+  const { t } = useTranslation();
 
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
@@ -39,7 +39,7 @@ export default function SignIn() {
 
   const onSubmit: SubmitHandler<SignInSchema> = (payload) => {
     if (payload.password.length < PASSWORD_MIN_LENGTH) {
-      toast.error(t('alert.error'));
+      toast.error(t('pages.signin.alerts.invalid_credentials'));
       return;
     }
 
@@ -64,29 +64,31 @@ export default function SignIn() {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <h2>{t('title')}</h2>
-        <p>{t('description')}</p>
+        <h2>{t('pages.signin.title')}</h2>
+        <p>{t('pages.signin.description')}</p>
       </S.Header>
       <S.Form onSubmit={handleSubmit(onSubmit)}>
         <Input
           {...register('email')}
-          label={t('form.fields.email.label')}
+          label={t('pages.signin.fields.email.label')}
           error={formErrors.email?.message}
         />
         <Input
           {...register('password')}
-          label={t('form.fields.password.label')}
+          label={t('pages.signin.fields.password.label')}
           type='password'
           error={formErrors.password?.message}
         />
-        <Link to={'/signup'}>{t('signup')}</Link>
+        <Link to={'/signup'}>{
+          t('pages.signin.no_account')
+        }</Link>
         <S.SubmitButton
           type='submit'
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <span>{t('form.login')}</span>
+          <span>{t('pages.signin.submit.label')}</span>
           <FaArrowRightLong />
         </S.SubmitButton>
       </S.Form>

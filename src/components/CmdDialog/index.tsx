@@ -10,9 +10,7 @@ import { useSelector } from '../../store/useSelector';
 import { goToShortcuts, extraShortcuts } from '../../utils';
 
 export default function CmdDialog() {
-  const { t } = useTranslation('translation', {
-    keyPrefix: 'components.commander.modal',
-  });
+  const { t } = useTranslation();
 
   const dispatch = useDispatch();
   const { isModalOpened } = useSelector((state) => state.commander);
@@ -23,14 +21,16 @@ export default function CmdDialog() {
       onOpenChange={() => dispatch(toggleModal())}
     >
       <div className='commands_header'>
-        <Command.Input placeholder={t('input')} />
+        <Command.Input
+          placeholder={t('components.commander.search.placeholder')}
+        />
         <button onClick={() => dispatch(toggleModal())}>
           <IoClose />
         </button>
       </div>
 
       <Command.List>
-        <Command.Group heading={t('go_to')}>
+        <Command.Group heading={t('components.commander.headings.pages')}>
           {Object.values(goToShortcuts).map(
             ({ action, icon, title, keys }, index) => (
               <Command.Item key={index} onMouseDown={action}>
@@ -48,7 +48,7 @@ export default function CmdDialog() {
           )}
         </Command.Group>
 
-        <Command.Group heading={t('extra')}>
+        <Command.Group heading={t('components.commander.headings.extra')}>
           {Object.values(extraShortcuts).map(
             ({ action, icon, title, keys }, index) => (
               <Command.Item key={index} onMouseDown={action}>

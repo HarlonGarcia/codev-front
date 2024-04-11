@@ -1,187 +1,108 @@
 {
   "translation": {
-    "global": {
-      "alert": {
-        "auth_required": "Essa ação requer que você esteja logado"
-      },
-      "api": {
-        "default": "Ocorreu um erro inesperado",
-        "duplicate": "Esse recurso já existe",
-        "404": "Recurso não encontrado, contacte o suporte",
-        "401": "Necessário realizar login",
-        "500": "Ocorreu um erro interno no servidor"
-      }
-    },
-    "pages": {
-      "home": {
-        "instruction": {
-          "press": "Pressione",
-          "action": "para abrir a lista de comandos"
-        },
-        "goals": {
-          "title": "Aumente seu nível na programação",
-          "description": "Descubra por que a prática através de projetos é essencial para consolidar habilidades em web desenvolvimento, abrangendo desde o frontend com os principais frameworks, até backend, além do uso de outros tipos de ferramentas",
-          "cards": {
-            "solution": "Encontre soluções para problemas reais",
-            "code": "Converta idéias em código",
-            "compare": "Veja outras soluções"
-          }
-        },
-        "technologies": {
-          "title": "Explorando as principais stacks",
-          "description": "Pratique com as principais linguagens e tecnologias do mercado, como React, Angular, Vue, Node, Quarkus, Docker, entre outras"
-        },
-        "latest": {
-          "title": "Desafios adicionados recentemente",
-          "description": "Comece agora por uma variedade de projetos práticos que irão te ajudar a solidificar conhecimentos em diferentes áreas do web desenvolvimento",
-          "badge": "Novo",
-          "link": "Ver desafios"
-        }
-      },
-      "my_account": {
-        "options": {
-          "challenges": "Desafios que estou participando",
-          "info": "Editar informações",
-          "friends": "Encontrar amigos"
-        },
-        "logout": "Sair"
-      },
-      "challenges": {
-        "main": {
-          "title": "Título não informado",
-          "status": {
-            "to_begin": "Não iniciado",
-            "in_progress": "Em progresso",
-            "finished": "Finalizado",
-            "canceled": "Cancelado"
-          },
-          "join": "Participar do desafio"
-        },
-        "create": {
-          "title": "Título",
-          "description": {
-            "label": "Descrição",
-            "placeholder": "Como funciona o seu *desafio*?"
-          },
-          "category": "Escolha uma categoria",
-          "status": {
-            "label": "Escolha o status",
-            "in_progress": "Em progresso",
-            "to_begin": "Não iniciado"
-          },
-          "submit": "Criar novo desafio"
-        },
-        "details": {
-          "title": "Título não informado",
-          "description": "Descrição não informada",
-          "info": {
-            "created": "Criado por",
-            "author": "Autor não informado"
-          },
-          "join": "Participar do desafio"
-        }
-      },
-      "users": {
-        "search": {
-          "placeholder": "Buscar usuário"
-        }
-      },
-      "signin": {
-        "alert": {
-          "error": "Email ou senha incorretos"
-        },
-        "title": "Bem vindo!",
-        "description": "Faça login para continuar",
-        "form": {
-          "fields": {
-            "email": {
-              "label": "Email",
-              "error": "Insira um email válido"
-            },
-            "password": {
-              "label": "Senha",
-              "error": "Senha é obrigatória"
-            }
-          },
-          "login": "Entrar"
-        },
-        "signup": "Ainda não tem conta? Cadastre-se"
-      },
-      "signup": {
-        "form": {
-          "title": "Cadastrar-se",
-          "description": "Pratique, aprenda e interaja com outros desenvolvedores",
-          "fields": {
-            "name": {
-              "label": "Como você deseja ser chamado?",
-              "placeholder": "Seu nome",
-              "error": "Nome é obrigatório"
-            },
-            "email": {
-              "label": "Seu melhor email",
-              "placeholder": "seu@email",
-              "error": "Insira um email válido"
-            },
-            "password": {
-              "label": "Sua senha",
-              "placeholder": "123@&#*",
-              "error": {
-                "min": "Senha deve ter no mínimo 6 caractéres",
-                "max": "Senha deve ter no máximo 20 caractéres"
-              }
-            },
-            "confirmationPassword": {
-              "label": "Confirme sua senha",
-              "placeholder": "123@&#*",
-              "error": "Senhas não coincidem"
-            },
-            "githubUrl": {
-              "label": "Qual link do seu github?",
-              "placeholder": "https://github.com/dev",
-              "error": "Insira um link de github válido"
-            },
-            "additionalUrl": {
-              "label": "Qual link do seu portfólio?",
-              "placeholder": "www.portfolio.com"
-            }
-          },
-          "submit": "Continuar"
-        }
-      },
-      "not_found": {
-        "title": "Página não encontrada",
-        "description": "A página que você está procurando não existe.",
-        "go_back": "Voltar para o ínicio"
-      }
-    },
-    "components": {
-      "commander": {
-        "modal": {
-          "input": "O que você deseja?",
-          "go_to": "Ir para",
-          "extra": "Extra"
-        },
-        "commands": {
-          "home": "Ínicio",
-          "challenges": "Desafios",
-          "about": "Sobre",
-          "tips": "Dicas",
-          "profile": "Meu perfil",
-          "copy": "Copiar url",
-          "github": "Ver github"
-        }
-      },
-      "menu": {
-        "home": "Ínicio",
-        "challenges": "Desafios",
-        "signin": "Fazer login"
-      },
-      "navbar": {
-        "home": "Ínicio",
-        "challenges": "Desafios",
-        "signin": "Fazer login",
-        "logout": "Fazer logout"
-      }
-    }
+    "global.alerts.errors.default": "Ocorreu um erro inesperado",
+    "global.alerts.errors.duplicated_key": "Esse recurso já existe",
+    "global.alerts.errors.401": "Necessário realizar login",
+    "global.alerts.errors.404": "Recurso não encontrado, contacte o suporte",
+    "global.alerts.errors.500": "Ocorreu um erro interno no servidor",
+
+    "global.challenges.status.to_begin": "Não iniciado",
+    "global.challenges.status.in_progress": "Em progresso",
+    "global.challenges.status.finished": "Finalizado",
+    "global.challenges.status.canceled": "Cancelado",
+
+    "pages.home.instructions.press": "Pressione",
+    "pages.home.instructions.action": "para abrir a lista de comandos",
+
+    "pages.home.introduction.title": "Aumente seu nível na programação",
+    "pages.home.introduction.description": "Descubra por que a prática através de projetos é essencial para consolidar habilidades em web desenvolvimento, abrangendo desde o frontend com os principais frameworks, até backend, além do uso de outros tipos de ferramentas",
+    "pages.home.introduction.cards.find_solutions": "Encontre soluções para problemas reais",
+    "pages.home.introduction.cards.coding": "Converta idéias em código",
+    "pages.home.introduction.cards.network": "Conecte-se com outros desenvolvedores",
+
+    "pages.home.technologies.title": "Explorando as principais stacks",
+    "pages.home.technologies.description": "Pratique com as principais linguagens e tecnologias do mercado, como React, Angular, Vue, Node, Quarkus, Docker, entre outras",
+
+    "pages.home.challenges.title": "Desafios adicionados recentemente",
+    "pages.home.challenges.description": "Comece agora por uma variedade de projetos práticos que irão te ajudar a solidificar conhecimentos em diferentes áreas do web desenvolvimento",
+    "pages.home.challenges.badge": "Novo",
+    "pages.home.challenges.button.text": "Ver desafios",
+
+    "pages.account.options.challenges": "Desafios que estou participando",
+    "pages.account.options.edit_information": "Editar minhas informações",
+    "pages.account.options.connections": "Ver minhas conexões",
+    "pages.account.logout": "Sair",
+
+    "pages.challenges.unknown_title": "Título não informado",
+    "pages.challenges.see_challenge": "Ver desafio",
+
+    "pages.create_challenge.fields.title.label": "Título",
+    "pages.create_challenge.fields.description.label": "Descrição",
+    "pages.create_challenge.fields.description.placeholder": "Como funciona o seu *desafio*?",
+    "pages.create_challenge.fields.category.label": "Escolha uma categoria",
+    "pages.create_challenge.fields.status.label": "Escolha o status",
+    "pages.create_challenge.submit.label": "Criar desafio",
+
+    "pages.challenge_information.unknown_title": "Título não informado",
+    "pages.challenge_information.unknown_description": "Descrição não informada",
+    "pages.challenge_information.unknown_author": "Autor não informado",
+    "pages.challenge_information.created_by": "Criado por",
+    "pages.challenge_information.submit.label": "Participar do desafio",
+
+    "pages.signin.alerts.invalid_credentials": "Email ou senha incorretos",
+    "pages.signin.title": "Bem vindo de volta!",
+    "pages.signin.description": "Faça login para continuar praticando e aprendendo",
+    "pages.signin.fields.email.label": "Email",
+    "pages.signin.fields.email.error": "Insira um email válido",
+    "pages.signin.fields.password.label": "Senha",
+    "pages.signin.fields.password.error": "Senha é obrigatória",
+    "pages.signin.submit.label": "Entrar",
+    "pages.signin.no_account": "Ainda não tem conta? Cadastre-se",
+
+    "pages.signup.title": "Cadastrar-se",
+    "pages.signup.description": "Pratique, aprenda e interaja com outros desenvolvedores",
+    "pages.signup.fields.name.label": "Como você deseja ser chamado?",
+    "pages.signup.fields.name.placeholder": "Seu nome",
+    "pages.signup.fields.name.error": "Nome é obrigatório",
+    "pages.signup.fields.email.label": "Seu melhor email",
+    "pages.signup.fields.email.placeholder": "seu@email",
+    "pages.signup.fields.email.error": "Insira um email válido",
+    "pages.signup.fields.password.label": "Sua senha",
+    "pages.signup.fields.password.placeholder": "123@&#*",
+    "pages.signup.fields.password.error.min": "Senha deve ter no mínimo 8 caractéres",
+    "pages.signup.fields.password.error.max": "Senha deve ter no máximo 20 caractéres",
+    "pages.signup.fields.confirmation_password.label": "Confirme sua senha",
+    "pages.signup.fields.confirmation_password.placeholder": "123@&#*",
+    "pages.signup.fields.confirmation_password.error": "Senhas não coincidem",
+    "pages.signup.fields.github.label": "Qual link do seu github?",
+    "pages.signup.fields.github.placeholder": "github.com/seu_nome",
+    "pages.signup.fields.github.error": "Insira um link de github válido",
+    "pages.signup.fields.additional.label": "Qual link do seu portfólio?",
+    "pages.signup.fields.additional.placeholder": "www.portfolio.com",
+    "pages.signup.submit.label": "Continuar",
+
+    "pages.not_found.title": "Página não encontrada",
+    "pages.not_found.description": "A página que você está procurando não existe",
+    "pages.not_found.return": "Voltar para o ínicio",
+
+    "components.commander.search.placeholder": "O que você deseja?",
+    "components.commander.headings.pages": "Ir para",
+    "components.commander.headings.extra": "Extra",
+    "components.commander.commands.home": "Ínicio",
+    "components.commander.commands.challenges": "Desafios",
+    "components.commander.commands.about": "Sobre",
+    "components.commander.commands.tips": "Dicas",
+    "components.commander.commands.profile": "Meu perfil",
+    "components.commander.commands.copy_url": "Copiar url",
+    "components.commander.commands.github": "Ver github",
+
+    "components.menu.home": "Ínicio",
+    "components.menu.challenges": "Desafios",
+    "components.menu.signin": "Fazer login",
+
+    "components.navbar.home": "Ínicio",
+    "components.navbar.challenges": "Desafios",
+    "components.navbar.signin": "Fazer login",
+    "components.navbar.logout": "Fazer logout"
   }
 }

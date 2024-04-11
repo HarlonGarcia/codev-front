@@ -80,7 +80,7 @@ export const goToShortcuts: IShortcuts = {
     ),
     keys: [ '⌘', 'Q' ],
     action: () => {
-      location.href ='/my_account';
+      location.href ='/account';
     }
   },
 };
@@ -90,7 +90,7 @@ export const extraShortcuts: IShortcuts = {
     icon: <FaCopy />,
     title: (
       <Translation>
-        {(t) => <span>{t('components.commander.commands.copy')}</span>}
+        {(t) => <span>{t('components.commander.commands.copy_url')}</span>}
       </Translation>
     ),
     keys: [ '⌘', 'U' ],
