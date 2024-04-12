@@ -1,6 +1,6 @@
 import AuthProvider from 'react-auth-kit/AuthProvider';
 import createStore from 'react-auth-kit/createStore';
-import { Provider } from 'react-redux';
+import { Provider as ReduxProvider } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 
 import Routes from './routes';
@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { defaultToastConfig } from './utils/animations';
 
 const authStore = createStore({
-  authName: '_auth',
+  authName: 'codev_auth',
   authType: 'cookie',
   cookieDomain: window.location.hostname,
   cookieSecure: window.location.protocol === 'https:',
@@ -17,12 +17,12 @@ const authStore = createStore({
 
 function App() {
   return (
-    <AuthProvider store={authStore}>
-      <Provider store={reduxStore}>
+    <ReduxProvider store={reduxStore}>
+      <AuthProvider store={authStore}>
         <ToastContainer {...defaultToastConfig} />
         <Routes />
-      </Provider>
-    </AuthProvider>
+      </AuthProvider>
+    </ReduxProvider>
   );
 }
 

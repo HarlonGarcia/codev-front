@@ -1,20 +1,20 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import { authReducer } from './features/authSlice';
-import { categoriesReducer } from './features/categorySlice';
-import { challengesReducer } from './features/challengeSlice';
-import { commanderReducer } from './features/commanderSlice';
-import { technologiesReducer } from './features/technologySlice';
-import { usersReducer } from './features/userSlice';
+import { authReducer } from './slices/auth';
+import { categoryReducer } from './slices/category';
+import { challengeReducer } from './slices/challenge';
+import { commanderReducer } from './slices/commander';
+import { technologyReducer } from './slices/technology';
+import { userReducer } from './slices/user';
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
-    categories: categoriesReducer,
-    challenges: challengesReducer,
+    categories: categoryReducer,
+    challenges: challengeReducer,
     commander: commanderReducer,
-    technologies: technologiesReducer,
-    users: usersReducer,
+    technologies: technologyReducer,
+    users: userReducer,
   },
 });
 

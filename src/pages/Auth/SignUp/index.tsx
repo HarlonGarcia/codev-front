@@ -10,7 +10,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { Input } from '../../../components/shared/Input';
 import { AppDispatch } from '../../../store';
-import { signUp } from '../../../store/features/authSlice';
+import { signUp } from '../../../store/slices/auth';
+import { getMe } from '../../../store/slices/user';
 import { useSelector } from '../../../store/useSelector';
 import * as S from './styles';
 import { SignUpSchema, signUpSchema } from './validation';
@@ -34,10 +35,10 @@ export default function SignUp() {
     resolver: zodResolver(signUpSchema),
   });
 
-  const onSubmit: SubmitHandler<SignUpSchema> = (data) => {
+  const onSubmit: SubmitHandler<SignUpSchema> = (formValues) => {
     const payload = {
-      ...data,
-      additionalUrl: data.additionalUrl || undefined,
+      ...formValues,
+      additionalUrl: formValues.additionalUrl || undefined,
       passwordConfirmation: undefined,
     };
 
@@ -52,8 +53,9 @@ export default function SignUp() {
       return;
     }
 
+    dispatch(getMe());
     navigate('/');
-  }, [ navigate, token ]);
+  }, [ dispatch, navigate, token ]);
 
   return (
     <S.Container>
@@ -89,7 +91,9 @@ export default function SignUp() {
         <Input
           {...register('passwordConfirmation')}
           label={t('pages.signup.fields.confirmation_password.label')}
-          placeholder={t('pages.signup.fields.confirmation_password.placeholder')}
+          placeholder={
+            t('pages.signup.fields.confirmation_password.placeholder')
+          }
           type='password'
           error={formErrors.passwordConfirmation?.message}
         />

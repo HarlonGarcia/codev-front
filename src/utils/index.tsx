@@ -9,18 +9,17 @@ import {
   FaUserCircle,
 } from 'react-icons/fa';
 
+import { IShortcuts } from '../types';
 import { URL_DEPLOY, URL_REPOSITORY } from './constants';
 
-interface IShortcutInfo {
-  icon: JSX.Element;
-  title: JSX.Element;
-  keys: string[];
-  action: () => void;
-}
+export const getCookie = (key: string) => {
+  const cookies = `; ${document.cookie}`;
+  const parts = cookies.split(`; ${key}=`);
 
-interface IShortcuts {
-  [key: string]: IShortcutInfo;
-}
+  if (parts.length === 2) {
+    return parts.pop()?.split(';').shift();
+  }
+};
 
 export const goToShortcuts: IShortcuts = {
   H: {

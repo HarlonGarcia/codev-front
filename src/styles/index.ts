@@ -5,6 +5,8 @@ const colors = {
   secondary: '#120F26',
   title: '#8625df',
   text: '#c392ef',
+  coolgrey: '#8690B3',
+  lavender: '#E6F0FF',
   highlight: '#50fa7b',
   alert: '#DBF227',
   error: '#ff5555',

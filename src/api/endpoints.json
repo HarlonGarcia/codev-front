@@ -3,6 +3,7 @@
   "login": "http://127.0.0.1:8080/users/login",
   "signup": "http://127.0.0.1:8080/users/signup",
   "users": "http://127.0.0.1:8080/users",
+  "join_challenge": "http://127.0.0.1:8080/challenges/{challengeId}/join-challenge",
 
   "challenges": "http://0.0.0.0:5001/challenges",
   "challenge_by_id": "http://0.0.0.0:5001/challenges/{challengeId}",

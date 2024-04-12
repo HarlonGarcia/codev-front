@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { AppDispatch } from '../../store';
-import { getCategories } from '../../store/features/categorySlice';
-import { getChallenges } from '../../store/features/challengeSlice';
+import { getCategories } from '../../store/slices/category';
+import { getChallenges } from '../../store/slices/challenge';
 import { useSelector } from '../../store/useSelector';
 import ChallengesGroup from './partials/ChallengesGroup';
 import * as S from './styles';
@@ -11,7 +11,7 @@ import * as S from './styles';
 export default function Challenges() {
   const dispatch = useDispatch<AppDispatch>();
 
-  const { categories } = useSelector((state) => state.categories);
+  const { items: categories } = useSelector((state) => state.categories);
 
   useEffect(() => {
     Promise.all([

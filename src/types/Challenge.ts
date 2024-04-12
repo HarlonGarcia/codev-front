@@ -15,5 +15,7 @@ export interface IChallenge {
   updatedAt: Date;
 }
 
-export type IChallengeDto =
-  Pick<IChallenge, 'title' | 'description' | 'category' | 'status'>
+export type IChallengeDto = Pick<
+  IChallenge,
+  'title' | 'description' | 'category' | 'status',
+>

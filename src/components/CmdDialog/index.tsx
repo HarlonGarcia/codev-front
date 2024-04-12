@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { Command } from 'cmdk';
 
 import './styles.scss';
-import { toggleModal } from '../../store/features/commanderSlice';
+import { toggleModal } from '../../store/slices/commander';
 import { useSelector } from '../../store/useSelector';
 import { goToShortcuts, extraShortcuts } from '../../utils';
 

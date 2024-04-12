@@ -8,7 +8,8 @@ import { jwtDecode as decode, JwtPayload } from 'jwt-decode';
 import CmdDialog from './components/CmdDialog';
 import Navbar from './components/Navbar';
 import PageNotFound from './pages/PageNotFound';
-import { closeModal, openModal } from './store/features/commanderSlice';
+import { AppDispatch } from './store';
+import { closeModal, openModal } from './store/slices/commander';
 import { useSelector } from './store/useSelector';
 import { extraShortcuts, goToShortcuts } from './utils';
 import { ADMIN, USER } from './utils/constants';
@@ -18,8 +19,8 @@ const MyAccount = React.lazy(() => import('./pages/MyAccount'));
 const SignIn = React.lazy(() => import('./pages/Auth/SignIn'));
 const SignUp = React.lazy(() => import('./pages/Auth/SignUp'));
 const Challenges = React.lazy(() => import('./pages/Challenges'));
-const ChallengeDetails = React.lazy(
-  () => import('./pages/Challenges/ChallengeDetails'),
+const ChallengeInformation = React.lazy(
+  () => import('./pages/Challenges/ChallengeInformation'),
 );
 const CreateChallenge = React.lazy(
   () => import('./pages/Challenges/CreateChallenge'),
@@ -33,15 +34,15 @@ const MIN_TOKEN_LENGHT = 10;
 const fallbackPath = '/signin';
 
 export default function AppRoutes() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
+
   const { token } = useSelector((state) => state.auth);
   const { isModalOpened } = useSelector((state) => state.commander);
 
   if (token && MIN_TOKEN_LENGHT < token.length) {
-    const { sub: email, groups }: JwtPayloadWithGroups = decode(token);
+    const { groups }: JwtPayloadWithGroups = decode(token);
     const isAdmin = groups.find((group) => group.toLocaleLowerCase() === ADMIN);
 
-    localStorage.setItem('_email', email as string);
     localStorage.setItem('_role', isAdmin ? ADMIN : USER);
   }
 
@@ -92,7 +93,7 @@ export default function AppRoutes() {
             path='/challenges/:id'
             element={
               <RequireAuth fallbackPath={fallbackPath}>
-                <ChallengeDetails />
+                <ChallengeInformation />
               </RequireAuth>
             }
           />
@@ -112,7 +113,6 @@ export default function AppRoutes() {
               </RequireAuth>
             }
           />
-
           <Route path='*' element={<PageNotFound />} />
         </Routes>
       </Suspense>
