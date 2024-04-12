@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { api } from '../../api';
-import { Category } from '../../types/Category';
+import { ICategory } from '../../types/Category';
 import { getUrl } from '../utils';
 
 interface CategoryState {
-  categories: Category[];
+  categories: ICategory[];
   isLoading: boolean;
   isError: boolean;
 }

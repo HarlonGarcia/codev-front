@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { api } from '../../api';
-import { User } from '../../types/User';
+import { IUser } from '../../types/User';
 import { getUrl } from '../utils';
 
 interface Filters {
@@ -9,9 +9,9 @@ interface Filters {
 }
 
 interface UserState {
-  users: User[];
+  users: IUser[];
   filters: Filters;
-  currentUser: User | null;
+  currentUser: IUser | null;
   isLoading: boolean;
   isError: boolean;
 }

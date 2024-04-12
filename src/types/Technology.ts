@@ -1,4 +1,4 @@
-export interface Technology {
+export interface ITechnology {
   id: string;
   name: string;
   documentationLink: string;

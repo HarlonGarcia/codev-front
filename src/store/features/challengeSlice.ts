@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { api } from '../../api';
-import { Challenge, ChallengeDto } from '../../types/Challenge';
+import { IChallenge, IChallengeDto } from '../../types/Challenge';
 import { getUrl } from '../utils';
 
 interface Filters {
@@ -11,9 +11,9 @@ interface Filters {
 }
 
 interface ChallengeState {
-  challenges: Challenge[];
-  latestChallenges: Challenge[];
-  currentChallenge: Challenge | null;
+  challenges: IChallenge[];
+  latestChallenges: IChallenge[];
+  currentChallenge: IChallenge | null;
   isLoading: boolean;
   isError: boolean;
 }
@@ -60,7 +60,7 @@ export const getChallengeById = createAsyncThunk(
 
 export const createChallenge = createAsyncThunk(
   'challenges/createChallenge',
-  async (challenge: ChallengeDto) => {
+  async (challenge: IChallengeDto) => {
     const categoryId = challenge.category?.id;
 
     if (challenge['category'] !== undefined) {

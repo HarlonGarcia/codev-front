@@ -10,8 +10,10 @@ import { AppDispatch } from '../../../store';
 import { getCategories } from '../../../store/features/categorySlice';
 import { createChallenge } from '../../../store/features/challengeSlice';
 import { useSelector } from '../../../store/useSelector';
-import { ChallengeDto } from '../../../types/Challenge';
-import { ChallengeStatus as status } from '../../../types/enums/ChallengeStatus';
+import { IChallengeDto } from '../../../types/Challenge';
+import {
+  IChallengeStatus as status,
+} from '../../../types/enums/ChallengeStatus';
 import * as S from './styles';
 
 const defaultInputOptions = {
@@ -63,7 +65,7 @@ export default function CreateChallenge() {
       return category.name.toLowerCase() === formData.category.toLowerCase();
     });
 
-    const payload: ChallengeDto = {
+    const payload: IChallengeDto = {
       title,
       description,
       category,
@@ -80,13 +82,14 @@ export default function CreateChallenge() {
   const getFilteredCategories = () => {
     return categories.filter(({ name }) => {
       const categoryName = name.toLowerCase();
-      return categoryName.includes(searchTerm.toLowerCase()) && name !== searchTerm;
+      return categoryName
+        .includes(searchTerm.toLowerCase()) && name !== searchTerm;
     });
   };
 
   useEffect(() => {
     dispatch(getCategories());
-  }, []);
+  }, [dispatch]);
 
   return (
     <S.Container>

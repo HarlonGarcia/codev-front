@@ -6,11 +6,11 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 import { useSelector } from '../../../../store/useSelector';
-import { Category } from '../../../../types/Category';
+import { ICategory } from '../../../../types/Category';
 import * as S from './styles';
 
 interface ChallengesGroupProps {
-  category: Category;
+  category: ICategory;
 }
 
 const statusIcons = {

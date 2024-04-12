@@ -1,18 +1,19 @@
-import { Category } from './Category';
-import { ChallengeStatus } from './enums/ChallengeStatus';
-import { Technology } from './Technology';
-import { User } from './User';
+import { ICategory } from './Category';
+import { IChallengeStatus } from './enums/ChallengeStatus';
+import { ITechnology } from './Technology';
+import { IUser } from './User';
 
-export interface Challenge {
+export interface IChallenge {
   id: string;
   title: string;
   description: string;
-  status: ChallengeStatus;
-  category: Category | undefined;
-  technologies: Technology[];
-  author: User;
+  status: IChallengeStatus;
+  category: ICategory | undefined;
+  technologies: ITechnology[];
+  author: IUser;
   createdAt: Date;
   updatedAt: Date;
 }
 
-export type ChallengeDto = Pick<Challenge, 'title' | 'description' | 'category' | 'status'>
+export type IChallengeDto =
+  Pick<IChallenge, 'title' | 'description' | 'category' | 'status'>

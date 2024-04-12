@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { api } from '../../api';
-import { Technology } from '../../types/Technology';
+import { ITechnology } from '../../types/Technology';
 import { getUrl } from '../utils';
 
 interface TechnologyState {
-  technologies: Technology[];
+  technologies: ITechnology[];
   isLoading: boolean;
   isError: boolean;
 }
