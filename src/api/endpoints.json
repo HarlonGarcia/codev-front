@@ -4,9 +4,8 @@
   "signup": "http://127.0.0.1:8080/users/signup",
   "users": "http://127.0.0.1:8080/users",
   "join_challenge": "http://127.0.0.1:8080/challenges/{challengeId}/join-challenge",
-
-  "challenges": "http://0.0.0.0:5001/challenges",
-  "challenge_by_id": "http://0.0.0.0:5001/challenges/{challengeId}",
-  "categories": "http://0.0.0.0:5001/categories",
-  "technologies": "http://0.0.0.0:5001/technologies"
+  "challenges": "http://127.0.0.1:8080/challenges",
+  "categories": "http://127.0.0.1:8080/categories",
+  "technologies": "http://127.0.0.1:8080/technologies",
+  "challenge_by_id": "http://127.0.0.1:8080/challenges/{challengeId}"
 }

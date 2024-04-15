@@ -23,6 +23,7 @@ interface SignInParams {
   },
   // eslint-disable-next-line no-unused-vars
   saveAuthData: (data: IAuthPayload) => void;
+  callback: () => void;
 }
 
 interface SignUpParams {
@@ -35,11 +36,12 @@ interface SignUpParams {
   },
   // eslint-disable-next-line no-unused-vars
   saveAuthData: (data: IAuthPayload) => void;
+  callback: () => void;
 }
 
 export const signIn = createAsyncThunk(
   'auth/signIn',
-  async ({ payload, saveAuthData }: SignInParams) => {
+  async ({ payload, saveAuthData, callback }: SignInParams) => {
     const { data, status } = await axios.post(getUrl('login'), payload);
 
     if (status === 200) {
@@ -50,6 +52,7 @@ export const signIn = createAsyncThunk(
         },
       });
 
+      callback();
       return data.token;
     }
 
@@ -59,7 +62,7 @@ export const signIn = createAsyncThunk(
 
 export const signUp = createAsyncThunk(
   'auth/signUp',
-  async ({ payload, saveAuthData }: SignUpParams) => {
+  async ({ payload, saveAuthData, callback }: SignUpParams) => {
     const { data, status } = await axios.post(getUrl('signup'), payload);
 
     if (status === 201) {
@@ -70,6 +73,7 @@ export const signUp = createAsyncThunk(
         },
       });
 
+      callback();
       return data.token;
     }
 

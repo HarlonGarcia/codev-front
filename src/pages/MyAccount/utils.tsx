@@ -2,14 +2,11 @@ import { Translation } from 'react-i18next';
 import { FaCode, FaUsers } from 'react-icons/fa6';
 import { MdEdit } from 'react-icons/md';
 
-import { ADMIN } from '../../utils/constants';
-
 export interface IUserOption {
   label: JSX.Element;
   icon: JSX.Element;
   redirectUrl?: string;
   action?: () => void;
-  isAuthorizationRequired?: (role: string) => boolean; // eslint-disable-line
 }
 
 export const options: IUserOption[] = [
@@ -29,7 +26,6 @@ export const options: IUserOption[] = [
       </Translation>
     ),
     icon: <MdEdit />,
-    isAuthorizationRequired: (role) => role.toLowerCase() === ADMIN,
   },
   {
     label: (

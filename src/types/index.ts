@@ -19,3 +19,5 @@ export interface IAuthPayload {
     createdAt: Date;
   },
 }
+
+export type IRole = 'ADMIN' | 'USER';
