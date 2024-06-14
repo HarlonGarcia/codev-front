@@ -8,9 +8,9 @@ import CmdDialog from './components/CmdDialog';
 import Navbar from './components/Navbar';
 import RequireAdmin from './pages/Auth/RequireAdmin';
 import PageNotFound from './pages/PageNotFound';
-import { AppDispatch } from './store';
-import { closeModal, openModal } from './store/slices/commander';
-import { useSelector } from './store/useSelector';
+import { AppDispatch } from './services';
+import { closeModal, openModal } from './services/slices/commander';
+import { useSelector } from './services/useSelector';
 import { extraShortcuts, goToShortcuts } from './utils';
 
 const Home = lazy(() => import('./pages/Home'));

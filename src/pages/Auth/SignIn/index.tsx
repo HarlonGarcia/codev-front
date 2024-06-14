@@ -9,8 +9,8 @@ import { toast } from 'react-toastify';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { Input } from '../../../components/shared/Input';
-import { AppDispatch } from '../../../store';
-import { signIn } from '../../../store/slices/auth';
+import { AppDispatch } from '../../../services';
+import { signIn } from '../../../services/slices/auth';
 import * as S from './styles';
 import { SignInSchema, signInSchema } from './validation';
 

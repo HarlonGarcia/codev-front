@@ -5,12 +5,12 @@ import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import Markdown from '../../../components/Markdown';
-import { AppDispatch } from '../../../store';
+import { AppDispatch } from '../../../services';
 import {
   getChallengeById,
   joinChallenge,
-} from '../../../store/slices/challenge';
-import { useSelector } from '../../../store/useSelector';
+} from '../../../services/slices/challenge';
+import { useSelector } from '../../../services/useSelector';
 import * as S from './styles';
 
 export default function ChallengeInformation() {
