@@ -2,7 +2,7 @@ import endpoints from '../api/endpoints.json';
 
 type Endpoint = typeof endpoints;
 
-const getUrl = (key: keyof Endpoint, identifiers = {}) => {
+const generateUrl = (key: keyof Endpoint, identifiers = {}) => {
   let url = endpoints[key];
 
   if (!url) {
@@ -21,4 +21,4 @@ const getUrl = (key: keyof Endpoint, identifiers = {}) => {
   return url;
 };
 
-export { getUrl };
+export { generateUrl };

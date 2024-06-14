@@ -6,7 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import { PersistGate } from 'redux-persist/integration/react';
 
 import Routes from './routes';
-import { persistor, store as reduxStore } from './store';
+import { persistor, store as reduxStore } from './services';
 import 'react-toastify/dist/ReactToastify.css';
 import { defaultToastConfig } from './utils/animations';
 import { AUTH_KEY } from './utils/constants';

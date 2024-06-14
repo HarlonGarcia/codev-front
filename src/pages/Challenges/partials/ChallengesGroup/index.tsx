@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { motion } from 'framer-motion';
 
-import { useSelector } from '../../../../store/useSelector';
+import { useSelector } from '../../../../services/useSelector';
 import { ICategory } from '../../../../types/Category';
 import { statusIcons } from '../../utils';
 import * as S from './styles';

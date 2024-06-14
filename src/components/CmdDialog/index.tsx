@@ -5,8 +5,8 @@ import { useDispatch } from 'react-redux';
 import { Command } from 'cmdk';
 
 import './styles.scss';
-import { toggleModal } from '../../store/slices/commander';
-import { useSelector } from '../../store/useSelector';
+import { toggleModal } from '../../services/slices/commander';
+import { useSelector } from '../../services/useSelector';
 import { goToShortcuts, extraShortcuts } from '../../utils';
 
 export default function CmdDialog() {

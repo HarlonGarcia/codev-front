@@ -6,11 +6,11 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 import Typer from '../../components/Typer';
-import { AppDispatch } from '../../store';
-import { getChallenges } from '../../store/slices/challenge';
-import { getTechnologies } from '../../store/slices/technology';
-import { getMe } from '../../store/slices/user';
-import { useSelector } from '../../store/useSelector';
+import { AppDispatch } from '../../services';
+import { getChallenges } from '../../services/slices/challenge';
+import { getTechnologies } from '../../services/slices/technology';
+import { getMe } from '../../services/slices/user';
+import { useSelector } from '../../services/useSelector';
 import { getCookie } from '../../utils';
 import { defaultTransition } from '../../utils/animations';
 import { AUTH_KEY } from '../../utils/constants';

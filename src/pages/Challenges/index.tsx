@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { AppDispatch } from '../../store';
-import { getCategories } from '../../store/slices/category';
-import { getChallenges } from '../../store/slices/challenge';
-import { useSelector } from '../../store/useSelector';
+import { AppDispatch } from '../../services';
+import { getCategories } from '../../services/slices/category';
+import { getChallenges } from '../../services/slices/challenge';
+import { useSelector } from '../../services/useSelector';
 import ChallengesGroup from './partials/ChallengesGroup';
 import * as S from './styles';
 

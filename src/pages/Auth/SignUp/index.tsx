@@ -8,8 +8,8 @@ import { useNavigate } from 'react-router-dom';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { Input } from '../../../components/shared/Input';
-import { AppDispatch } from '../../../store';
-import { signUp } from '../../../store/slices/auth';
+import { AppDispatch } from '../../../services';
+import { signUp } from '../../../services/slices/auth';
 import * as S from './styles';
 import { SignUpSchema, signUpSchema } from './validation';
 
