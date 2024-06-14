@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import useSignIn from 'react-auth-kit/hooks/useSignIn';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -11,19 +10,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '../../../components/shared/Input';
 import { AppDispatch } from '../../../store';
 import { signUp } from '../../../store/slices/auth';
-import { getMe } from '../../../store/slices/user';
-import { useSelector } from '../../../store/useSelector';
 import * as S from './styles';
 import { SignUpSchema, signUpSchema } from './validation';
 
 export default function SignUp() {
   const { t } = useTranslation();
-
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const authenticate = useSignIn();
-
-  const { token } = useSelector((state) => state.auth);
 
   const {
     formState: {
@@ -45,17 +39,9 @@ export default function SignUp() {
     dispatch(signUp({
       payload,
       saveAuthData: authenticate,
+      callback: () => navigate('/'),
     }));
   };
-
-  useEffect(() => {
-    if (!token) {
-      return;
-    }
-
-    dispatch(getMe());
-    navigate('/');
-  }, [ dispatch, navigate, token ]);
 
   return (
     <S.Container>
@@ -74,12 +60,14 @@ export default function SignUp() {
           placeholder={t('pages.signup.fields.name.placeholder')}
           type='text'
           error={formErrors.name?.message}
+          size='lg'
         />
         <Input
           {...register('email')}
           label={t('pages.signup.fields.email.label')}
           placeholder={t('pages.signup.fields.email.placeholder')}
           error={formErrors.email?.message}
+          size='lg'
         />
         <Input
           {...register('password')}
@@ -87,6 +75,7 @@ export default function SignUp() {
           placeholder={t('pages.signup.fields.password.placeholder')}
           type='password'
           error={formErrors.password?.message}
+          size='lg'
         />
         <Input
           {...register('passwordConfirmation')}
@@ -96,6 +85,7 @@ export default function SignUp() {
           }
           type='password'
           error={formErrors.passwordConfirmation?.message}
+          size='lg'
         />
         <Input
           {...register('githubUrl')}
@@ -103,6 +93,7 @@ export default function SignUp() {
           placeholder={t('pages.signup.fields.github.placeholder')}
           type='text'
           error={formErrors.githubUrl?.message}
+          size='lg'
         />
         <Input
           {...register('additionalUrl')}
@@ -110,6 +101,7 @@ export default function SignUp() {
           placeholder={t('pages.signup.fields.additional.placeholder')}
           type='text'
           error={formErrors.additionalUrl?.message}
+          size='lg'
         />
         <S.SubmitButton
           type='submit'

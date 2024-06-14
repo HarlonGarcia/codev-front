@@ -7,9 +7,12 @@ import {
 
 import * as S from './styles';
 
-type InputProps = InputHTMLAttributes<HTMLInputElement> & {
+type DefaultInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'size'>;
+type InputProps = DefaultInputProps & {
   label?: ReactNode;
   error?: ReactNode;
+  size?: 'sm' | 'md' | 'lg' | 'xl';
+  weight?: 'normal' | 'bold';
   onIconBeforeClick?: () => void;
   onIconAfterClick?: () => void;
   iconBefore?: ElementType;
@@ -22,11 +25,13 @@ type GetIconFnParams = {
   onClick?: () => void;
 };
 
-const Input = forwardRef<HTMLInputElement, InputProps>(
+export const Input = forwardRef<HTMLInputElement, InputProps>(
   function Input(props, ref)  {
     const {
       label,
       error,
+      size = 'sm',
+      weight = 'normal',
       onIconBeforeClick,
       onIconAfterClick,
       iconBefore: IconBefore,
@@ -50,7 +55,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     };
 
     return (
-      <S.Wrapper>
+      <S.Wrapper size={size} weight={weight}>
         {label && (
           <label htmlFor={rest.id}>
             {label}
@@ -81,5 +86,3 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     );
   },
 );
-
-export { Input };

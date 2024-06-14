@@ -2,7 +2,7 @@
   "translation": {
     "global.alerts.errors.default": "An unexpected error occurred",
     "global.alerts.errors.duplicated_key": "This resource already exists",
-    "global.alerts.errors.401": "Authentication required",
+    "global.alerts.errors.401": "Authentication error",
     "global.alerts.errors.404": "Resource not found, please contact the support team",
     "global.alerts.errors.500": "Internal server error",
 
@@ -36,10 +36,18 @@
     "pages.challenges.unknown_title": "Title not found",
     "pages.challenges.see_challenge": "See challenge",
 
+    "pages.create_challenge.fields.author.error": "Login is required. The session may have expired",
     "pages.create_challenge.fields.title.label": "Title",
+    "pages.create_challenge.fields.title.error": "The title is required",
     "pages.create_challenge.fields.description.label": "Description",
     "pages.create_challenge.fields.description.placeholder": "Tell us about this **challenge**?",
+    "pages.create_challenge.fields.description.error": "The description is required",
     "pages.create_challenge.fields.category.label": "Select a category",
+    "pages.create_challenge.fields.category.error": "A category must be selected",
+    "pages.create_challenge.fields.selected_technologies.label": "Technologies used in the challenge",
+    "pages.create_challenge.fields.technologies.label": "Select a technology",
+    "pages.create_challenge.fields.technologies.error.min": "At least one technology must be selected",
+    "pages.create_challenge.fields.technologies.error.limit": "You can only select 5 technologies",
     "pages.create_challenge.fields.status.label": "Select a status",
     "pages.create_challenge.submit.label": "Create challenge",
 

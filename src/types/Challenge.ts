@@ -17,5 +17,13 @@ export interface IChallenge {
 
 export type IChallengeDto = Pick<
   IChallenge,
-  'title' | 'description' | 'category' | 'status',
+  'title' | 'description' | 'category' | 'status'
 >
+
+export type ICreateChallengeDto =
+  Pick<IChallenge, 'title' | 'status' | 'description'> & {
+  imageUrl: string;
+  authorId: string;
+  categoryId: string;
+  technologies: string[];
+}

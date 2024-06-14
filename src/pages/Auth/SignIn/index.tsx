@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import useSignIn from 'react-auth-kit/hooks/useSignIn';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -12,8 +11,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '../../../components/shared/Input';
 import { AppDispatch } from '../../../store';
 import { signIn } from '../../../store/slices/auth';
-import { getMe } from '../../../store/slices/user';
-import { useSelector } from '../../../store/useSelector';
 import * as S from './styles';
 import { SignInSchema, signInSchema } from './validation';
 
@@ -25,8 +22,6 @@ export default function SignIn() {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const authenticate = useSignIn();
-
-  const { token } = useSelector((state) => state.auth);
 
   const {
     formState: {
@@ -47,17 +42,9 @@ export default function SignIn() {
     dispatch(signIn({
       payload,
       saveAuthData: authenticate,
+      callback: () => navigate('/'),
     }));
   };
-
-  useEffect(() => {
-    if (!token) {
-      return;
-    }
-
-    dispatch(getMe());
-    navigate('/');
-  }, [ dispatch, navigate, token ]);
 
   return (
     <S.Container>
@@ -74,12 +61,14 @@ export default function SignIn() {
           {...register('email')}
           label={t('pages.signin.fields.email.label')}
           error={formErrors.email?.message}
+          size='lg'
         />
         <Input
           {...register('password')}
           label={t('pages.signin.fields.password.label')}
           type='password'
           error={formErrors.password?.message}
+          size='lg'
         />
         <Link to={'/signup'}>{
           t('pages.signin.no_account')

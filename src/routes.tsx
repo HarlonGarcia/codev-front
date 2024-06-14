@@ -1,50 +1,35 @@
-import React, { Suspense, useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import RequireAuth from '@auth-kit/react-router/RequireAuth';
-import { jwtDecode as decode, JwtPayload } from 'jwt-decode';
 
 import CmdDialog from './components/CmdDialog';
 import Navbar from './components/Navbar';
+import RequireAdmin from './pages/Auth/RequireAdmin';
 import PageNotFound from './pages/PageNotFound';
 import { AppDispatch } from './store';
 import { closeModal, openModal } from './store/slices/commander';
 import { useSelector } from './store/useSelector';
 import { extraShortcuts, goToShortcuts } from './utils';
-import { ADMIN, USER } from './utils/constants';
 
-const Home = React.lazy(() => import('./pages/Home'));
-const MyAccount = React.lazy(() => import('./pages/MyAccount'));
-const SignIn = React.lazy(() => import('./pages/Auth/SignIn'));
-const SignUp = React.lazy(() => import('./pages/Auth/SignUp'));
-const Challenges = React.lazy(() => import('./pages/Challenges'));
-const ChallengeInformation = React.lazy(
-  () => import('./pages/Challenges/ChallengeInformation'),
-);
-const CreateChallenge = React.lazy(
-  () => import('./pages/Challenges/CreateChallenge'),
-);
+const Home = lazy(() => import('./pages/Home'));
+const MyAccount = lazy(() => import('./pages/MyAccount'));
+const SignIn = lazy(() => import('./pages/Auth/SignIn'));
+const SignUp = lazy(() => import('./pages/Auth/SignUp'));
+const Challenges = lazy(() => import('./pages/Challenges'));
+const ChallengeInformation =
+  lazy(() => import('./pages/Challenges/ChallengeInformation'));
+const CreateChallenge =
+  lazy(() => import('./pages/Challenges/CreateChallenge'));
 
-interface JwtPayloadWithGroups extends JwtPayload {
-  groups: string[];
-}
-
-const MIN_TOKEN_LENGHT = 10;
-const fallbackPath = '/signin';
+const props = {
+  fallbackPath: '/signin'
+};
 
 export default function AppRoutes() {
   const dispatch = useDispatch<AppDispatch>();
-
-  const { token } = useSelector((state) => state.auth);
   const { isModalOpened } = useSelector((state) => state.commander);
-
-  if (token && MIN_TOKEN_LENGHT < token.length) {
-    const { groups }: JwtPayloadWithGroups = decode(token);
-    const isAdmin = groups.find((group) => group.toLocaleLowerCase() === ADMIN);
-
-    localStorage.setItem('_role', isAdmin ? ADMIN : USER);
-  }
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -52,7 +37,6 @@ export default function AppRoutes() {
       const keyPressed = event.key?.toUpperCase();
 
       if (isSpecialKey && keyPressed === 'K') {
-        event.preventDefault();
         dispatch(openModal());
       }
 
@@ -82,38 +66,43 @@ export default function AppRoutes() {
           <Route path='/signin' element={<SignIn />} />
           <Route path='/signup' element={<SignUp />} />
           <Route
-            path='/challenges'
-            element={
-              <RequireAuth fallbackPath={fallbackPath}>
-                <Challenges />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path='/challenges/:id'
-            element={
-              <RequireAuth fallbackPath={fallbackPath}>
-                <ChallengeInformation />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path='/challenges/create'
-            element={
-              <RequireAuth fallbackPath={fallbackPath}>
-                <CreateChallenge />
-              </RequireAuth>
-            }
-          />
-          <Route
             path='/account'
             element={
-              <RequireAuth fallbackPath={fallbackPath}>
+              <RequireAuth {...props}>
                 <MyAccount />
               </RequireAuth>
             }
           />
+          <Route path='challenges'>
+            <Route
+              index
+              element={
+                <RequireAuth {...props}>
+                  <Challenges />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path=':id'
+              element={
+                <RequireAuth {...props}>
+                  <ChallengeInformation />
+                </RequireAuth>
+              }
+            />
+          </Route>
           <Route path='*' element={<PageNotFound />} />
+
+          <Route element={<RequireAdmin />}>
+            <Route
+              path='/challenges/create'
+              element={
+                <RequireAuth {...props}>
+                  <CreateChallenge />
+                </RequireAuth>
+              }
+            />
+          </Route>
         </Routes>
       </Suspense>
     </BrowserRouter>

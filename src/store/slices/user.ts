@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { api } from '../../api';
 import { IUser } from '../../types/User';
@@ -30,6 +30,8 @@ export const getMe = createAsyncThunk('user/getMe', async () => {
   return data;
 });
 
+export const clearCurrentUser = createAction('user/clearCurrentUser');
+
 export const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -57,6 +59,10 @@ export const userSlice = createSlice({
     addCase(getMe.rejected, (state) => {
       state.isLoading = false;
       state.isError = true;
+    });
+
+    addCase(clearCurrentUser, function clear(state) {
+      state.currentUser = null;
     });
   },
 });

@@ -1,9 +1,13 @@
 import { styled } from '../../../styles';
+import { inputVariants } from './variants';
+
 
 const Wrapper = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   gap: '0.5rem',
+
+  variants: inputVariants.wrapper,
 
   '& > label': {
     fontSize: '0.925rem',
@@ -27,23 +31,7 @@ const Wrapper = styled('div', {
 
 const InputWrapper = styled('div', {
   position: 'relative',
-
-  variants: {
-    hasIconBefore: {
-      true: {
-        '& > input': {
-          paddingLeft: '2.5rem',
-        },
-      },
-    },
-    hasIconAfter: {
-      true: {
-        '& > input': {
-          paddingRight: '2.5rem',
-        },
-      },
-    },
-  },
+  variants: inputVariants.icons,
 
   '#before, #after': {
     position: 'absolute',
@@ -92,6 +80,14 @@ const InputWrapper = styled('div', {
       '-webkit-background-clip': 'text',
       transition: 'background-color 5000s ease-in-out 0s',
       boxShadow: 'inset 0 0 20px 20px #120F26',
+    },
+  },
+
+  '@xl': {
+    '& > input': {
+      padding: '0.8125rem',
+      paddingLeft: '1.25rem',
+      paddingRight: '1.25rem',
     },
   },
 });

@@ -9,69 +9,53 @@ const Container = styled(WrapperWithPadding, {
 const Form = styled('form', {
   display: 'flex',
   flexDirection: 'column',
+  gap: '2rem',
 });
 
-const InputGroup = styled('div', {
+const SelectedTechnologies = styled('div', {
   display: 'flex',
   flexDirection: 'column',
-  gap: '0.75rem',
+  gap: '1rem',
 
-  marginBottom: '1.5rem',
-
-  '& > label': {
-    color: '$title',
-    fontSize: '1.125rem',
+  '& > strong': {
+    color: '$highlight',
+    fontSize: '1.25rem',
     fontWeight: '600',
   },
+});
 
-  '& > input, & > textarea': {
-    padding: '0.5rem',
+const Technology = styled('ul', {
+  display: 'flex',
+  flexWrap: 'wrap',
+  gap: '0.5rem',
 
-    color: '$text',
+  '& > li': {
+    display: 'flex',
+    alignItems: 'center',
+
+    gap: '0.625rem',
+    padding: '0.625rem 0.75rem 0.625rem 1rem',
     backgroundColor: '$secondary',
-    border: 'none',
     borderRadius: '0.25rem',
-    fontSize: '1rem',
-    fontFamily: '$code',
 
-    outline: 'none',
-    resize: 'none',
-
-    '&::placeholder': {
-      color: '$text',
-      filter: 'brightness(0.5)',
+    '& > span': {
+      fontFamily: '$code',
+      fontSize: '1rem',
     },
-  },
 
-  '& > input': {
-    maxWidth: '48rem',
-  },
+    '& > button': {
+      display: 'flex',
+      alignItems: 'center',
+      color: '$error',
 
-  '& > textarea': {
-    minHeight: '16rem',
-  },
+      '& > *': {
+        width: '1rem',
+        height: '1rem',
+      },
 
-  '@xs': {
-    gap: '1rem',
-    marginBottom: '2.25rem',
-
-    '& > input, & > textarea': {
-      padding: '0.75rem',
-    },
-  },
-
-  '@md': {
-    marginBottom: '3rem',
-
-    '& > input, & > textarea': {
-      padding: '1rem',
-      fontSize: '1.25rem',
-    },
-  },
-
-  '@lg': {
-    '& > label': {
-      fontSize: '1.5rem',
+      '&:hover': {
+        filter: 'brightness(0.8)',
+      },
     },
   },
 });
@@ -79,162 +63,21 @@ const InputGroup = styled('div', {
 const Group = styled('div', {
   display: 'grid',
   flexWrap: 'wrap',
+  gridTemplateColumns: '1fr',
+  
   gap: '3rem',
-  gridTemplateColumns: 'repeat(2, 1fr)',
-
-  marginBottom: '2rem',
-
-  '& > div': {
-    position: 'relative',
-
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '0.75rem',
-
-    '& > label': {
-      color: '$title',
-      fontSize: '1.125rem',
-      fontWeight: '600',
-    },
-
-    '& > input': {
-      width: '100%',
-      padding: '0.5rem',
-
-      color: '$text',
-      backgroundColor: '$secondary',
-      border: 'none',
-      borderRadius: '0.25rem',
-
-      fontSize: '1rem',
-      fontFamily: '$code',
-
-      outline: 'none',
-      resize: 'none',
-    },
-
-    '& > ul': {
-      position: 'absolute !important',
-      width: '100%',
-      height: 'fit-content',
-      top: '6rem !important',
-
-      color: '$secondary',
-      background: '$text',
-      borderRadius: '0.25rem',
-
-      fontSize: '1rem',
-      fontWeight: '600',
-
-      listStyle: 'none',
-      overflow: 'hidden',
-
-      '& > li': {
-        padding: '0.5rem',
-        transition: 'all 0.3s ease-in-out',
-        cursor: 'pointer',
-
-        '&:hover': {
-          backgroundColor: '$title',
-        },
-      },
-    },
-
-    '.toggle': {
-      width: 'fit-content',
-      height: '100%',
-
-      display: 'flex',
-      alignItems: 'center',
-      gap: '0.5rem',
-
-      '&:hover > *': {
-        filter: 'brightness(0.9)',
-      },
-
-      '& > *': {
-        width: '1.25rem',
-        height: '1.25rem',
-        color: '$highlight',
-
-        transition: 'all 0.3s ease-in-out',
-      },
-
-      '& > small': {
-        width: 'fit-content',
-        height: 'fit-content',
-        fontSize: '1rem',
-        fontWeight: '600',
-      },
-
-      '&[data-state="on"]': {
-        '& > *': {
-          color: '$alert',
-        },
-
-        '& > :first-child': {
-          transform: 'rotate(180deg)',
-        },
-      },
-    }
-  },
-
+  marginBottom: '1.5rem',
+  
   '@xs': {
-    marginBottom: '2.5rem',
-
-    '& > div ': {
-      gap: '1rem',
-
-      '& > input, & > ul > li': {
-        padding: '0.75rem',
-      },
-
-      '& > ul': {
-        bottom: '-3.25rem',
-      },
-    },
+    gridTemplateColumns: 'repeat(2, 1fr)',
   },
-
   '@md': {
     gap: '1.5rem',
-
-    '& > div': {
-      '& > input & > ul > li': {
-        padding: '1rem',
-      },
-
-      '& > ul': {
-        bottom: '-3.5rem',
-      },
-
-      '.toggle': {
-        '& > *': {
-          width: '1.5rem',
-          height: '1.5rem',
-        },
-
-        '& > small': {
-          height: 'fit-content',
-          fontSize: '1.25rem',
-        },
-      }
-    },
   },
-
   '@lg': {
     display: 'flex',
     flexWrap: 'wrap',
     gap: '2.5rem',
-
-    marginBottom: '3.5rem',
-
-    '& > div': {
-      width: '18rem',
-
-      '& > label': {
-        fontSize: '1.5rem',
-      },
-    }
   },
 });
 
@@ -264,4 +107,11 @@ const Submit = styled('input', {
   }
 });
 
-export { Container, Form, InputGroup, Group, Submit };
+export {
+  Container,
+  Form,
+  SelectedTechnologies,
+  Technology,
+  Group,
+  Submit,
+};

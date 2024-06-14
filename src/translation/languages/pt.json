@@ -2,7 +2,7 @@
   "translation": {
     "global.alerts.errors.default": "Ocorreu um erro inesperado",
     "global.alerts.errors.duplicated_key": "Esse recurso já existe",
-    "global.alerts.errors.401": "Necessário realizar login",
+    "global.alerts.errors.401": "Erro de autenticação",
     "global.alerts.errors.404": "Recurso não encontrado, contacte o suporte",
     "global.alerts.errors.500": "Ocorreu um erro interno no servidor",
 
@@ -36,10 +36,18 @@
     "pages.challenges.unknown_title": "Título não informado",
     "pages.challenges.see_challenge": "Ver desafio",
 
+    "pages.create_challenge.fields.author.error": "É necessário estar logado. Talvez sua sessão tenha expirado",
     "pages.create_challenge.fields.title.label": "Título",
+    "pages.create_challenge.fields.title.error": "O título é obrigatório",
     "pages.create_challenge.fields.description.label": "Descrição",
     "pages.create_challenge.fields.description.placeholder": "Como funciona o seu *desafio*?",
+    "pages.create_challenge.fields.description.error": "A descrição é obrigatória",
     "pages.create_challenge.fields.category.label": "Escolha uma categoria",
+    "pages.create_challenge.fields.category.error": "Categoria é obrigatória",
+    "pages.create_challenge.fields.selected_technologies.label": "Tecnologias usadas no desafio",
+    "pages.create_challenge.fields.technologies.label": "Escolha as tecnologias",
+    "pages.create_challenge.fields.technologies.error.min": "Pelo menos uma tecnologia é obrigatória",
+    "pages.create_challenge.fields.technologies.error.limit": "Só é possível escolher até 5 tecnologias",
     "pages.create_challenge.fields.status.label": "Escolha o status",
     "pages.create_challenge.submit.label": "Criar desafio",
 

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import { IChallenge, IChallengeDto } from '../../types/Challenge';
+import { IChallenge, ICreateChallengeDto } from '../../types/Challenge';
 import { getUrl } from '../utils';
 import { api } from '../../api';
 
@@ -56,7 +56,6 @@ export const joinChallenge = createAsyncThunk(
   'challenge/joinChallenge',
   async (challengeId?: string) => {
     const userId = store.getState().users.currentUser?.id;
-    console.log('joinChallenge', challengeId, userId);
 
     if (!challengeId || !userId) {
       throw new Error('The user or challenge is not valid.');
@@ -80,18 +79,8 @@ export const joinChallenge = createAsyncThunk(
 
 export const createChallenge = createAsyncThunk(
   'challenge/createChallenge',
-  async (challenge: IChallengeDto) => {
-    const categoryId = challenge.category?.id;
-
-    if (challenge['category'] !== undefined) {
-      delete challenge['category'];
-    }
-
-    const { data } = await api.post(getUrl('challenges'), {
-      ...challenge,
-      authorId: '1',
-      categoryId,
-    });
+  async (challenge: ICreateChallengeDto) => {
+    const { data } = await api.post(getUrl('challenges'), challenge);
 
     return data ?? {};
   },
