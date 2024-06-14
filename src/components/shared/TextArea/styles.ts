@@ -1,4 +1,4 @@
-import { styled } from '../../../styles';
+import { styled } from '@styles';
 import { textAreaVariants } from './variants';
 
 const Wrapper = styled('div', {

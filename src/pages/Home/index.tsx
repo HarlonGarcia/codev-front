@@ -1,66 +1,36 @@
-import { useEffect, useMemo } from 'react';
+import { useContext, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { motion } from 'framer-motion';
+import { AuthContext } from '@contexts/AuthContext';
+import { useChallenges } from '@services/challenge';
+import { useTechnologies } from '@services/technology';
 
-import Typer from '../../components/Typer';
-import { AppDispatch } from '../../store';
-import { getChallenges } from '../../store/slices/challenge';
-import { getTechnologies } from '../../store/slices/technology';
-import { getMe } from '../../store/slices/user';
-import { useSelector } from '../../store/useSelector';
-import { getCookie } from '../../utils';
-import { defaultTransition } from '../../utils/animations';
-import { AUTH_KEY } from '../../utils/constants';
+import { WelcomeSection } from './partials/Welcome';
 import * as S from './styles';
-import { possibilities } from './utils';
 import {
   containerVariants,
   itemVariants,
+  possibilities,
   sectionAnimationProps,
-} from './utils/animation';
-import { technologiesIcons as techIcons } from './utils/icons';
-
-const WelcomeSection = () => {
-  const { t } = useTranslation();
-
-  return (
-    <S.Hero>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={defaultTransition}
-      >
-        <S.Title font='code'>
-          {'=> '}
-          <Typer />
-        </S.Title>
-        <S.Instruction>
-          {t('pages.home.instructions.press') + ' '}
-          <span><span>⌘</span></span>
-          +
-          <span><span>K</span></span>
-          {' ' + t('pages.home.instructions.action')}
-        </S.Instruction>
-      </motion.div>
-    </S.Hero>
-  );
-};
+  technologiesIcons as techIcons,
+} from './utils';
 
 export default function Home() {
   const { t } = useTranslation();
-  const token = getCookie(AUTH_KEY);
+  const { isAuthenticated } = useContext(AuthContext);
+    
+  const { data:  technologies = [] } = useTechnologies({
+    enabled: isAuthenticated,
+  });
 
-  const dispatch = useDispatch<AppDispatch>();
-
-  const { items: technologies } = useSelector((state) => state.technologies);
-  const { items: challenges } = useSelector((state) => state.challenges);
-  const { currentUser } = useSelector((state) => state.users);
+  const { data: challenges = [] } = useChallenges({
+    page: 0,
+    size: 4,
+  });
 
   const hydratedTechnologies = useMemo(() => {
-    const technologiesWithIcons = technologies.map((technology) => {
+    const items = technologies?.map((technology) => {
       const slug = Object.keys(techIcons).find(
         (key) => technology.slug.toLowerCase().includes(key)
       );
@@ -71,25 +41,8 @@ export default function Home() {
       };
     });
 
-    return technologiesWithIcons.slice(0, 12);
+    return items.slice(0, 12);
   }, [technologies]);
-
-  useEffect(() => {
-    dispatch(getTechnologies());
-    dispatch(getChallenges({
-      orderBy: 'latest',
-      page: 0,
-      size: 4,
-    }));
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (!token || !!currentUser) {
-      return;
-    }
-
-    dispatch(getMe());
-  }, [ dispatch, token, currentUser ]);
 
   return (
     <S.Container>

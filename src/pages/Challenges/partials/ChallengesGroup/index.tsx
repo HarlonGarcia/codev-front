@@ -1,13 +1,13 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { GrStatusGoodSmall } from 'react-icons/gr';
 import { useNavigate } from 'react-router-dom';
 
+import { useChallenges } from '@services/challenge';
+import { ICategory } from '@types/category';
+import { statusIcons } from '@utils';
 import { motion } from 'framer-motion';
+import { GrStatusGoodSmall } from 'react-icons/gr';
 
-import { useSelector } from '../../../../store/useSelector';
-import { ICategory } from '../../../../types/Category';
-import { statusIcons } from '../../utils';
 import * as S from './styles';
 
 interface ChallengesGroupProps {
@@ -21,7 +21,7 @@ export default function ChallengesGroup({ category }: ChallengesGroupProps) {
   const carouselRef = useRef(null);
   const [ carouselWidth, setCarouselWidth ] = useState(0);
 
-  const { items: challenges } = useSelector((state) => state.challenges);
+  const { data: challenges = [] } = useChallenges();
 
   const filteredChallenges = useMemo(() => {
     return challenges.filter(

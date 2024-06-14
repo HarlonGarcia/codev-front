@@ -1,24 +1,20 @@
-import { ChangeEvent, useEffect, useMemo, useState } from 'react';
+import { ChangeEvent, useContext, useMemo, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { MdOutlineClose } from 'react-icons/md';
-import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 
+import { Input } from '@components/shared/Input';
+import { Select } from '@components/shared/Select';
+import { TextArea } from '@components/shared/TextArea';
+import { AuthContext } from '@contexts/AuthContext';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useCategories } from '@services/category';
+import { useCreateChallenge } from '@services/challenge';
+import { useTechnologies } from '@services/technology';
+import { useMe } from '@services/user';
 import { t } from 'i18next';
+import { MdOutlineClose } from 'react-icons/md';
 
-import { Input } from '../../../components/shared/Input';
-import { Select } from '../../../components/shared/Select';
-import { TextArea } from '../../../components/shared/TextArea';
-import { usePermissions } from '../../../hooks/usePermissions';
-import { AppDispatch } from '../../../store';
-import { getCategories } from '../../../store/slices/category';
-import { createChallenge } from '../../../store/slices/challenge';
-import { getTechnologies } from '../../../store/slices/technology';
-import { useSelector } from '../../../store/useSelector';
-import { IChallengeStatus } from '../../../types/enums/ChallengeStatus';
-import { ITechnology } from '../../../types/Technology';
 import { statuses } from '../utils';
 import * as S from './styles';
 import { CreateChallengeSchema, createChallengeSchema } from './validation';
@@ -28,11 +24,12 @@ interface ITechnologiesState {
   error: string;
 }
 
-const TechnologiesList = (
-  // eslint-disable-next-line no-unused-vars
-  props: { technologies: ITechnology[], onRemove: (id: string) => void }) => {
-  const { technologies, onRemove } = props;
+interface TechnologyListPros {
+  technologies: ITechnology[];
+  onRemove: (id: string) => void;
+}
 
+const TechnologiesList = ({ technologies, onRemove }: TechnologyListPros) => {
   if (0 < technologies.length) {
     return (
       <S.SelectedTechnologies>
@@ -57,16 +54,14 @@ const TechnologiesList = (
 
 export default function CreateChallenge() {
   const { t } = useTranslation();
-  const { logout } = usePermissions();
-  const { currentUser: user } = useSelector((state) => state.users);
-  const dispatch = useDispatch<AppDispatch>();
-  const [
-    technologiesState,
-    setTechnologiesState,
-  ] = useState<ITechnologiesState>({ items: [], error: '' });
+  const { logout } = useContext(AuthContext);
+  const [selectedTechnologies, setSelectedTechnologies] = useState<ITechnologiesState>({ items: [], error: '' });
+  
+  const { data: currentUser = {} } = useMe();
+  const { data: categories = [] } = useCategories();
+  const { data: technologies = [] } = useTechnologies();
 
-  const { items: categories } = useSelector((state) => state.categories);
-  const { items: technologies } = useSelector((state) => state.technologies);
+  const { mutate: createChallenge } = useCreateChallenge();
 
   const {
     register,
@@ -77,21 +72,21 @@ export default function CreateChallenge() {
   });
 
   const onSubmit: SubmitHandler<CreateChallengeSchema> = (formValues) => {
-    const { items: selectedTechnologies, error } = technologiesState;
+    const { items, error } = selectedTechnologies;
 
-    if (Boolean(error)) {
+    if (error) {
       return;
     }
 
-    if (0 >= selectedTechnologies.length) {
-      setTechnologiesState((prevState) => ({
+    if (0 >= items.length) {
+      setSelectedTechnologies((prevState) => ({
         ...prevState,
         error: t('pages.create_challenge.fields.technologies.error.min'),
       }));
       return;
     }
 
-    if (!user) {
+    if (!currentUser) {
       toast(t('pages.create_challenge.fields.author.error'));
       logout();
       return;
@@ -100,16 +95,16 @@ export default function CreateChallenge() {
     const newChallenge = {
       ...formValues,
       imageUrl: 'test',
-      technologies: selectedTechnologies.map(({ id }) => id),
-      authorId: user.id,
+      technologies: items.map(({ id }) => id),
+      authorId: currentUser.id,
       status: formValues.status as IChallengeStatus,
     };
 
-    dispatch(createChallenge(newChallenge));
+    createChallenge(newChallenge);
   };
 
   const addTechnology = (event: ChangeEvent<HTMLSelectElement>) => {
-    if (5 <= technologiesState.items.length) {
+    if (5 <= selectedTechnologies.items.length) {
       toast(t('pages.create_challenge.fields.technologies.error.limit'));
       return;
     }
@@ -121,14 +116,14 @@ export default function CreateChallenge() {
       return;
     }
 
-    setTechnologiesState((prevState) => ({
+    setSelectedTechnologies((prevState) => ({
       error: '',
       items: [ ...prevState.items, newTechnology ],
     }));
   };
 
   const removeChallenge = (id: string) => {
-    setTechnologiesState((prevState) => ({
+    setSelectedTechnologies((prevState) => ({
       ...prevState,
       items: prevState.items.filter((tech) => tech.id !== id),
     }));
@@ -143,17 +138,12 @@ export default function CreateChallenge() {
   }, [categories]);
 
   const hydratedTechnologies = useMemo(() => {
-    return technologies.map((technology) => ({
-      key: technology.id,
-      label: technology.name,
-      value: technology.id,
+    return technologies.map(({ id, name }) => ({
+      key: id,
+      label: name,
+      value: id,
     }));
   }, [technologies]);
-
-  useEffect(() => {
-    dispatch(getCategories());
-    dispatch(getTechnologies());
-  }, [dispatch]);
 
   return (
     <S.Container>
@@ -176,7 +166,7 @@ export default function CreateChallenge() {
           weight={'bold'}
         />
         <TechnologiesList
-          technologies={technologiesState.items}
+          technologies={selectedTechnologies.items}
           onRemove={removeChallenge}
         />
         <S.Group>
@@ -193,7 +183,7 @@ export default function CreateChallenge() {
             name='technologies'
             onChange={addTechnology}
             label={t('pages.create_challenge.fields.technologies.label')}
-            error={technologiesState.error}
+            error={selectedTechnologies.error}
             options={hydratedTechnologies}
             size={'xl'}
             weight={'bold'}

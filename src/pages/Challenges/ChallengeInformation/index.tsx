@@ -1,40 +1,25 @@
-import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { PiCodeDuotone } from 'react-icons/pi';
-import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import Markdown from '../../../components/Markdown';
-import { AppDispatch } from '../../../store';
-import {
-  getChallengeById,
-  joinChallenge,
-} from '../../../store/slices/challenge';
-import { useSelector } from '../../../store/useSelector';
+import Markdown from '@components/Markdown';
+import { useChallenge, useJoinChallenge } from '@services/challenge';
+import { PiCodeDuotone } from 'react-icons/pi';
+
 import * as S from './styles';
 
 export default function ChallengeInformation() {
-  const { id } = useParams();
+  const { challengeId } = useParams();
   const { t } = useTranslation();
 
-  const dispatch = useDispatch<AppDispatch>();
+  const { data: currentChallenge } = useChallenge(challengeId);
+  const { mutate: joinChallenge } = useJoinChallenge();
 
-  const { currentChallenge } = useSelector((state) => state.challenges);
   const {
-    id: challengeId,
     title = t('pages.challenge_information.unknown_title'),
     description = t('pages.challenge_information.unknown_description'),
     author,
     technologies = [],
   } = currentChallenge || {};
-
-  useEffect(() => {
-    if (!id) {
-      return;
-    }
-
-    dispatch(getChallengeById(id));
-  }, [ dispatch, id ]);
 
   if (!currentChallenge) return;
   return (
@@ -59,7 +44,7 @@ export default function ChallengeInformation() {
             ))}
           </S.Technologies>
         </S.Info>
-        <S.Button onClick={() => dispatch(joinChallenge(challengeId))}>
+        <S.Button onClick={() => joinChallenge(currentChallenge.id)}>
           <PiCodeDuotone />
           <strong>{t('pages.challenge_information.submit.label')}</strong>
         </S.Button>

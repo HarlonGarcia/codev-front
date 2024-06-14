@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 
-import { styled } from '../../../styles';
-import { WrapperDefault } from '../../../styles/wrapper';
+import { styled } from '@styles';
+import { WrapperDefault } from '@styles/wrapper';
 
 const Container = styled(WrapperDefault, {
   display: 'flex',

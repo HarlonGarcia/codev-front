@@ -1,0 +1,36 @@
+export * from './category';
+export * from './challenge';
+export * from './technology';
+
+export type RequiredRouterProps = {
+  redirectUrl?: string
+}
+
+export type CustomQueryOptions<T> = Partial<UseQueryOptions<T>>;
+export type CustomMutationOptions<T> = MutateOptions<T, Error, T, unknown>;
+
+export type IRole = 'ADMIN' | 'USER';
+
+export interface IShortcuts {
+  [key: string]: {
+    icon: JSX.Element;
+    title: JSX.Element;
+    keys: string[];
+    action: () => void;
+  };
+}
+
+export interface IUser {
+  id: string;
+  name: string;
+  email: string;
+  githubUrl: string;
+  additionalUrl?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+export interface ILoginPayload {
+  email: string;
+  password: string;
+}

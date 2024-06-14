@@ -1,7 +1,8 @@
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+
 import { FaGithub } from 'react-icons/fa';
 import { ImLink } from 'react-icons/im';
-import { useNavigate } from 'react-router-dom';
 
 import * as S from './styles';
 import { IUserOption, options } from './utils';
@@ -22,8 +23,13 @@ export default function MyAccount() {
   const navigate = useNavigate();
 
   const handleActions = ({ action, redirectUrl }: IUserOption) => {
-    action && action();
-    redirectUrl && navigate(redirectUrl);
+    if (action) {
+      action();
+    }
+
+    if (redirectUrl) {
+      navigate(redirectUrl);
+    }
   };
 
   return (

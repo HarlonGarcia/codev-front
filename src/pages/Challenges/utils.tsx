@@ -1,6 +1,6 @@
 import { Translation } from 'react-i18next';
 
-import { IChallengeStatus } from '../../types/enums/ChallengeStatus';
+import { IChallengeStatus } from '@types/enums/ChallengeStatus';
 
 export const statuses = [
   {
