@@ -10,7 +10,7 @@ const colors = {
   highlight: '#50fa7b',
   alert: '#DBF227',
   error: '#ff5555',
-  // eslint-disable-next-line max-len
+   
   glass: 'linear-gradient(to left bottom, rgba(5, 2, 8, 0.3), rgba(10, 0, 10, 0.3), rgba(5, 2, 8, 0.3))',
   shadow: 'rgba(5, 2, 25, 0.4)',
 };

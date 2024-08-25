@@ -1,7 +1,0 @@
-.eslintrc.cjs
-vite.config.ts
-
-mock
-src/components/Markdown
-src/components/Typer.tsx
-src/**/styles.ts

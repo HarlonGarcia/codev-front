@@ -1,16 +1,14 @@
-import useSignIn from 'react-auth-kit/hooks/useSignIn';
+import { useContext } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { FaArrowRightLong } from 'react-icons/fa6';
-import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
+import { Input } from '@components/shared/Input';
+import { AuthContext } from '@contexts/AuthContext';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { FaArrowRightLong } from 'react-icons/fa6';
 
-import { Input } from '../../../components/shared/Input';
-import { AppDispatch } from '../../../store';
-import { signIn } from '../../../store/slices/auth';
 import * as S from './styles';
 import { SignInSchema, signInSchema } from './validation';
 
@@ -18,10 +16,9 @@ const PASSWORD_MIN_LENGTH = 8;
 
 export default function SignIn() {
   const { t } = useTranslation();
+  const { login } = useContext(AuthContext);
 
   const navigate = useNavigate();
-  const dispatch = useDispatch<AppDispatch>();
-  const authenticate = useSignIn();
 
   const {
     formState: {
@@ -33,17 +30,15 @@ export default function SignIn() {
     resolver: zodResolver(signInSchema),
   });
 
-  const onSubmit: SubmitHandler<SignInSchema> = (payload) => {
-    if (payload.password.length < PASSWORD_MIN_LENGTH) {
+  const onSubmit: SubmitHandler<SignInSchema> = (data) => {
+    if (data.password.length < PASSWORD_MIN_LENGTH) {
       toast.error(t('pages.signin.alerts.invalid_credentials'));
       return;
     }
 
-    dispatch(signIn({
-      payload,
-      saveAuthData: authenticate,
-      callback: () => navigate('/'),
-    }));
+    login(data, {
+      onSuccess: () => navigate('/'),
+    })
   };
 
   return (

@@ -1,23 +1,20 @@
-import useSignIn from 'react-auth-kit/hooks/useSignIn';
+import { useContext } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { FaArrowRightLong } from 'react-icons/fa6';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
+import { Input } from '@components/shared/Input';
+import { AuthContext } from '@contexts/AuthContext';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { FaArrowRightLong } from 'react-icons/fa6';
 
-import { Input } from '../../../components/shared/Input';
-import { AppDispatch } from '../../../store';
-import { signUp } from '../../../store/slices/auth';
 import * as S from './styles';
 import { SignUpSchema, signUpSchema } from './validation';
 
 export default function SignUp() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const dispatch = useDispatch<AppDispatch>();
-  const authenticate = useSignIn();
+  const { signUp } = useContext(AuthContext);
 
   const {
     formState: {
@@ -30,17 +27,16 @@ export default function SignUp() {
   });
 
   const onSubmit: SubmitHandler<SignUpSchema> = (formValues) => {
-    const payload = {
+    const data = {
       ...formValues,
+      id: 'teste',
       additionalUrl: formValues.additionalUrl || undefined,
       passwordConfirmation: undefined,
     };
 
-    dispatch(signUp({
-      payload,
-      saveAuthData: authenticate,
-      callback: () => navigate('/'),
-    }));
+    signUp(data, {
+      onSuccess: () => navigate('/'),
+    })
   };
 
   return (

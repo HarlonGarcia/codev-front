@@ -3,12 +3,10 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 import { t } from 'i18next';
 
-import { store } from '../store';
-
 export const api = axios.create();
 
 api.interceptors.request.use((request) => {
-  const token = store.getState().auth.token;
+  const token = '';
 
   if (token) {
     request.headers.Authorization = `Bearer ${token}`;
@@ -37,4 +35,5 @@ axios.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  });
+  },
+);

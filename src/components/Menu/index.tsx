@@ -1,10 +1,10 @@
 import { useTranslation } from 'react-i18next';
+
+import * as Popover from '@radix-ui/react-popover';
 import { AiFillHome } from 'react-icons/ai';
 import { FaCodeBranch } from 'react-icons/fa';
 import { FiLogIn } from 'react-icons/fi';
 import { MdRoute } from 'react-icons/md';
-
-import * as Popover from '@radix-ui/react-popover';
 
 import * as S from './styles';
 

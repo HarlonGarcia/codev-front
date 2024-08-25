@@ -1,5 +1,5 @@
-import { styled } from '../../styles';
-import { WrapperWithPadding } from '../../styles/wrapper';
+import { styled } from '@styles';
+import { WrapperWithPadding } from '@styles/wrapper';
 
 const Container = styled(WrapperWithPadding, {
   '& > div': {

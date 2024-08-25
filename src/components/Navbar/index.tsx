@@ -1,16 +1,18 @@
+import { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
+
+import Menu from '@components/Menu';
+import { AuthContext } from '@contexts/AuthContext';
 import { AiFillHome } from 'react-icons/ai';
 import { FaCodeBranch } from 'react-icons/fa';
 import { LuLogIn, LuLogOut } from 'react-icons/lu';
-import { Link } from 'react-router-dom';
 
-import { usePermissions } from '../../hooks/usePermissions';
-import Menu from '../Menu';
 import * as S from './styles';
 
 export default function Navbar() {
   const { t } = useTranslation();
-  const { logout, isAuthenticated } = usePermissions();
+  const { logout, isAuthenticated } = useContext(AuthContext);
 
   return (
     <S.Container>

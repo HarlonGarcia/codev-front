@@ -1,4 +1,4 @@
-import { styled } from '../../../styles';
+import { styled } from '@styles';
 import { selectVariants } from './variants';
 
 const Wrapper = styled('div', {
