@@ -1,5 +1,5 @@
-import { styled } from '@styles';
-import { WrapperWithPadding } from '@styles/wrapper';
+import { styled } from 'styles';
+import { WrapperWithPadding } from 'styles/wrapper';
 
 const Container = styled(WrapperWithPadding, {
   '& > div': {
@@ -46,7 +46,9 @@ const AccountInfo = styled('div', {
   alignItems: 'center',
 
   '& > h2': {
-    fontSize: '1.25rem',
+    color: '$highlight',
+    fontWeight: '600',
+    fontSize: '1.75rem',
     marginBottom: '0.5rem',
   },
 
@@ -58,10 +60,10 @@ const AccountInfo = styled('div', {
       padding: '0.25rem 0.5rem',
       'text-transform': 'uppercase',
 
-      fontSize: '0.625rem',
+      fontSize: '0.75rem',
       fontWeight: '600',
-      color: '$highlight',
-      backgroundColor: '$primary',
+      color: '$coolgrey',
+      backgroundColor: '$secondary',
       borderRadius: '0.25rem',
     },
   },
@@ -76,14 +78,15 @@ const AccountContent = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   gap: '1.25rem',
-  marginBottom: '1.75rem',
+  marginBottom: '3rem',
 });
 
 const Option = styled('div', {
   display: 'flex',
   alignItems: 'center',
-  gap: '0.75rem',
+  gap: '1rem',
 
+  fontSize: '1.25rem',
   borderRadius: '0.25rem',
   cursor: 'pointer',
 
@@ -92,15 +95,10 @@ const Option = styled('div', {
   '&:hover': {
     color: '$title',
   },
-
-  '& h3': {
-    fontSize: '0.875rem',
-    fontWeight: '500',
-  },
 });
 
 const Divider = styled('div', {
-  margin: '0rem 0',
+  margin: '1rem 0',
   borderTop: '2px solid $secondary',
 });
 
@@ -109,25 +107,37 @@ const Contact = styled('div', {
   alignItems: 'center',
   gap: '0.75rem',
   color: '$text',
+
+  fontSize: '1.25rem',
 });
 
 const AccountFooter = styled('footer', {
   '& button': {
-    padding: '0.5rem 0.75rem',
+    padding: '0.625rem 0.875rem',
 
-    background: '$secondary',
-    color: '$text',
+    fontSize: '1rem',
+    fontWeight: '600',
+
+    background: 'rgba(250, 100, 100, 0.5)',
+    color: '$primary',
     borderRadius: '0.25rem',
-    border: '1px solid',
-    borderColor: 'transparent',
 
     transition: 'all 0.3s ease-in-out',
 
     '&:hover': {
-      background: 'none',
-      borderColor: '$text',
+      background: '$error',
     },
   },
 });
 
-export { Container, AccountHeader, Avatar, AccountInfo, AccountContent, Option, Divider, Contact, AccountFooter };
+export {
+  Container,
+  AccountHeader,
+  Avatar,
+  AccountInfo,
+  AccountContent,
+  Option,
+  Divider,
+  Contact,
+  AccountFooter,
+};

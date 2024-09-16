@@ -2,9 +2,9 @@ import { useContext, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import { AuthContext } from '@contexts/AuthContext';
-import { useChallenges } from '@services/challenge';
-import { useTechnologies } from '@services/technology';
+import { AuthContext } from 'contexts/AuthContext';
+import { useChallenges } from 'services/challenge';
+import { useTechnologies } from 'services/technology';
 
 import { WelcomeSection } from './partials/Welcome';
 import * as S from './styles';
@@ -20,7 +20,7 @@ export default function Home() {
   const { t } = useTranslation();
   const { isAuthenticated } = useContext(AuthContext);
     
-  const { data:  technologies = [] } = useTechnologies({
+  const { data: technologiesItems = [] } = useTechnologies({
     enabled: isAuthenticated,
   });
 
@@ -29,11 +29,10 @@ export default function Home() {
     size: 4,
   });
 
-  const hydratedTechnologies = useMemo(() => {
-    const items = technologies?.map((technology) => {
-      const slug = Object.keys(techIcons).find(
-        (key) => technology.slug.toLowerCase().includes(key)
-      );
+  const technologies = useMemo(() => {
+    const items = technologiesItems?.map((technology) => {
+      const slug = Object.keys(techIcons)
+        .find((key) => technology.slug?.toLowerCase().includes(key));
 
       return {
         ...technology,
@@ -42,7 +41,7 @@ export default function Home() {
     });
 
     return items.slice(0, 12);
-  }, [technologies]);
+  }, [technologiesItems]);
 
   return (
     <S.Container>
@@ -69,38 +68,42 @@ export default function Home() {
         </S.Possibilities>
       </S.Section>
 
-      <S.Section {...sectionAnimationProps}>
-        <S.Title>{t('pages.home.technologies.title')}</S.Title>
-        <S.Paragraph>{t('pages.home.technologies.description')}</S.Paragraph>
-        <S.Technologies>
-          {hydratedTechnologies.map(({ id, name, color, logo }) => (
-            <S.Tech key={id}>
-              <span style={{ color }}>
-                {logo}
-              </span>
-              <small>{name}</small>
-            </S.Tech>
-          ))}
-        </S.Technologies>
-      </S.Section>
-
-      <S.Section {...sectionAnimationProps}>
-        <S.Title>{t('pages.home.challenges.title')}</S.Title>
-        <S.Paragraph>{t('pages.home.challenges.description')}</S.Paragraph>
-
-        <S.LatestChallenges>
-          <S.ChallengeList>
-            {challenges.map(({ id, title }) => (
-              <div key={id}>
-                <small>{title}</small>
-                <span>{t('pages.home.challenges.badge')}</span>
-              </div>
+      {technologies.length > 0 && (
+        <S.Section {...sectionAnimationProps}>
+          <S.Title>{t('pages.home.technologies.title')}</S.Title>
+          <S.Paragraph>{t('pages.home.technologies.description')}</S.Paragraph>
+          <S.Technologies>
+            {technologies.map(({ id, name, color, logo }) => (
+              <S.Tech key={id}>
+                <span style={{ color }}>
+                  {logo}
+                </span>
+                <small>{name}</small>
+              </S.Tech>
             ))}
-          </S.ChallengeList>
-          <div className='expand_challenges' />
-        </S.LatestChallenges>
-        <Link to='/challenges'>{t('pages.home.challenges.button.text')}</Link>
-      </S.Section>
+          </S.Technologies>
+        </S.Section>
+      )}
+
+      {challenges.length > 0 && (
+        <S.Section {...sectionAnimationProps}>
+          <S.Title>{t('pages.home.challenges.title')}</S.Title>
+          <S.Paragraph>{t('pages.home.challenges.description')}</S.Paragraph>
+
+          <S.LatestChallenges>
+            <S.ChallengeList>
+              {challenges.map(({ id, title }) => (
+                <div key={id}>
+                  <small>{title}</small>
+                  <span>{t('pages.home.challenges.badge')}</span>
+                </div>
+              ))}
+            </S.ChallengeList>
+            <div className='expand_challenges' />
+          </S.LatestChallenges>
+          <Link to='/challenges'>{t('pages.home.challenges.button.text')}</Link>
+        </S.Section>
+      )}
     </S.Container>
   );
 }

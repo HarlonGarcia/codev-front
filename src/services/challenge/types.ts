@@ -1,4 +1,4 @@
-import { IChallenge } from '@types/challenge';
+import { IChallenge } from 'types/challenge';
 
 export type IGetChallengeParams = {
   orderBy?: string;

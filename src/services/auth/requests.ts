@@ -1,5 +1,5 @@
-import { ILoginPayload, IUser } from '@types';
 import axios from 'axios';
+import { ILoginPayload, IUser } from 'types';
 
 import { generateUrl } from '../utils';
 

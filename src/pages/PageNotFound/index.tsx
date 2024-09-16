@@ -3,13 +3,18 @@ import { Link } from 'react-router-dom';
 
 import * as S from './styles';
 
-export default function PageNotFound() {
+interface PageNotFoundProps {
+  placeholder?: string;
+}
+export default function PageNotFound({ placeholder: placeholderText }: PageNotFoundProps) {
   const { t } = useTranslation();
+
+  const placeholder = placeholderText || t('pages.not_found.description');
 
   return (
     <S.Container>
       <h1>{t('pages.not_found.title')}</h1>
-      <p>{t('pages.not_found.description')}</p>
+      <p>{placeholder}</p>
       <Link to="/">{t('pages.not_found.return')}</Link>
     </S.Container>
   );

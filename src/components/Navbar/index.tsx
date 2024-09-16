@@ -2,12 +2,13 @@ import { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import Menu from '@components/Menu';
-import { AuthContext } from '@contexts/AuthContext';
+import Menu from 'components/Menu';
+import { AuthContext } from 'contexts/AuthContext';
 import { AiFillHome } from 'react-icons/ai';
 import { FaCodeBranch } from 'react-icons/fa';
 import { LuLogIn, LuLogOut } from 'react-icons/lu';
 
+import Avatar from './partials/Avatar';
 import * as S from './styles';
 
 export default function Navbar() {
@@ -35,6 +36,9 @@ export default function Navbar() {
               <span>{t('components.navbar.logout')}</span>
             </button>
           </>
+        )}
+        {isAuthenticated && (
+          <Avatar />
         )}
         {!isAuthenticated && (
           <Link to='/signin'>

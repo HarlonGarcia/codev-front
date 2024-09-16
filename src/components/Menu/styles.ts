@@ -1,4 +1,4 @@
-import { styled } from '@styles';
+import { styled } from 'styles';
 
 const PopoverTrigger = styled('button', {
   height: '1.75rem',

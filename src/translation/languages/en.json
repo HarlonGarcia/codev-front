@@ -56,14 +56,14 @@
     "pages.challenge_information.unknown_author": "Author not found",
     "pages.challenge_information.created_by": "Created by",
     "pages.challenge_information.submit.label": "Join challenge",
+    "pages.challenge_information.page_not_found.placeholder": "The challenge was not found",
 
-    "pages.signin.alerts.invalid_credentials": "Invalid email or password",
     "pages.signin.title": "Welcome back!",
     "pages.signin.description": "Log in to continue practicing and learning",
     "pages.signin.fields.email.label": "Email",
     "pages.signin.fields.email.error": "It must be a valid email",
     "pages.signin.fields.password.label": "Password",
-    "pages.signin.fields.password.error": "Password is required",
+    "pages.signin.fields.password.error": "Password must have at least 8 characters",
     "pages.signin.submit.label": "Log in",
     "pages.signin.no_account": "Don't have an account? Sign up",
 

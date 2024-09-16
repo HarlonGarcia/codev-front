@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 
-import { styled } from '@styles';
-import { floating, floating2 } from '@styles/global';
-import { WrapperWithPadding } from '@styles/wrapper';
+import { styled } from 'styles';
+import { floating, floating2 } from 'styles/global';
+import { WrapperWithPadding } from 'styles/wrapper';
 
 const Container = styled(WrapperWithPadding, {
 });

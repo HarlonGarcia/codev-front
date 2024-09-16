@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import TypeIt from 'typeit-react';
-import { styled } from '@styles';
+import { styled } from 'styles';
 
 const CodeError = styled('small', {
   fontSize: '1rem',

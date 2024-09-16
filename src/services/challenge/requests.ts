@@ -1,12 +1,13 @@
-import { api } from '@api';
+import { api } from 'api';
+import axios from 'axios';
 
 import { generateUrl } from '../utils';
 import { ICreateChallengeDto, IGetChallengeParams } from './types';
 
 export const getChallenges = async (filters?: IGetChallengeParams) => {
-  const { page = 0, size = 100, orderBy = 'latest' } = filters ?? {};
+  const { page = 0, size = 100, orderBy = 'LATEST' } = filters ?? {};
 
-  const { data } = await api.get(generateUrl('challenges'), {
+  const { data } = await axios.get(generateUrl('challenges'), {
     params: {
       page,
       size,

@@ -3,9 +3,9 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import { Input } from '@components/shared/Input';
-import { AuthContext } from '@contexts/AuthContext';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Input } from 'components/shared/Input';
+import { AuthContext } from 'contexts/AuthContext';
 import { FaArrowRightLong } from 'react-icons/fa6';
 
 import * as S from './styles';

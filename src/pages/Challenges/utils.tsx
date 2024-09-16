@@ -1,6 +1,6 @@
 import { Translation } from 'react-i18next';
 
-import { IChallengeStatus } from '@types/enums/ChallengeStatus';
+import { ChallengeStatusEnum } from 'types/enums/challenge';
 
 export const statuses = [
   {
@@ -10,7 +10,7 @@ export const statuses = [
         {(t) => <>{t('global.challenges.status.to_begin')}</>}
       </Translation>
     ),
-    value: IChallengeStatus.TO_BEGIN,
+    value: ChallengeStatusEnum.TO_BEGIN,
   },
   {
     key: 'in-progress',
@@ -19,11 +19,14 @@ export const statuses = [
         {(t) => <>{t('global.challenges.status.in_progress')}</>}
       </Translation>
     ),
-    value: IChallengeStatus.IN_PROGRESS,
+    value: ChallengeStatusEnum.IN_PROGRESS,
   },
 ];
 
-export const statusIcons = {
+export const statusIcons: Record<ChallengeStatusEnum, {
+  label: JSX.Element;
+  color: string;
+}> = {
   IN_PROGRESS: {
     label: (
       <Translation>

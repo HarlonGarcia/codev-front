@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 
-import { styled } from '@styles';
+import { styled } from 'styles';
 
 const Hero = styled(motion.section, {
   padding: '3rem',

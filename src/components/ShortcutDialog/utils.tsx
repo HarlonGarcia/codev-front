@@ -1,7 +1,5 @@
 import { Translation } from 'react-i18next';
 
-import { IShortcuts } from '@types';
-import { URL_DEPLOY, URL_REPOSITORY } from '@utils/constants';
 import { AiFillHome } from 'react-icons/ai';
 import {
   FaBook,
@@ -11,6 +9,8 @@ import {
   FaInfoCircle,
   FaUserCircle,
 } from 'react-icons/fa';
+import { IShortcuts } from 'types';
+import { URL_DEPLOY, URL_REPOSITORY } from 'utils/constants';
 
 export const goToShortcuts: IShortcuts = {
   H: {

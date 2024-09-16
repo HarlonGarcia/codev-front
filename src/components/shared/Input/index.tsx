@@ -8,6 +8,7 @@ import {
 import * as S from './styles';
 
 type DefaultInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'size'>;
+
 type InputProps = DefaultInputProps & {
   label?: ReactNode;
   error?: ReactNode;
@@ -61,6 +62,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             {label}
           </label>
         )}
+
         <S.InputWrapper
           hasIconBefore={hasIconBefore}
           hasIconAfter={hasIconAfter}
@@ -79,6 +81,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             onClick: onIconAfterClick,
           })}
         </S.InputWrapper>
+
         {error && (
           <span>{error}</span>
         )}

@@ -1,8 +1,10 @@
+import { ChallengeStatusEnum } from './enums/challenge';
+
 interface IChallenge {
   id: string;
   title: string;
   description: string;
-  status: IChallengeStatus;
+  status: ChallengeStatusEnum;
   category: ICategory | undefined;
   technologies: ITechnology[];
   author: IUser;
@@ -21,11 +23,4 @@ type ICreateChallengeDto =
   authorId: string;
   categoryId: string;
   technologies: string[];
-}
-
-enum IChallengeStatus {
-  TO_BEGIN = 'TO_BEGIN',
-  IN_PROGRESS = 'IN_PROGRESS',
-  FINISHED = 'FINISHED',
-  CANCELED = 'CANCELED',
 }

@@ -1,13 +1,13 @@
 import { lazy, Suspense, useContext, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import Navbar from '@components/Navbar';
-import ShortcutDialog from '@components/ShortcutDialog';
-import { extraShortcuts, goToShortcuts } from '@components/ShortcutDialog/utils';
-import { GlobalContext } from '@contexts/GlobalContext';
-import AdminOnly from '@pages/Auth/AdminOnly';
-import AuthOnly from '@pages/Auth/AuthOnly';
-import PageNotFound from '@pages/PageNotFound';
+import Navbar from 'components/Navbar';
+import ShortcutDialog from 'components/ShortcutDialog';
+import { extraShortcuts, goToShortcuts } from 'components/ShortcutDialog/utils';
+import { GlobalContext } from 'contexts/GlobalContext';
+import { AdminOnly } from 'pages/Auth/AdminOnly';
+import { AuthOnly } from 'pages/Auth/AuthOnly';
+import PageNotFound from 'pages/PageNotFound';
 
 const Home = lazy(() => import('./pages/Home'));
 const MyAccount = lazy(() => import('./pages/MyAccount'));
@@ -92,7 +92,7 @@ export default function AppRoutes() {
             <Route
               path='/challenges/create'
               element={
-                <AuthOnly {...props}>
+                <AuthOnly>
                   <CreateChallenge />
                 </AuthOnly>
               }

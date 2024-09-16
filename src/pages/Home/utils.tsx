@@ -1,7 +1,6 @@
 import { Translation } from 'react-i18next';
 
-import { Svg } from '@assets/svg';
-import { defaultTransition } from '@utils/animations';
+import { Svg } from 'assets/svg';
 import {
   FaAngular,
   FaReact,
@@ -18,6 +17,7 @@ import {
   SiTypescript,
   SiTailwindcss,
 } from 'react-icons/si';
+import { defaultTransition } from 'utils/animations';
 
 export const possibilities = [{
   id: 'solution',

@@ -1,9 +1,10 @@
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
-import Markdown from '@components/Markdown';
-import { useChallenge, useJoinChallenge } from '@services/challenge';
+import Markdown from 'components/Markdown';
+import PageNotFound from 'pages/PageNotFound';
 import { PiCodeDuotone } from 'react-icons/pi';
+import { useChallenge, useJoinChallenge } from 'services/challenge';
 
 import * as S from './styles';
 
@@ -21,7 +22,13 @@ export default function ChallengeInformation() {
     technologies = [],
   } = currentChallenge || {};
 
-  if (!currentChallenge) return;
+  if (!currentChallenge) {
+    return (
+      <PageNotFound
+        placeholder={t('pages.challenge_information.page_not_found.placeholder')}
+      />
+    )
+  };
   return (
     <S.Container>
       <h2>{title}</h2>

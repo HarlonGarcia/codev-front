@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { GlobalContext } from '@contexts/GlobalContext';
 import { Command } from 'cmdk';
+import { GlobalContext } from 'contexts/GlobalContext';
 import { IoClose } from 'react-icons/io5';
 
 import { extraShortcuts, goToShortcuts } from './utils';

@@ -7,7 +7,7 @@ export const signInSchema = z.object({
     .email(t('pages.signin.fields.email.error')),
   password: z
     .string()
-    .min(1, t('pages.signin.fields.password.error'))
+    .min(8, t('pages.signin.fields.password.error'))
 });
 
 export type SignInSchema = z.infer<typeof signInSchema>;

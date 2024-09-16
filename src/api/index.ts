@@ -6,8 +6,8 @@ import { t } from 'i18next';
 export const api = axios.create();
 
 api.interceptors.request.use((request) => {
-  const token = '';
-
+  const token = localStorage.getItem('@auth');
+  
   if (token) {
     request.headers.Authorization = `Bearer ${token}`;
   }

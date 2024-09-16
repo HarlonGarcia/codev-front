@@ -1,70 +1,85 @@
-import { createContext, PropsWithChildren, useState } from 'react';
+import { createContext, PropsWithChildren, useEffect, useState } from 'react';
 
-import { useLogin, useSignUp } from '@services/auth';
-import { CustomMutationOptions, ILoginPayload, IUser } from '@types';
+import { useLogin, useSignUp } from 'services/auth';
+import { useMe } from 'services/user';
+import { ILoginPayload, IUser } from 'types';
 
 interface AuthContextProps {
-  user: ILoginPayload | null,
+  user?: IUser,
   error: boolean;
   isAuthenticated: boolean;
   isLoading: boolean;
-  signUp: (data: IUser, options: CustomMutationOptions<IUser> ) => void;
-  login: (data: ILoginPayload, options: CustomMutationOptions<ILoginPayload>) => void;
+  signUp: (data: IUser, callback?: () => void ) => void;
+  login: (data: ILoginPayload, callback?: () => void) => void;
   logout: () => void;
 }
 
 export const AuthContext = createContext({} as AuthContextProps);
   
 export const AuthProvider = ({ children }: PropsWithChildren) => {
-  const [user, setUser] = useState<ILoginPayload | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const { data: user } = useMe(isAuthenticated);
 
   const {
     mutate: sendLogin,
     isPending: isLoggingIn,
+    error: loginError,
   } = useLogin();
 
   const {
     mutate: register,
     isPending: isSigningIn,
+    error: signupError,
   } = useSignUp();
 
-  const signUp = (
-    data: IUser,
-    options: CustomMutationOptions<IUser> = {},
-  ) => {
-    const payload = {
-      email: data.email,
-      password: '',
-    };
+  const handleUserAuthentication = (token: string) => {
+    localStorage.setItem('@auth', token);
+    setIsAuthenticated(true);
+  }
 
-    register(data, {
-      ...options,
-      onSuccess: () => setUser(payload),
-      onError: () => setUser(null),
+  const signUp = (user: IUser, callback?: () => void) => {
+    register(user, {
+      onSuccess: (token) => {
+        handleUserAuthentication(token);
+        callback?.();
+      },
+      onError: () => setIsAuthenticated(false),
     });
   }
 
-  const login = (
-    data: ILoginPayload,
-    options: CustomMutationOptions<ILoginPayload> = {},
-  ) => {
+  const login = (data: ILoginPayload, callback?: () => void) => {
     sendLogin(data, {
-      ...options,
-      onSuccess: () => setUser(data),
-      onError: () => setUser(null),
+      onSuccess: (token) => {
+        handleUserAuthentication(token);
+        callback?.();
+      },
+      onError: () => setIsAuthenticated(false),
     });
   };
 
   const logout = () => {
-    setUser(null);
+    setIsAuthenticated(false);
+    localStorage.removeItem('@auth');
   };
+
+  useEffect(function setToken() {
+    const token = localStorage.getItem('@auth');
+
+    if (token) {
+      setIsAuthenticated(true);
+      return;
+    }
+
+    logout();
+  }, []);
 
   return (
     <AuthContext.Provider
       value={{
         user,
-        error: false,
-        isAuthenticated: !!user,
+        error: !!loginError || !!signupError,
+        isAuthenticated,
         isLoading: isLoggingIn || isSigningIn,
         signUp,
         login,

@@ -1,5 +1,5 @@
 import { QueryClient } from '@tanstack/react-query';
-import { DEFAULT_STALE_TIME, GARBAGE_COLLECTION_INTERVAL } from '@utils/constants';
+import { DEFAULT_STALE_TIME, GARBAGE_COLLECTION_INTERVAL } from 'utils/constants';
 
 export const queryClient = new QueryClient({
   defaultOptions: {

@@ -3,11 +3,11 @@ export * from './challenge';
 export * from './technology';
 
 export type RequiredRouterProps = {
-  redirectUrl?: string
+  redirectUrl?: string;
+  children?: ReactNode;
 }
 
 export type CustomQueryOptions<T> = Partial<UseQueryOptions<T>>;
-export type CustomMutationOptions<T> = MutateOptions<T, Error, T, unknown>;
 
 export type IRole = 'ADMIN' | 'USER';
 

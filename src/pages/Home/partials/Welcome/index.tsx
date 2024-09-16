@@ -1,10 +1,10 @@
 import { useTranslation } from 'react-i18next';
 
-import Typer from '@components/Typer';
-import { defaultTransition } from '@utils/animations';
+import Typer from 'components/Typer';
 import { motion } from 'framer-motion';
+import { Title } from 'pages/Home/styles';
+import { defaultTransition } from 'utils/animations';
 
-import { Title } from '../../styles';
 import * as S from './styles';
 
 export const WelcomeSection = () => {

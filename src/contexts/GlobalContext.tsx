@@ -1,4 +1,10 @@
-import { createContext, Dispatch, PropsWithChildren, SetStateAction, useState } from 'react';
+import {
+  createContext,
+  Dispatch,
+  PropsWithChildren,
+  SetStateAction,
+  useState,
+} from 'react';
 
 interface GlobalContextProps {
   isShortcutDialogVisible: boolean;

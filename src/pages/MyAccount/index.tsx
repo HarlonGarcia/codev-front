@@ -1,26 +1,21 @@
+import { useContext, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
+import { AuthContext } from 'contexts/AuthContext';
 import { FaGithub } from 'react-icons/fa';
 import { ImLink } from 'react-icons/im';
+import { getUrlWithoutPrefix } from 'services/utils';
 
 import * as S from './styles';
 import { IUserOption, options } from './utils';
 
-const links = [
-  {
-    icon: <FaGithub />,
-    link: '/DevName',
-  },
-  {
-    icon: <ImLink />,
-    link: 'portifolio.com',
-  },
-];
+const fakeLabels = [ 'Dev Java', 'Challenger' ];
 
 export default function MyAccount() {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
 
   const handleActions = ({ action, redirectUrl }: IUserOption) => {
     if (action) {
@@ -32,15 +27,40 @@ export default function MyAccount() {
     }
   };
 
+  const links = useMemo(() => {
+    if (!user) {
+      return [];
+    }
+
+    const { additionalUrl, githubUrl } = user;
+
+    const items = [{
+      url: getUrlWithoutPrefix(githubUrl),
+      icon: <FaGithub />,
+    }]
+
+    if (additionalUrl) {
+      items.push({
+        url: getUrlWithoutPrefix(additionalUrl),
+        icon: <ImLink />,
+      });
+    }
+
+    return items;
+  }, [user]);
+
+  if (!user) {
+    return;
+  }
   return (
     <S.Container>
       <div>
         <S.AccountHeader>
           <S.Avatar src='https://picsum.photos/200' />
           <S.AccountInfo>
-            <h2>John Doe</h2>
+            <h2>{user.name}</h2>
             <div>
-              {[ 'Dev Java', 'Challenger' ].map((item, index) => (
+              {fakeLabels.map((item, index) => (
                 <span key={index}>{item}</span>
               ))}
             </div>
@@ -54,10 +74,10 @@ export default function MyAccount() {
             </S.Option>
           ))}
           <S.Divider />
-          {links.map((contact, index) => (
+          {links.map(({ url, icon }, index) => (
             <S.Contact key={index}>
-              {contact.icon}
-              <span>{contact.link}</span>
+              {icon}
+              <span>{url}</span>
             </S.Contact>
           ))}
         </S.AccountContent>

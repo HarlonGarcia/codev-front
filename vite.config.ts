@@ -8,4 +8,12 @@ export default defineConfig({
     react(),
     tsconfigPaths(),
   ],
+  server: {
+    port: 5173,
+  },
+  build: {
+    outDir: 'build',
+    emptyOutDir: true,
+    sourcemap: true,
+  },
 })

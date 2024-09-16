@@ -3,17 +3,17 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 
-import { Input } from '@components/shared/Input';
-import { Select } from '@components/shared/Select';
-import { TextArea } from '@components/shared/TextArea';
-import { AuthContext } from '@contexts/AuthContext';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useCategories } from '@services/category';
-import { useCreateChallenge } from '@services/challenge';
-import { useTechnologies } from '@services/technology';
-import { useMe } from '@services/user';
+import { Input } from 'components/shared/Input';
+import { Select } from 'components/shared/Select';
+import { TextArea } from 'components/shared/TextArea';
+import { AuthContext } from 'contexts/AuthContext';
 import { t } from 'i18next';
 import { MdOutlineClose } from 'react-icons/md';
+import { useCategories } from 'services/category';
+import { useCreateChallenge } from 'services/challenge';
+import { useTechnologies } from 'services/technology';
+import { ChallengeStatusEnum } from 'types/enums/challenge';
 
 import { statuses } from '../utils';
 import * as S from './styles';
@@ -54,10 +54,13 @@ const TechnologiesList = ({ technologies, onRemove }: TechnologyListPros) => {
 
 export default function CreateChallenge() {
   const { t } = useTranslation();
-  const { logout } = useContext(AuthContext);
-  const [selectedTechnologies, setSelectedTechnologies] = useState<ITechnologiesState>({ items: [], error: '' });
+  const { logout, user: currentUser } = useContext(AuthContext);
   
-  const { data: currentUser = {} } = useMe();
+  const [selectedTechnologies, setSelectedTechnologies] = useState<ITechnologiesState>({
+    items: [],
+    error: '',
+  });
+  
   const { data: categories = [] } = useCategories();
   const { data: technologies = [] } = useTechnologies();
 
@@ -79,10 +82,11 @@ export default function CreateChallenge() {
     }
 
     if (0 >= items.length) {
-      setSelectedTechnologies((prevState) => ({
-        ...prevState,
+      setSelectedTechnologies((technologies) => ({
+        ...technologies,
         error: t('pages.create_challenge.fields.technologies.error.min'),
       }));
+
       return;
     }
 
@@ -97,7 +101,7 @@ export default function CreateChallenge() {
       imageUrl: 'test',
       technologies: items.map(({ id }) => id),
       authorId: currentUser.id,
-      status: formValues.status as IChallengeStatus,
+      status: formValues.status as ChallengeStatusEnum,
     };
 
     createChallenge(newChallenge);
@@ -110,7 +114,7 @@ export default function CreateChallenge() {
     }
 
     const technologyId = event.target.value;
-    const newTechnology = technologies.find((tech) => tech.id === technologyId);
+    const newTechnology = technologies.find(({ id }) => id === technologyId);
 
     if (!newTechnology) {
       return;
@@ -130,10 +134,10 @@ export default function CreateChallenge() {
   };
 
   const hydratedCategories = useMemo(() => {
-    return categories.map((category) => ({
-      key: category.id,
-      label: category.name,
-      value: category.id,
+    return categories.map(({ id, name }) => ({
+      key: id,
+      label: name,
+      value: id,
     }));
   }, [categories]);
 

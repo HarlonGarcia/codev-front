@@ -1,5 +1,5 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
-import { CustomQueryOptions } from '@types';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { CustomQueryOptions, IChallenge } from 'types';
 
 import * as api from './requests';
 import { ICreateChallengeDto, IGetChallengeParams } from './types';
@@ -9,6 +9,7 @@ export function useChallenges(
   options?: CustomQueryOptions<IChallenge[]>,
 ) {
   return useQuery<IChallenge[]>({
+    staleTime: Infinity,
     ...options,
     queryKey: ['challenges', filters],
     queryFn: async () => {
@@ -22,7 +23,7 @@ export function useChallenges(
 export function useChallenge(challengeId?: string) {
   return useQuery<IChallenge>({
     enabled: !!challengeId,
-    queryKey: ['challenge', challengeId],
+    queryKey: ['challenges', challengeId],
     queryFn: async () => {
       const response = await api.getChallenge(challengeId);
 
@@ -33,7 +34,6 @@ export function useChallenge(challengeId?: string) {
 
 export function useJoinChallenge() {
   return useMutation({
-    mutationKey: ['joinChallenge'],
     mutationFn: async (challengeId: string) => {
       const response = await api.joinChallenge(challengeId);
 
@@ -43,12 +43,18 @@ export function useJoinChallenge() {
 };
 
 export function useCreateChallenge() {
+  const queryClient = useQueryClient();
+
   return useMutation({
-    mutationKey: ['createChallenge'],
     mutationFn: async (challenge: ICreateChallengeDto) => {
       const response = await api.createChallenge(challenge);
 
       return response;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['challenges'],
+      });
     },
   });
 };

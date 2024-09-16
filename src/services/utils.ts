@@ -1,4 +1,4 @@
-import endpoints from '@api/endpoints.json';
+import endpoints from 'api/endpoints.json';
 
 type Endpoint = typeof endpoints;
 
@@ -21,4 +21,8 @@ const generateUrl = (key: keyof Endpoint, identifiers = {}) => {
   return url;
 };
 
-export { generateUrl };
+const getUrlWithoutPrefix = (url: string): string => {
+  return url.replace(/^(https?:\/\/)?(www\.)?/, '');
+};
+
+export { generateUrl, getUrlWithoutPrefix };

@@ -4,7 +4,8 @@ import * as api from './requests';
 
 export function useCategories() {
   return useQuery<ICategory[]>({
-    queryKey: ['category'],
+    staleTime: Infinity,
+    queryKey: ['categories'],
     queryFn: async () => {
       const response = await api.getCategories();
 

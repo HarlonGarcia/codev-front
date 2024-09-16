@@ -2,17 +2,14 @@ import { useContext } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 
-import { Input } from '@components/shared/Input';
-import { AuthContext } from '@contexts/AuthContext';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Input } from 'components/shared/Input';
+import { AuthContext } from 'contexts/AuthContext';
 import { FaArrowRightLong } from 'react-icons/fa6';
 
 import * as S from './styles';
 import { SignInSchema, signInSchema } from './validation';
-
-const PASSWORD_MIN_LENGTH = 8;
 
 export default function SignIn() {
   const { t } = useTranslation();
@@ -22,23 +19,21 @@ export default function SignIn() {
 
   const {
     formState: {
+      dirtyFields,
       errors: formErrors,
     },
+    reset: resetForm,
     register,
     handleSubmit,
   } = useForm<SignInSchema>({
     resolver: zodResolver(signInSchema),
   });
 
-  const onSubmit: SubmitHandler<SignInSchema> = (data) => {
-    if (data.password.length < PASSWORD_MIN_LENGTH) {
-      toast.error(t('pages.signin.alerts.invalid_credentials'));
-      return;
-    }
+  const hasFormValuesChanged = !(Object.keys(dirtyFields).length > 0);
 
-    login(data, {
-      onSuccess: () => navigate('/'),
-    })
+  const onSubmit: SubmitHandler<SignInSchema> = (data) => {
+    login(data, () => navigate('/'));
+    resetForm(data);
   };
 
   return (
@@ -73,6 +68,7 @@ export default function SignIn() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
+          disabled={hasFormValuesChanged}
         >
           <span>{t('pages.signin.submit.label')}</span>
           <FaArrowRightLong />

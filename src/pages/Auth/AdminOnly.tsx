@@ -1,16 +1,16 @@
-import { useContext } from 'react';
-import { Navigate, Outlet, useLocation } from 'react-router-dom';
+import { Fragment, useContext } from 'react';
+import { Navigate, useLocation } from 'react-router-dom';
 
-import { AuthContext } from '@contexts/AuthContext';
-import { RequiredRouterProps } from '@types';
+import { AuthContext } from 'contexts/AuthContext';
+import { RequiredRouterProps } from 'types';
 
-export default function AdminOnly({ redirectUrl = '/' }: RequiredRouterProps) {
+export const AdminOnly = ({ children, redirectUrl = '/' }: RequiredRouterProps) => {
   const location = useLocation();
   const { isAuthenticated: isAdmin } = useContext(AuthContext);
 
   const content = (
     isAdmin ? (
-      <Outlet />
+      <Fragment>{children}</Fragment>
     ) : (
       <Navigate to={redirectUrl} state={{ from: location }} replace />
     )

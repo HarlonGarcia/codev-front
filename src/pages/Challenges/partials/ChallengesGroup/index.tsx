@@ -2,11 +2,10 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import { useChallenges } from '@services/challenge';
-import { ICategory } from '@types/category';
-import { statusIcons } from '@utils';
 import { motion } from 'framer-motion';
+import { statusIcons } from 'pages/Challenges/utils';
 import { GrStatusGoodSmall } from 'react-icons/gr';
+import { useChallenges } from 'services/challenge';
 
 import * as S from './styles';
 

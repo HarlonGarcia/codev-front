@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 
-import { styled } from '@styles';
-import { WrapperDefault } from '@styles/wrapper';
+import { styled } from 'styles';
+import { WrapperDefault } from 'styles/wrapper';
 
 const Container = styled(WrapperDefault, {
   display: 'flex',
@@ -76,7 +76,7 @@ const SubmitButton = styled(motion.button, {
 
   transition: 'all 0.3s ease-in-out',
 
-  '&:hover': {
+  '&:hover:not(:disabled)': {
     backgroundColor: 'rgba(50, 255, 130, 1)',
     boxShadow: '0px 0px 24px 2px rgba(50, 255, 120, 0.3)',
 
@@ -86,6 +86,11 @@ const SubmitButton = styled(motion.button, {
   },
 
   '&:focus': {
+    filter: 'brightness(0.5)',
+  },
+
+  '&:disabled': {
+    cursor: 'not-allowed',
     filter: 'brightness(0.5)',
   },
 

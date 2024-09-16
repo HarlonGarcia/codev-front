@@ -1,4 +1,4 @@
-import { useCategories } from '@services/category';
+import { useCategories } from 'services/category';
 
 import ChallengesGroup from './partials/ChallengesGroup';
 import * as S from './styles';

@@ -31,7 +31,7 @@
     "pages.account.options.challenges": "Desafios que estou participando",
     "pages.account.options.edit_information": "Editar minhas informações",
     "pages.account.options.connections": "Ver minhas conexões",
-    "pages.account.logout": "Sair",
+    "pages.account.logout": "Desconectar",
 
     "pages.challenges.unknown_title": "Título não informado",
     "pages.challenges.see_challenge": "Ver desafio",
@@ -56,14 +56,14 @@
     "pages.challenge_information.unknown_author": "Autor não informado",
     "pages.challenge_information.created_by": "Criado por",
     "pages.challenge_information.submit.label": "Participar do desafio",
+    "pages.challenge_information.page_not_found.placeholder": "O desafio que você procura não foi encontrado",
 
-    "pages.signin.alerts.invalid_credentials": "Email ou senha incorretos",
     "pages.signin.title": "Bem vindo de volta!",
     "pages.signin.description": "Faça login para continuar praticando e aprendendo",
     "pages.signin.fields.email.label": "Email",
     "pages.signin.fields.email.error": "Insira um email válido",
     "pages.signin.fields.password.label": "Senha",
-    "pages.signin.fields.password.error": "Senha é obrigatória",
+    "pages.signin.fields.password.error": "A senha deve ter pelo menos 8 dígitos",
     "pages.signin.submit.label": "Entrar",
     "pages.signin.no_account": "Ainda não tem conta? Cadastre-se",
 
