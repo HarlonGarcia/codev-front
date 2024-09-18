@@ -15,6 +15,11 @@ const generateUrl = (key: keyof Endpoint, identifiers = {}) => {
 
   Object.keys(identifiers).forEach((identifier) => {
     const id = identifier as keyof typeof identifiers;
+
+    if (identifier === 'identifier') {
+      url = `${url}/${identifiers[id]}`
+    }
+
     url = url.replace(`{${id}}`, identifiers[id]);
   });
 
@@ -25,4 +30,13 @@ const getUrlWithoutPrefix = (url: string): string => {
   return url.replace(/^(https?:\/\/)?(www\.)?/, '');
 };
 
-export { generateUrl, getUrlWithoutPrefix };
+const toBase64 = (file: File) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve((reader.result as string).split(',')[1]);
+    reader.onerror = error => reject(error);
+  });
+};
+
+export { generateUrl, getUrlWithoutPrefix, toBase64 };

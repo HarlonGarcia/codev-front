@@ -9,7 +9,7 @@ import { useChallenge, useJoinChallenge } from 'services/challenge';
 import * as S from './styles';
 
 export default function ChallengeInformation() {
-  const { challengeId } = useParams();
+  const { id: challengeId } = useParams();
   const { t } = useTranslation();
 
   const { data: currentChallenge } = useChallenge(challengeId);
@@ -19,6 +19,7 @@ export default function ChallengeInformation() {
     title = t('pages.challenge_information.unknown_title'),
     description = t('pages.challenge_information.unknown_description'),
     author,
+    image,
     technologies = [],
   } = currentChallenge || {};
 
@@ -29,9 +30,13 @@ export default function ChallengeInformation() {
       />
     )
   };
+
   return (
     <S.Container>
       <h2>{title}</h2>
+      {image?.file && (
+        <S.Cover src={`data:image/jpeg;base64,${image?.file}`} />
+      )}
       <Markdown content={description} />
       <S.Details>
         <S.Info>

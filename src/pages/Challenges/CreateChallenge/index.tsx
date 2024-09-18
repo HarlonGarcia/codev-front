@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from 'components/shared/Input';
+import { InputFile } from 'components/shared/InputFile';
 import { Select } from 'components/shared/Select';
 import { TextArea } from 'components/shared/TextArea';
 import { AuthContext } from 'contexts/AuthContext';
@@ -49,6 +50,7 @@ const TechnologiesList = ({ technologies, onRemove }: TechnologyListPros) => {
       </S.SelectedTechnologies>
     );
   }
+
   return <></>;
 };
 
@@ -63,7 +65,6 @@ export default function CreateChallenge() {
   
   const { data: categories = [] } = useCategories();
   const { data: technologies = [] } = useTechnologies();
-
   const { mutate: createChallenge } = useCreateChallenge();
 
   const {
@@ -76,7 +77,7 @@ export default function CreateChallenge() {
 
   const onSubmit: SubmitHandler<CreateChallengeSchema> = (formValues) => {
     const { items, error } = selectedTechnologies;
-
+  
     if (error) {
       return;
     }
@@ -96,9 +97,11 @@ export default function CreateChallenge() {
       return;
     }
 
+    const file = formValues.image[0];
+   
     const newChallenge = {
       ...formValues,
-      imageUrl: 'test',
+      image: file,
       technologies: items.map(({ id }) => id),
       authorId: currentUser.id,
       status: formValues.status as ChallengeStatusEnum,
@@ -151,7 +154,7 @@ export default function CreateChallenge() {
 
   return (
     <S.Container>
-      <S.Form onSubmit={handleSubmit(onSubmit)}>
+      <S.Form>
         <Input
           {...register('title')}
           label={t('pages.create_challenge.fields.title.label')}
@@ -195,14 +198,20 @@ export default function CreateChallenge() {
           <Select
             {...register('status')}
             label={t('pages.create_challenge.fields.status.label')}
+            default={statuses[0]}
             error={formErrors.status?.message}
             options={statuses}
             size={'xl'}
             weight={'bold'}
           />
         </S.Group>
+        <InputFile
+          error={formErrors.image?.message as string}
+          register={register}
+        />
         <S.Submit
           type="submit"
+          onClick={handleSubmit(onSubmit)}
           value={t('pages.create_challenge.submit.label')}
         />
       </S.Form>

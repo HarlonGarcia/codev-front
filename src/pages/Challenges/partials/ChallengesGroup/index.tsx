@@ -22,6 +22,10 @@ export default function ChallengesGroup({ category }: ChallengesGroupProps) {
 
   const { data: challenges = [] } = useChallenges();
 
+  const getChallengeCover = (image?: string) => {
+    return image ? `data:image/jpeg;base64,${image}` : 'https://picsum.photos/1280/720';
+  };
+
   const filteredChallenges = useMemo(() => {
     return challenges.filter(
       (challenge) => challenge.category?.id === category.id,
@@ -52,7 +56,7 @@ export default function ChallengesGroup({ category }: ChallengesGroupProps) {
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 1 }}
         >
-          {filteredChallenges.map(({ id, title, status }) => (
+          {filteredChallenges.map(({ id, title, image, status }) => (
             <S.Challenge key={id}>
               <S.ChallengeHeader>
                 <h2>{title || t('pages.challenges.unknown_title')}</h2>
@@ -64,7 +68,7 @@ export default function ChallengesGroup({ category }: ChallengesGroupProps) {
                 }
               </S.ChallengeHeader>
               <S.Image
-                src="https://picsum.photos/id/237/200/300"
+                src={getChallengeCover(image?.file)}
                 alt={title}
                 loading='lazy'
               />

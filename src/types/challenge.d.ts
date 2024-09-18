@@ -7,6 +7,9 @@ interface IChallenge {
   status: ChallengeStatusEnum;
   category: ICategory | undefined;
   technologies: ITechnology[];
+  image: {
+    file: string;
+  };
   author: IUser;
   createdAt: Date;
   updatedAt: Date;
@@ -19,7 +22,6 @@ type IChallengeDto = Pick<
 
 type ICreateChallengeDto =
   Pick<IChallenge, 'title' | 'status' | 'description'> & {
-  imageUrl: string;
   authorId: string;
   categoryId: string;
   technologies: string[];

@@ -11,6 +11,8 @@
     "global.challenges.status.finished": "Finalizado",
     "global.challenges.status.canceled": "Cancelado",
 
+    "global.select.placeholder": "Selecionar",
+
     "pages.home.instructions.press": "Pressione",
     "pages.home.instructions.action": "para abrir a lista de comandos",
 

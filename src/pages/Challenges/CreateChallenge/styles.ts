@@ -84,12 +84,13 @@ const Group = styled('div', {
 const Submit = styled('input', {
   width: 'fit-content',
   padding: '0.75rem 2rem',
+  marginTop: '2rem',
 
-  color: '$highlight',
+  color: '$text',
   backgroundColor: '$secondary',
   fontWeight: '600',
 
-  border: 'none',
+  border: '1px solid $text',
   borderRadius: '0.25rem',
   outline: 'none',
 
@@ -98,7 +99,7 @@ const Submit = styled('input', {
 
   '&:hover': {
     color: '$secondary',
-    backgroundColor: '$highlight',
+    backgroundColor: '$text',
   },
 
   '@xs': {

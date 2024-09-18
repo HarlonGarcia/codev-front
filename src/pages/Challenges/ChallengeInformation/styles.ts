@@ -6,6 +6,7 @@ const Container = styled(WrapperWithPadding, {
     color: '$highlight',
     fontSize: '1.25rem',
     marginBottom: '1.5rem',
+    textTransform: 'capitalize',
 
     '@xs': {
       fontSize: '1.5rem',
@@ -13,6 +14,24 @@ const Container = styled(WrapperWithPadding, {
     '@md': {
       fontSize: '2rem',
     },
+  },
+});
+
+const Cover = styled('img', {
+  width: '100%',
+  height: '20rem',
+  objectFit: 'cover',
+  borderRadius: '1rem',
+
+  marginBottom: '1rem',
+
+  '@md': {
+    height: '30rem',
+    marginBottom: '2rem'
+  },
+
+  '@xl': {
+    height: '40rem',
   },
 });
 
@@ -123,6 +142,7 @@ const Button = styled('button', {
 
 export {
   Container,
+  Cover,
   Details,
   Button,
   Info,
