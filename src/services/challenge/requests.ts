@@ -2,7 +2,7 @@ import { api } from 'api';
 import axios from 'axios';
 
 import { generateUrl, toBase64 } from '../utils';
-import { ICreateChallengeDto, IGetChallengeParams } from './types';
+import { ICreateChallengeDto, IGetChallengeParams, IJoinChallengeDto } from './types';
 
 export const getChallenges = async (filters?: IGetChallengeParams) => {
   const { page = 0, size = 100, orderBy = 'LATEST' } = filters ?? {};
@@ -19,28 +19,26 @@ export const getChallenges = async (filters?: IGetChallengeParams) => {
 }
 
 export const getChallenge = async (challengeId?: string) => {
-  const { data } = await api.get(generateUrl('challenges', { identifier: challengeId }));
+  const { data } = await api.get(
+    generateUrl('challenges', { identifier: challengeId })
+  );
 
   return data ?? {};
 }
 
-export const joinChallenge = async (challengeId: string) => {
-  const userId = '';
-
+export const joinChallenge = async ({ userId, challengeId }: IJoinChallengeDto) => {
   if (!challengeId || !userId) {
     throw new Error('The user or challenge is not valid.');
   }
 
-  const configParams = {
-    headers: {
-      'x-user-id': userId,
-    },
-  };
-
   const { data } = await api.post(
     generateUrl('join_challenge', { challengeId }),
     undefined,
-    configParams,
+    {
+      headers: {
+        'x-user-id': userId,
+      },
+    },
   );
 
   return data;

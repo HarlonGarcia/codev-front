@@ -1,4 +1,7 @@
+import { useContext } from 'react';
+
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { AuthContext } from 'contexts/AuthContext';
 import { CustomQueryOptions, IChallenge } from 'types';
 
 import * as api from './requests';
@@ -33,9 +36,11 @@ export function useChallenge(challengeId?: string) {
 };
 
 export function useJoinChallenge() {
+  const { user } = useContext(AuthContext);
+
   return useMutation({
     mutationFn: async (challengeId: string) => {
-      const response = await api.joinChallenge(challengeId);
+      const response = await api.joinChallenge({ challengeId, userId: user?.id });
 
       return response;
     },

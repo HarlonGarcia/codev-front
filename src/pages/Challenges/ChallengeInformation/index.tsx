@@ -2,9 +2,11 @@ import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
 import Markdown from 'components/Markdown';
+import dayjs from 'dayjs';
 import PageNotFound from 'pages/PageNotFound';
 import { PiCodeDuotone } from 'react-icons/pi';
 import { useChallenge, useJoinChallenge } from 'services/challenge';
+import { DATE_TIME } from 'utils/constants';
 
 import * as S from './styles';
 
@@ -33,7 +35,13 @@ export default function ChallengeInformation() {
 
   return (
     <S.Container>
-      <h2>{title}</h2>
+      <S.Header>
+        <h2>{title}</h2>
+        <span>
+          <strong>Criado em:</strong>
+          {dayjs(currentChallenge.createdAt).format(DATE_TIME)}
+        </span>
+      </S.Header>
       {image?.file && (
         <S.Cover src={`data:image/jpeg;base64,${image?.file}`} />
       )}

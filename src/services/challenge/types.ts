@@ -13,3 +13,8 @@ export type ICreateChallengeDto =
   categoryId: string;
   technologies: string[];
 }
+
+export type IJoinChallengeDto = {
+  userId?: string;
+  challengeId?: string;
+};

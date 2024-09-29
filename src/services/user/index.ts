@@ -12,6 +12,7 @@ export function useMe(isAuthenticated?: boolean) {
 
       return response;
     },
+
   })
 }
 

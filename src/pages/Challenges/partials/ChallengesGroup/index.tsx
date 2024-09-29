@@ -72,12 +72,12 @@ export default function ChallengesGroup({ category }: ChallengesGroupProps) {
                 alt={title}
                 loading='lazy'
               />
-              <S.JoinChallenge
+              <S.SeeChallenge
                 onClick={() => navigate(`/challenges/${id}`)}
                 disabled={status === 'FINISHED'}
               >
                 {t('pages.challenges.see_challenge')}
-              </S.JoinChallenge>
+              </S.SeeChallenge>
             </S.Challenge>
           ))}
         </motion.div>

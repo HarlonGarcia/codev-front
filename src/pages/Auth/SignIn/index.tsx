@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from 'components/shared/Input';
@@ -13,9 +14,10 @@ import { SignInSchema, signInSchema } from './validation';
 
 export default function SignIn() {
   const { t } = useTranslation();
-  const { login } = useContext(AuthContext);
-
+  const location = useLocation();
   const navigate = useNavigate();
+  const { login, isAuthenticated } = useContext(AuthContext);
+
 
   const {
     formState: {
@@ -36,6 +38,9 @@ export default function SignIn() {
     resetForm(data);
   };
 
+  if (isAuthenticated) {
+    return <Navigate to={'/'} state={{ from: location }} replace />
+  }
   return (
     <S.Container>
       <S.Header

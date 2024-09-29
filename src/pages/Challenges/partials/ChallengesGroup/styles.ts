@@ -107,7 +107,7 @@ const Image = styled('img', {
   draggable: 'false',
 });
 
-const JoinChallenge = styled('button', {
+const SeeChallenge = styled('button', {
   width: '100%',
 
   padding: '0.75rem',
@@ -134,4 +134,4 @@ const JoinChallenge = styled('button', {
   },
 });
 
-export { Container, Challenge, ChallengeHeader, Image, JoinChallenge };
+export { Container, Challenge, ChallengeHeader, Image, SeeChallenge };

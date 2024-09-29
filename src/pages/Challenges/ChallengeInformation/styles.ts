@@ -2,6 +2,13 @@ import { styled } from 'styles';
 import { WrapperWithPadding } from 'styles/wrapper';
 
 const Container = styled(WrapperWithPadding, {
+});
+
+const Header = styled('div', {
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+
   '& > h2': {
     color: '$highlight',
     fontSize: '1.25rem',
@@ -13,6 +20,17 @@ const Container = styled(WrapperWithPadding, {
     },
     '@md': {
       fontSize: '2rem',
+    },
+  },
+
+  '& > span': {
+    display: 'flex',
+    gap: '0.5rem',
+    alignItems: 'center',
+    color: '$lavender',
+
+    '& strong': {
+      color: '$coolgrey',
     },
   },
 });
@@ -57,13 +75,13 @@ const Info = styled('div', {
     fontWeight: 600,
 
     '@xs': {
-      fontSize: '1.25rem',
+      fontSize: '1.125rem',
     },
   },
 
   '& > div': {
     display: 'flex',
-    gap: '0.25rem',
+    gap: '0.375rem',
 
     ':last-child': {
       color: '$lavender',
@@ -142,6 +160,7 @@ const Button = styled('button', {
 
 export {
   Container,
+  Header,
   Cover,
   Details,
   Button,
