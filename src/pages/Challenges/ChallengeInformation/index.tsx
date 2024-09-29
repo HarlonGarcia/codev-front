@@ -38,7 +38,7 @@ export default function ChallengeInformation() {
       <S.Header>
         <h2>{title}</h2>
         <span>
-          <strong>Criado em:</strong>
+          <strong>{t('pages.challenge_information.created_at')}</strong>
           {dayjs(currentChallenge.createdAt).format(DATE_TIME)}
         </span>
       </S.Header>

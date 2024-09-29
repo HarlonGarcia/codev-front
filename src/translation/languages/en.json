@@ -54,6 +54,7 @@
     "pages.create_challenge.submit.label": "Create challenge",
 
     "pages.challenge_information.unknown_title": "Title not found",
+    "pages.challenge_information.created_at": "Created at",
     "pages.challenge_information.unknown_description": "Description not found",
     "pages.challenge_information.unknown_author": "Author not found",
     "pages.challenge_information.created_by": "Created by",

@@ -25,7 +25,7 @@ const Header = styled('div', {
 
   '& > span': {
     display: 'flex',
-    gap: '0.5rem',
+    gap: '0.4175rem',
     alignItems: 'center',
     color: '$lavender',
 

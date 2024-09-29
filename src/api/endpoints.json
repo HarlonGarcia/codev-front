@@ -3,7 +3,7 @@
   "login": "http://localhost:8080/users/login",
   "signup": "http://localhost:8080/users/signup",
   "users": "http://localhost:8080/users",
-  "join_challenge": "http://localhost:8080/challenges/{challengeId}/join-challenge",
+  "challenge_users": "http://localhost:8080/challenges/{challengeId}/users",
   "challenges": "http://localhost:8080/challenges",
   "categories": "http://localhost:8080/categories",
   "technologies": "http://localhost:8080/technologies"

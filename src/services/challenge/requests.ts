@@ -31,17 +31,18 @@ export const joinChallenge = async ({ userId, challengeId }: IJoinChallengeDto) 
     throw new Error('The user or challenge is not valid.');
   }
 
-  const { data } = await api.post(
-    generateUrl('join_challenge', { challengeId }),
-    undefined,
+  const response = await api.post(
+    generateUrl('challenge_users', { challengeId }),
+    null,
     {
       headers: {
-        'x-user-id': userId,
+        'X-User-ID': userId,
       },
     },
   );
 
-  return data;
+
+  return response.data;
 }
 
 export const createChallenge = async ({
@@ -53,7 +54,6 @@ export const createChallenge = async ({
   const { data } = await api.post(
     generateUrl('challenges'), {
       ...challenge,
-      technologies: undefined,
       image: {
         file: fileBase64,
         fileName: image.name,

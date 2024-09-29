@@ -17,7 +17,7 @@
     "pages.home.instructions.action": "para abrir a lista de comandos",
 
     "pages.home.introduction.title": "Aumente seu nível na programação",
-    "pages.home.introduction.description": "Descubra por que a prática através de projetos é essencial para consolidar habilidades em web desenvolvimento, abrangendo desde o frontend com os principais frameworks, até backend, além do uso de outros tipos de ferramentas",
+    "pages.home.introduction.description": "Desafios voltados para seu uso pessoal, programação competitiva e processos seletivos",
     "pages.home.introduction.cards.find_solutions": "Encontre soluções para problemas reais",
     "pages.home.introduction.cards.coding": "Converta idéias em código",
     "pages.home.introduction.cards.network": "Conecte-se com outros desenvolvedores",
@@ -54,6 +54,7 @@
     "pages.create_challenge.submit.label": "Criar desafio",
 
     "pages.challenge_information.unknown_title": "Título não informado",
+    "pages.challenge_information.created_at": "Criado em",
     "pages.challenge_information.unknown_description": "Descrição não informada",
     "pages.challenge_information.unknown_author": "Autor não informado",
     "pages.challenge_information.created_by": "Criado por",
