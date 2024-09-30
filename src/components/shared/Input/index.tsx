@@ -1,91 +1,46 @@
-import {
-  ElementType,
-  InputHTMLAttributes,
-  ReactNode,
-  forwardRef,
-} from 'react';
+import { InputHTMLAttributes, ReactNode } from 'react';
+import { FieldValues, Path, UseFormRegister } from 'react-hook-form';
 
-import * as S from './styles';
+import {
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Input as ChakraInput,
+} from '@chakra-ui/react';
 
 type DefaultInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'size'>;
 
-type InputProps = DefaultInputProps & {
+type InputProps<T extends FieldValues> = DefaultInputProps & {
   label?: ReactNode;
   error?: ReactNode;
+  register: UseFormRegister<T>;
   size?: 'sm' | 'md' | 'lg' | 'xl';
-  weight?: 'normal' | 'bold';
-  onIconBeforeClick?: () => void;
-  onIconAfterClick?: () => void;
-  iconBefore?: ElementType;
-  iconAfter?: ElementType;
 };
 
-type GetIconFnParams = {
-  position: 'before' | 'after';
-  icon: ElementType;
-  onClick?: () => void;
+export const Input = <T extends FieldValues>(props: InputProps<T>) => {
+  const {
+    id,
+    label,
+    error,
+    required,
+    register,
+    ...rest
+  } = props;
+
+  return (
+    <FormControl
+      variant="floating"
+      id={id}
+      isRequired={required}
+      isInvalid={!!error}
+    >
+      <ChakraInput
+        {...rest}
+        {...register(id as Path<T>)}
+        placeholder=" "
+      />
+      <FormLabel>{label}</FormLabel>
+      <FormErrorMessage>{error}</FormErrorMessage>
+    </FormControl>
+  );
 };
-
-export const Input = forwardRef<HTMLInputElement, InputProps>(
-  function Input(props, ref)  {
-    const {
-      label,
-      error,
-      size = 'sm',
-      weight = 'normal',
-      onIconBeforeClick,
-      onIconAfterClick,
-      iconBefore: IconBefore,
-      iconAfter: IconAfter,
-      ...rest
-    } = props;
-
-    const hasIconBefore = Boolean(IconBefore);
-    const hasIconAfter = Boolean(IconAfter);
-
-    const getIcon = ({ icon: Icon, position, onClick }: GetIconFnParams) => {
-      if (!onClick) {
-        return <Icon id={position} />;
-      }
-
-      return (
-        <button onClick={onClick}>
-          <Icon id={position} />
-        </button>
-      );
-    };
-
-    return (
-      <S.Wrapper size={size} weight={weight}>
-        {label && (
-          <label htmlFor={rest.id}>
-            {label}
-          </label>
-        )}
-
-        <S.InputWrapper
-          hasIconBefore={hasIconBefore}
-          hasIconAfter={hasIconAfter}
-        >
-          {IconBefore && getIcon({
-            position: 'before',
-            icon: IconBefore,
-            onClick: onIconBeforeClick,
-          })}
-
-          <input ref={ref} {...rest} />
-
-          {IconAfter && getIcon({
-            position: 'after',
-            icon: IconAfter,
-            onClick: onIconAfterClick,
-          })}
-        </S.InputWrapper>
-
-        {error && (
-          <span>{error}</span>
-        )}
-      </S.Wrapper>
-    );
-  },
-);

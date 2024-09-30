@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 import { Navigate, useLocation } from 'react-router-dom';
 
+import { FormControl, FormErrorMessage, FormLabel, Input } from '@chakra-ui/react'
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Input } from 'components/shared/Input';
 import { AuthContext } from 'contexts/AuthContext';
 import { FaArrowRightLong } from 'react-icons/fa6';
 
@@ -52,19 +52,16 @@ export default function SignIn() {
         <p>{t('pages.signin.description')}</p>
       </S.Header>
       <S.Form onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          {...register('email')}
-          label={t('pages.signin.fields.email.label')}
-          error={formErrors.email?.message}
-          size='lg'
-        />
-        <Input
-          {...register('password')}
-          label={t('pages.signin.fields.password.label')}
-          type='password'
-          error={formErrors.password?.message}
-          size='lg'
-        />
+        <FormControl variant="floating" id="email" isRequired isInvalid={!!formErrors.email?.message}>
+          <Input {...register('email')} placeholder=" " />
+          <FormLabel>{t('pages.signin.fields.email.label')}</FormLabel>
+          <FormErrorMessage>{formErrors.email?.message}</FormErrorMessage>
+        </FormControl>
+        <FormControl variant="floating" id="first-name" isRequired isInvalid={!!formErrors.password?.message}>
+          <Input {...register('password')} type='password' placeholder=" " />
+          <FormLabel>{t('pages.signin.fields.password.label')}</FormLabel>
+          <FormErrorMessage>{formErrors.password?.message}</FormErrorMessage>
+        </FormControl>
         <Link to={'/signup'}>{
           t('pages.signin.no_account')
         }</Link>
