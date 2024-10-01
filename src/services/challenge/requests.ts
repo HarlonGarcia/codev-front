@@ -36,6 +36,7 @@ export const joinChallenge = async ({ userId, challengeId }: IJoinChallengeDto) 
     null,
     {
       headers: {
+        'Content-Type': 'application/json',
         'X-User-ID': userId,
       },
     },
