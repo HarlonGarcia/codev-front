@@ -68,6 +68,27 @@ export function useJoinChallenge() {
   });
 };
 
+export function useUnjoinChallenge() {
+  const queryClient = useQueryClient();
+  const { user } = useContext(AuthContext);
+
+  return useMutation({
+    mutationFn: async (challengeId: string) => {
+      const response = await api.unjoinChallenge({
+        challengeId,
+        userId: user?.id,
+      });
+
+      return response;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['challenges', 'users'],
+      })
+    },
+  });
+};
+
 export function useCreateChallenge() {
   const queryClient = useQueryClient();
 

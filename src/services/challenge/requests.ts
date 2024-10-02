@@ -53,6 +53,24 @@ export const joinChallenge = async ({ userId, challengeId }: IJoinChallengeDto) 
 
   return response.data;
 }
+export const unjoinChallenge = async ({ userId, challengeId }: IJoinChallengeDto) => {
+  if (!challengeId || !userId) {
+    throw new Error('The user or challenge is not valid.');
+  }
+
+  const response = await api.delete(
+    generateUrl('challenge_users', { challengeId }),
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        'X-User-ID': userId,
+      },
+    },
+  );
+
+
+  return response.data;
+}
 
 export const createChallenge = async ({
   image,
@@ -62,12 +80,12 @@ export const createChallenge = async ({
 
   const { data } = await api.post(
     generateUrl('challenges'), {
-      ...challenge,
-      image: {
-        file: fileBase64,
-        fileName: image.name,
-      },
+    ...challenge,
+    image: {
+      file: fileBase64,
+      fileName: image.name,
     },
+  },
   );
 
   return data ?? {};
