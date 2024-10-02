@@ -27,7 +27,7 @@ const Container = styled('div', {
 });
 
 const UploadButton = styled('button', {
-    fontSize: '1rem',
+    fontSize: '0.875rem',
     fontWeight: '600',
     padding: '0.5rem 1rem',
     borderRadius: '0.25rem',

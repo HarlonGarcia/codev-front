@@ -3,20 +3,22 @@ import { styled } from 'styles';
 const Container = styled('div', {
     position: 'relative',
 
-    'button+div': {
+    'li': {
+        cursor: 'pointer',
+
+        '> img': {
+            width: '2rem',
+            height: '2rem',
+            borderRadius: '50%',
+        },
+    },
+
+    'li+div': {
         display: 'none',
     },
     
-    'button:hover + div': {
+    'li:hover + div': {
         display: 'flex',
-    },
-});
-
-const Avatar = styled('button', {
-    '> img': {
-        width: '2rem',
-        height: '2rem',
-        borderRadius: '50%',
     },
 });
 
@@ -40,7 +42,6 @@ const Popover = styled('div', {
     },
 
     '> button': {
-        marginTop: '1rem',
         color: '$error',
     },
 
@@ -49,4 +50,4 @@ const Popover = styled('div', {
     },
 });
 
-export { Container, Avatar, Popover };
+export { Container, Popover };
