@@ -28,6 +28,15 @@ export interface IUser {
   additionalUrl?: string;
   createdAt?: Date;
   updatedAt?: Date;
+  labels: {
+    id: string;
+    title: string;
+    description: string;
+  }[];
+  image?: {
+    file: string;
+    fileName: string;
+  } | null;
 }
 
 export interface ILoginPayload {

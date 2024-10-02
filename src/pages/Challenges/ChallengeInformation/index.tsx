@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { Avatar, AvatarGroup, WrapItem } from '@chakra-ui/react';
 import Markdown from 'components/Markdown';
@@ -7,6 +7,7 @@ import dayjs from 'dayjs';
 import PageNotFound from 'pages/PageNotFound';
 import { PiCodeDuotone } from 'react-icons/pi';
 import { useChallenge, useJoinChallenge, useParticipants } from 'services/challenge';
+import { getBase64Image } from 'utils';
 import { DATE_TIME } from 'utils/constants';
 
 import * as S from './styles';
@@ -14,6 +15,7 @@ import * as S from './styles';
 export default function ChallengeInformation() {
   const { id: challengeId } = useParams();
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const { data: currentChallenge } = useChallenge(challengeId);
   const { data: participants = [] } = useParticipants(challengeId);
@@ -70,12 +72,18 @@ export default function ChallengeInformation() {
           </S.Technologies>
         </S.Info>
         <S.JoinChallengeArea>
-          <AvatarGroup max={5}>
-            {participants.map(({ id, name }) => (
+          <AvatarGroup
+            onClick={() => navigate(`/challenges/${challengeId}/users`)}
+            size='sm'
+            max={2}
+          >
+            {participants.map(({ id, name, image }) => (
               <WrapItem key={id}>
                 <Avatar
                   size='sm'
+                  fontWeight={600}
                   name={name}
+                  src={getBase64Image(image?.file)}
                 />
               </WrapItem>
             ))}

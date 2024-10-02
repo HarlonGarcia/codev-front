@@ -14,6 +14,7 @@ const MyAccount = lazy(() => import('./pages/MyAccount'));
 const SignIn = lazy(() => import('./pages/Auth/SignIn'));
 const SignUp = lazy(() => import('./pages/Auth/SignUp'));
 const Challenges = lazy(() => import('./pages/Challenges'));
+const Participants = lazy(() => import('./pages/Challenges/Participants'));
 const ChallengeInformation = lazy(() => import('./pages/Challenges/ChallengeInformation'));
 const CreateChallenge = lazy(() => import('./pages/Challenges/CreateChallenge'));
 
@@ -85,9 +86,17 @@ export default function AppRoutes() {
                 </AuthOnly>
               }
             />
+            <Route
+              path=':id/users'
+              element={
+                <AuthOnly {...props}>
+                  <Participants />
+                </AuthOnly>
+              }
+            />
           </Route>
           <Route
-            path='/teste'
+            path='/create'
             element={
               // <AuthOnly {...props}>
               <CreateChallenge />

@@ -107,6 +107,15 @@ const JoinChallengeArea = styled('div', {
   flexDirection: 'row-reverse',
   gap: '1rem',
 
+  '> div': {
+    cursor: 'pointer',
+    transition: 'all 0.2s ease-in-out',
+
+    '&:hover': {
+      opacity: 0.8,
+    },
+  },
+
   '@md': {
     flexDirection: 'row',
   }

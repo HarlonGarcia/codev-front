@@ -29,14 +29,12 @@ export default function SignUp() {
   const onSubmit: SubmitHandler<SignUpSchema> = (formValues) => {
     const data = {
       ...formValues,
-      id: 'teste',
+      id: '1',
       additionalUrl: formValues.additionalUrl || undefined,
       passwordConfirmation: undefined,
     };
 
-    signUp(data, {
-      onSuccess: () => navigate('/'),
-    })
+    signUp(data, () => navigate('/'))
   };
 
   return (

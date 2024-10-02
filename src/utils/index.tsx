@@ -6,3 +6,7 @@ export const getCookie = (key: string) => {
     return parts.pop()?.split(';').shift();
   }
 };
+
+export const getBase64Image = (image?: string) => {
+  return image ? `data:image/jpeg;base64,${image}` : undefined;
+};

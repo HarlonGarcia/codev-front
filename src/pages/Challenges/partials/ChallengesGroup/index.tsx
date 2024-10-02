@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { statusIcons } from 'pages/Challenges/utils';
 import { GrStatusGoodSmall } from 'react-icons/gr';
 import { useChallenges } from 'services/challenge';
+import { getBase64Image } from 'utils';
 
 import * as S from './styles';
 
@@ -21,10 +22,6 @@ export default function ChallengesGroup({ category }: ChallengesGroupProps) {
   const [ carouselWidth, setCarouselWidth ] = useState(0);
 
   const { data: challenges = [] } = useChallenges();
-
-  const getChallengeCover = (image?: string) => {
-    return image ? `data:image/jpeg;base64,${image}` : 'https://picsum.photos/1280/720';
-  };
 
   const filteredChallenges = useMemo(() => {
     return challenges.filter(
@@ -68,7 +65,7 @@ export default function ChallengesGroup({ category }: ChallengesGroupProps) {
                 }
               </S.ChallengeHeader>
               <S.Image
-                src={getChallengeCover(image?.file)}
+                src={getBase64Image(image?.file) || 'https://picsum.photos/1280/720'}
                 alt={title}
                 loading='lazy'
               />

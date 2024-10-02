@@ -19,7 +19,7 @@ export const AuthContext = createContext({} as AuthContextProps);
 export const AuthProvider = ({ children }: PropsWithChildren) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const { data: user } = useMe(isAuthenticated);
+  const { data: user, refetch: refetchUser } = useMe();
 
   const {
     mutate: sendLogin,
@@ -36,7 +36,13 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   const handleUserAuthentication = (token: string) => {
     localStorage.setItem('@auth', token);
     setIsAuthenticated(true);
+    refetchUser();
   }
+
+  const logout = () => {
+    setIsAuthenticated(false);
+    localStorage.removeItem('@auth');
+  };
 
   const signUp = (user: IUser, callback?: () => void) => {
     register(user, {
@@ -44,7 +50,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
         handleUserAuthentication(token);
         callback?.();
       },
-      onError: () => setIsAuthenticated(false),
+      onError: logout,
     });
   }
 
@@ -54,13 +60,8 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
         handleUserAuthentication(token);
         callback?.();
       },
-      onError: () => setIsAuthenticated(false),
+      onError: logout,
     });
-  };
-
-  const logout = () => {
-    setIsAuthenticated(false);
-    localStorage.removeItem('@auth');
   };
 
   useEffect(function setToken() {

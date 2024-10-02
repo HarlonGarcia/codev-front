@@ -18,7 +18,6 @@ export default function SignIn() {
   const navigate = useNavigate();
   const { login, isAuthenticated } = useContext(AuthContext);
 
-
   const {
     formState: {
       dirtyFields,

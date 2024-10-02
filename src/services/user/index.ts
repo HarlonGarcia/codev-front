@@ -3,10 +3,10 @@ import { IUser } from 'types';
 
 import * as api from './requests';
 
-export function useMe(isAuthenticated?: boolean) {
+export function useMe() {
   return useQuery<IUser>({
-    enabled: !!isAuthenticated,
-    queryKey: ['me', isAuthenticated],
+    enabled: false,
+    queryKey: ['me'],
     queryFn: async () => {
       const response = await api.getMe();
 
