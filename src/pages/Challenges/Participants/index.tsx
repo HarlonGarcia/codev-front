@@ -13,6 +13,7 @@ import {
   WrapItem,
 } from '@chakra-ui/react';
 import PageNotFound from 'pages/PageNotFound';
+import { MdArrowBackIosNew } from "react-icons/md";
 import { useParticipants } from 'services/challenge';
 import { getBase64Image } from 'utils';
 
@@ -35,18 +36,20 @@ export default function Participants() {
 
   return (
     <S.Container>
-      <button onClick={() => navigate(`/challenge/${challengeId}`)}></button>
+      <button onClick={() => navigate(`/challenge/${challengeId}`)}>
+        <MdArrowBackIosNew />
+        <span>Retornar ao desafio</span>
+      </button>
       <TableContainer>
-        <Table variant='unstyled'>
+        <Table colorScheme='whiteAlpha' variant='striped'>
           <Thead>
             <Tr>
-              <Th>Foto</Th>
+              <Th></Th>
               <Th>Nome</Th>
               <Th>Github</Th>
             </Tr>
           </Thead>
           <Tbody>
-                
             {participants.map(({
               id,
               name,
@@ -65,7 +68,7 @@ export default function Participants() {
                   </WrapItem>
                 </Td>
                 <Td>{name}</Td>
-                <Td>{githubUrl}</Td>
+                <Td style={{ letterSpacing: '1px' }}>{githubUrl}</Td>
               </Tr>
             ))}
           </Tbody>
