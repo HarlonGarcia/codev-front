@@ -12,13 +12,14 @@ const Header = styled('div', {
   '& > h2': {
     color: '$highlight',
     fontSize: '1.25rem',
-    marginBottom: '1.5rem',
+    marginBottom: '0rem',
     textTransform: 'capitalize',
 
     '@xs': {
       fontSize: '1.5rem',
     },
     '@md': {
+      marginBottom: '1.5rem',
       fontSize: '2rem',
     },
   },
@@ -65,11 +66,12 @@ const Details = styled('div', {
 
 const Info = styled('div', {
   display: 'flex',
+  justifyContent: 'center',
   flexDirection: 'column',
-  marginBottom: '1.5rem',
+  marginBottom: '2rem',
 
   '& > div, & > small': {
-    marginBottom: '1.25rem',
+    marginBottom: '1rem',
     color: '$coolgrey',
     fontSize: '1rem',
     fontWeight: 600,
@@ -88,6 +90,26 @@ const Info = styled('div', {
       textTransform: 'capitalize',
     },
   },
+
+  '@md': {
+    marginBottom: '0rem',
+
+    '& > div, & > small': {
+      marginBottom: '1.25rem',
+    },
+  }
+});
+
+const JoinChallengeArea = styled('div', {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'flex-end',
+  flexDirection: 'row-reverse',
+  gap: '1rem',
+
+  '@md': {
+    flexDirection: 'row',
+  }
 });
 
 const Technologies = styled('ul', {
@@ -137,6 +159,11 @@ const Button = styled('button', {
     backgroundColor: '$highlight',
   },
 
+  '&:disabled': {
+    filter: 'grayscale(0.3)',
+    cursor: 'not-allowed',
+  },
+
   '& > svg': {
     display: 'none',
     width: '1.5rem',
@@ -165,5 +192,6 @@ export {
   Details,
   Button,
   Info,
+  JoinChallengeArea,
   Technologies,
 };

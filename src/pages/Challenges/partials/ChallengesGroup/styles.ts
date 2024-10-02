@@ -4,6 +4,9 @@ import { styled } from 'styles';
 
 const Container = styled('div', {
   '& > h2': {
+    fontFamily: '$code',
+    fontSize: '1.75rem',
+    fontWeight: 600,
     marginBottom: '1rem',
   },
 
@@ -65,6 +68,9 @@ const ChallengeHeader = styled('div', {
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
+    fontSize: '1.25rem',
+    color: '$text',
+    fontWeight: 600,
   },
 
   '& > span': {
@@ -117,14 +123,14 @@ const SeeChallenge = styled('button', {
   background: '$secondary',
   borderRadius: '0.5rem',
 
-  fontSize: '1rem',
+  fontSize: '1.125rem',
   fontWeight: 600,
 
   transition: 'all 0.3s ease-in-out',
 
   '&:hover': {
-    color: '$secondary',
-    background: '$title',
+    color: '$primary',
+    background: '$highlight',
   },
 
   '&:disabled': {

@@ -15,7 +15,7 @@ api.interceptors.request.use((request) => {
   return request;
 });
 
-axios.interceptors.response.use(
+api.interceptors.response.use(
   (response) => response,
   (error) => {
     const { data, status } = error.response ?? {};

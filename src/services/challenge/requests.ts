@@ -26,6 +26,14 @@ export const getChallenge = async (challengeId?: string) => {
   return data ?? {};
 }
 
+export const getParticipants = async (challengeId?: string) => {
+  const { data } = await api.get(
+    generateUrl('challenge_users', { challengeId })
+  );
+
+  return data ?? [];
+}
+
 export const joinChallenge = async ({ userId, challengeId }: IJoinChallengeDto) => {
   if (!challengeId || !userId) {
     throw new Error('The user or challenge is not valid.');

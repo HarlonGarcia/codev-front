@@ -43,11 +43,6 @@ export const globalStyles = globalCss({
   '*::-webkit-scrollbar-thumb': {
     backgroundColor: '$secondary',
   },
-  body: {
-    fontFamily: '$default',
-    backgroundColor: '$primary',
-    color: '$text',
-  },
   'h1, h2': {
     color: '$title',
   },

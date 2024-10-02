@@ -2,7 +2,7 @@ import { useContext } from 'react';
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { AuthContext } from 'contexts/AuthContext';
-import { CustomQueryOptions, IChallenge } from 'types';
+import { CustomQueryOptions, IChallenge, IUser } from 'types';
 
 import * as api from './requests';
 import { ICreateChallengeDto, IGetChallengeParams } from './types';
@@ -35,14 +35,35 @@ export function useChallenge(challengeId?: string) {
   });
 };
 
+export function useParticipants(challengeId?: string) {
+  return useQuery<IUser[]>({
+    enabled: !!challengeId,
+    queryKey: ['challenges', 'users', challengeId],
+    queryFn: async () => {
+      const response = await api.getParticipants(challengeId);
+
+      return response;
+    },
+  });
+};
+
 export function useJoinChallenge() {
+  const queryClient = useQueryClient();
   const { user } = useContext(AuthContext);
 
   return useMutation({
     mutationFn: async (challengeId: string) => {
-      const response = await api.joinChallenge({ challengeId, userId: user?.id });
+      const response = await api.joinChallenge({
+        challengeId,
+        userId: user?.id,
+      });
 
       return response;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['challenges', 'users'],
+      })
     },
   });
 };

@@ -3,7 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import rehypeHighlight from 'rehype-highlight';
 import remarkGfm from 'remark-gfm';
 
-import 'styles/alt.scss';
+import 'styles/index.scss';
 import * as S from './styles';
 
 interface MarkdownProps {
