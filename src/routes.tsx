@@ -5,7 +5,6 @@ import Navbar from 'components/Navbar';
 import ShortcutDialog from 'components/ShortcutDialog';
 import { extraShortcuts, goToShortcuts } from 'components/ShortcutDialog/utils';
 import { GlobalContext } from 'contexts/GlobalContext';
-// import { AdminOnly } from 'pages/Auth/AdminOnly';
 import { AuthOnly } from 'pages/Auth/AuthOnly';
 import PageNotFound from 'pages/PageNotFound';
 
@@ -96,11 +95,11 @@ export default function AppRoutes() {
             />
           </Route>
           <Route
-            path='/create'
+            path='new'
             element={
-              // <AuthOnly {...props}>
-              <CreateChallenge />
-              // </AuthOnly>
+              <AuthOnly {...props}>
+                <CreateChallenge />
+              </AuthOnly>
             }
           />
           <Route path='*' element={<PageNotFound />} />

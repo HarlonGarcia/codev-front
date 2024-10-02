@@ -41,7 +41,7 @@ export const InputFile = <T extends FieldValues>({
   };
 
   const uploadButtonLabel = 
-    preview ? "Remove image" : "Upload image";
+    preview ? "Remover imagem" : "Adicionar imagem";
 
   return (
     <S.Container>

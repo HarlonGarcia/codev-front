@@ -80,7 +80,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
       value={{
         user,
         error: !!loginError || !!signupError,
-        isAuthenticated,
+        isAuthenticated: Boolean(user) && isAuthenticated,
         isLoading: isLoggingIn || isSigningIn,
         signUp,
         login,

@@ -6,13 +6,13 @@ import * as api from './requests';
 export function useMe() {
   return useQuery<IUser>({
     enabled: false,
+    staleTime: Infinity,
     queryKey: ['me'],
     queryFn: async () => {
       const response = await api.getMe();
 
       return response;
     },
-
   })
 }
 

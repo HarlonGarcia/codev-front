@@ -21,7 +21,6 @@ export default function ChallengeInformation() {
 
   const { user } = useContext(AuthContext);
 
-
   const { data: currentChallenge } = useChallenge(challengeId);
   const { data: participants = [] } = useParticipants(challengeId);
 
@@ -35,15 +34,18 @@ export default function ChallengeInformation() {
     isPending: isUnjoiningChallenge,
   } = useUnjoinChallenge();
 
-  const isParticipant = participants.some((participant) => participant.id === user?.id);
+  const isParticipant = participants.some(({ id }) => id === user?.id);
 
-  const toggleParticipant = (id: string) => {
-    if (!id) return;
+  const handleParticipantAction = (id: string) => {
+    if (!id) {
+      return;
+    }
 
     if (isParticipant) {
       unjoinChallenge(id);
       return;
-    } 
+    }
+
     joinChallenge(id);
   }
 
@@ -55,6 +57,8 @@ export default function ChallengeInformation() {
     technologies = [],
   } = currentChallenge || {};
 
+  const isLoading = isJoiningChallenge || isUnjoiningChallenge;
+
   if (!currentChallenge) {
     return (
       <PageNotFound
@@ -62,7 +66,6 @@ export default function ChallengeInformation() {
       />
     )
   };
-
   return (
     <S.Container>
       <S.Header>
@@ -112,8 +115,8 @@ export default function ChallengeInformation() {
             ))}
           </AvatarGroup>
           <S.Button
-            onClick={() => toggleParticipant(currentChallenge.id)}
-            disabled={isJoiningChallenge || isUnjoiningChallenge}
+            onClick={() => handleParticipantAction(currentChallenge.id)}
+            disabled={isLoading}
           >
             <PiCodeDuotone />
             <strong>{isParticipant ? 

@@ -21,6 +21,15 @@ const Container = styled(WrapperWithPadding, {
     },
   },
 
+  '& > button': {
+    width: 'fit-content',
+    padding: '1rem 2rem',
+    borderRadius: '0.5rem',
+    marginTop: '2rem',
+    boxShadow: '0 0 12px rgba(5, 2, 25, 0.5), 0 0 24px rgba(5, 2, 25, 0.5), 0 0 36px rgba(5, 2, 25, 0.5)',
+    backgroundColor: '$secondary',
+  },
+
   '@md': {
     '& > div': {
       '& > .separator': {

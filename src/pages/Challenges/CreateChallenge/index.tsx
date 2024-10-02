@@ -1,6 +1,7 @@
 import { ChangeEvent, useContext, useMemo, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -57,6 +58,7 @@ const TechnologiesList = ({ technologies, onRemove }: TechnologyListPros) => {
 export default function CreateChallenge() {
   const { t } = useTranslation();
   const { logout, user: currentUser } = useContext(AuthContext);
+  const navigate = useNavigate();
   
   const [selectedTechnologies, setSelectedTechnologies] = useState<ITechnologiesState>({
     items: [],
@@ -107,7 +109,12 @@ export default function CreateChallenge() {
       status: formValues.status as ChallengeStatusEnum,
     };
 
-    createChallenge(newChallenge);
+    createChallenge(newChallenge, {
+      onSuccess: () => {
+        toast.success('Desafio criado com sucesso');
+        navigate('/challenges')
+      },
+    });
   };
 
   const addTechnology = (event: ChangeEvent<HTMLSelectElement>) => {
