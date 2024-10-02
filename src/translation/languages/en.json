@@ -59,6 +59,7 @@
     "pages.challenge_information.unknown_author": "Author not found",
     "pages.challenge_information.created_by": "Created by",
     "pages.challenge_information.submit.label": "Join challenge",
+    "pages.challenge_information.unsubmit.label": "Unjoin challenge",
     "pages.challenge_information.page_not_found.placeholder": "The challenge was not found",
 
     "pages.signin.title": "Welcome back!",

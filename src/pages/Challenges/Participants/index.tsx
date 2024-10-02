@@ -36,7 +36,7 @@ export default function Participants() {
 
   return (
     <S.Container>
-      <button onClick={() => navigate(`/challenge/${challengeId}`)}>
+      <button onClick={() => navigate(`/challenges/${challengeId}`)}>
         <MdArrowBackIosNew />
         <span>Retornar ao desafio</span>
       </button>

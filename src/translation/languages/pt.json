@@ -59,6 +59,8 @@
     "pages.challenge_information.unknown_author": "Autor não informado",
     "pages.challenge_information.created_by": "Criado por",
     "pages.challenge_information.submit.label": "Participar do desafio",
+    "pages.challenge_information.unsubmit.label": "Deixar de participar",
+
     "pages.challenge_information.page_not_found.placeholder": "O desafio que você procura não foi encontrado",
 
     "pages.signin.title": "Bem vindo de volta!",

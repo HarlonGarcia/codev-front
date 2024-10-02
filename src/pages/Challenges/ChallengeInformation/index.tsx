@@ -1,12 +1,14 @@
+import { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { Avatar, AvatarGroup, WrapItem } from '@chakra-ui/react';
 import Markdown from 'components/Markdown';
+import { AuthContext } from 'contexts/AuthContext';
 import dayjs from 'dayjs';
 import PageNotFound from 'pages/PageNotFound';
 import { PiCodeDuotone } from 'react-icons/pi';
-import { useChallenge, useJoinChallenge, useParticipants } from 'services/challenge';
+import { useChallenge, useJoinChallenge, useParticipants, useUnjoinChallenge } from 'services/challenge';
 import { getBase64Image } from 'utils';
 import { DATE_TIME } from 'utils/constants';
 
@@ -17,12 +19,33 @@ export default function ChallengeInformation() {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
+  const { user } = useContext(AuthContext);
+
+
   const { data: currentChallenge } = useChallenge(challengeId);
   const { data: participants = [] } = useParticipants(challengeId);
+
   const {
     mutate: joinChallenge,
     isPending: isJoiningChallenge,
   } = useJoinChallenge();
+
+  const {
+    mutate: unjoinChallenge,
+    isPending: isUnjoiningChallenge,
+  } = useUnjoinChallenge();
+
+  const isParticipant = participants.some((participant) => participant.id === user?.id);
+
+  const toggleParticipant = (id: string) => {
+    if (!id) return;
+
+    if (isParticipant) {
+      unjoinChallenge(id);
+      return;
+    } 
+    joinChallenge(id);
+  }
 
   const {
     title = t('pages.challenge_information.unknown_title'),
@@ -89,11 +112,15 @@ export default function ChallengeInformation() {
             ))}
           </AvatarGroup>
           <S.Button
-            onClick={() => joinChallenge(currentChallenge.id)}
-            disabled={isJoiningChallenge}
+            onClick={() => toggleParticipant(currentChallenge.id)}
+            disabled={isJoiningChallenge || isUnjoiningChallenge}
           >
             <PiCodeDuotone />
-            <strong>{t('pages.challenge_information.submit.label')}</strong>
+            <strong>{isParticipant ? 
+              t('pages.challenge_information.unsubmit.label') :
+              t('pages.challenge_information.submit.label') 
+            }
+            </strong>
           </S.Button>
         </S.JoinChallengeArea>
       </S.Details>
