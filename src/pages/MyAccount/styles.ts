@@ -55,17 +55,6 @@ const AccountInfo = styled('div', {
   '& div': {
     display: 'flex',
     gap: '0.5rem',
-
-    '& > span': {
-      padding: '0.25rem 0.5rem',
-      'text-transform': 'uppercase',
-
-      fontSize: '0.75rem',
-      fontWeight: '600',
-      color: '$coolgrey',
-      backgroundColor: '$secondary',
-      borderRadius: '0.25rem',
-    },
   },
 
   '@sm': {

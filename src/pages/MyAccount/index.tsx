@@ -2,6 +2,7 @@ import { useContext, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
+import { Badge } from 'components/Badge';
 import { AuthContext } from 'contexts/AuthContext';
 import { FaGithub } from 'react-icons/fa';
 import { ImLink } from 'react-icons/im';
@@ -9,8 +10,6 @@ import { getUrlWithoutPrefix } from 'services/utils';
 
 import * as S from './styles';
 import { IUserOption, options } from './utils';
-
-const fakeLabels = [ 'Dev Java', 'Challenger' ];
 
 export default function MyAccount() {
   const { t } = useTranslation();
@@ -60,8 +59,8 @@ export default function MyAccount() {
           <S.AccountInfo>
             <h2>{user.name}</h2>
             <div>
-              {fakeLabels.map((item, index) => (
-                <span key={index}>{item}</span>
+              {user.labels.map(({ id, title }) => (
+                <Badge key={id}>{title}</Badge>
               ))}
             </div>
           </S.AccountInfo>

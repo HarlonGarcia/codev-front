@@ -1,5 +1,6 @@
 import { ChangeEvent, useRef, useState } from 'react';
 import { FieldValues, Path, UseFormRegister } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import * as S from './styles';
 
@@ -13,6 +14,7 @@ const imagePlaceholder = 'https://placehold.co/200/120F26/342F48?&text=:/&font=r
 export const InputFile = <T extends FieldValues>({ 
   register,
 }: InputFileProps<T>) => {
+  const { t } = useTranslation();
   const hiddenInputRef = useRef<HTMLInputElement | null>(null);
   const [preview, setPreview] = useState<string | undefined>(undefined);
 
@@ -40,8 +42,9 @@ export const InputFile = <T extends FieldValues>({
     hiddenInputRef.current?.click();
   };
 
-  const uploadButtonLabel = 
-    preview ? "Remover imagem" : "Adicionar imagem";
+  const uploadButtonLabel = preview
+    ? t('pages.create_challenge.fields.image.remove')
+    : t('pages.create_challenge.fields.image.add');
 
   return (
     <S.Container>

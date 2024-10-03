@@ -51,6 +51,8 @@
     "pages.create_challenge.fields.technologies.error.min": "Pelo menos uma tecnologia é obrigatória",
     "pages.create_challenge.fields.technologies.error.limit": "Só é possível escolher até 5 tecnologias",
     "pages.create_challenge.fields.status.label": "Escolha o status",
+    "pages.create_challenge.fields.image.add": "Adicionar imagem",
+    "pages.create_challenge.fields.image.remove": "Remover imagem",
     "pages.create_challenge.submit.label": "Criar desafio",
 
     "pages.challenge_information.unknown_title": "Título não informado",

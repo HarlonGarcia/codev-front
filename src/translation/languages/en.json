@@ -51,6 +51,8 @@
     "pages.create_challenge.fields.technologies.error.min": "At least one technology must be selected",
     "pages.create_challenge.fields.technologies.error.limit": "You can only select 5 technologies",
     "pages.create_challenge.fields.status.label": "Select a status",
+    "pages.create_challenge.fields.image.add": "Upload image",
+    "pages.create_challenge.fields.image.remove": "Remove image",
     "pages.create_challenge.submit.label": "Create challenge",
 
     "pages.challenge_information.unknown_title": "Title not found",
