@@ -80,12 +80,12 @@ export const createChallenge = async ({
 
   const { data } = await api.post(
     generateUrl('challenges'), {
-    ...challenge,
-    image: {
-      file: fileBase64,
-      fileName: image.name,
+      ...challenge,
+      image: {
+        file: fileBase64,
+        fileName: image.name,
+      },
     },
-  },
   );
 
   return data ?? {};

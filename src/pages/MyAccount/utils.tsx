@@ -18,7 +18,7 @@ export const options: IUserOption[] = [
       </Translation>
     ),
     icon: <FaCode />,
-    redirectUrl: '/challenges'
+    redirectUrl: '/account/challenges'
   },
   {
     label: (

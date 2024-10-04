@@ -8,6 +8,18 @@
   src: url('../assets/fonts/FiraCode-VariableFont_wght.ttf');
 }
 
+@property --bg-angle {
+  inherits: false;
+  initial-value: 0deg;
+  syntax: "<angle>";
+}
+
+@keyframes spin {
+  to {
+    --bg-angle: 180deg;
+  }
+}
+
 .markdown {
   display: flex;
   flex-direction: column;

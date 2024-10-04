@@ -61,9 +61,13 @@
     "pages.challenge_information.unknown_author": "Autor não informado",
     "pages.challenge_information.created_by": "Criado por",
     "pages.challenge_information.submit.label": "Participar do desafio",
-    "pages.challenge_information.unsubmit.label": "Deixar de participar",
-
+    "pages.challenge_information.unsubmit.label": "Sair do desafio",
     "pages.challenge_information.page_not_found.placeholder": "O desafio que você procura não foi encontrado",
+
+    "pages.challenge_users.button.return": "Retornar ao desafio",
+    "pages.challenge_users.table.columns.name": "Nome",
+    "pages.challenge_users.table.columns.github": "Github",
+    "pages.challenge_users.table.columns.labels": "Conquistas",
 
     "pages.signin.title": "Bem vindo de volta!",
     "pages.signin.description": "Faça login para continuar praticando e aprendendo",

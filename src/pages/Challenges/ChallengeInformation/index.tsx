@@ -76,7 +76,7 @@ export default function ChallengeInformation() {
         </span>
       </S.Header>
       {image?.file && (
-        <S.Cover src={`data:image/jpeg;base64,${image?.file}`} />
+        <S.Cover src={getBase64Image(image.file)} />
       )}
       <Markdown content={description} />
       <S.Details>
@@ -90,9 +90,9 @@ export default function ChallengeInformation() {
             <small>{t('pages.challenge_information.unknown_author')}</small>
           )}
           <S.Technologies>
-            {technologies.map((technology, index) => (
-              <li key={technology.id + index}>
-                {technology.name}
+            {technologies.map(({ id, name }) => (
+              <li key={id}>
+                {name}
               </li>
             ))}
           </S.Technologies>
@@ -119,10 +119,10 @@ export default function ChallengeInformation() {
             disabled={isLoading}
           >
             <PiCodeDuotone />
-            <strong>{isParticipant ? 
-              t('pages.challenge_information.unsubmit.label') :
-              t('pages.challenge_information.submit.label') 
-            }
+            <strong>
+              {isParticipant
+                ? t('pages.challenge_information.unsubmit.label')
+                : t('pages.challenge_information.submit.label')}
             </strong>
           </S.Button>
         </S.JoinChallengeArea>

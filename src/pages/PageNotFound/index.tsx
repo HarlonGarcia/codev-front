@@ -14,7 +14,7 @@ export default function PageNotFound({ placeholder: placeholderText }: PageNotFo
   return (
     <S.Container>
       <h1>{t('pages.not_found.title')}</h1>
-      <p>{placeholder}</p>
+      <p>{placeholder || t('pages.challenge_information.page_not_found.placeholder')}</p>
       <Link to="/">{t('pages.not_found.return')}</Link>
     </S.Container>
   );

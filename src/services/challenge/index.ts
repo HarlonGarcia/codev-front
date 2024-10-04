@@ -7,6 +7,17 @@ import { CustomQueryOptions, IChallenge, IUser } from 'types';
 import * as api from './requests';
 import { ICreateChallengeDto, IGetChallengeParams } from './types';
 
+const useRefresh = () => {
+  const queryClient = useQueryClient();
+  const keys = ['challengeUsers', 'userChallenges'];
+
+  return () => queryClient.invalidateQueries({
+    predicate({ queryKey }) {
+      return keys.some((key) => queryKey.includes(key))
+    },
+  });
+};
+
 export function useChallenges(
   filters?: IGetChallengeParams,
   options?: CustomQueryOptions<IChallenge[]>,
@@ -38,7 +49,7 @@ export function useChallenge(challengeId?: string) {
 export function useParticipants(challengeId?: string) {
   return useQuery<IUser[]>({
     enabled: !!challengeId,
-    queryKey: ['challenges', 'users', challengeId],
+    queryKey: ['challengeUsers', challengeId],
     queryFn: async () => {
       const response = await api.getParticipants(challengeId);
 
@@ -48,7 +59,7 @@ export function useParticipants(challengeId?: string) {
 };
 
 export function useJoinChallenge() {
-  const queryClient = useQueryClient();
+  const refresh = useRefresh();
   const { user } = useContext(AuthContext);
 
   return useMutation({
@@ -60,16 +71,12 @@ export function useJoinChallenge() {
 
       return response;
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['challenges', 'users'],
-      })
-    },
+    onSuccess: refresh,
   });
 };
 
 export function useUnjoinChallenge() {
-  const queryClient = useQueryClient();
+  const refresh = useRefresh();
   const { user } = useContext(AuthContext);
 
   return useMutation({
@@ -81,11 +88,7 @@ export function useUnjoinChallenge() {
 
       return response;
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['challenges', 'users'],
-      })
-    },
+    onSuccess: refresh,
   });
 };
 

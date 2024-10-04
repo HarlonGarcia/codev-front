@@ -38,7 +38,7 @@ export default function Navbar() {
           </>
         )}
         {isAuthenticated && (
-          <UserAvatar />
+          <UserAvatar redirect />
         )}
         {!isAuthenticated && (
           <Link to='/signin'>

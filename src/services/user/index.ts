@@ -1,5 +1,8 @@
+import { useContext } from 'react';
+
 import { useQuery } from '@tanstack/react-query';
-import { IUser } from 'types';
+import { AuthContext } from 'contexts/AuthContext';
+import { IChallenge, IUser } from 'types';
 
 import * as api from './requests';
 
@@ -17,7 +20,7 @@ export function useMe() {
 }
 
 export function useUsers() {
-  return useQuery({
+  return useQuery<IUser[]>({
     queryKey: ['users'],
     queryFn: async () => {
       const response = await api.getUsers();
@@ -26,3 +29,16 @@ export function useUsers() {
     },
   })
 }
+
+export function useUserChallenges() {
+  const { user } = useContext(AuthContext);
+
+  return useQuery<IChallenge[]>({
+    queryKey: ['userChallenges', user],
+    queryFn: async () => {
+      const response = await api.getUserChallenges(user?.id);
+
+      return response;
+    },
+  });
+};

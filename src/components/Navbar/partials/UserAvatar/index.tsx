@@ -1,33 +1,56 @@
 import { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import { Avatar, WrapItem } from '@chakra-ui/react';
+import { Avatar, AvatarProps, WrapItem } from '@chakra-ui/react';
 import { AuthContext } from 'contexts/AuthContext';
 import { getBase64Image } from 'utils';
 
 import * as S from './styles';
 
-export default function UserAvatar() {
+
+type UserAvatarProps = AvatarProps & {
+  redirect?: boolean;
+};
+
+export default function UserAvatar({
+  size ='sm',
+  fontWeight = 600,
+  redirect = false,
+  ...otherProps
+}: UserAvatarProps) {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { user } = useContext(AuthContext);
+
+  const handleClick = () => {
+    if (!redirect) {
+      return;
+    }
+
+    navigate('/account');
+  }
 
   if (!user) {
     return;
   }
   return (
     <S.Container>
-      <WrapItem onClick={() => navigate('/account')}>
+      <WrapItem onClick={handleClick}>
         <Avatar
-          size='sm'
-          fontWeight={600}
+          {...otherProps}
+          size={size}
+          fontWeight={fontWeight}
           name={user?.name}
           src={getBase64Image(user?.image?.file)}
         />
       </WrapItem>
-      <S.Popover>
-        <span>{user.name}</span>
-        <button>Fazer logout</button>
-      </S.Popover>
+      {redirect && (
+        <S.Popover>
+          <span>{user.name}</span>
+          <button>{t('components.navbar.logout')}</button>
+        </S.Popover>
+      )}
     </S.Container>
   );
 }

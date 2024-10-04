@@ -64,6 +64,11 @@
     "pages.challenge_information.unsubmit.label": "Unjoin challenge",
     "pages.challenge_information.page_not_found.placeholder": "The challenge was not found",
 
+    "pages.challenge_users.button.return": "Back to challenge",
+    "pages.challenge_users.table.columns.name": "Name",
+    "pages.challenge_users.table.columns.github": "Github",
+    "pages.challenge_users.table.columns.labels": "Achievements",
+
     "pages.signin.title": "Welcome back!",
     "pages.signin.description": "Log in to continue practicing and learning",
     "pages.signin.fields.email.label": "Email",

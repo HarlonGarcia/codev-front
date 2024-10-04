@@ -20,6 +20,12 @@ export interface IShortcuts {
   };
 }
 
+export interface ILabel {
+  id: string;
+  title: string;
+  description: string;
+}
+
 export interface IUser {
   id: string;
   name: string;
@@ -28,11 +34,7 @@ export interface IUser {
   additionalUrl?: string;
   createdAt?: Date;
   updatedAt?: Date;
-  labels: {
-    id: string;
-    title: string;
-    description: string;
-  }[];
+  labels?: ILabel[];
   image?: {
     file: string;
     fileName: string;

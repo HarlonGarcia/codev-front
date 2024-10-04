@@ -36,7 +36,9 @@ export default function ChallengesGroup({ category }: ChallengesGroupProps) {
     }
   }, [category]);
 
-  if (filteredChallenges.length <= 0) return;
+  if (filteredChallenges.length <= 0) {
+    return;
+  };
   return (
     <S.Container>
       <h2>{category.name}</h2>

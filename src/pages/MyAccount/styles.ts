@@ -10,8 +10,8 @@ const Container = styled(WrapperWithPadding, {
 
 const AccountHeader = styled('header', {
   display: 'flex',
-  flexDirection: 'column',
   alignItems: 'center',
+  flexDirection: 'column',
   justifyContent: 'center',
 
   marginBottom: '1.75rem',
@@ -59,7 +59,6 @@ const AccountInfo = styled('div', {
 
   '@sm': {
     alignItems: 'flex-start',
-    padding: '1rem 0',
   },
 });
 
@@ -68,6 +67,17 @@ const AccountContent = styled('div', {
   flexDirection: 'column',
   gap: '1.25rem',
   marginBottom: '3rem',
+
+  variants: {
+    loading: {
+      true: {
+        '> *': {
+          cursor: 'not-allowed',
+          color: '$textDarker',
+        }
+      }
+    }
+  }
 });
 
 const Option = styled('div', {

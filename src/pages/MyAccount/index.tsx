@@ -3,18 +3,24 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { Badge } from 'components/Badge';
+import UserAvatar from 'components/Navbar/partials/UserAvatar';
 import { AuthContext } from 'contexts/AuthContext';
 import { FaGithub } from 'react-icons/fa';
 import { ImLink } from 'react-icons/im';
+import { useUserChallenges } from 'services/user';
 import { getUrlWithoutPrefix } from 'services/utils';
 
 import * as S from './styles';
 import { IUserOption, options } from './utils';
 
+const MAX_LABELS_DISPLAYED = 5;
+
 export default function MyAccount() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { user } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
+
+  const { isFetching: isLoadingChallenges } = useUserChallenges();
 
   const handleActions = ({ action, redirectUrl }: IUserOption) => {
     if (action) {
@@ -51,21 +57,39 @@ export default function MyAccount() {
   if (!user) {
     return;
   }
+
+  const userLabels = user.labels || [];
+  const labels = userLabels.slice(0, MAX_LABELS_DISPLAYED);
+
+  const labelsRemainingCount = 5 < userLabels.length
+    ? userLabels.length - MAX_LABELS_DISPLAYED
+    : 0;
+  
   return (
     <S.Container>
       <div>
         <S.AccountHeader>
-          <S.Avatar src='https://picsum.photos/200' />
+          <UserAvatar size={'xl'} />
           <S.AccountInfo>
             <h2>{user.name}</h2>
             <div>
-              {user.labels.map(({ id, title }) => (
-                <Badge key={id}>{title}</Badge>
+              {labels.map(({ id, title }, index) => (
+                <Badge
+                  border='animated'
+                  key={id + index}
+                >
+                  {title}
+                </Badge>
               ))}
+              {labelsRemainingCount > 0 && (
+                <Badge border='purple'>
+                  +{labelsRemainingCount}
+                </Badge>
+              )}
             </div>
           </S.AccountInfo>
         </S.AccountHeader>
-        <S.AccountContent>
+        <S.AccountContent loading={isLoadingChallenges}>
           {options.map((option, index) => (
             <S.Option key={index} onClick={() => handleActions(option)}>
               {option.icon}
@@ -81,7 +105,9 @@ export default function MyAccount() {
           ))}
         </S.AccountContent>
         <S.AccountFooter>
-          <button>{t('pages.account.logout')}</button>
+          <button onClick={logout}>
+            {t('pages.account.logout')}
+          </button>
         </S.AccountFooter>
       </div>
     </S.Container>

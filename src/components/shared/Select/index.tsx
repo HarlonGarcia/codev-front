@@ -31,7 +31,7 @@ type SelectProps = DefaultSelectProps & {
 };
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
-  function Select(props, ref)  {
+  function Select(props, ref) {
     const {
       label,
       error,
