@@ -34,7 +34,10 @@
     "pages.account.options.edit_information": "Edit information",
     "pages.account.options.connections": "See my connections",
     "pages.account.logout": "Log out",
-
+  
+    "pages.account.challenges.title": "My challenges",
+    "pages.account.challenges.none_challenge": "You are not participating in any challenges at the moment",
+  
     "pages.challenges.unknown_title": "Title not found",
     "pages.challenges.see_challenge": "See challenge",
 

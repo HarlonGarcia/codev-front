@@ -35,6 +35,9 @@
     "pages.account.options.connections": "Ver minhas conexões",
     "pages.account.logout": "Desconectar",
 
+    "pages.account.challenges.title": "Meus desafios",
+    "pages.account.challenges.none_challenge": "Você não está participando de nenhum desafio no momento",
+
     "pages.challenges.unknown_title": "Título não informado",
     "pages.challenges.see_challenge": "Ver desafio",
 

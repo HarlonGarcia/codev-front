@@ -2,7 +2,7 @@
   "me": "http://localhost:8080/me",
   "login": "http://localhost:8080/users/login",
   "signup": "http://localhost:8080/users/signup",
-  "user_challenges": "http://localhost:8080/users/challenges",
+  "user_challenges": "http://localhost:8080/users/{userId}/challenges",
   "users": "http://localhost:8080/users",
   "challenge_users": "http://localhost:8080/challenges/{challengeId}/users",
   "challenges": "http://localhost:8080/challenges",

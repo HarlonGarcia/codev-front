@@ -20,12 +20,8 @@ export const getUserChallenges = async (userId?: string) => {
   }
 
   const { data } = await api.get(
-    generateUrl('user_challenges'),
-    {
-      headers: {
-        'X-User-ID': userId,
-      },
-    },
+    generateUrl('user_challenges', { userId }),
   );
+
   return data ?? [];
 }

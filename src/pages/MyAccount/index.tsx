@@ -61,7 +61,7 @@ export default function MyAccount() {
   const userLabels = user.labels || [];
   const labels = userLabels.slice(0, MAX_LABELS_DISPLAYED);
 
-  const labelsRemainingCount = 5 < userLabels.length
+  const labelsRemainingCount = MAX_LABELS_DISPLAYED < userLabels.length
     ? userLabels.length - MAX_LABELS_DISPLAYED
     : 0;
   
