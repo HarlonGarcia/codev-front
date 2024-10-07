@@ -7,7 +7,7 @@ import Markdown from 'components/Markdown';
 import { AuthContext } from 'contexts/AuthContext';
 import dayjs from 'dayjs';
 import PageNotFound from 'pages/PageNotFound';
-import { PiCodeDuotone } from 'react-icons/pi';
+import { LuUserPlus, LuUserX  } from "react-icons/lu";
 import { useChallenge, useJoinChallenge, useParticipants, useUnjoinChallenge } from 'services/challenge';
 import { getBase64Image } from 'utils';
 import { DATE_TIME } from 'utils/constants';
@@ -115,15 +115,19 @@ export default function ChallengeInformation() {
             ))}
           </AvatarGroup>
           <S.Button
+            isParticipant={isParticipant}
             onClick={() => handleParticipantAction(currentChallenge.id)}
             disabled={isLoading}
           >
-            <PiCodeDuotone />
-            <strong>
+            {isParticipant
+              ? <LuUserX />
+              : <LuUserPlus />
+            }
+            <span>
               {isParticipant
                 ? t('pages.challenge_information.unsubmit.label')
                 : t('pages.challenge_information.submit.label')}
-            </strong>
+            </span>
           </S.Button>
         </S.JoinChallengeArea>
       </S.Details>

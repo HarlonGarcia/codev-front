@@ -62,6 +62,7 @@ const ChallengeHeader = styled('div', {
   alignItems: 'center',
   justifyContent: 'space-between',
 
+  fontWeight: 600,
   marginBottom: '1.5rem',
 
   '& > h2': {
@@ -70,7 +71,6 @@ const ChallengeHeader = styled('div', {
     textOverflow: 'ellipsis',
     fontSize: '1.25rem',
     color: '$text',
-    fontWeight: 600,
   },
 
   '& > span': {
@@ -79,18 +79,6 @@ const ChallengeHeader = styled('div', {
     gap: '0.75rem',
     lineBreak: 'unset',
     whiteSpace: 'nowrap',
-  },
-
-  '& .red': {
-    color: '$error',
-  },
-
-  '& .yellow': {
-    color: '$alert',
-  },
-
-  '& .green': {
-    color: '$highlight',
   },
 
   '@sm': {

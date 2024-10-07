@@ -10,5 +10,5 @@ export const NONE = 'none';
 export const DATE_TIME = 'DD/MM/YYYY';
 
 export const DEFAULT_STALE_TIME = 1000 * 60 * 5;
-export const GARBAGE_COLLECTION_INTERVAL = 1000 * 60 * 60 * 24 * 7;;
+export const GARBAGE_COLLECTION_INTERVAL = 1000 * 60 * 60 * 24 * 7;
 export const EXPIRES_IN = 60 * 24 * 7;

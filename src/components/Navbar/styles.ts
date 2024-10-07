@@ -19,6 +19,8 @@ const Container = styled('header', {
   backdropFilter: 'blur(6px)',
 
   '& > a > h3': {
+    fontSize: '1.125rem',
+    fontWeight: '900',
     background: 'linear-gradient(to right bottom, rgb(88, 28, 135), rgb(192, 38, 211), rgb(217, 70, 239))',
     backgroundClip: 'text',
     color: 'transparent'

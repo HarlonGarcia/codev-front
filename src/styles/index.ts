@@ -8,7 +8,7 @@ const colors = {
   textDarker: 'rgba(180, 100, 235, 0.7)',
   coolgrey: '#8690B3',
   lavender: '#E6F0FF',
-  blue: '#0341Cf',
+  blue: '#234fff',
   highlight: '#50fa7b',
   alert: '#DBF227',
   error: '#ff5555',

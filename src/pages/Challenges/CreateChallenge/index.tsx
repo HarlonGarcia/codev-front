@@ -10,14 +10,14 @@ import { InputFile } from 'components/shared/InputFile';
 import { Select } from 'components/shared/Select';
 import { TextArea } from 'components/shared/TextArea';
 import { AuthContext } from 'contexts/AuthContext';
+import { challengeStatuses } from 'enums/challengeStatus';
 import { t } from 'i18next';
 import { MdOutlineClose } from 'react-icons/md';
 import { useCategories } from 'services/category';
 import { useCreateChallenge } from 'services/challenge';
 import { useTechnologies } from 'services/technology';
-import { ChallengeStatusEnum } from 'types/enums/challenge';
+import { ChallengeStatusEnum } from 'types';
 
-import { statuses } from '../utils';
 import * as S from './styles';
 import { CreateChallengeSchema, createChallengeSchema } from './validation';
 
@@ -156,6 +156,19 @@ export default function CreateChallenge() {
       key: id,
       label: name,
       value: id,
+    }));
+  }, [technologies]);
+
+  const statuses = useMemo(() => {
+    const unwantedStatuses = [challengeStatuses.CANCELED.id, challengeStatuses.FINISHED.id];
+    const filteredStatuses = Object
+      .values(challengeStatuses)
+      .filter(({ id }) => !unwantedStatuses.includes(id));
+
+    return filteredStatuses.map(({ id, label }) => ({
+      key: id,
+      value: id,
+      label,
     }));
   }, [technologies]);
 

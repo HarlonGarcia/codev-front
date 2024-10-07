@@ -153,7 +153,7 @@ const Button = styled('button', {
   alignItems: 'center',
   justifyContent: 'center',
 
-  gap: '0.75rem',
+  gap: '0.5rem',
   padding: '1rem',
 
   color: '$highlight',
@@ -175,8 +175,22 @@ const Button = styled('button', {
 
   '& > svg': {
     display: 'none',
-    width: '1.5rem',
-    height: '1.5rem',
+    width: '1.375rem',
+    height: '1.375rem',
+  },
+
+  variants: {
+    isParticipant: {
+      true: {
+        color: '$error',
+        backgroundColor: '$secondary',
+
+        '&:hover': {
+          color: '$primary',
+          backgroundColor: '$error',
+        },
+      }
+    }
   },
   
   '@xs': {
@@ -188,9 +202,6 @@ const Button = styled('button', {
     height: 'fit-content',
     padding: '1rem 1.5rem',
     fontSize: '1.175rem',
-  },
-  '@lg': {
-    padding: '1rem 2rem',
   },
 });
 

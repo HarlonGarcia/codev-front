@@ -1,6 +1,6 @@
-import { ChallengeStatusEnum } from './enums/challenge';
+type ChallengeStatusEnum = 'TO_BEGIN' | 'IN_PROGRESS' | 'FINISHED' | 'CANCELED';
 
-interface IChallenge {
+export interface IChallenge {
   id: string;
   title: string;
   description: string;

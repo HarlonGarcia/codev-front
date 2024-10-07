@@ -14,10 +14,11 @@ import {
   Tag,
 } from '@chakra-ui/react';
 import BackButton from 'components/shared/BackButton';
+import { getChallengeStatus } from 'enums/challengeStatus';
 import { GrStatusCriticalSmall } from 'react-icons/gr';
 import { RiEmotionSadLine } from "react-icons/ri";
 import { useUserChallenges } from 'services/user';
-import { challengeStatuses, getBase64Image } from 'utils';
+import { getBase64Image } from 'utils';
 
 import * as S from './styles';
 
@@ -102,7 +103,7 @@ export default function MyChallenges() {
                     variant='subtle'
                     height={'100%'}
                     fontSize={'1.5rem'}
-                    style={{ color: challengeStatuses[status].color }}
+                    style={{ color: getChallengeStatus(status)?.color }}
                     colorScheme='purple'
                   >
                     <GrStatusCriticalSmall />

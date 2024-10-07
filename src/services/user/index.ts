@@ -10,7 +10,7 @@ export function useMe() {
   return useQuery<IUser>({
     enabled: false,
     staleTime: Infinity,
-    queryKey: ['me'],
+    queryKey: ['cached', 'me'],
     queryFn: async () => {
       const response = await api.getMe();
 

@@ -2,8 +2,8 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
+import { getChallengeStatus } from 'enums/challengeStatus';
 import { motion } from 'framer-motion';
-import { statusIcons } from 'pages/Challenges/utils';
 import { GrStatusGoodSmall } from 'react-icons/gr';
 import { useChallenges } from 'services/challenge';
 import { getBase64Image } from 'utils';
@@ -27,7 +27,7 @@ export default function ChallengesGroup({ category }: ChallengesGroupProps) {
     return challenges.filter(
       (challenge) => challenge.category?.id === category.id,
     );
-  }, [ challenges, category.id ]);
+  }, [challenges, category.id]);
 
   useEffect(() => {
     if (carouselRef.current) {
@@ -55,30 +55,34 @@ export default function ChallengesGroup({ category }: ChallengesGroupProps) {
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 1 }}
         >
-          {filteredChallenges.map(({ id, title, image, status }) => (
-            <S.Challenge key={id}>
-              <S.ChallengeHeader>
-                <h2>{title || t('pages.challenges.unknown_title')}</h2>
-                {status &&
-                  <span className={statusIcons[status]?.color}>
-                    {statusIcons[status]?.label}
-                    <GrStatusGoodSmall />
-                  </span>
-                }
-              </S.ChallengeHeader>
-              <S.Image
-                src={getBase64Image(image?.file) || 'https://picsum.photos/1280/720'}
-                alt={title}
-                loading='lazy'
-              />
-              <S.SeeChallenge
-                onClick={() => navigate(`/challenges/${id}`)}
-                disabled={status === 'FINISHED'}
-              >
-                {t('pages.challenges.see_challenge')}
-              </S.SeeChallenge>
-            </S.Challenge>
-          ))}
+          {filteredChallenges.map(({ id, title, image, status }) => {
+            const { color, label: statusLabel } = getChallengeStatus(status) || {};
+
+            return (
+              <S.Challenge key={id}>
+                <S.ChallengeHeader>
+                  <h2>{title || t('pages.challenges.unknown_title')}</h2>
+                  {statusLabel &&
+                    <span style={{ color: color }}>
+                      {statusLabel}
+                      <GrStatusGoodSmall />
+                    </span>
+                  }
+                </S.ChallengeHeader>
+                <S.Image
+                  src={getBase64Image(image?.file) || 'https://picsum.photos/1280/720'}
+                  alt={title}
+                  loading='lazy'
+                />
+                <S.SeeChallenge
+                  onClick={() => navigate(`/challenges/${id}`)}
+                  disabled={status === 'FINISHED'}
+                >
+                  {t('pages.challenges.see_challenge')}
+                </S.SeeChallenge>
+              </S.Challenge>
+            )}
+          )}
         </motion.div>
       </motion.div>
       <div className="separator" />
