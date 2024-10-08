@@ -1,11 +1,14 @@
 import { createContext, PropsWithChildren, useEffect, useState } from 'react';
 
+import { QueryObserverResult, RefetchOptions } from '@tanstack/react-query';
 import { useLogin, useSignUp } from 'services/auth';
 import { useMe } from 'services/user';
 import { ILoginPayload, IUser } from 'types';
 
 interface AuthContextProps {
   user?: IUser,
+  invalidateUser: (options?: RefetchOptions) => Promise<QueryObserverResult<IUser, Error>>;
+  isUserLoading: boolean;
   error: boolean;
   isAuthenticated: boolean;
   isLoading: boolean;
@@ -19,7 +22,11 @@ export const AuthContext = createContext({} as AuthContextProps);
 export const AuthProvider = ({ children }: PropsWithChildren) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const { data: user, refetch: refetchUser } = useMe();
+  const {
+    data: user,
+    refetch: refetchUser,
+    isPending: isUserLoading,
+  } = useMe();
 
   const {
     mutate: sendLogin,
@@ -79,6 +86,8 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     <AuthContext.Provider
       value={{
         user,
+        invalidateUser: refetchUser,
+        isUserLoading,
         error: !!loginError || !!signupError,
         isAuthenticated: Boolean(user) && isAuthenticated,
         isLoading: isLoggingIn || isSigningIn,

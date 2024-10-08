@@ -111,7 +111,7 @@ export default function CreateChallenge() {
 
     createChallenge(newChallenge, {
       onSuccess: () => {
-        toast.success('Desafio criado com sucesso');
+        toast.success(t('pages.create_challenge.submit.success'));
         navigate('/challenges')
       },
     });
@@ -226,6 +226,8 @@ export default function CreateChallenge() {
           />
         </S.Group>
         <InputFile
+          label={t('pages.create_challenge.fields.image.label')}
+          showButton
           error={formErrors.image?.message as string}
           register={register}
         />

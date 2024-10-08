@@ -11,11 +11,9 @@ import {
   Heading,
   Image,
   Stack,
-  Tag,
 } from '@chakra-ui/react';
 import BackButton from 'components/shared/BackButton';
-import { getChallengeStatus } from 'enums/challengeStatus';
-import { GrStatusCriticalSmall } from 'react-icons/gr';
+import { challengeStatuses, getChallengeStatus } from 'enums/challengeStatus';
 import { RiEmotionSadLine } from "react-icons/ri";
 import { useUserChallenges } from 'services/user';
 import { getBase64Image } from 'utils';
@@ -50,13 +48,27 @@ export default function MyChallenges() {
           {t('pages.account.challenges.none_challenge')}
         </S.NoChallenge>
       )}
+      <S.Legend>
+        {Object.values(challengeStatuses).map(({ id, label, color }) => (
+          <div key={id}>
+            <div style={{ backgroundColor: color }}></div>
+            <span>{label}</span>
+          </div>
+        ))}
+      </S.Legend>
       <S.Challenges>
         {challenges.map(({ id, title, status, image, technologies }) => {
           const techs = technologies.slice(0, MAX_TECHS_DISPLAYED);
           const techsRemaining = getTechsRemaining(technologies);
+          const challengeStatus = getChallengeStatus(status);
 
           return (
-            <Card key={id} maxW='sm'>
+            <Card
+              title={challengeStatus?.label}
+              className='my-challenges-card'
+              key={id}
+              maxW='sm'
+            >
               <CardBody>
                 <Image
                   src={getBase64Image(image?.file) || 'https://picsum.photos/1280/720'}
@@ -84,30 +96,25 @@ export default function MyChallenges() {
                 </Stack>
               </CardBody>
               <Divider />
-              <CardFooter>
+              <CardFooter
+                className='my-challenges-card-footer'
+                style={{ borderColor: challengeStatus?.color }}
+              >
                 <Stack
+                  width={'100%'}
                   direction={'row'}
                   alignItems={'center'}
                   spacing='3'
+                  display={'flex'}
                 >
                   <Button
-                    minW={'2xs'}
+                    width={'100%'}
                     onClick={() => navigate(`/challenges/${id}`)}
                     variant='solid'
                     colorScheme='purple'
                   >
                     {t('pages.challenges.see_challenge')}
                   </Button>
-                  <Tag
-                    size={'lg'}
-                    variant='subtle'
-                    height={'100%'}
-                    fontSize={'1.5rem'}
-                    style={{ color: getChallengeStatus(status)?.color }}
-                    colorScheme='purple'
-                  >
-                    <GrStatusCriticalSmall />
-                  </Tag>
                 </Stack>
               </CardFooter>
             </Card>            

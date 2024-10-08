@@ -5,11 +5,12 @@ const colors = {
   secondary: '#120F26',
   title: '#8625df',
   text: '#c392ef',
-  textDarker: 'rgba(180, 100, 235, 0.7)',
+  textDarker: 'rgba(150, 100, 175, 1)',
   coolgrey: '#8690B3',
   lavender: '#E6F0FF',
   blue: '#234fff',
   highlight: '#50fa7b',
+  highlightDarker: 'rgba(110, 220, 120, 0.7)',
   alert: '#DBF227',
   error: '#ff5555',
    

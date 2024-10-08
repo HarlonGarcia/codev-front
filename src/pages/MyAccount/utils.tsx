@@ -27,6 +27,7 @@ export const options: IUserOption[] = [
       </Translation>
     ),
     icon: <MdEdit />,
+    redirectUrl: '/account/edit'
   },
   {
     label: (

@@ -1,0 +1,22 @@
+@import "../../../styles/index.scss";
+
+.float-input {
+    > input {
+        color: $text;
+        font-family: 'Fira Code';
+        border: 1px solid $coolgrey;
+
+        &:focus {
+            border: 1px solid $highlight;
+            box-shadow: 0px 0px 5px rgba($highlight, 0.3);
+        }
+    };
+
+    > input:focus + label {
+        color: $highlight;
+    };
+
+    > label {
+        color: $coolgrey;
+    }
+}

@@ -1,14 +1,4 @@
-$primary: #02010A;
-$secondary: #120F26;
-$title: #8625df;
-$text: #c392ef;
-$highlight: #50fa7b;
-$error: #ff5555;
-$glass: linear-gradient(to left bottom, rgba(0, 0, 5, 0.6), rgba(10, 4, 20, 0.8), rgba(0, 0, 5, 0.6));
-
-$xs: 460px;
-$sm: 580px;
-$md: 750px;
+@import "../../styles/index.scss";
 
 [cmdk-root] {
   position: fixed;

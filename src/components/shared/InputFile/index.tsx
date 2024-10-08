@@ -1,18 +1,34 @@
-import { ChangeEvent, useRef, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { FieldValues, Path, UseFormRegister } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+
+import { IoCloseSharp } from "react-icons/io5";
 
 import * as S from './styles';
 
 interface InputFileProps<T extends FieldValues> {
+  register: UseFormRegister<T>;
+  onChange?: () => void;
+  label?: string;
+  image?: string;
+  showCloseButton?: boolean;
+  showButton?: boolean;
   error?: string;	
-  register: UseFormRegister<T>;    
+  className?: string; 
+  variant?: 'green' | 'lavender' | 'coolgrey'; 
 }
 
 const imagePlaceholder = 'https://placehold.co/200/120F26/342F48?&text=:/&font=roboto';
 
 export const InputFile = <T extends FieldValues>({ 
   register,
+  onChange: onImageChange,
+  image,
+  label,
+  variant,
+  className,
+  showCloseButton = false,
+  showButton = false,
 }: InputFileProps<T>) => {
   const { t } = useTranslation();
   const hiddenInputRef = useRef<HTMLInputElement | null>(null);
@@ -34,6 +50,8 @@ export const InputFile = <T extends FieldValues>({
   };
 
   const onUpload = () => {
+    onImageChange?.();
+
     if (preview) {
       setPreview(undefined);
       return;
@@ -42,32 +60,61 @@ export const InputFile = <T extends FieldValues>({
     hiddenInputRef.current?.click();
   };
 
+  const removeImage = () => {
+    onImageChange?.();
+    setPreview(undefined);
+  };
+
   const uploadButtonLabel = preview
     ? t('pages.create_challenge.fields.image.remove')
     : t('pages.create_challenge.fields.image.add');
 
+  const showOutline = Boolean(preview) && showCloseButton;
+
+  useEffect(function setImagePreview() {
+    if (!image || !!preview) {
+      return;
+    }
+
+    setPreview(image);
+  }, []);
+
   return (
-    <S.Container>
-      <label>Capa do desafio</label>
+    <S.Container colorSchema={variant} className={className}>
+      {label && <label>{label}</label>}
 
-      <input
-        type={'file'}
-        {...rest}
-        onChange={handleFileUpload}
-        ref={(e) => {
-          registerRef(e);
-          hiddenInputRef.current = e;
-        }}
-      />
+      <S.InputWrapper
+        colorSchema={variant}
+        hasPreview={showOutline}
+      >
+        {preview && showCloseButton && (
+          <S.RemoveButton onClick={removeImage}>
+            <IoCloseSharp />
+          </S.RemoveButton>
+        )}
 
-      <img
-        src={preview ?? imagePlaceholder}
-        onClick={!preview ? onUpload : () => {}}
-      />
+        <input
+          type={'file'}
+          {...rest}
+          onChange={handleFileUpload}
+          ref={(e) => {
+            registerRef(e);
+            hiddenInputRef.current = e;
+          }}
+        />
 
-      <S.UploadButton type='button' onClick={onUpload}>
-        {uploadButtonLabel}
-      </S.UploadButton>
+        <img
+          src={preview ?? imagePlaceholder}
+          onClick={!preview ? onUpload : () => {}}
+        />
+      </S.InputWrapper>
+
+
+      {showButton && (
+        <S.UploadButton type='button' onClick={onUpload}>
+          {uploadButtonLabel}
+        </S.UploadButton>
+      )}
     </S.Container>
   );
 };

@@ -72,8 +72,8 @@ const AccountContent = styled('div', {
     loading: {
       true: {
         '> *': {
-          cursor: 'not-allowed',
           color: '$textDarker',
+          pointerEvents: 'none',
         }
       }
     }

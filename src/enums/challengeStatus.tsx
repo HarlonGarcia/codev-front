@@ -1,10 +1,9 @@
-import { Trans } from 'react-i18next';
-
+import i18next from 'i18next';
 import { ChallengeStatusEnum } from 'types';
 
 type StatusEnumValue = {
   id: string;
-  label: JSX.Element;
+  label: string;
   color: string;
 };
 
@@ -12,33 +11,34 @@ export const challengeStatuses: Record<ChallengeStatusEnum, StatusEnumValue> = {
   get TO_BEGIN() {
     return {
       id: 'TO_BEGIN',
-      label: <Trans>{'global.challenges.status.to_begin'}</Trans>,
+      label: i18next.t('global.challenges.status.to_begin'),
       color: '#234fff',
     };
   },
   get IN_PROGRESS() {
     return {
       id: 'IN_PROGRESS',
-      label: <Trans>{'global.challenges.status.in_progress'}</Trans>,
+      label: i18next.t('global.challenges.status.in_progress'),
       color: '#50fa7b',
     };
   },
   get FINISHED() {
     return {
       id: 'FINISHED',
-      label: <Trans>{'global.challenges.status.finished'}</Trans>,
+      label: i18next.t('global.challenges.status.finished'),
       color: '#ff5555',
     };
   },
   get CANCELED() {
     return {
       id: 'CANCELED',
-      label: <Trans>{'global.challenges.status.canceled'}</Trans>,
+      label: i18next.t('global.challenges.status.canceled'),
       color: '#ff5555',
     };
   },
 };
 
 export const getChallengeStatus = (status: ChallengeStatusEnum) => {
-  return Object.values(challengeStatuses).find(({ id }) => id === status);
+  return Object.values(challengeStatuses)
+    .find(({ id }) => id === status);
 }

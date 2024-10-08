@@ -1,10 +1,11 @@
 import { useContext } from 'react';
 
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { AuthContext } from 'contexts/AuthContext';
 import { IChallenge, IUser } from 'types';
 
 import * as api from './requests';
+import { IUpdateUserDto } from './types';
 
 export function useMe() {
   return useQuery<IUser>({
@@ -24,6 +25,16 @@ export function useUsers() {
     queryKey: ['users'],
     queryFn: async () => {
       const response = await api.getUsers();
+
+      return response;
+    },
+  })
+}
+
+export function useUpdateUser() {
+  return useMutation({
+    mutationFn: async (userPayload: IUpdateUserDto) => {
+      const response = await api.updateUser(userPayload);
 
       return response;
     },

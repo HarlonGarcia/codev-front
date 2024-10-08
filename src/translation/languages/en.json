@@ -37,6 +37,15 @@
   
     "pages.account.challenges.title": "My challenges",
     "pages.account.challenges.none_challenge": "You are not participating in any challenges at the moment",
+
+    "pages.account.edit.title": "Edit information", 
+    "pages.account.edit.fields.image.label": "Change avatar",
+    "pages.account.edit.fields.name.label": "Name",
+    "pages.account.edit.fields.email.label": "Email",
+    "pages.account.edit.fields.github.label": "Your github",
+    "pages.account.edit.fields.additional.label": "Your additional link",
+    "pages.account.edit.button.submit.label": "Save changes",
+    "pages.account.edit.button.submit.success": "Your changes have been saved",
   
     "pages.challenges.unknown_title": "Title not found",
     "pages.challenges.see_challenge": "See challenge",
@@ -54,9 +63,11 @@
     "pages.create_challenge.fields.technologies.error.min": "At least one technology must be selected",
     "pages.create_challenge.fields.technologies.error.limit": "You can only select 5 technologies",
     "pages.create_challenge.fields.status.label": "Select a status",
+    "pages.create_challenge.fields.image.label": "Challenge cover",
     "pages.create_challenge.fields.image.add": "Upload image",
     "pages.create_challenge.fields.image.remove": "Remove image",
     "pages.create_challenge.submit.label": "Create challenge",
+    "pages.create_challenge.submit.success": "Challenge successfully created",
 
     "pages.challenge_information.unknown_title": "Title not found",
     "pages.challenge_information.created_at": "Created at",

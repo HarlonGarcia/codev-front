@@ -17,6 +17,7 @@ const Participants = lazy(() => import('./pages/Challenges/Participants'));
 const ChallengeInformation = lazy(() => import('./pages/Challenges/ChallengeInformation'));
 const CreateChallenge = lazy(() => import('./pages/Challenges/CreateChallenge'));
 const MyChallenges = lazy(() => import('./pages/MyAccount/partials/MyChallenges'));
+const ModifyUser = lazy(() => import('./pages/MyAccount/partials/ModifyUser'));
 
 const props = {
   redirectUrl: '/signin'
@@ -75,6 +76,14 @@ export default function AppRoutes() {
               element={
                 <AuthOnly {...props}>
                   <MyChallenges />
+                </AuthOnly>
+              }
+            />
+            <Route
+              path='edit'
+              element={
+                <AuthOnly {...props}>
+                  <ModifyUser />
                 </AuthOnly>
               }
             />

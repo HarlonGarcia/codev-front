@@ -18,6 +18,27 @@ const Header = styled('div', {
   }
 });
 
+const Legend = styled('div', {
+  display: 'flex',
+  alignItems: 'center',
+  gap: '1.5rem',
+  marginBottom: '4rem',
+
+  '> div': {
+    display: 'flex',
+    gap: '0.5rem',
+    alignItems: 'center',
+    color: '$lavender',
+
+    '> div': {
+      width: '0.5rem',
+      height: '0.5rem',
+      backgroundColor: '$title',
+      borderRadius: '50%',
+    },
+  }
+});
+
 const NoChallenge = styled('div', {
   display: 'flex',
   flexDirection: 'column',
@@ -37,10 +58,14 @@ const NoChallenge = styled('div', {
 const Challenges = styled('div', {
   display: 'grid',
   gridTemplateColumns: 'repeat(2, 1fr)',
-  gap: '1rem',
+  gap: '1.5rem',
 
-  '> div': {
+  '.my-challenges-card': {
     background: '$secondary',
+
+    '&-footer': {
+      borderBottom: '2px solid $coolgrey',
+    },
   },
 
   'h2': {
@@ -64,6 +89,7 @@ const Status = styled('span', {
 export {
   Container,
   Header,
+  Legend,
   NoChallenge,
   Challenges,
   Status,
