@@ -8,18 +8,17 @@ const Header = styled('div', {
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
+  marginBottom: '1rem',
 
   '& > h2': {
     color: '$highlight',
     fontSize: '1.25rem',
-    marginBottom: '0rem',
     textTransform: 'capitalize',
 
     '@xs': {
       fontSize: '1.5rem',
     },
     '@md': {
-      marginBottom: '1.5rem',
       fontSize: '2rem',
     },
   },
@@ -34,23 +33,27 @@ const Header = styled('div', {
       color: '$coolgrey',
     },
   },
+
+  '@md': {
+    marginBottom: '1.5rem',
+  },
 });
 
 const Cover = styled('img', {
   width: '100%',
-  height: '20rem',
+  minHeight: '20rem',
   objectFit: 'cover',
   borderRadius: '1rem',
 
   marginBottom: '1rem',
 
   '@md': {
-    height: '30rem',
+    minHeight: '25rem',
     marginBottom: '2rem'
   },
 
   '@xl': {
-    height: '40rem',
+    minHeight: '30rem',
   },
 });
 

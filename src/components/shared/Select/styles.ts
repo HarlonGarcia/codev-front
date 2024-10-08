@@ -63,9 +63,11 @@ const ContentArea = styled('select', {
 });
 
 const Option = styled('option', {
-  backgroundColor: '#120F26',
-  color: '#c392ef',
+  backgroundColor: '$secondary',
+  color: '$text',
   textAlign: 'start',
+
+  variants: selectVariants.option,
 });
 
 export {

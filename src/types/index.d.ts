@@ -9,7 +9,7 @@ export type RequiredRouterProps = {
 
 export type CustomQueryOptions<T> = Partial<UseQueryOptions<T>>;
 
-export type IRole = 'ADMIN' | 'USER';
+export type IRoleName = 'ADMIN' | 'USER';
 
 export interface IShortcuts {
   [key: string]: {
@@ -26,6 +26,11 @@ export interface ILabel {
   description: string;
 }
 
+export interface IRole {
+  id: string;
+  name: IRoleName;
+}
+
 export interface IUser {
   id: string;
   name: string;
@@ -35,6 +40,7 @@ export interface IUser {
   createdAt?: Date;
   updatedAt?: Date;
   labels?: ILabel[];
+  roles?: IRole[];
   image?: {
     file: string;
     fileName: string;

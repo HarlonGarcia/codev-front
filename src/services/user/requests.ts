@@ -24,7 +24,7 @@ export const updateUser = async ({
   const { image, ...newValues } = newUser;
 
   const fileBase64 = image && await toBase64(image);
-  const newAvatar = image
+  const newImage = image
     ? {
       file: fileBase64,
       fileName: image?.name,
@@ -40,7 +40,7 @@ export const updateUser = async ({
     generateUrl('users', { identifier }),
     {
       ...body,
-      avatar: newAvatar,
+      image: newImage,
     },
   );
 

@@ -12,6 +12,7 @@
     "global.challenges.status.canceled": "Canceled",
 
     "global.select.placeholder": "Select",
+    "global.translation.change": "Change language",
 
     "pages.home.instructions.press": "Press",
     "pages.home.instructions.action": "to open the command list",
@@ -33,6 +34,9 @@
     "pages.account.options.challenges": "Challenges I am taking part in",
     "pages.account.options.edit_information": "Edit information",
     "pages.account.options.connections": "See my connections",
+    "pages.account.options.new_challenge": "Create a new challenge",
+    "pages.account.options.admin.title": "Admin options",
+    "pages.account.options.contacts.title": "My contacts",
     "pages.account.logout": "Log out",
   
     "pages.account.challenges.title": "My challenges",
@@ -129,13 +133,13 @@
     "components.commander.commands.copy_url": "Copy url",
     "components.commander.commands.github": "View github",
 
-    "components.menu.home": "Ínicio",
-    "components.menu.challenges": "Desafios",
-    "components.menu.signin": "Fazer login",
+    "components.menu.home": "Home",
+    "components.menu.challenges": "Challenges",
+    "components.menu.signin": "Login",
 
-    "components.navbar.home": "Ínicio",
-    "components.navbar.challenges": "Desafios",
-    "components.navbar.signin": "Fazer login",
-    "components.navbar.logout": "Fazer logout"
+    "components.navbar.home": "Home",
+    "components.navbar.challenges": "Challenges",
+    "components.navbar.signin": "Login",
+    "components.navbar.logout": "Logout"
   }
 }

@@ -17,6 +17,7 @@ import { useCategories } from 'services/category';
 import { useCreateChallenge } from 'services/challenge';
 import { useTechnologies } from 'services/technology';
 import { ChallengeStatusEnum } from 'types';
+import { NONE } from 'utils/constants';
 
 import * as S from './styles';
 import { CreateChallengeSchema, createChallengeSchema } from './validation';
@@ -124,6 +125,13 @@ export default function CreateChallenge() {
     }
 
     const technologyId = event.target.value;
+    const isTechAlreadyAdded = selectedTechnologies.items
+      .some(({ id }) => id === technologyId)
+
+    if (isTechAlreadyAdded) {
+      return;
+    }
+
     const newTechnology = technologies.find(({ id }) => id === technologyId);
 
     if (!newTechnology) {
@@ -152,12 +160,25 @@ export default function CreateChallenge() {
   }, [categories]);
 
   const hydratedTechnologies = useMemo(() => {
-    return technologies.map(({ id, name }) => ({
-      key: id,
-      label: name,
-      value: id,
-    }));
-  }, [technologies]);
+    const filteredTechnologies = technologies
+      .filter(({ id }) => {
+        return !selectedTechnologies.items.some((tech) => tech.id === id);
+      });
+
+    return [
+      {
+        key: NONE,
+        label: t('global.select.placeholder'),
+        value: NONE,
+        disabled: true,
+      },
+      ...filteredTechnologies.map(({ id, name }) => ({
+        key: id,
+        label: name,
+        value: id,
+      })),
+    ];
+  }, [technologies, selectedTechnologies.items]);
 
   const statuses = useMemo(() => {
     const unwantedStatuses = [challengeStatuses.CANCELED.id, challengeStatuses.FINISHED.id];

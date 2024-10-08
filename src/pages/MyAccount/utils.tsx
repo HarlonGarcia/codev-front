@@ -1,7 +1,10 @@
 import { Translation } from 'react-i18next';
 
 import { FaCode, FaUsers } from 'react-icons/fa6';
+import { HiOutlineViewGridAdd } from "react-icons/hi";
 import { MdEdit } from 'react-icons/md';
+
+
 
 export interface IUserOption {
   label: JSX.Element;
@@ -38,4 +41,16 @@ export const options: IUserOption[] = [
     icon: <FaUsers />,
     redirectUrl: '/users'
   }
+];
+
+export const adminOptions: IUserOption[] = [
+  {
+    label: (
+      <Translation>
+        {(t) => <span>{t('pages.account.options.new_challenge')}</span>}
+      </Translation>
+    ),
+    icon: <HiOutlineViewGridAdd />,
+    redirectUrl: '/new'
+  },
 ];

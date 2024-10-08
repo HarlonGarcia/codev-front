@@ -38,4 +38,12 @@ export const selectVariants = {
       },
     },
   },
+  option: {
+    isDisabled: {
+      true: {
+        color: '$coolgrey',
+        cursor: 'not-allowed',
+      },
+    },
+  }
 };

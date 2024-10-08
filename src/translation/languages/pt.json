@@ -12,6 +12,7 @@
     "global.challenges.status.canceled": "Cancelado",
 
     "global.select.placeholder": "Selecionar",
+    "global.translation.change": "Mudar idioma",
 
     "pages.home.instructions.press": "Pressione",
     "pages.home.instructions.action": "para abrir a lista de comandos",
@@ -33,6 +34,9 @@
     "pages.account.options.challenges": "Desafios que estou participando",
     "pages.account.options.edit_information": "Editar minhas informações",
     "pages.account.options.connections": "Ver minhas conexões",
+    "pages.account.options.new_challenge": "Criar novo desafio",
+    "pages.account.options.admin.title": "Opções de administrador",
+    "pages.account.options.contacts.title": "Meus contatos",
     "pages.account.logout": "Desconectar",
 
     "pages.account.challenges.title": "Meus desafios",

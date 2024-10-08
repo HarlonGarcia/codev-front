@@ -18,7 +18,7 @@ interface InputFileProps<T extends FieldValues> {
   variant?: 'green' | 'lavender' | 'coolgrey'; 
 }
 
-const imagePlaceholder = 'https://placehold.co/200/120F26/342F48?&text=:/&font=roboto';
+import imagePlaceholder from '../../../../public/images/card-image-placeholder.png';
 
 export const InputFile = <T extends FieldValues>({ 
   register,

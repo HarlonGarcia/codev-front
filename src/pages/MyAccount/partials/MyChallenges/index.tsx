@@ -18,6 +18,7 @@ import { RiEmotionSadLine } from "react-icons/ri";
 import { useUserChallenges } from 'services/user';
 import { getBase64Image } from 'utils';
 
+import imagePlaceholder from '../../../../../public/images/card-image-placeholder-2.png';
 import * as S from './styles';
 
 const MAX_TECHS_DISPLAYED = 6;
@@ -48,19 +49,22 @@ export default function MyChallenges() {
           {t('pages.account.challenges.none_challenge')}
         </S.NoChallenge>
       )}
-      <S.Legend>
-        {Object.values(challengeStatuses).map(({ id, label, color }) => (
-          <div key={id}>
-            <div style={{ backgroundColor: color }}></div>
-            <span>{label}</span>
-          </div>
-        ))}
-      </S.Legend>
+      {hasChallenges && (
+        <S.Legend>
+          {Object.values(challengeStatuses).map(({ id, label, color }) => (
+            <div key={id}>
+              <div style={{ backgroundColor: color }}></div>
+              <span>{label}</span>
+            </div>
+          ))}
+        </S.Legend>
+      )}
       <S.Challenges>
         {challenges.map(({ id, title, status, image, technologies }) => {
           const techs = technologies.slice(0, MAX_TECHS_DISPLAYED);
           const techsRemaining = getTechsRemaining(technologies);
           const challengeStatus = getChallengeStatus(status);
+          const imageSource = image?.file ? getBase64Image(image?.file) : imagePlaceholder;
 
           return (
             <Card
@@ -71,9 +75,10 @@ export default function MyChallenges() {
             >
               <CardBody>
                 <Image
-                  src={getBase64Image(image?.file) || 'https://picsum.photos/1280/720'}
+                  src={imageSource}
                   alt={title}
                   borderRadius='md'
+                  objectFit='cover'
                 />
                 <Heading mt={'6'} size='md'>{title}</Heading>                  
                 <Stack

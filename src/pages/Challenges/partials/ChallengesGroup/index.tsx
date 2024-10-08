@@ -8,6 +8,7 @@ import { GrStatusGoodSmall } from 'react-icons/gr';
 import { useChallenges } from 'services/challenge';
 import { getBase64Image } from 'utils';
 
+import imagePlaceholder from '../../../../../public/images/card-image-placeholder.png';
 import * as S from './styles';
 
 interface ChallengesGroupProps {
@@ -70,7 +71,7 @@ export default function ChallengesGroup({ category }: ChallengesGroupProps) {
                   }
                 </S.ChallengeHeader>
                 <S.Image
-                  src={getBase64Image(image?.file) || 'https://picsum.photos/1280/720'}
+                  src={getBase64Image(image?.file) || imagePlaceholder}
                   alt={title}
                   loading='lazy'
                 />

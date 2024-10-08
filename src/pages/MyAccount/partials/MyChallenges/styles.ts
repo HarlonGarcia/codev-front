@@ -21,7 +21,8 @@ const Header = styled('div', {
 const Legend = styled('div', {
   display: 'flex',
   alignItems: 'center',
-  gap: '1.5rem',
+  flexWrap: 'wrap',
+  gap: '0.5rem 1.5rem',
   marginBottom: '4rem',
 
   '> div': {
@@ -45,6 +46,7 @@ const NoChallenge = styled('div', {
   alignItems: 'center',
   alignSelf: 'center',
 
+  textAlign: 'center',
   color: '$coolgrey',
   opacity: '0.7',
   fontSize: '1.25rem',
@@ -57,12 +59,18 @@ const NoChallenge = styled('div', {
 
 const Challenges = styled('div', {
   display: 'grid',
-  gridTemplateColumns: 'repeat(2, 1fr)',
-  gap: '1.5rem',
-
+  gridTemplateColumns: 'repeat(1, 1fr)',
+  gap: '3rem 1.5rem',
+  
   '.my-challenges-card': {
     background: '$secondary',
 
+    img: {
+      width: '100%',
+      objectFit: 'cover',
+      height: '15rem',
+    },
+  
     '&-footer': {
       borderBottom: '2px solid $coolgrey',
     },
@@ -75,9 +83,12 @@ const Challenges = styled('div', {
   },
 
   '@sm': {
+    gridTemplateColumns: 'repeat(2, 1fr)',
+  },
+  '@lg': {
     gridTemplateColumns: 'repeat(3, 1fr)',
   },
-  '@md': {
+  '@xl2': {
     gridTemplateColumns: 'repeat(4, 1fr)',
   }
 });

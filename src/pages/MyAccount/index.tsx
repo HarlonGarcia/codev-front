@@ -10,9 +10,10 @@ import { FaGithub } from 'react-icons/fa';
 import { ImLink } from 'react-icons/im';
 import { useUserChallenges } from 'services/user';
 import { getUrlWithoutPrefix } from 'services/utils';
+import { ADMIN } from 'utils/constants';
 
 import * as S from './styles';
-import { IUserOption, options } from './utils';
+import { IUserOption, options, adminOptions } from './utils';
 
 const MAX_LABELS_DISPLAYED = 5;
 
@@ -59,6 +60,7 @@ export default function MyAccount() {
     return;
   }
 
+  const isAdmin = user.roles?.some((role) => ADMIN === role.name);
   const isLoading = isLoadingChallenges || isUserLoading;
   const userLabels = user.labels || [];
   const labels = userLabels.slice(0, MAX_LABELS_DISPLAYED);
@@ -100,13 +102,34 @@ export default function MyAccount() {
                 {option.label}
               </S.Option>
             ))}
+            {isAdmin && (
+              <>
+                <S.Divider />
+                <S.OptionsWrapper>
+                  <h3>{t('pages.account.options.admin.title')}</h3>
+                  <div>
+                    {adminOptions.map((option, index) => (
+                      <S.Option key={index} onClick={() => handleActions(option)}>
+                        {option.icon}
+                        {option.label}
+                      </S.Option>
+                    ))}
+                  </div>
+                </S.OptionsWrapper>
+              </>
+            )}
             <S.Divider />
-            {links.map(({ url, icon }, index) => (
-              <S.Contact key={index}>
-                {icon}
-                <span>{url}</span>
-              </S.Contact>
-            ))}
+            <S.OptionsWrapper>
+              <h3>{t('pages.account.options.contacts.title')}</h3>
+              <div>
+                {links.map(({ url, icon }, index) => (
+                  <S.Contact key={index}>
+                    {icon}
+                    <span>{url}</span>
+                  </S.Contact>
+                ))}
+              </div>
+            </S.OptionsWrapper>
           </S.AccountContent>
           <S.AccountFooter>
             <button onClick={logout}>

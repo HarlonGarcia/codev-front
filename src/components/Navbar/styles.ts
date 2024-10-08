@@ -31,7 +31,19 @@ const Navigation = styled('nav', {
   display: 'none',
   alignItems: 'center',
 
+  gap: '1rem',
+
+  '@sm': {
+    display: 'flex',
+  }
+});
+
+const NavItems = styled('div', {
+  display: 'flex',
+  alignItems: 'center',
+
   gap: '2rem',
+  marginRight: '1.5rem',
 
   '& > a, & > button': {
     display: 'flex',
@@ -48,10 +60,17 @@ const Navigation = styled('nav', {
       color: '$title',
     },
   },
+});
 
-  '@sm': {
-    display: 'flex',
+const LanguageToggle = styled('button', {
+  backgroundColor: '$text',
+  padding: '0.25rem',
+  borderRadius: '0.25rem',
+  transition: 'all 250ms ease-in-out',
+
+  '> svg': {
+    color: '$primary',
   }
 });
 
-export { Container, Navigation };
+export { Container, Navigation, NavItems, LanguageToggle };

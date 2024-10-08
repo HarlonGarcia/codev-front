@@ -19,6 +19,7 @@ interface SelectOption {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   value: any;
   label: JSX.Element | string;
+  disabled?: boolean;
 }
 
 type SelectProps = DefaultSelectProps & {
@@ -71,8 +72,13 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             </S.Option>
           )}
 
-          {options.map(({ key, value, label }) => (
-            <S.Option key={key} value={value}>
+          {options.map(({ key, value, label, disabled = false }) => (
+            <S.Option
+              key={key}
+              value={value}
+              disabled={disabled}
+              isDisabled={disabled}
+            >
               {label}
             </S.Option>
           ))}

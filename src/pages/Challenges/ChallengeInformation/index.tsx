@@ -12,6 +12,7 @@ import { useChallenge, useJoinChallenge, useParticipants, useUnjoinChallenge } f
 import { getBase64Image } from 'utils';
 import { DATE_TIME } from 'utils/constants';
 
+import imagePlaceholder from '../../../../public/images/challenge-image-placeholder.png';
 import * as S from './styles';
 
 export default function ChallengeInformation() {
@@ -65,6 +66,8 @@ export default function ChallengeInformation() {
     technologies = [],
   } = currentChallenge || {};
 
+  const imageSource = image?.file ? getBase64Image(image.file) : imagePlaceholder;
+
   return (
     <>
       <Loader loading={isLoading} />
@@ -76,9 +79,7 @@ export default function ChallengeInformation() {
             {dayjs(currentChallenge?.createdAt).format(DATE_TIME)}
           </span>
         </S.Header>
-        {image?.file && (
-          <S.Cover src={getBase64Image(image.file)} />
-        )}
+        <S.Cover src={imageSource} />
         <Markdown content={description} />
         <S.Details>
           <S.Info>

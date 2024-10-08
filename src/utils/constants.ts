@@ -6,6 +6,7 @@ export const AUTH_KEY = 'codev_auth';
 
 export const ALL = 'all';
 export const NONE = 'none';
+export const ADMIN = 'ADMIN';
 
 export const DATE_TIME = 'DD/MM/YYYY';
 

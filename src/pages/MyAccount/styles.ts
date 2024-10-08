@@ -101,13 +101,31 @@ const Divider = styled('div', {
   borderTop: '2px solid $secondary',
 });
 
+const OptionsWrapper = styled('div', {
+  h3: {
+    fontSize: '1rem',
+    fontWeight: '500',
+    marginBottom: '1rem',
+    color: '$coolgrey',
+  },
+
+  '> div': {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.75rem',
+    color: '$text',
+  },
+});
+
 const Contact = styled('div', {
   display: 'flex',
   alignItems: 'center',
   gap: '0.75rem',
-  color: '$text',
-
   fontSize: '1.25rem',
+  
+  span: {
+    fontSize: '1.125rem',
+  }
 });
 
 const AccountFooter = styled('footer', {
@@ -137,6 +155,7 @@ export {
   AccountContent,
   Option,
   Divider,
+  OptionsWrapper,
   Contact,
   AccountFooter,
 };
