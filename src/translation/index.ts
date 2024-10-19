@@ -14,7 +14,17 @@ i18next.use(initReactI18next).init({
   debug: false,
   lng: 'pt',
   fallbackLng: 'pt',
+  keySeparator: false,
   interpolation: {
     escapeValue: false,
+    format: (value, format) => {
+      if ('uppercase' === format) {
+        return `${value || ''}`.toUpperCase();
+      }
+
+      return value;
+    },
   },
+
+
 });

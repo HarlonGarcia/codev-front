@@ -117,7 +117,17 @@
     "pages.signup.fields.additional.label": "What's your portfolio url?",
     "pages.signup.fields.additional.placeholder": "www.portfolio.com",
     "pages.signup.submit.label": "Continue",
+    
+    "pages.dashboard.sidebar.button.show": "Show",
+    "pages.dashboard.sidebar.routes.stats": "Stats",
+    "pages.dashboard.sidebar.routes.challenges": "Challenges",
+    "pages.dashboard.sidebar.support": "Support",
 
+    "pages.dashboard.stats.title": "See your activity",
+    "pages.dashboard.stats.description": "See your latest challenges created, general information about the challenges, your activity in the current month and more",
+    "pages.dashboard.stats.cards.challenge.description": "You created {{challenges}} challenges this month",
+    "pages.dashboard.stats.cards.steak.label": "Longest streak",
+  
     "pages.not_found.title": "Page not found",
     "pages.not_found.description": "The page you are looking for does not exist",
     "pages.not_found.return": "Go back",
@@ -139,6 +149,7 @@
 
     "components.navbar.home": "Home",
     "components.navbar.challenges": "Challenges",
+    "components.navbar.dashboard": "Dashboard",
     "components.navbar.signin": "Login",
     "components.navbar.logout": "Logout"
   }

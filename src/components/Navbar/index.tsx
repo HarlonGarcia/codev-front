@@ -4,28 +4,35 @@ import { Link } from 'react-router-dom';
 
 import Menu from 'components/Menu';
 import { AuthContext } from 'contexts/AuthContext';
+import dayjs from 'dayjs';
 import i18next from 'i18next';
 import { AiFillHome } from 'react-icons/ai';
 import { FaCodeBranch } from 'react-icons/fa';
 import { IoLanguage } from "react-icons/io5";
 import { LuLogIn, LuLogOut } from 'react-icons/lu';
+import { MdLeaderboard   } from "react-icons/md";
 
 import UserAvatar from './partials/UserAvatar';
 import * as S from './styles';
 
 export default function Navbar() {
   const { t } = useTranslation();
-  const { logout, isAuthenticated } = useContext(AuthContext);
+  const { logout, isAuthenticated, isAdmin } = useContext(AuthContext);
 
-  const changeLanguage = () => {
+  const changeLanguage = (value: string) => {
+    dayjs.locale(value);
+    i18next.changeLanguage(value);
+  };
+
+  const handleLanguageChange = () => {
     const currentLanguage = i18next.resolvedLanguage;
     
     if ('en' === currentLanguage) {
-      i18next.changeLanguage('pt-BR');
+      changeLanguage('pt-BR');
       return;
     }
 
-    i18next.changeLanguage('en');
+    changeLanguage('en');
   };
 
   return (
@@ -39,6 +46,12 @@ export default function Navbar() {
             <AiFillHome />
             <span>{t('components.navbar.home')}</span>
           </Link>
+          {isAuthenticated && isAdmin && (
+            <Link to='/dashboard'>
+              <MdLeaderboard   />
+              <span>{t('components.navbar.dashboard')}</span>
+            </Link>
+          )}
           {isAuthenticated && (
             <>
               <Link to='/challenges'>
@@ -51,10 +64,16 @@ export default function Navbar() {
               </button>
             </>
           )}
+          {!isAuthenticated && (
+            <Link to='/signin'>
+              <LuLogIn />
+              <span>{t('components.navbar.signin')}</span>
+            </Link>
+          )}
         </S.NavItems>
 
         <S.LanguageToggle
-          onClick={changeLanguage}
+          onClick={handleLanguageChange}
           title={t('global.translation.change')}
         >
           <IoLanguage />
@@ -62,13 +81,6 @@ export default function Navbar() {
 
         {isAuthenticated && (
           <UserAvatar redirect />
-        )}
-
-        {!isAuthenticated && (
-          <Link to='/signin'>
-            <LuLogIn />
-            <span>{t('components.navbar.signin')}</span>
-          </Link>
         )}
       </S.Navigation>
       <Menu />
