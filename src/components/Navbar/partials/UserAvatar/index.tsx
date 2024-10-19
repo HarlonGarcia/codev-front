@@ -11,12 +11,14 @@ import * as S from './styles';
 
 type UserAvatarProps = AvatarProps & {
   redirect?: boolean;
+  hidePopover?: boolean;
 };
 
 export default function UserAvatar({
   size ='sm',
   fontWeight = 600,
   redirect = false,
+  hidePopover = false,
   ...otherProps
 }: UserAvatarProps) {
   const navigate = useNavigate();
@@ -45,7 +47,7 @@ export default function UserAvatar({
           src={getBase64Image(user?.image?.file)}
         />
       </WrapItem>
-      {redirect && (
+      {redirect && !hidePopover && (
         <S.Popover>
           <span>{user.name}</span>
           <button>{t('components.navbar.logout')}</button>

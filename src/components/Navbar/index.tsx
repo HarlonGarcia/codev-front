@@ -9,13 +9,14 @@ import { AiFillHome } from 'react-icons/ai';
 import { FaCodeBranch } from 'react-icons/fa';
 import { IoLanguage } from "react-icons/io5";
 import { LuLogIn, LuLogOut } from 'react-icons/lu';
+import { MdLeaderboard   } from "react-icons/md";
 
 import UserAvatar from './partials/UserAvatar';
 import * as S from './styles';
 
 export default function Navbar() {
   const { t } = useTranslation();
-  const { logout, isAuthenticated } = useContext(AuthContext);
+  const { logout, isAuthenticated, isAdmin } = useContext(AuthContext);
 
   const changeLanguage = () => {
     const currentLanguage = i18next.resolvedLanguage;
@@ -39,6 +40,12 @@ export default function Navbar() {
             <AiFillHome />
             <span>{t('components.navbar.home')}</span>
           </Link>
+          {isAuthenticated && isAdmin && (
+            <Link to='/dashboard'>
+              <MdLeaderboard   />
+              <span>{t('components.navbar.dashboard')}</span>
+            </Link>
+          )}
           {isAuthenticated && (
             <>
               <Link to='/challenges'>
@@ -51,6 +58,12 @@ export default function Navbar() {
               </button>
             </>
           )}
+          {!isAuthenticated && (
+            <Link to='/signin'>
+              <LuLogIn />
+              <span>{t('components.navbar.signin')}</span>
+            </Link>
+          )}
         </S.NavItems>
 
         <S.LanguageToggle
@@ -62,13 +75,6 @@ export default function Navbar() {
 
         {isAuthenticated && (
           <UserAvatar redirect />
-        )}
-
-        {!isAuthenticated && (
-          <Link to='/signin'>
-            <LuLogIn />
-            <span>{t('components.navbar.signin')}</span>
-          </Link>
         )}
       </S.Navigation>
       <Menu />

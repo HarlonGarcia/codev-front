@@ -118,6 +118,16 @@
     "pages.signup.fields.additional.placeholder": "www.portfolio.com",
     "pages.signup.submit.label": "Continuar",
 
+    "pages.dashboard.sidebar.button.show": "Mostrar",
+    "pages.dashboard.sidebar.routes.stats": "Estatísticas",
+    "pages.dashboard.sidebar.routes.challenges": "Desafios",
+    "pages.dashboard.sidebar.support": "Suporte",
+
+    "pages.dashboard.stats.title": "Veja sua atividade",
+    "pages.dashboard.stats.description": "Veja seus últimos desafios criados, informações gerais sobre os desafios, sua atividade neste mês e mais",
+    "pages.dashboard.stats.cards.challenge.description": "Você criou {{challenges}} desafios neste mês",
+    "pages.dashboard.stats.cards.steak.label": "Maior sequência",
+
     "pages.not_found.title": "Página não encontrada",
     "pages.not_found.description": "A página que você está procurando não existe",
     "pages.not_found.return": "Voltar para o ínicio",
@@ -139,6 +149,7 @@
 
     "components.navbar.home": "Ínicio",
     "components.navbar.challenges": "Desafios",
+    "components.navbar.dashboard": "Dashboard",
     "components.navbar.signin": "Fazer login",
     "components.navbar.logout": "Fazer logout"
   }

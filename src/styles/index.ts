@@ -1,6 +1,6 @@
 import { createStitches } from '@stitches/react';
 
-const colors = {
+export const colors = {
   primary: '#02010A',
   secondary: '#120F26',
   title: '#8625df',

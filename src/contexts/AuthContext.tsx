@@ -4,12 +4,14 @@ import { QueryObserverResult, RefetchOptions } from '@tanstack/react-query';
 import { useLogin, useSignUp } from 'services/auth';
 import { useMe } from 'services/user';
 import { ILoginPayload, IUser } from 'types';
+import { ADMIN } from 'utils/constants';
 
 interface AuthContextProps {
   user?: IUser,
   invalidateUser: (options?: RefetchOptions) => Promise<QueryObserverResult<IUser, Error>>;
   isUserLoading: boolean;
   error: boolean;
+  isAdmin: boolean;
   isAuthenticated: boolean;
   isLoading: boolean;
   signUp: (data: IUser, callback?: () => void ) => void;
@@ -82,6 +84,8 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     logout();
   }, []);
 
+  const isAdmin = user && user.roles?.some(({ name }) => ADMIN === name);
+
   return (
     <AuthContext.Provider
       value={{
@@ -90,6 +94,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
         isUserLoading,
         error: !!loginError || !!signupError,
         isAuthenticated: Boolean(user) && isAuthenticated,
+        isAdmin: Boolean(isAdmin),
         isLoading: isLoggingIn || isSigningIn,
         signUp,
         login,

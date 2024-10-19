@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from 'components/shared/Input';
 import { AuthContext } from 'contexts/AuthContext';
 import { FaArrowRightLong } from 'react-icons/fa6';
-import { uuid } from 'uuidv4';
+import { v4 as uuidv4 } from 'uuid';
 
 import * as S from './styles';
 import { SignUpSchema, signUpSchema } from './validation';
@@ -30,7 +30,7 @@ export default function SignUp() {
   const onSubmit: SubmitHandler<SignUpSchema> = (formValues) => {
     const newUser = {
       ...formValues,
-      id: uuid(),
+      id: uuidv4(),
       additionalUrl: formValues.additionalUrl || undefined,
       passwordConfirmation: undefined,
     };
