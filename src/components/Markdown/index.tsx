@@ -17,10 +17,10 @@ export default function Markdown({ content }: MarkdownProps) {
       rehypePlugins={[rehypeHighlight]}
       remarkPlugins={[remarkGfm]}
       components={{
-        p: ({ node, ...props }) => <S.Paragraph {...props} />,
-        a: ({ node, ...props }) => <S.Link {...props} />,
-        ul: ({ node, ...props }) => <S.UnorderedList {...props} />,
-        blockquote: ({ node, ...props }) => <S.BlockQuote {...props} />,
+        p: ({ node, ref, ...props }) => <S.Paragraph {...props} />,
+        a: ({ node, ref, ...props }) => <S.Link {...props} />,
+        ul: ({ node, ref, ...props }) => <S.UnorderedList {...props} />,
+        blockquote: ({ node, ref, ...props }) => <S.BlockQuote {...props} />,
       }}
     >
       {content}

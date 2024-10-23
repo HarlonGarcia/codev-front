@@ -4,6 +4,14 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  css: {
+    preprocessorOptions: {
+      scss: {
+        api: 'modern-compiler',
+      },
+    },
+
+  },
   plugins: [
     react(),
     tsconfigPaths(),
@@ -15,5 +23,6 @@ export default defineConfig({
     outDir: 'build',
     emptyOutDir: true,
     sourcemap: true,
+    chunkSizeWarningLimit: 1600,
   },
 })
