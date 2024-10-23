@@ -26,8 +26,9 @@ ENV NODE_ENV=production
 RUN pnpm build
 
 # production
-FROM nginx:1.25.1-alpine AS prod
+FROM nginx:1.27-alpine AS prod
 
+COPY docker/frontend/nginx.conf /etc/nginx/nginx.conf
 COPY --from=build /app/build /usr/share/nginx/html
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
