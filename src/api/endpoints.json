@@ -1,11 +1,11 @@
 {
-  "me": "http://localhost:8000/me",
-  "login": "http://localhost:8000/users/login",
-  "signup": "http://localhost:8000/users/signup",
-  "user_challenges": "http://localhost:8000/users/{userId}/challenges",
-  "users": "http://localhost:8000/users",
-  "challenge_users": "http://localhost:8000/challenges/{challengeId}/users",
-  "challenges": "http://localhost:8000/challenges",
-  "categories": "http://localhost:8000/categories",
-  "technologies": "http://localhost:8000/technologies"
+  "me": "/me",
+  "login": "/users/login",
+  "signup": "/users/signup",
+  "user_challenges": "/users/{userId}/challenges",
+  "users": "/users",
+  "challenge_users": "/challenges/{challengeId}/users",
+  "challenges": "/challenges",
+  "categories": "/categories",
+  "technologies": "/technologies"
 }

@@ -3,11 +3,13 @@ import endpoints from 'api/endpoints.json';
 type Endpoint = typeof endpoints;
 
 const generateUrl = (key: keyof Endpoint, identifiers = {}) => {
-  let url = endpoints[key];
+  const complement = endpoints[key];
 
-  if (!url) {
+  if (!complement) {
     throw new Error(`Endpoint ${key} not found in endpoints.json`);
   }
+
+  let url = `${import.meta.env.VITE_API_URL}${complement}`;
 
   if (!identifiers || !Object.keys(identifiers).length) {
     return url;
