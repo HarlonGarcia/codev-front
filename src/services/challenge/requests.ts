@@ -5,15 +5,13 @@ import { generateUrl, toBase64 } from '../utils';
 import { ICreateChallengeDto, IGetChallengeParams, IJoinChallengeDto } from './types';
 
 export const getChallenges = async (filters?: IGetChallengeParams) => {
-  const { page = 0, size = 100, orderBy = 'LATEST' } = filters ?? {};
 
-  const { data } = await axios.get(generateUrl('challenges'), {
-    params: {
-      page,
-      size,
-      orderBy: orderBy ?? undefined,
-    },
-  });
+  const { data } = await axios.get(
+    generateUrl('challenges'),
+    {
+      params: filters,
+    }
+  );
 
   return data ?? [];
 }

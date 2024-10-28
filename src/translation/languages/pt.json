@@ -128,6 +128,9 @@
     "pages.dashboard.stats.cards.challenge.description": "Você criou {{challenges}} desafios neste mês",
     "pages.dashboard.stats.cards.steak.label": "Maior sequência",
 
+    "pages.dashboard.challenges.filters.order.popularity": "Popularidade",
+    "pages.dashboard.challenges.filters.order.created_at": "Data de criação",
+
     "pages.not_found.title": "Página não encontrada",
     "pages.not_found.description": "A página que você está procurando não existe",
     "pages.not_found.return": "Voltar para o ínicio",

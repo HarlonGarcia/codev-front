@@ -1,7 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import { Divider } from '@chakra-ui/react';
 import UserAvatar from 'components/Navbar/partials/UserAvatar';
 import { FaChartBar  } from "react-icons/fa";
 import { FaCodeMerge, FaArrowLeft  } from "react-icons/fa6";
@@ -36,14 +35,12 @@ export default function Sidebar({
       </S.Toggle>
       <S.Header>
         <UserAvatar
-          size='xl'
           redirect
           hidePopover
         />
       </S.Header>
 
       <S.Body>
-        <Divider />
         <S.List>
           <Link to={''}>
             <FaChartBar />

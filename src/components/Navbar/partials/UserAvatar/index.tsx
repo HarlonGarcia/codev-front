@@ -2,21 +2,18 @@ import { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import { Avatar, AvatarProps, WrapItem } from '@chakra-ui/react';
 import { AuthContext } from 'contexts/AuthContext';
 import { getBase64Image } from 'utils';
 
 import * as S from './styles';
 
 
-type UserAvatarProps = AvatarProps & {
+type UserAvatarProps = {
   redirect?: boolean;
   hidePopover?: boolean;
 };
 
 export default function UserAvatar({
-  size ='sm',
-  fontWeight = 600,
   redirect = false,
   hidePopover = false,
   ...otherProps
@@ -38,15 +35,12 @@ export default function UserAvatar({
   }
   return (
     <S.Container>
-      <WrapItem onClick={handleClick}>
-        <Avatar
+      <S.Button onClick={handleClick}>
+        <img
           {...otherProps}
-          size={size}
-          fontWeight={fontWeight}
-          name={user?.name}
           src={getBase64Image(user?.image?.file)}
         />
-      </WrapItem>
+      </S.Button>
       {redirect && !hidePopover && (
         <S.Popover>
           <span>{user.name}</span>

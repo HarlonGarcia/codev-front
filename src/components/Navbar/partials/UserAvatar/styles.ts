@@ -3,22 +3,22 @@ import { styled } from 'styles';
 const Container = styled('div', {
     position: 'relative',
 
-    'li': {
-        cursor: 'pointer',
-
-        '> img': {
-            width: '2rem',
-            height: '2rem',
-            borderRadius: '50%',
-        },
-    },
-
-    'li+div': {
+    'button+div': {
         display: 'none',
     },
     
-    'li:hover + div': {
+    'button:hover + div': {
         display: 'flex',
+    },
+});
+
+const Button = styled('button', {
+    cursor: 'pointer',
+
+    '> img': {
+        width: '2rem',
+        height: '2rem',
+        borderRadius: '50%',
     },
 });
 
@@ -50,4 +50,4 @@ const Popover = styled('div', {
     },
 });
 
-export { Container, Popover };
+export { Container, Button, Popover };

@@ -1,7 +1,11 @@
-import { IChallenge } from 'types/challenge';
+import { ChallengeStatusEnum, IChallenge } from 'types/challenge';
 
 export type IGetChallengeParams = {
-  orderBy?: string;
+  category?: string;
+  technology?: string;
+  status?: ChallengeStatusEnum;
+  order?: 'asc' | 'desc';
+  orderBy?: 'popularity' | 'created_at';
   page?: number;
   size?: number;
 }

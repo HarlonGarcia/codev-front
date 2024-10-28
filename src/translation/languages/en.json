@@ -127,6 +127,9 @@
     "pages.dashboard.stats.description": "See your latest challenges created, general information about the challenges, your activity in the current month and more",
     "pages.dashboard.stats.cards.challenge.description": "You created {{challenges}} challenges this month",
     "pages.dashboard.stats.cards.steak.label": "Longest streak",
+
+    "pages.dashboard.challenges.filters.order.popularity": "Popularity",
+    "pages.dashboard.challenges.filters.order.created_at": "Created at",
   
     "pages.not_found.title": "Page not found",
     "pages.not_found.description": "The page you are looking for does not exist",
