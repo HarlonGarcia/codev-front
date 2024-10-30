@@ -43,6 +43,7 @@ export const { styled, theme, globalCss, getCssText } = createStitches({
     xl: '(min-width: 1080px)',
     xl2: '(min-width: 1260px)',
     xl3: '(min-width: 1440px)',
+    xl4: '(min-width: 1800px)',
   },
   utils: {
     wrapperPadding: (value: string) => ({

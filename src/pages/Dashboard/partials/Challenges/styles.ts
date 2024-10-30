@@ -4,6 +4,9 @@ const Container = styled('div', {
 });
 
 const Header = styled('header', {
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
   marginBottom: '4rem',
 
   h1: {
@@ -13,6 +16,19 @@ const Header = styled('header', {
   p: {
     fontSize: '1.125rem',
   },
+
+  '> button': {
+    color: '$highlight',
+    fontWeight: 600,
+    padding: '0.5rem 1rem',
+    borderRadius: '0.5rem',
+    border: '1px solid $highlight',
+
+    '&:hover': {
+      color: '$highlightDarker',
+      borderColor: '$highlightDarker',
+    },
+  },
 });
 
 const ChallengesContainer = styled('div', {
@@ -21,6 +37,7 @@ const ChallengesContainer = styled('div', {
 
 const ChallengesHeader = styled('div', {
   display: 'flex',
+  flexWrap: 'wrap',
   justifyContent:'space-between',
   alignItems: 'center',
   gap: '1rem',
@@ -34,6 +51,7 @@ const ChallengesHeader = styled('div', {
 
 const Filters = styled('div', {
   display: 'flex',
+  flexWrap: 'wrap',
   gap: '1rem',
 });
 
@@ -98,10 +116,189 @@ const Toggle = styled('div', {
 });
 
 const List = styled('div', {
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '0.375rem',
 });
 
 const ListItem = styled('div', {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
 
+  background: '$secondary',
+  padding: '1rem 1.5rem',
+  borderRadius: '0.75rem',
+  marginBottom: '0.5rem',
+
+  '.challenge': {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '4rem',
+
+    '&-info': {
+      display: 'flex',
+      alignItems: 'center',
+      gap: '1rem',
+
+      '&-category, &-techs, &-status': {
+        padding: '0.25rem 0.375rem',
+        borderRadius: '0.25rem',
+        fontWeight: 600,
+      },
+
+      '&-category': {
+        color: '$primary',
+        background: '$text',
+      },
+
+      '&-techs': {
+        color: '$primary',
+        background: '$highlight',
+      },
+
+      '&-status':{
+        display: 'flex',
+        gap: '0.5rem',
+        alignItems: 'center',
+
+        '> small': {
+          fontWeight: '600',
+          fontSize: '1rem',
+        },
+        '> svg': {
+          fontSize: '0.75rem',
+        },
+      },
+    },
+  },
+});
+
+const Title = styled('div', {
+  display: 'flex',
+  alignItems: 'center',
+  gap: '1rem',
+
+  '> small': {
+    fontSize: '1rem',
+  },
+  '> strong': {
+    color: '$highlight',
+    fontFamily: '$code',
+    fontWeight: 600,
+  },
+});
+
+const ChallengeActions = styled('div', {
+  display: 'flex',
+  alignItems: 'center',
+  gap: '0.25rem',
+});
+
+const Action = styled('button', {
+  fontSize: '1.5rem',
+  padding: '0.5rem',
+  backgroundColor: 'transparent',
+  borderRadius: '0.5rem',
+
+  transition: 'all 0.3s ease-in-out',
+
+  '&:hover': {
+    backgroundColor: 'rgba(0, 0, 0, 0.4)',
+  },
+});
+
+const Grid = styled('div', {
+  display: 'grid',
+  gridTemplateColumns: 'repeat(1, 1fr)',
+  gap: '3rem 1.5rem',
+
+  '@sm': {
+    gridTemplateColumns: 'repeat(2, 1fr)',
+  },
+  '@lg': {
+    gridTemplateColumns: 'repeat(3, 1fr)',
+  },
+  '@xl2': {
+    gridTemplateColumns: 'repeat(4, 1fr)',
+  },
+  '@xl4': {
+    gridTemplateColumns: 'repeat(5, 1fr)',
+  }
+});
+
+const GridItem = styled('div', {
+  padding: '1rem',
+  background: '$secondary',
+  borderRadius: '0.75rem',
+
+  '&:hover': {
+    '.grid-item-info > strong > svg': {
+      opacity: '1',
+    },
+  },
+
+  '.grid-item-info': {
+    display: 'flex',
+    flexDirection: 'column',
+
+    '> strong': {
+      display: 'flex',
+      alignItems: 'center',
+      gap: '1rem',
+
+      fontSize: '1.125rem',
+      fontWeight: 600,
+      color: '$highlight',
+      fontFamily: '$code',
+
+      '> svg': {
+        opacity: '0',
+        fontSize: '1.5rem',
+        transition: 'all 300ms ease-in-out',
+        cursor: 'pointer',
+
+        '&:hover': {
+          color: '$highlightDarker',
+        },
+      },
+    },
+    '&-badges': {
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: '0.5rem',
+      marginTop: '1.25rem',
+
+      '> span': {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '0.5rem',
+
+        width: 'fit-content',
+        padding: '0.375rem 0.75rem',
+        background: '$primary',
+        borderRadius: '0.5rem',
+        fontSize: '1rem',
+        fontWeight: 600,
+
+        '> svg': {
+          fontSize: '0.5rem',
+        },
+      },
+
+      '&-techs': {
+        color: '$highlight',
+      },
+    },
+  },
+
+  img: {
+    width: '100%',
+    objectFit: 'cover',
+    height: '15rem',
+    marginBottom: '1.5rem',
+    borderRadius: '0.5rem',
+  },
 });
 
 export {
@@ -115,4 +312,9 @@ export {
   Toggle,
   List,
   ListItem,
+  Title,
+  ChallengeActions,
+  Action,
+  Grid,
+  GridItem,
 }

@@ -3,6 +3,7 @@ services:
         build:
             context: .
             dockerfile: docker/frontend/Dockerfile
+            target: dev
         restart: unless-stopped
         working_dir: /app
         volumes:
@@ -19,4 +20,3 @@ services:
             - ./mock:/app/mock
         ports:
             - 5001:5001
-            

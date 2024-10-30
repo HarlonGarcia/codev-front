@@ -128,6 +128,13 @@
     "pages.dashboard.stats.cards.challenge.description": "Você criou {{challenges}} desafios neste mês",
     "pages.dashboard.stats.cards.steak.label": "Maior sequência",
 
+    "pages.dashboard.challenges.title": "Desafios",
+    "pages.dashboard.challenges.description": "Veja seus últimos desafios criados, informações gerais sobre os desafios, sua atividade neste mês e mais",
+    "pages.dashboard.challenges.add_challenge": "Criar novo desafio",
+    "pages.dashboard.challenges.filters.category.placeholder": "Selecione uma categoria",
+    "pages.dashboard.challenges.filters.technology.placeholder": "Selecione uma tecnologia",
+    "pages.dashboard.challenges.filters.status.placeholder": "Selecione um status",
+    "pages.dashboard.challenges.filters.order.placeholder": "Ordernar por",
     "pages.dashboard.challenges.filters.order.popularity": "Popularidade",
     "pages.dashboard.challenges.filters.order.created_at": "Data de criação",
 

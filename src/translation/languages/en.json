@@ -128,6 +128,13 @@
     "pages.dashboard.stats.cards.challenge.description": "You created {{challenges}} challenges this month",
     "pages.dashboard.stats.cards.steak.label": "Longest streak",
 
+    "pages.dashboard.challenges.title": "Challenges",
+    "pages.dashboard.challenges.description": "See your latest challenges created, general information about the challenges, your activity in the current month and more",
+    "pages.dashboard.challenges.add_challenge": "Create new challenge",
+    "pages.dashboard.challenges.filters.category.placeholder": "Select a category",
+    "pages.dashboard.challenges.filters.technology.placeholder": "Select a technology",
+    "pages.dashboard.challenges.filters.status.placeholder": "Select a status",
+    "pages.dashboard.challenges.filters.order.placeholder": "Order by",
     "pages.dashboard.challenges.filters.order.popularity": "Popularity",
     "pages.dashboard.challenges.filters.order.created_at": "Created at",
   

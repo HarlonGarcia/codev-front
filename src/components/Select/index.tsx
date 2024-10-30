@@ -1,5 +1,7 @@
 import { ChangeEvent, ComponentProps } from 'react';
 
+import { NONE } from 'utils/constants';
+
 import './styles.scss';
 
 interface SelectProps extends ComponentProps<'select'> {
@@ -38,7 +40,7 @@ export const Select = ({
         {...rest}
       >
         {placeholder && (
-          <option selected disabled={cannotBeEmpty}>{placeholder}</option>
+          <option value={NONE} selected disabled={cannotBeEmpty}>{placeholder}</option>
         )}
         {options.map(({ label, value, disabled }) => (
           <option

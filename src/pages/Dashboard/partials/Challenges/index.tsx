@@ -6,14 +6,18 @@ import { Loader } from 'components/shared/Loader';
 import { challengesOrderBy } from 'enums/challengeOrderBy';
 import { challengeStatuses } from 'enums/challengeStatus';
 import { FaArrowUpAZ, FaArrowDownAZ } from "react-icons/fa6";
-import { IoMdList } from "react-icons/io";
-import { MdGridView } from "react-icons/md";
+import { GrStatusGoodSmall } from "react-icons/gr";
+import { IoMdList, IoMdTrash } from "react-icons/io";
+import { MdEdit, MdGridView } from "react-icons/md";
 import { useCategories } from 'services/category';
 import { useChallenges } from 'services/challenge';
 import { IGetChallengeParams } from 'services/challenge/types';
 import { useTechnologies } from 'services/technology';
 import { ChallengeStatusEnum } from 'types';
+import { getBase64Image } from 'utils';
+import { NONE } from 'utils/constants';
 
+import imagePlaceholder from '../../../../../public/images/card-image-placeholder-2.png'
 import * as S from './styles';
 
 interface Filters {
@@ -55,9 +59,11 @@ export default function Challenges() {
   };
 
   const handleFilterChange = (key: string) => (event: ChangeEvent<HTMLSelectElement>) => {
+    const value = event.target.value;
+
     setFilters((prevState) => ({
       ...prevState,
-      [key]: event.target.value,
+      [key]: NONE === value ? undefined : value,
     }))
   };
 
@@ -65,7 +71,11 @@ export default function Challenges() {
     id,
     value: filters[id],
     onChange: handleFilterChange(id),
-  })
+  });
+
+  const getChallengeImage = (image?: string) => {
+    return image ? getBase64Image(image) : imagePlaceholder;
+  }
 
   const categories = useMemo(() => {
     return categoriesItems.map(({ id, name }) => ({
@@ -96,30 +106,35 @@ export default function Challenges() {
       <Loader loading={isLoading} />
       <S.Container>
         <S.Header>
-          <h1>Desafios</h1>
-          <p>{t('pages.dashboard.stats.description')}</p>
+          <div>
+            <h1>{t('pages.dashboard.challenges.title')}</h1>
+            <p>{t('pages.dashboard.challenges.description')}</p>
+          </div>
+          <button type="button">
+            {t('pages.dashboard.challenges.add_challenge')}
+          </button>
         </S.Header>
         <S.ChallengesContainer>
           <S.ChallengesHeader>
             <S.Filters>
               <Select
                 {...getFilterProps('category')}
-                placeholder={'Select a category'}
+                placeholder={t('pages.dashboard.challenges.filters.category.placeholder')}
                 options={categories}
               />
               <Select
                 {...getFilterProps('technology')}
-                placeholder={'Select a technology'}
+                placeholder={t('pages.dashboard.challenges.filters.technology.placeholder')}
                 options={technologies}
               />
               <Select
                 {...getFilterProps('status')}
-                placeholder={'Select a status'}
+                placeholder={t('pages.dashboard.challenges.filters.status.placeholder')}
                 options={statuses}
               />
               <Select
                 {...getFilterProps('orderBy')}
-                placeholder={'Select a order'}
+                placeholder={t('pages.dashboard.challenges.filters.order.placeholder')}
                 options={Object.values(challengesOrderBy)}
               />
             </S.Filters>
@@ -137,22 +152,83 @@ export default function Challenges() {
               </S.Toggle>
             </S.Actions>
           </S.ChallengesHeader>
-          {isGrid ? (
+          {!isGrid ? (
             <S.List>
-              {challenges.map(({ id, title }) => (
+              {challenges.map(({
+                id,
+                title,
+                category,
+                technologies,
+                status,
+              }, index) => (
                 <S.ListItem key={id}>
-                  <h2>{title}</h2>
+                  <S.Title>
+                    <small>{(index + 1).toString().padStart(2, '0')}</small>
+                    <strong>{title}</strong>
+                  </S.Title>
+                  <div className={'challenge'}>
+                    <div className={'challenge-info'}>
+                      <span
+                        style={{ color: challengeStatuses[status].color }}
+                        className={'challenge-info-status'}
+                      >
+                        <GrStatusGoodSmall />
+                        <small>
+                          {challengeStatuses[status].label}
+                        </small>
+                      </span>
+                      <span className={'challenge-info-category'}>
+                        {category?.name}
+                      </span>
+                      <span className={'challenge-info-techs'}>
+                        {technologies.map((technology) => technology.name).join(' / ')}
+                      </span>
+                    </div>
+                    <S.ChallengeActions>
+                      <S.Action>
+                        <MdEdit />
+                      </S.Action>
+                      <S.Action>
+                        <IoMdTrash />
+                      </S.Action>
+                    </S.ChallengeActions>
+                  </div>
                 </S.ListItem>
               ))}
             </S.List>
           ) : (
-            <S.List>
-              {challenges.map(({ id, title }) => (
-                <S.ListItem key={id}>
-                  <h2>{title}</h2>
-                </S.ListItem>
+            <S.Grid>
+              {challenges.map(({
+                id,
+                title,
+                status,
+                category,
+                technologies,
+                image,
+              }) => (
+                <S.GridItem key={id}>
+                  <img src={getChallengeImage(image?.file)} alt="" />
+                  <div className={'grid-item-info'}>
+                    <strong>
+                      <span>{title}</span>
+                      <MdEdit />
+                    </strong>
+                    <div className={'grid-item-info-badges'}>
+                      <span style={{ color: challengeStatuses[status].color }}>
+                        <GrStatusGoodSmall />
+                        {challengeStatuses[status].label}
+                      </span>
+                      <span>
+                        {category?.name}
+                      </span>
+                      <span className={'grid-item-info-badges-techs'}>
+                        {technologies.map((technology) => technology.name).join(' / ')}
+                      </span>
+                    </div>
+                  </div>
+                </S.GridItem>
               ))}
-            </S.List>
+            </S.Grid>
           )}
         </S.ChallengesContainer>
       </S.Container>
