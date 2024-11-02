@@ -18,40 +18,42 @@ interface SelectProps extends ComponentProps<'select'> {
 }
 
 export const Select = ({
-  id,
-  cannotBeEmpty = false,
-  placeholder,
-  label,
-  options,
-  value,
-  onChange,
-  ...rest
+    id,
+    cannotBeEmpty = false,
+    placeholder,
+    label,
+    options,
+    value,
+    onChange,
+    ...rest
 }: SelectProps) => {
-  return (
-    <div className='co-select'>
-      {label && (
-        <label htmlFor={id}>{label}</label>
-      )}
-      <select
-        id={id}
-        value={value}
-        onChange={onChange}
-        className='co-select-input'
-        {...rest}
-      >
-        {placeholder && (
-          <option value={NONE} selected disabled={cannotBeEmpty}>{placeholder}</option>
-        )}
-        {options.map(({ label, value, disabled }) => (
-          <option
-            key={value}
-            value={value}
-            disabled={disabled}
-          >
-            {label}
-          </option>
-        ))}
-      </select>
-    </div>
-  );
+    return (
+        <div className='co-select'>
+            {label && (
+                <label htmlFor={id}>{label}</label>
+            )}
+            <select
+                id={id}
+                value={value}
+                onChange={onChange}
+                className='co-select-input'
+                {...rest}
+            >
+                {placeholder && (
+                    <option value={NONE} defaultValue={NONE} disabled={cannotBeEmpty}>
+                        {placeholder}
+                    </option>
+                )}
+                {options.map(({ label, value, disabled }) => (
+                    <option
+                        key={value}
+                        value={value}
+                        disabled={disabled}
+                    >
+                        {label}
+                    </option>
+                ))}
+            </select>
+        </div>
+    );
 };

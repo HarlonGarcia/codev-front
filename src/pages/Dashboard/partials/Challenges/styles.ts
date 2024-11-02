@@ -1,40 +1,5 @@
 import { styled } from 'styles';
 
-const Container = styled('div', {
-});
-
-const Header = styled('header', {
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  marginBottom: '4rem',
-
-  h1: {
-    fontSize: '2rem',
-    fontWeight: 600,
-  },
-  p: {
-    fontSize: '1.125rem',
-  },
-
-  '> button': {
-    color: '$highlight',
-    fontWeight: 600,
-    padding: '0.5rem 1rem',
-    borderRadius: '0.5rem',
-    border: '1px solid $highlight',
-
-    '&:hover': {
-      color: '$highlightDarker',
-      borderColor: '$highlightDarker',
-    },
-  },
-});
-
-const ChallengesContainer = styled('div', {
-  marginTop: '4rem',
-});
-
 const ChallengesHeader = styled('div', {
   display: 'flex',
   flexWrap: 'wrap',
@@ -302,9 +267,6 @@ const GridItem = styled('div', {
 });
 
 export {
-  Container,
-  Header,
-  ChallengesContainer,
   ChallengesHeader,
   Filters,
   Actions,

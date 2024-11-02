@@ -21,100 +21,100 @@ interface InputFileProps<T extends FieldValues> {
 import imagePlaceholder from '../../../../public/images/card-image-placeholder.png';
 
 export const InputFile = <T extends FieldValues>({ 
-  register,
-  onChange: onImageChange,
-  image,
-  label,
-  variant,
-  className,
-  showCloseButton = false,
-  showButton = false,
+    register,
+    onChange: onImageChange,
+    image,
+    label,
+    variant,
+    className,
+    showCloseButton = false,
+    showButton = false,
 }: InputFileProps<T>) => {
-  const { t } = useTranslation();
-  const hiddenInputRef = useRef<HTMLInputElement | null>(null);
-  const [preview, setPreview] = useState<string | undefined>(undefined);
+    const { t } = useTranslation();
+    const hiddenInputRef = useRef<HTMLInputElement | null>(null);
+    const [preview, setPreview] = useState<string | undefined>(undefined);
 
-  const { ref: registerRef, onChange, ...rest } = register('image' as Path<T>);
+    const { ref: registerRef, onChange, ...rest } = register('image' as Path<T>);
 
-  const handleFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
-    onChange(event);
+    const handleFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
+        onChange(event);
 
-    const file = event.target.files?.[0];
+        const file = event.target.files?.[0];
 
-    if (!file) {
-      return;
-    }
+        if (!file) {
+            return;
+        }
 
-    const imageUrl = URL.createObjectURL(file);
-    setPreview(imageUrl);
-  };
+        const imageUrl = URL.createObjectURL(file);
+        setPreview(imageUrl);
+    };
 
-  const onUpload = () => {
-    onImageChange?.();
+    const onUpload = () => {
+        onImageChange?.();
 
-    if (preview) {
-      setPreview(undefined);
-      return;
-    }
+        if (preview) {
+            setPreview(undefined);
+            return;
+        }
   
-    hiddenInputRef.current?.click();
-  };
+        hiddenInputRef.current?.click();
+    };
 
-  const removeImage = () => {
-    onImageChange?.();
-    setPreview(undefined);
-  };
+    const removeImage = () => {
+        onImageChange?.();
+        setPreview(undefined);
+    };
 
-  const uploadButtonLabel = preview
-    ? t('pages.create_challenge.fields.image.remove')
-    : t('pages.create_challenge.fields.image.add');
+    const uploadButtonLabel = preview
+        ? t('pages.create_challenge.fields.image.remove')
+        : t('pages.create_challenge.fields.image.add');
 
-  const showOutline = Boolean(preview) && showCloseButton;
+    const showOutline = Boolean(preview) && showCloseButton;
 
-  useEffect(function setImagePreview() {
-    if (!image || !!preview) {
-      return;
-    }
+    useEffect(function setImagePreview() {
+        if (!image || !!preview) {
+            return;
+        }
 
-    setPreview(image);
-  }, []);
+        setPreview(image);
+    }, []);
 
-  return (
-    <S.Container colorSchema={variant} className={className}>
-      {label && <label>{label}</label>}
+    return (
+        <S.Container colorSchema={variant} className={className}>
+            {label && <label>{label}</label>}
 
-      <S.InputWrapper
-        colorSchema={variant}
-        hasPreview={showOutline}
-      >
-        {preview && showCloseButton && (
-          <S.RemoveButton onClick={removeImage}>
-            <IoCloseSharp />
-          </S.RemoveButton>
-        )}
+            <S.InputWrapper
+                colorSchema={variant}
+                hasPreview={showOutline}
+            >
+                {preview && showCloseButton && (
+                    <S.RemoveButton onClick={removeImage}>
+                        <IoCloseSharp />
+                    </S.RemoveButton>
+                )}
 
-        <input
-          type={'file'}
-          {...rest}
-          onChange={handleFileUpload}
-          ref={(e) => {
-            registerRef(e);
-            hiddenInputRef.current = e;
-          }}
-        />
+                <input
+                    type={'file'}
+                    {...rest}
+                    onChange={handleFileUpload}
+                    ref={(e) => {
+                        registerRef(e);
+                        hiddenInputRef.current = e;
+                    }}
+                />
 
-        <img
-          src={preview ?? imagePlaceholder}
-          onClick={!preview ? onUpload : () => {}}
-        />
-      </S.InputWrapper>
+                <img
+                    src={preview ?? imagePlaceholder}
+                    onClick={!preview ? onUpload : () => {}}
+                />
+            </S.InputWrapper>
 
 
-      {showButton && (
-        <S.UploadButton type='button' onClick={onUpload}>
-          {uploadButtonLabel}
-        </S.UploadButton>
-      )}
-    </S.Container>
-  );
+            {showButton && (
+                <S.UploadButton type='button' onClick={onUpload}>
+                    {uploadButtonLabel}
+                </S.UploadButton>
+            )}
+        </S.Container>
+    );
 };

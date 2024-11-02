@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    @font-face {
+        font-family: 'Fira Code';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(../assets/fonts/FiraCode-VariableFont_wght.ttf) format('ttf');
+    }
+
+    @font-face {
+        font-family: 'Raleway';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url(../assets/fonts/Raleway-VariableFont_wght.ttf) format('ttf');
+    }
+}
+
+:root {
+    --nav-size-base: 3.25rem;
+}
+
+body {
+    background-color: theme('colors.purple.900');
+    color: theme('colors.pink.800');
+    font-family: 'Raleway';
+}
+
+h1 {
+    color: theme('colors.purple.300')
+}
+
+.nav-size {
+    height: var(--nav-size-base);
+}

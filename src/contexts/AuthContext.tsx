@@ -22,86 +22,86 @@ interface AuthContextProps {
 export const AuthContext = createContext({} as AuthContextProps);
   
 export const AuthProvider = ({ children }: PropsWithChildren) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const {
-    data: user,
-    refetch: refetchUser,
-    isPending: isUserLoading,
-  } = useMe();
+    const {
+        data: user,
+        refetch: refetchUser,
+        isPending: isUserLoading,
+    } = useMe();
 
-  const {
-    mutate: sendLogin,
-    isPending: isLoggingIn,
-    error: loginError,
-  } = useLogin();
+    const {
+        mutate: sendLogin,
+        isPending: isLoggingIn,
+        error: loginError,
+    } = useLogin();
 
-  const {
-    mutate: register,
-    isPending: isSigningIn,
-    error: signupError,
-  } = useSignUp();
+    const {
+        mutate: register,
+        isPending: isSigningIn,
+        error: signupError,
+    } = useSignUp();
 
-  const handleUserAuthentication = (token: string) => {
-    localStorage.setItem('@auth', token);
-    setIsAuthenticated(true);
-    refetchUser();
-  }
-
-  const logout = () => {
-    setIsAuthenticated(false);
-    localStorage.removeItem('@auth');
-  };
-
-  const signUp = (user: IUser, callback?: () => void) => {
-    register(user, {
-      onSuccess: (token) => {
-        handleUserAuthentication(token);
-        callback?.();
-      },
-      onError: logout,
-    });
-  }
-
-  const login = (data: ILoginPayload, callback?: () => void) => {
-    sendLogin(data, {
-      onSuccess: (token) => {
-        handleUserAuthentication(token);
-        callback?.();
-      },
-      onError: logout,
-    });
-  };
-
-  useEffect(function setToken() {
-    const token = localStorage.getItem('@auth');
-
-    if (token) {
-      setIsAuthenticated(true);
-      return;
+    const handleUserAuthentication = (token: string) => {
+        localStorage.setItem('@auth', token);
+        setIsAuthenticated(true);
+        refetchUser();
     }
 
-    logout();
-  }, []);
+    const logout = () => {
+        setIsAuthenticated(false);
+        localStorage.removeItem('@auth');
+    };
 
-  const isAdmin = user && user.roles?.some(({ name }) => ADMIN === name);
+    const signUp = (user: IUser, callback?: () => void) => {
+        register(user, {
+            onSuccess: (token) => {
+                handleUserAuthentication(token);
+                callback?.();
+            },
+            onError: logout,
+        });
+    }
 
-  return (
-    <AuthContext.Provider
-      value={{
-        user,
-        invalidateUser: refetchUser,
-        isUserLoading,
-        error: !!loginError || !!signupError,
-        isAuthenticated: Boolean(user) && isAuthenticated,
-        isAdmin: Boolean(isAdmin),
-        isLoading: isLoggingIn || isSigningIn,
-        signUp,
-        login,
-        logout,
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
-  );
+    const login = (data: ILoginPayload, callback?: () => void) => {
+        sendLogin(data, {
+            onSuccess: (token) => {
+                handleUserAuthentication(token);
+                callback?.();
+            },
+            onError: logout,
+        });
+    };
+
+    useEffect(function setToken() {
+        const token = localStorage.getItem('@auth');
+
+        if (token) {
+            setIsAuthenticated(true);
+            return;
+        }
+
+        logout();
+    }, []);
+
+    const isAdmin = user && user.roles?.some(({ name }) => ADMIN === name);
+
+    return (
+        <AuthContext.Provider
+            value={{
+                user,
+                invalidateUser: refetchUser,
+                isUserLoading,
+                error: !!loginError || !!signupError,
+                isAuthenticated: Boolean(user) && isAuthenticated,
+                isAdmin: Boolean(user) && isAuthenticated && Boolean(isAdmin),
+                isLoading: isLoggingIn || isSigningIn,
+                signUp,
+                login,
+                logout,
+            }}
+        >
+            {children}
+        </AuthContext.Provider>
+    );
 };
