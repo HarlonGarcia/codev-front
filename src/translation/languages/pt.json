@@ -85,6 +85,7 @@
     "pages.challenge_users.button.return": "Retornar ao desafio",
     "pages.challenge_users.table.columns.name": "Nome",
     "pages.challenge_users.table.columns.github": "Github",
+    "pages.challenge_users.table.columns.additional_url": "Link adicional",
     "pages.challenge_users.table.columns.labels": "Conquistas",
 
     "pages.signin.title": "Bem vindo de volta!",
@@ -125,11 +126,13 @@
 
     "pages.dashboard.stats.title": "Veja sua atividade",
     "pages.dashboard.stats.description": "Veja seus últimos desafios criados, informações gerais sobre os desafios, sua atividade neste mês e mais",
-    "pages.dashboard.stats.cards.challenge.description": "Você criou {{challenges}} desafios neste mês",
+    "pages.dashboard.stats.cards.challenge.description": "Você criou <span>{{challenges}}</span> desafios neste mês",
+    "pages.dashboard.stats.cards.challenge.left": "Faltam <span>{{challenges}}</span> desafios para alcançar o seu recorde",
+    "pages.dashboard.stats.cards.challenge.achievement": "Sua próxima conquista:",
     "pages.dashboard.stats.cards.steak.label": "Maior sequência",
 
     "pages.dashboard.challenges.title": "Desafios",
-    "pages.dashboard.challenges.description": "Veja seus últimos desafios criados, informações gerais sobre os desafios, sua atividade neste mês e mais",
+    "pages.dashboard.challenges.description": "Filtre, crie, edite e delete desafios de forma prática",
     "pages.dashboard.challenges.add_challenge": "Criar novo desafio",
     "pages.dashboard.challenges.filters.category.placeholder": "Selecione uma categoria",
     "pages.dashboard.challenges.filters.technology.placeholder": "Selecione uma tecnologia",

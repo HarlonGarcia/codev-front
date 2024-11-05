@@ -1,8 +1,9 @@
 import { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import Menu from 'components/Menu';
+import { Avatar } from 'components/shared/Avatar';
 import { AuthContext } from 'contexts/AuthContext';
 import dayjs from 'dayjs';
 import i18next from 'i18next';
@@ -11,79 +12,94 @@ import { FaCodeBranch } from 'react-icons/fa';
 import { IoLanguage } from "react-icons/io5";
 import { LuLogIn, LuLogOut } from 'react-icons/lu';
 import { MdLeaderboard   } from "react-icons/md";
+import { getBase64Image } from 'utils';
 
-import UserAvatar from './partials/UserAvatar';
 import * as S from './styles';
 
 export default function Navbar() {
-  const { t } = useTranslation();
-  const { logout, isAuthenticated, isAdmin } = useContext(AuthContext);
+    const { t } = useTranslation();
+    const navigate = useNavigate();
+    const {
+        user,
+        isAuthenticated,
+        isAdmin,
+        logout,
+    } = useContext(AuthContext);
 
-  const changeLanguage = (value: string) => {
-    dayjs.locale(value);
-    i18next.changeLanguage(value);
-  };
+    const changeLanguage = (value: string) => {
+        dayjs.locale(value);
+        i18next.changeLanguage(value);
+    };
 
-  const handleLanguageChange = () => {
-    const currentLanguage = i18next.resolvedLanguage;
+    const handleLanguageChange = () => {
+        const currentLanguage = i18next.resolvedLanguage;
     
-    if ('en' === currentLanguage) {
-      changeLanguage('pt-BR');
-      return;
-    }
+        if ('en' === currentLanguage) {
+            changeLanguage('pt-BR');
+            return;
+        }
 
-    changeLanguage('en');
-  };
+        changeLanguage('en');
+    };
 
-  return (
-    <S.Container>
-      <Link to='/'>
-        <h3>Codev</h3>
-      </Link>
-      <S.Navigation>
-        <S.NavItems>
-          <Link to='/'>
-            <AiFillHome />
-            <span>{t('components.navbar.home')}</span>
-          </Link>
-          {isAuthenticated && isAdmin && (
-            <Link to='/dashboard'>
-              <MdLeaderboard   />
-              <span>{t('components.navbar.dashboard')}</span>
+    return (
+        <div className='nav-size flex justify-between items-center fixed w-full px-8 z-10
+            border-b border-purple-800 backdrop-blur-sm'>
+            <Link to='/'>
+                <h3 className='text-xl font-bold bg-gradient-to-r from-purple-300 to-pink-700 bg-clip-text text-[transparent]'>
+                    Codev
+                </h3>
             </Link>
-          )}
-          {isAuthenticated && (
-            <>
-              <Link to='/challenges'>
-                <FaCodeBranch />
-                <span>{t('components.navbar.challenges')}</span>
-              </Link>
-              <button onClick={logout}>
-                <LuLogOut />
-                <span>{t('components.navbar.logout')}</span>
-              </button>
-            </>
-          )}
-          {!isAuthenticated && (
-            <Link to='/signin'>
-              <LuLogIn />
-              <span>{t('components.navbar.signin')}</span>
-            </Link>
-          )}
-        </S.NavItems>
+            <S.Navigation>
+                <S.NavItems>
+                    <Link to='/'>
+                        <AiFillHome />
+                        <span>{t('components.navbar.home')}</span>
+                    </Link>
+                    {isAuthenticated && isAdmin && (
+                        <Link to='/dashboard'>
+                            <MdLeaderboard   />
+                            <span>{t('components.navbar.dashboard')}</span>
+                        </Link>
+                    )}
+                    {isAuthenticated && (
+                        <>
+                            <Link to='/challenges'>
+                                <FaCodeBranch />
+                                <span>{t('components.navbar.challenges')}</span>
+                            </Link>
+                            <button onClick={logout}>
+                                <LuLogOut />
+                                <span>{t('components.navbar.logout')}</span>
+                            </button>
+                        </>
+                    )}
+                    {!isAuthenticated && (
+                        <Link to='/signin'>
+                            <LuLogIn />
+                            <span>{t('components.navbar.signin')}</span>
+                        </Link>
+                    )}
+                </S.NavItems>
 
-        <S.LanguageToggle
-          onClick={handleLanguageChange}
-          title={t('global.translation.change')}
-        >
-          <IoLanguage />
-        </S.LanguageToggle>
+                <S.LanguageToggle
+                    onClick={handleLanguageChange}
+                    title={t('global.translation.change')}
+                >
+                    <IoLanguage />
+                </S.LanguageToggle>
 
-        {isAuthenticated && (
-          <UserAvatar redirect />
-        )}
-      </S.Navigation>
-      <Menu />
-    </S.Container>
-  );
+                {isAuthenticated && (
+                    <Avatar
+                        border
+                        name={user?.name}
+                        size={'sm'}
+                        url={getBase64Image(user?.image?.file)}
+                        onClick={() => navigate('/account')}
+                    />
+                )}
+            </S.Navigation>
+            <Menu />
+        </div>
+    );
 }

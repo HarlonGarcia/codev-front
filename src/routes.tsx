@@ -5,6 +5,7 @@ import Navbar from 'components/Navbar';
 import ShortcutDialog from 'components/ShortcutDialog';
 import { extraShortcuts, goToShortcuts } from 'components/ShortcutDialog/utils';
 import { GlobalContext } from 'contexts/GlobalContext';
+import { AdminOnly } from 'pages/Auth/AdminOnly';
 import { AuthOnly } from 'pages/Auth/AuthOnly';
 import PageNotFound from 'pages/PageNotFound';
 
@@ -23,115 +24,123 @@ const Stats = lazy(() => import('./pages/Dashboard/partials/Stats'));
 const DashboardChallenges = lazy(() => import('./pages/Dashboard/partials/Challenges'));
 
 const props = {
-  redirectUrl: '/signin'
+    redirectUrl: '/signin'
 };
 
 export default function AppRoutes() {
-  const { isShortcutDialogVisible, setIsShortcutDialogVisible } = useContext(GlobalContext);
+    const { isShortcutDialogVisible, setIsShortcutDialogVisible } = useContext(GlobalContext);
 
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      const isSpecialKey = event.metaKey || event.ctrlKey;
-      const key = event.key?.toUpperCase();
-      const shortcuts = { ...goToShortcuts, ...extraShortcuts };
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            const isSpecialKey = event.metaKey || event.ctrlKey;
+            const key = event.key?.toUpperCase();
+            const shortcuts = { ...goToShortcuts, ...extraShortcuts };
 
-      if (isSpecialKey && key === 'K') {
-        setIsShortcutDialogVisible(true);
-      }
-
-      if (!isSpecialKey || !isShortcutDialogVisible) {
-        return;
-      }
-
-      event.preventDefault();
-      shortcuts[key]?.action();
-
-      if (goToShortcuts[key]) {
-        setIsShortcutDialogVisible(false);
-      }
-    };
-
-    document.addEventListener('keydown', handleKeyDown);
-
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [isShortcutDialogVisible]);
-
-  return (
-    <BrowserRouter>
-      <ShortcutDialog />
-      <Navbar />
-      <Suspense>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/signin' element={<SignIn />} />
-          <Route path='/signup' element={<SignUp />} />
-          <Route path='account'>
-            <Route
-              index
-              element={
-                <AuthOnly {...props}>
-                  <MyAccount />
-                </AuthOnly>
-              }
-            />
-            <Route
-              path='challenges'
-              element={
-                <AuthOnly {...props}>
-                  <MyChallenges />
-                </AuthOnly>
-              }
-            />
-            <Route
-              path='edit'
-              element={
-                <AuthOnly {...props}>
-                  <ModifyUser />
-                </AuthOnly>
-              }
-            />
-          </Route>
-          <Route path='challenges'>
-            <Route
-              index
-              element={
-                <AuthOnly {...props}>
-                  <Challenges />
-                </AuthOnly>
-              }
-            />
-            <Route
-              path=':id'
-              element={
-                <AuthOnly {...props}>
-                  <ChallengeInformation />
-                </AuthOnly>
-              }
-            />
-            <Route
-              path=':id/users'
-              element={
-                <AuthOnly {...props}>
-                  <Participants />
-                </AuthOnly>
-              }
-            />
-          </Route>
-          <Route
-            path='new'
-            element={
-              <AuthOnly {...props}>
-                <CreateChallenge />
-              </AuthOnly>
+            if (isSpecialKey && key === 'K') {
+                setIsShortcutDialogVisible(true);
             }
-          />
-          <Route path='/dashboard' element={<Dashboard />}>
-            <Route index element={<Stats />} />
-            <Route path='challenges' element={<DashboardChallenges />} />
-          </Route>
-          <Route path='*' element={<PageNotFound />} />
-        </Routes>
-      </Suspense>
-    </BrowserRouter>
-  );
+
+            if (!isSpecialKey || !isShortcutDialogVisible) {
+                return;
+            }
+
+            event.preventDefault();
+            shortcuts[key]?.action();
+
+            if (goToShortcuts[key]) {
+                setIsShortcutDialogVisible(false);
+            }
+        };
+
+        document.addEventListener('keydown', handleKeyDown);
+
+        return () => document.removeEventListener('keydown', handleKeyDown);
+    }, [isShortcutDialogVisible]);
+
+    return (
+        <BrowserRouter>
+            <ShortcutDialog />
+            <Navbar />
+            <Suspense>
+                <Routes>
+                    <Route path='/' element={<Home />} />
+                    <Route path='/signin' element={<SignIn />} />
+                    <Route path='/signup' element={<SignUp />} />
+                    <Route path='account'>
+                        <Route
+                            index
+                            element={
+                                <AuthOnly {...props}>
+                                    <MyAccount />
+                                </AuthOnly>
+                            }
+                        />
+                        <Route
+                            path='challenges'
+                            element={
+                                <AuthOnly {...props}>
+                                    <MyChallenges />
+                                </AuthOnly>
+                            }
+                        />
+                        <Route
+                            path='edit'
+                            element={
+                                <AuthOnly {...props}>
+                                    <ModifyUser />
+                                </AuthOnly>
+                            }
+                        />
+                    </Route>
+                    <Route path='challenges'>
+                        <Route
+                            index
+                            element={
+                                <AuthOnly {...props}>
+                                    <Challenges />
+                                </AuthOnly>
+                            }
+                        />
+                        <Route
+                            path=':id'
+                            element={
+                                <AuthOnly {...props}>
+                                    <ChallengeInformation />
+                                </AuthOnly>
+                            }
+                        />
+                        <Route
+                            path=':id/users'
+                            element={
+                                <AuthOnly {...props}>
+                                    <Participants />
+                                </AuthOnly>
+                            }
+                        />
+                    </Route>
+                    <Route
+                        path='new'
+                        element={
+                            <AuthOnly {...props}>
+                                <CreateChallenge />
+                            </AuthOnly>
+                        }
+                    />
+                    <Route path='/dashboard' element={<Dashboard />}>
+                        <Route index element={
+                            <AdminOnly {...props}>
+                                <Stats />
+                            </AdminOnly>
+                        } />
+                        <Route path='challenges' element={
+                            <AdminOnly {...props}>
+                                <DashboardChallenges />
+                            </AdminOnly>
+                        } />
+                    </Route>
+                    <Route path='*' element={<PageNotFound />} />
+                </Routes>
+            </Suspense>
+        </BrowserRouter>
+    );
 }

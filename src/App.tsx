@@ -14,14 +14,14 @@ import 'react-toastify/dist/ReactToastify.css';
 dayjs.locale('pt-br');
 
 function App() {
-  return (
-    <GlobalProvider>
-      <AuthProvider>
-        <ToastContainer {...defaultToastConfig} />
-        <Routes />
-      </AuthProvider>
-    </GlobalProvider>
-  );
+    return (
+        <GlobalProvider>
+            <AuthProvider>
+                <ToastContainer {...defaultToastConfig} />
+                <Routes />
+            </AuthProvider>
+        </GlobalProvider>
+    );
 }
 
 export default App;

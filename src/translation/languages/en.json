@@ -85,6 +85,7 @@
     "pages.challenge_users.button.return": "Back to challenge",
     "pages.challenge_users.table.columns.name": "Name",
     "pages.challenge_users.table.columns.github": "Github",
+    "pages.challenge_users.table.columns.additional_url": "Additional url",
     "pages.challenge_users.table.columns.labels": "Achievements",
 
     "pages.signin.title": "Welcome back!",
@@ -125,11 +126,13 @@
 
     "pages.dashboard.stats.title": "See your activity",
     "pages.dashboard.stats.description": "See your latest challenges created, general information about the challenges, your activity in the current month and more",
+    "pages.dashboard.stats.cards.challenge.left": "<span>{{challenges}}</span> challenges to go to reach the record",
+    "pages.dashboard.stats.cards.challenge.achievement": "Your next achievement:",
     "pages.dashboard.stats.cards.challenge.description": "You created {{challenges}} challenges this month",
     "pages.dashboard.stats.cards.steak.label": "Longest streak",
 
     "pages.dashboard.challenges.title": "Challenges",
-    "pages.dashboard.challenges.description": "See your latest challenges created, general information about the challenges, your activity in the current month and more",
+    "pages.dashboard.challenges.description": "Easily filter, create, edit, and delete challenges",
     "pages.dashboard.challenges.add_challenge": "Create new challenge",
     "pages.dashboard.challenges.filters.category.placeholder": "Select a category",
     "pages.dashboard.challenges.filters.technology.placeholder": "Select a technology",

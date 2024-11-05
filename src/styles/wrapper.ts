@@ -1,32 +1,32 @@
 import { styled } from '.';
 
 const WrapperDefault = styled('main', {
-  minHeight: '100vh',
+    minHeight: '100vh',
 });
 
 const Wrapper = styled(WrapperDefault, {
-  paddingTop: '$navbarHeight',
+    paddingTop: '$navbarHeight',
 });
 
 const WrapperWithPadding = styled(WrapperDefault, {
-  wrapperPadding: '2rem',
+    wrapperPadding: '2rem',
 
-  '@xs': {
-    wrapperPadding: '2.5rem',
-  },
+    '@xs': {
+        wrapperPadding: '2.5rem',
+    },
 
-  '@sm': {
-    wrapperPadding: '3.5rem',
-  },
+    '@sm': {
+        wrapperPadding: '3.5rem',
+    },
 
-  '@lg': {
-    wrapperPadding: '4.5rem',
-  },
+    '@lg': {
+        wrapperPadding: '4.5rem',
+    },
 
-  '@xl3': {
-    maxWidth: '100rem',
-    margin: '0 auto',
-  }
+    '@xl3': {
+        maxWidth: '100rem',
+        margin: '0 auto',
+    }
 });
 
 export { WrapperDefault, Wrapper, WrapperWithPadding };

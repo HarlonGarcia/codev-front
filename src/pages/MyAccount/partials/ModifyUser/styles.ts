@@ -27,30 +27,6 @@ const FormWrapper = styled('form', {
   '.image-input': {
     alignSelf: 'center',
   },
-
-  '> button': {
-    width: 'fit-content',
-    padding: '0.75rem 2rem',
-
-    fontSize: '1rem',
-    fontWeight: 600,
-    
-    borderRadius: '0.35rem',
-    border: '1px solid transparent',
-    background: '$secondary',
-    color: '$highlight',
-    transition: 'all 0.3s ease-in-out',
-
-    '&:hover:not(:disabled)': {
-      borderColor: '$highlight',
-      boxShadow: '0px 0px 2px #50fa7b',
-    },
-
-    '&:disabled': {
-      color: '$highlightDarker',
-      cursor: 'not-allowed',
-    },
-  }
 });
 
 export {

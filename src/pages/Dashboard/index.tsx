@@ -3,18 +3,16 @@ import { Outlet } from 'react-router-dom';
 
 import Sidebar from 'components/Sidebar';
 
-import * as S from './styles';
-
 export default function Dashboard() {
-  const [isSiderbarVisible, setIsSidebarVisible] = useState(true);
+    const [isSiderbarVisible, setIsSidebarVisible] = useState(true);
   
-  return (
-    <S.Container>
-      <Sidebar
-        visible={isSiderbarVisible}
-        setVisible={setIsSidebarVisible}
-      />
-      <Outlet />
-    </S.Container>
-  );
+    return (
+        <div className='pt-24 md:pt-32 px-24'>
+            <Sidebar
+                visible={isSiderbarVisible}
+                setVisible={setIsSidebarVisible}
+            />
+            <Outlet />
+        </div>
+    );
 }
