@@ -24,6 +24,7 @@ jobs:
           file: docker/frontend/Dockerfile
           push: true
           target: prod
+          platforms: linux/amd64
           tags: |
             ${{ secrets.USER }}/frontend:v1
             ${{ secrets.USER }}/frontend:latest
