@@ -23,6 +23,7 @@ jobs:
           context: .
           file: docker/frontend/Dockerfile
           push: true
+          target: prod
           tags: |
             ${{ secrets.USER }}/frontend:v1
             ${{ secrets.USER }}/frontend:latest
