@@ -13,7 +13,7 @@ interface MarkdownProps {
 export default function Markdown({ content }: MarkdownProps) {
   return (
     <ReactMarkdown
-      className='markdown'
+      className='markdown text-pink-100'
       rehypePlugins={[rehypeHighlight]}
       remarkPlugins={[remarkGfm]}
       components={{

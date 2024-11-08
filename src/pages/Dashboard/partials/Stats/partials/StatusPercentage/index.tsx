@@ -16,16 +16,6 @@ export const StatusPercentage = ({
         return (value * 100) / total;
     };
 
-    const getCircleSize = () => {
-        const windowWidth = window.innerWidth;
-
-        if (windowWidth > 1536) {
-            return 70;
-        }
-        
-        return 50;
-    }
-
     return (
         <div className='flex flex-col justify-center items-center bg-purple-800 rounded-3xl p-4 md:p-8'>
             <h3 className='text-lg text-center text-pink-100'>
@@ -35,7 +25,7 @@ export const StatusPercentage = ({
                 {`${value}/${total}`}
             </strong>
             <CircleProgress
-                size={getCircleSize()}
+                size={70}
                 percentage={getPercentage()}
                 color={status.color}
             />

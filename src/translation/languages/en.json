@@ -126,10 +126,11 @@
 
     "pages.dashboard.stats.title": "See your activity",
     "pages.dashboard.stats.description": "See your latest challenges created, general information about the challenges, your activity in the current month and more",
-    "pages.dashboard.stats.cards.challenge.left": "<span>{{challenges}}</span> challenges to go to reach the record",
+    "pages.dashboard.stats.cards.challenge.left": "<span>{{challenges}}</span> challenge(s) to go to reach the record",
     "pages.dashboard.stats.cards.challenge.achievement": "Your next achievement:",
     "pages.dashboard.stats.cards.challenge.description": "You created {{challenges}} challenges this month",
     "pages.dashboard.stats.cards.steak.label": "Longest streak",
+    "pages.dashboard.stats.cards.participants.total": "users are participating in your challenges",
 
     "pages.dashboard.challenges.title": "Challenges",
     "pages.dashboard.challenges.description": "Easily filter, create, edit, and delete challenges",

@@ -7,7 +7,7 @@ export default function Dashboard() {
     const [isSiderbarVisible, setIsSidebarVisible] = useState(true);
   
     return (
-        <div className='pt-24 md:pt-32 px-24'>
+        <div className='pt-24 px-14 sm:px-24 md:pt-32'>
             <Sidebar
                 visible={isSiderbarVisible}
                 setVisible={setIsSidebarVisible}

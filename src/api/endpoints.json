@@ -3,6 +3,7 @@
   "login": "/users/login",
   "signup": "/users/signup",
   "user_challenges": "/users/{userId}/challenges",
+  "user_metrics": "/users/{userId}/metrics",
   "users": "/users",
   "challenge_users": "/challenges/{challengeId}/users",
   "challenges": "/challenges",

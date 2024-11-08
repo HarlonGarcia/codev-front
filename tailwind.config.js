@@ -39,7 +39,12 @@ export default {
         },
         extend: {
             spacing: {
-                '8xl': '112rem',
+                '3xl': '112rem',
+                '4xl': '132rem',
+            },
+            screens: {
+                '3xl': '1920px',
+                '4xl': '2560px',
             },
         },
     },
