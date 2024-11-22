@@ -1,8 +1,9 @@
-import { ChangeEvent, useMemo, useState } from 'react';
+import { ChangeEvent, useContext, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Select } from 'components/Select';
 import { Loader } from 'components/shared/Loader';
+import { AuthContext } from 'contexts/AuthContext';
 import { challengesOrderBy } from 'enums/challengeOrderBy';
 import { challengeStatuses } from 'enums/challengeStatus';
 import { FaArrowUpAZ, FaArrowDownAZ } from "react-icons/fa6";
@@ -29,6 +30,7 @@ interface Filters {
 
 export default function Challenges() {
     const { t } = useTranslation();
+    const { user } = useContext(AuthContext);
 
     const [filters, setFilters] = useState<Filters>({});
     const [isAscOrder, setIsAscOrder] = useState(false);
@@ -39,6 +41,7 @@ export default function Challenges() {
         isFetching: isChallengesLoading,
     } = useChallenges({
         ...filters,
+        authorId: user?.id,
         order: isAscOrder ? 'asc' : 'desc',
     });
 

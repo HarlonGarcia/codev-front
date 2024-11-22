@@ -129,7 +129,7 @@
         "pages.dashboard.stats.cards.challenge.description": "Você criou <span>{{challenges}}</span> desafios neste mês",
         "pages.dashboard.stats.cards.challenge.left": "Falta(m) <span>{{challenges}}</span> desafio(s) para alcançar o seu recorde",
         "pages.dashboard.stats.cards.challenge.achievement": "Sua próxima conquista:",
-        "pages.dashboard.stats.cards.steak.label": "Maior sequência",
+        "pages.dashboard.stats.cards.streak.label": "Maior sequência",
         "pages.dashboard.stats.cards.participants.total": "usuários participaram de seus desafios",
 
         "pages.dashboard.challenges.title": "Desafios",

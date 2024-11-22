@@ -83,7 +83,6 @@ export const createChallenge = async ({
                 file: fileBase64,
                 fileName: image.name,
             },
-            technologies: [],
         },
     );
 

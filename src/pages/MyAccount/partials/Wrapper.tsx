@@ -13,7 +13,7 @@ export const Wrapper = ({
     children,
 }: PropsWithChildren<WrapperProps>) => {
     return (
-        <div className='max-w-3xl pt-28 px-20 lg:pt-40 xl:w-xl xl:mx-auto'>
+        <div className='pt-28 px-20 lg:pt-40 xl:mx-auto 2xl:w-4xl'>
             <div className='flex items-center gap-4 mb-8'>
                 <BackButton path={redirectPath} />
                 <h2 className='font-fira text-2xl'>{title}</h2>

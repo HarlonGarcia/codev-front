@@ -129,7 +129,7 @@
     "pages.dashboard.stats.cards.challenge.left": "<span>{{challenges}}</span> challenge(s) to go to reach the record",
     "pages.dashboard.stats.cards.challenge.achievement": "Your next achievement:",
     "pages.dashboard.stats.cards.challenge.description": "You created {{challenges}} challenges this month",
-    "pages.dashboard.stats.cards.steak.label": "Longest streak",
+    "pages.dashboard.stats.cards.streak.label": "Longest streak",
     "pages.dashboard.stats.cards.participants.total": "users are participating in your challenges",
 
     "pages.dashboard.challenges.title": "Challenges",

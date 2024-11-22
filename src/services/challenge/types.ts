@@ -2,6 +2,7 @@ import { ChallengeStatusEnum, IChallenge } from 'types/challenge';
 
 export type IGetChallengeParams = {
   category?: string;
+  authorId?: string;
   technology?: string;
   status?: ChallengeStatusEnum;
   order?: 'asc' | 'desc';

@@ -103,7 +103,10 @@ export default function MyAccount() {
                     </S.AccountHeader>
                     <S.AccountContent loading={isLoadingChallenges}>
                         {options.map((option, index) => (
-                            <S.Option key={index} onClick={() => handleActions(option)}>
+                            <S.Option
+                                key={index}
+                                onClick={() => handleActions(option)}
+                            >
                                 {option.icon}
                                 {option.label}
                             </S.Option>
@@ -115,7 +118,10 @@ export default function MyAccount() {
                                     <h3>{t('pages.account.options.admin.title')}</h3>
                                     <div>
                                         {adminOptions.map((option, index) => (
-                                            <S.Option key={index} onClick={() => handleActions(option)}>
+                                            <S.Option
+                                                key={index}
+                                                onClick={() => handleActions(option)}
+                                            >
                                                 {option.icon}
                                                 {option.label}
                                             </S.Option>
