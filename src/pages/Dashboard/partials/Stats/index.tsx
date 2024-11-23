@@ -107,55 +107,6 @@ export default function Stats() {
                         </span>
                     </div>
                 </div>
-                <div className='relative w-full flex flex-col justify-between items-center overflow-hidden col-span-1 rounded-3xl 3xl:col-span-2'>
-                    <p className='p-8 mb-10 text-center text-pink-100 3xl:p-10'>
-                        <Trans
-                            values={{ challenges: challengesInCurrentMonth }}
-                            components={{ span: <span className='px-1 text-2xl text-green-800 font-semibold' /> }}
-                        >
-                            {'pages.dashboard.stats.cards.challenge.description'}
-                        </Trans>
-                    </p>
-                    <div className='flex items-end gap-2 3xl:gap-6'>
-                        <span className='hidden w-14 h-10 bg-gradient-to-t from-green-800/30 via-green-900/10 4xl:block' />
-                        <span className='hidden w-10 h-32 bg-gradient-to-t from-green-800/30 via-green-900/10 md:w-12 3xl:w-14 3xl:block' />
-                        <span className='hidden w-14 h-24 bg-gradient-to-t from-green-800/30 via-green-900/10 3xl:block' />
-                        <span className='w-10 h-36 bg-gradient-to-t from-green-800/30 via-green-900/10 md:w-12 3xl:w-14' />
-                        <span className='w-10 h-10 bg-gradient-to-t from-green-800/30 via-green-900/10 md:w-12 3xl:w-14' />
-                        <span className='w-10 h-20 bg-gradient-to-t from-green-800/30 via-green-900/10 md:w-12 3xl:w-14' />
-                        <div className='relative'>
-                            <h2 className='absolute -left-4 -top-6 text-base text-pink-700 uppercase sm:text-xs md:text-sm md:-top-8 3xl:text-base 3xl:-left-5 3xl:font-semibold'>
-                                {currentMonth}
-                            </h2>
-                            <div className='w-10 h-48 bg-green-900 md:w-12 3xl:w-14' />
-                        </div>
-                    </div>
-                    <div className='cd-month-chart absolute top-0 left-0 w-full h-full'></div>
-                </div>
-                <div className='w-full flex flex-col justify-center items-center text-purple-900 bg-pink-900 rounded-3xl sm:flex-row'>
-                    <div className='flex flex-col items-center justify-center p-10 rounded-3xl'>
-                        <div className='flex items-center justify-center gap-2 pb-2'>
-                            <LuUsers size={40} />
-                            <span className='font-fira text-pink-100 text-5xl'>
-                                {metrics?.participantsCount}
-                            </span>
-                        </div>
-                        <span className='text-center text-xl font-semibold 2xl:text-2xl'>
-                            {t('pages.dashboard.stats.cards.participants.total')}
-                        </span>
-                    </div>
-                </div>
-                <div className='w-full p-8 flex flex-col justify-center items-center text-pink-700 bg-purple-800 rounded-3xl'>
-                    <div className='flex items-center justify-center pr-2 pb-4'>
-                        <Svg.Streak />
-                        <span className='font-fira text-pink-100 text-5xl'>
-                            {highestStreak}
-                        </span>
-                    </div>
-                    <span className='text-center text-xl font-semibold 2xl:text-2xl'>
-                        {t('pages.dashboard.stats.cards.steak.label')}
-                    </span>
-                </div>
                 <div className='w-full p-8 flex flex-col justify-center items-center text-pink-700 bg-purple-800 rounded-3xl'>
                     <div className='flex items-center justify-center pr-2 pb-4'>
                         <Svg.Streak />

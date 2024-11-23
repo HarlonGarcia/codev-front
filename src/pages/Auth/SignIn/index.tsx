@@ -13,71 +13,75 @@ import * as S from './styles';
 import { SignInSchema, signInSchema } from './validation';
 
 export default function SignIn() {
-  const { t } = useTranslation();
-  const location = useLocation();
-  const navigate = useNavigate();
-  const { login, isAuthenticated } = useContext(AuthContext);
+    const { t } = useTranslation();
+    const location = useLocation();
+    const navigate = useNavigate();
+    const {
+        login,
+        isAuthenticated,
+        isUserLoading,
+    } = useContext(AuthContext);
 
-  const {
-    formState: {
-      dirtyFields,
-      errors: formErrors,
-    },
-    reset: resetForm,
-    register,
-    handleSubmit,
-  } = useForm<SignInSchema>({
-    resolver: zodResolver(signInSchema),
-  });
+    const {
+        formState: {
+            dirtyFields,
+            errors: formErrors,
+        },
+        reset: resetForm,
+        register,
+        handleSubmit,
+    } = useForm<SignInSchema>({
+        resolver: zodResolver(signInSchema),
+    });
 
-  const hasFormValuesChanged = !(Object.keys(dirtyFields).length > 0);
+    const isSubmitDisabled = !(Object.keys(dirtyFields).length > 0) || isUserLoading;
 
-  const onSubmit: SubmitHandler<SignInSchema> = (data) => {
-    login(data, () => navigate('/'));
-    resetForm(data);
-  };
+    const onSubmit: SubmitHandler<SignInSchema> = (data) => {
+        login(data, () => navigate('/'));
+        resetForm(data);
+    };
 
-  if (isAuthenticated) {
-    return <Navigate to={'/'} state={{ from: location }} replace />
-  }
-  return (
-    <S.Container>
-      <S.Header
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <h2>{t('pages.signin.title')}</h2>
-        <p>{t('pages.signin.description')}</p>
-      </S.Header>
-      <S.Form onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          {...register('email')}
-          label={t('pages.signin.fields.email.label')}
-          error={formErrors.email?.message}
-          size='lg'
-        />
-        <Input
-          {...register('password')}
-          label={t('pages.signin.fields.password.label')}
-          type='password'
-          error={formErrors.password?.message}
-          size='lg'
-        />
-        <Link to={'/signup'}>{
-          t('pages.signin.no_account')
-        }</Link>
-        <S.SubmitButton
-          type='submit'
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          disabled={hasFormValuesChanged}
-        >
-          <span>{t('pages.signin.submit.label')}</span>
-          <FaArrowRightLong />
-        </S.SubmitButton>
-      </S.Form>
-    </S.Container>
-  );
+    if (isAuthenticated) {
+        return <Navigate to={'/'} state={{ from: location }} replace />
+    }
+    return (
+        <S.Container>
+            <S.Header
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
+            >
+                <h2>{t('pages.signin.title')}</h2>
+                <p>{t('pages.signin.description')}</p>
+            </S.Header>
+            <S.Form onSubmit={handleSubmit(onSubmit)}>
+                <Input
+                    {...register('email')}
+                    label={t('pages.signin.fields.email.label')}
+                    error={formErrors.email?.message}
+                    size='lg'
+                />
+                <Input
+                    {...register('password')}
+                    label={t('pages.signin.fields.password.label')}
+                    type='password'
+                    error={formErrors.password?.message}
+                    size='lg'
+                />
+                <Link to={'/signup'}>
+                    {t('pages.signin.no_account')}
+                </Link>
+                <S.SubmitButton
+                    type='submit'
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5 }}
+                    disabled={isSubmitDisabled}
+                >
+                    <span>{t('pages.signin.submit.label')}</span>
+                    <FaArrowRightLong />
+                </S.SubmitButton>
+            </S.Form>
+        </S.Container>
+    );
 }
