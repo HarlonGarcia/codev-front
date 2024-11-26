@@ -108,7 +108,7 @@ const CardItem = styled(motion.li, {
 
   padding: '1.5rem',
 
-  background: '#FF0',
+  background: '$secondary',
   borderRadius: '0.5rem',
   boxShadow: '0 0 12px rgba(5, 2, 25, 0.5), 0 0 24px rgba(5, 2, 25, 0.5), 0 0 36px rgba(5, 2, 25, 0.5), 0 0 48px rgba(5, 2, 25, 0.4)',
 
