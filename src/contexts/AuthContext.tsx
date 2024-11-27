@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     const {
         data: user,
         refetch: refetchUser,
-        isPending: isUserLoading,
+        isFetching: isUserLoading,
     } = useMe();
 
     const {
