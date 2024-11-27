@@ -34,7 +34,7 @@ export default function SignIn() {
         resolver: zodResolver(signInSchema),
     });
 
-    const isSubmitDisabled = !(Object.keys(dirtyFields).length > 0) || isUserLoading;
+    const isSubmitDisabled = Object.keys(dirtyFields).length <= 0 || isUserLoading;
 
     const onSubmit: SubmitHandler<SignInSchema> = (data) => {
         login(data, () => navigate('/'));
