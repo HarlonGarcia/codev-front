@@ -1,5 +1,6 @@
 import { ChangeEvent, useContext, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
 import { Select } from 'components/Select';
 import { Loader } from 'components/shared/Loader';
@@ -11,7 +12,7 @@ import { GrStatusGoodSmall } from "react-icons/gr";
 import { IoMdList, IoMdTrash } from "react-icons/io";
 import { MdEdit, MdGridView } from "react-icons/md";
 import { useCategories } from 'services/category';
-import { useChallenges } from 'services/challenge';
+import { useChallenges, useDeleteChallenge } from 'services/challenge';
 import { IGetChallengeParams } from 'services/challenge/types';
 import { useTechnologies } from 'services/technology';
 import { ChallengeStatusEnum } from 'types';
@@ -22,10 +23,10 @@ import imagePlaceholder from '../../../../../public/images/card-image-placeholde
 import * as S from './styles';
 
 interface Filters {
-  technology?: string;
-  category?: string;
-  status?: ChallengeStatusEnum;
-  orderBy?: IGetChallengeParams['orderBy'];
+    technology?: string;
+    category?: string;
+    status?: ChallengeStatusEnum;
+    orderBy?: IGetChallengeParams['orderBy'];
 }
 
 export default function Challenges() {
@@ -44,6 +45,8 @@ export default function Challenges() {
         authorId: user?.id,
         order: isAscOrder ? 'asc' : 'desc',
     });
+
+    const { mutate: deleteChallenge } = useDeleteChallenge();
 
     const {
         data: categoriesItems = [],
@@ -120,7 +123,9 @@ export default function Challenges() {
                         className='py-3 px-6 font-semibold text-md text-green-800 border
                         border-green-800 rounded-lg transition-all duration-300 ease-in-out hover:border-green-900 hover:text-green-900'
                     >
-                        {t('pages.dashboard.challenges.add_challenge')}
+                        <Link to={'new-challenge'}>
+                            {t('pages.dashboard.challenges.add_challenge')}
+                        </Link>
                     </button>
                 </div>
                 <div>
@@ -194,10 +199,10 @@ export default function Challenges() {
                                             </span>
                                         </div>
                                         <S.ChallengeActions>
-                                            <S.Action>
+                                            <S.Action type='edit'>
                                                 <MdEdit />
                                             </S.Action>
-                                            <S.Action>
+                                            <S.Action type='delete' onClick={() => deleteChallenge(id)}>
                                                 <IoMdTrash />
                                             </S.Action>
                                         </S.ChallengeActions>

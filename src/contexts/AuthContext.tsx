@@ -1,6 +1,8 @@
 import { createContext, PropsWithChildren, useEffect, useState } from 'react';
 
 import { QueryObserverResult, RefetchOptions } from '@tanstack/react-query';
+import dayjs from 'dayjs';
+import i18next from 'i18next';
 import { useLogin, useSignUp } from 'services/auth';
 import { useMe } from 'services/user';
 import { ILoginPayload, IUser } from 'types';
@@ -17,6 +19,7 @@ interface AuthContextProps {
   signUp: (data: IUser, callback?: () => void ) => void;
   login: (data: ILoginPayload, callback?: () => void) => void;
   logout: () => void;
+  changeLanguage: () => void;
 }
 
 export const AuthContext = createContext({} as AuthContextProps);
@@ -73,6 +76,22 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
         });
     };
 
+    const handleLanguageChange = (value: string) => {
+        dayjs.locale(value);
+        i18next.changeLanguage(value);
+    };
+
+    const changeLanguage = () => {
+        const currentLanguage = i18next.resolvedLanguage;
+    
+        if ('en' === currentLanguage) {
+            handleLanguageChange('pt-BR');
+            return;
+        }
+
+        handleLanguageChange('en');
+    };
+
     useEffect(function setToken() {
         const token = localStorage.getItem('@auth');
 
@@ -99,6 +118,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
                 signUp,
                 login,
                 logout,
+                changeLanguage,
             }}
         >
             {children}

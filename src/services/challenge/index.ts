@@ -112,3 +112,24 @@ export function useCreateChallenge() {
         },
     });
 };
+
+export function useDeleteChallenge() {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: async (challengeId: string) => {
+            const response = await api.deleteChallenge(challengeId);
+
+            return response;
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                predicate: ({ queryKey }) => {
+                    const keysToInvalidate = ['challenges', 'userMetrics'];
+
+                    return keysToInvalidate.some((key) => queryKey.includes(key));
+                }
+            });
+        },
+    });
+};

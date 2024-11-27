@@ -29,6 +29,21 @@ const avatar = tv({
         size: 'sm',
     },
 });
+
+const image = tv({
+    base: 'rounded-full object-cover',
+    variants: {
+        size: {
+            sm: 'w-7 h-7',
+            md: 'w-9 h-9',
+            lg: 'w-20 h-20',
+            xl: 'w-28 h-28',
+        },
+    },
+    defaultVariants: {
+        size: 'sm',
+    },
+});
   
 export const Avatar = ({
     name,
@@ -53,10 +68,10 @@ export const Avatar = ({
 
     return (
         <div title={name} className={classNames}>
-            <button type='button' onClick={onClick}>
+            <button type='button' onClick={onClick} className='overflow-hidden'>
                 {url
                     ? (
-                        <img src={url} alt={name} />
+                        <img className={image({ size })} src={url} alt={name} />
                     )
                     : placeholder}
             </button>

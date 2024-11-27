@@ -88,3 +88,11 @@ export const createChallenge = async ({
 
     return data ?? {};
 }
+
+export const deleteChallenge = async (identifier: string) => {
+    const response = await api.delete(
+        generateUrl('challenges', { identifier }),
+    );
+
+    return response.data;
+}

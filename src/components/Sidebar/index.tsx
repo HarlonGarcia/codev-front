@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -7,15 +7,29 @@ import { AuthContext } from 'contexts/AuthContext';
 import { FaChartBar  } from "react-icons/fa";
 import { FaCodeMerge, FaArrowLeft  } from "react-icons/fa6";
 import { TbMessageQuestion } from "react-icons/tb";
+import { twMerge } from 'tailwind-merge';
 import { getBase64Image } from 'utils';
 import { URL_DISCORD } from 'utils/constants';
 
 import * as S from './styles';
 
 interface SidebarProps {
-  visible?: boolean;
-  setVisible: (value: boolean) => void;
+    visible?: boolean;
+      setVisible: (value: boolean) => void;
 }
+
+const links = [
+    {
+        icon: <FaChartBar />,
+        path: '',
+        name: 'pages.dashboard.sidebar.routes.stats',
+    },
+    {
+        icon: <FaCodeMerge />,
+        path: 'challenges',
+        name: 'pages.dashboard.sidebar.routes.challenges',
+    },
+];
 
 export default function Sidebar({
     visible = false,
@@ -25,6 +39,10 @@ export default function Sidebar({
     const { t } = useTranslation();
 
     const { user } = useContext(AuthContext);
+
+    const [activePage, setActivePage] = useState(0);
+
+    const navItemClasses = twMerge('flex items-center gap-3 py-3 px-4 list-none cursor-pointer transition-all duration-300 ease-in-out text-pink-100 rounded-lg font-semibold hover:bg-purple-900/30');
 
     return (
         <S.Container visible={visible}>
@@ -49,22 +67,26 @@ export default function Sidebar({
                 />
             </S.Header>
 
-            <S.Body>
-                <hr className={'border border-pink-100'} />
+            <div>
+                <hr className={'border border-purple-700'} />
                 <S.List>
-                    <Link to={''}>
-                        <FaChartBar />
-                        <span>{t('pages.dashboard.sidebar.routes.stats')}</span>
-                    </Link>
-                    <Link to={'challenges'}>
-                        <FaCodeMerge />
-                        <span>{t('pages.dashboard.sidebar.routes.challenges')}</span>
-                    </Link>
+                    {links.map(({ path, name, icon }, index) => (
+                        <Link
+                            to={path}
+                            key={index}
+                            onClick={() => setActivePage(index)}
+                            className={`${navItemClasses} ${activePage === index && 'text-pink-700 bg-purple-900/30'}`}
+                        >
+                            {icon}
+                            <span>{t(name)}</span>
+                        </Link>
+                    ))}
                 </S.List>
-            </S.Body>
+            </div>
 
             <S.Footer>
                 <a
+                    className={navItemClasses}
                     href={URL_DISCORD}
                     target={'_blank'}
                     rel={"noopener noreferrer"}

@@ -16,7 +16,7 @@ const SignUp = lazy(() => import('./pages/Auth/SignUp'));
 const Challenges = lazy(() => import('./pages/Challenges'));
 const Participants = lazy(() => import('./pages/Challenges/Participants'));
 const ChallengeInformation = lazy(() => import('./pages/Challenges/ChallengeInformation'));
-const CreateChallenge = lazy(() => import('./pages/Challenges/CreateChallenge'));
+const CreateChallenge = lazy(() => import('./pages/Dashboard/CreateChallenge'));
 const MyChallenges = lazy(() => import('./pages/MyAccount/partials/MyChallenges'));
 const ModifyUser = lazy(() => import('./pages/MyAccount/partials/ModifyUser'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
@@ -118,25 +118,31 @@ export default function AppRoutes() {
                             }
                         />
                     </Route>
-                    <Route
-                        path='new'
-                        element={
-                            <AuthOnly {...props}>
-                                <CreateChallenge />
-                            </AuthOnly>
-                        }
-                    />
                     <Route path='/dashboard' element={<Dashboard />}>
-                        <Route index element={
-                            <AdminOnly {...props}>
-                                <Stats />
-                            </AdminOnly>
-                        } />
-                        <Route path='challenges' element={
-                            <AdminOnly {...props}>
-                                <DashboardChallenges />
-                            </AdminOnly>
-                        } />
+                        <Route
+                            index
+                            element={
+                                <AdminOnly {...props}>
+                                    <Stats />
+                                </AdminOnly>
+                            }
+                        />
+                        <Route
+                            path='challenges'
+                            element={
+                                <AdminOnly {...props}>
+                                    <DashboardChallenges />
+                                </AdminOnly>
+                            }
+                        />
+                        <Route
+                            path='challenges/new-challenge'
+                            element={
+                                <AdminOnly {...props}>
+                                    <CreateChallenge />
+                                </AdminOnly>
+                            }
+                        />
                     </Route>
                     <Route path='*' element={<PageNotFound />} />
                 </Routes>

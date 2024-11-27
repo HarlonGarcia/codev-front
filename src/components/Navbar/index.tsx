@@ -5,8 +5,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import Menu from 'components/Menu';
 import { Avatar } from 'components/shared/Avatar';
 import { AuthContext } from 'contexts/AuthContext';
-import dayjs from 'dayjs';
-import i18next from 'i18next';
 import { AiFillHome } from 'react-icons/ai';
 import { FaCodeBranch } from 'react-icons/fa';
 import { IoLanguage } from "react-icons/io5";
@@ -24,23 +22,8 @@ export default function Navbar() {
         isAuthenticated,
         isAdmin,
         logout,
+        changeLanguage,
     } = useContext(AuthContext);
-
-    const changeLanguage = (value: string) => {
-        dayjs.locale(value);
-        i18next.changeLanguage(value);
-    };
-
-    const handleLanguageChange = () => {
-        const currentLanguage = i18next.resolvedLanguage;
-    
-        if ('en' === currentLanguage) {
-            changeLanguage('pt-BR');
-            return;
-        }
-
-        changeLanguage('en');
-    };
 
     return (
         <div className='nav-size flex justify-between items-center fixed w-full px-8 z-10
@@ -83,7 +66,7 @@ export default function Navbar() {
                 </S.NavItems>
 
                 <S.LanguageToggle
-                    onClick={handleLanguageChange}
+                    onClick={changeLanguage}
                     title={t('global.translation.change')}
                 >
                     <IoLanguage />
