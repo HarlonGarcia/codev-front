@@ -1,5 +1,6 @@
 import { ToastContainer } from 'react-toastify';
 
+import { Loader } from 'components/shared/Loader';
 import dayjs from 'dayjs';
 
 import { AuthProvider } from './contexts/AuthContext';
@@ -18,6 +19,7 @@ function App() {
         <GlobalProvider>
             <AuthProvider>
                 <ToastContainer {...defaultToastConfig} />
+                <Loader />
                 <Routes />
             </AuthProvider>
         </GlobalProvider>

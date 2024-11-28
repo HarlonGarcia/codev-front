@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 
 import { Badge } from 'components/Badge';
 import { Avatar } from 'components/shared/Avatar';
-import { Loader } from 'components/shared/Loader';
 import { AuthContext } from 'contexts/AuthContext';
 import { FaGithub } from 'react-icons/fa';
 import { ImLink } from 'react-icons/im';
@@ -21,7 +20,7 @@ const MAX_LABELS_DISPLAYED = 5;
 export default function MyAccount() {
     const { t } = useTranslation();
     const navigate = useNavigate();
-    const { user, logout, isUserLoading } = useContext(AuthContext);
+    const { user, logout } = useContext(AuthContext);
 
     const { isFetching: isLoadingChallenges } = useUserChallenges();
 
@@ -62,7 +61,6 @@ export default function MyAccount() {
     }
 
     const isAdmin = user.roles?.some((role) => ADMIN === role.name);
-    const isLoading = isLoadingChallenges || isUserLoading;
     const userLabels = user.labels || [];
     const labels = userLabels.slice(0, MAX_LABELS_DISPLAYED);
 
@@ -71,85 +69,82 @@ export default function MyAccount() {
         : 0;
   
     return (
-        <>
-            <Loader loading={isLoading} />
-            <S.Container>
-                <div>
-                    <S.AccountHeader>
-                        <Avatar
-                            border
-                            size={'xl'}
-                            name={user.name}
-                            url={getBase64Image(user.image?.file)}
-                        />
-                        <S.AccountInfo>
-                            <h2>{user.name}</h2>
-                            <div>
-                                {labels.map(({ id, title }, index) => (
-                                    <Badge
-                                        border='animated'
-                                        key={id + index}
-                                    >
-                                        {title}
-                                    </Badge>
-                                ))}
-                                {labelsRemainingCount > 0 && (
-                                    <Badge border='purple'>
-                  +{labelsRemainingCount}
-                                    </Badge>
-                                )}
-                            </div>
-                        </S.AccountInfo>
-                    </S.AccountHeader>
-                    <S.AccountContent loading={isLoadingChallenges}>
-                        {options.map((option, index) => (
-                            <S.Option
-                                key={index}
-                                onClick={() => handleActions(option)}
-                            >
-                                {option.icon}
-                                {option.label}
-                            </S.Option>
-                        ))}
-                        {isAdmin && (
-                            <>
-                                <S.Divider />
-                                <S.OptionsWrapper>
-                                    <h3>{t('pages.account.options.admin.title')}</h3>
-                                    <div>
-                                        {adminOptions.map((option, index) => (
-                                            <S.Option
-                                                key={index}
-                                                onClick={() => handleActions(option)}
-                                            >
-                                                {option.icon}
-                                                {option.label}
-                                            </S.Option>
-                                        ))}
-                                    </div>
-                                </S.OptionsWrapper>
-                            </>
-                        )}
-                        <S.Divider />
-                        <S.OptionsWrapper>
-                            <h3>{t('pages.account.options.contacts.title')}</h3>
-                            <div>
-                                {links.map(({ url, icon }, index) => (
-                                    <S.Contact key={index}>
-                                        {icon}
-                                        <span>{url}</span>
-                                    </S.Contact>
-                                ))}
-                            </div>
-                        </S.OptionsWrapper>
-                    </S.AccountContent>
-                    <S.AccountFooter>
-                        <button onClick={logout}>
-                            {t('pages.account.logout')}
-                        </button>
-                    </S.AccountFooter>
-                </div>
-            </S.Container>
-        </>
+        <S.Container>
+            <div>
+                <S.AccountHeader>
+                    <Avatar
+                        border
+                        size={'xl'}
+                        name={user.name}
+                        url={getBase64Image(user.image?.file)}
+                    />
+                    <S.AccountInfo>
+                        <h2>{user.name}</h2>
+                        <div>
+                            {labels.map(({ id, title }, index) => (
+                                <Badge
+                                    border='animated'
+                                    key={id + index}
+                                >
+                                    {title}
+                                </Badge>
+                            ))}
+                            {labelsRemainingCount > 0 && (
+                                <Badge border='purple'>
+                +{labelsRemainingCount}
+                                </Badge>
+                            )}
+                        </div>
+                    </S.AccountInfo>
+                </S.AccountHeader>
+                <S.AccountContent loading={isLoadingChallenges}>
+                    {options.map((option, index) => (
+                        <S.Option
+                            key={index}
+                            onClick={() => handleActions(option)}
+                        >
+                            {option.icon}
+                            {option.label}
+                        </S.Option>
+                    ))}
+                    {isAdmin && (
+                        <>
+                            <S.Divider />
+                            <S.OptionsWrapper>
+                                <h3>{t('pages.account.options.admin.title')}</h3>
+                                <div>
+                                    {adminOptions.map((option, index) => (
+                                        <S.Option
+                                            key={index}
+                                            onClick={() => handleActions(option)}
+                                        >
+                                            {option.icon}
+                                            {option.label}
+                                        </S.Option>
+                                    ))}
+                                </div>
+                            </S.OptionsWrapper>
+                        </>
+                    )}
+                    <S.Divider />
+                    <S.OptionsWrapper>
+                        <h3>{t('pages.account.options.contacts.title')}</h3>
+                        <div>
+                            {links.map(({ url, icon }, index) => (
+                                <S.Contact key={index}>
+                                    {icon}
+                                    <span>{url}</span>
+                                </S.Contact>
+                            ))}
+                        </div>
+                    </S.OptionsWrapper>
+                </S.AccountContent>
+                <S.AccountFooter>
+                    <button onClick={logout}>
+                        {t('pages.account.logout')}
+                    </button>
+                </S.AccountFooter>
+            </div>
+        </S.Container>
     );
 }

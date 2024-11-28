@@ -1,32 +1,38 @@
+import { useIsFetching, useIsMutating } from '@tanstack/react-query';
+
 interface LoaderProps {
     color?: string;
-    loading?: boolean;
 }
 
-export const Loader = ({
-    color = '#c392ef',
-    loading = false,
-}: LoaderProps) => {
-    if (!loading) {
+export const Loader = ({ color = '#c392ef' }: LoaderProps) => {
+    const queriesFetching = useIsFetching();
+    const mutationsFetching = useIsMutating();
+
+    if (queriesFetching === 0 && mutationsFetching === 0) {
         return <></>
     }
     return (
         <div className='fixed inset-0 flex justify-center items-center z-[999] bg-purple-900/60'>
             <svg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
-                <style>{`
-                    .spinner_9y7u { animation: spinner_fUkk 2.4s linear infinite; animation-delay: -2.4s; }
-                    .spinner_DF2s { animation-delay: -1.6s; }
-                    .spinner_q27e { animation-delay: -0.8s; }
-                    @keyframes spinner_fUkk {
-                        8.33% { x: 13px; y: 1px; }
-                        25% { x: 13px; y: 1px; }
-                        33.3% { x: 13px; y: 13px; }
-                        50% { x: 13px; y: 13px; }
-                        58.33% { x: 1px; y: 13px; }
-                        75% { x: 1px; y: 13px; }
-                        83.33% { x: 1px; y: 1px; }
-                    }
-                `}</style>
+                <style>
+                    {`
+                        .spinner_9y7u {
+                            animation: spinner_fUkk 2.4s linear infinite;
+                            animation-delay: -2.4s;
+                        }
+                        .spinner_DF2s { animation-delay: -1.6s; }
+                        .spinner_q27e { animation-delay: -0.8s; }
+                        @keyframes spinner_fUkk {
+                            8.33% { x: 13px; y: 1px; }
+                            25% { x: 13px; y: 1px; }
+                            33.3% { x: 13px; y: 13px; }
+                            50% { x: 13px; y: 13px; }
+                            58.33% { x: 1px; y: 13px; }
+                            75% { x: 1px; y: 13px; }
+                            83.33% { x: 1px; y: 1px; }
+                        }
+                    `}
+                </style>
                 <rect
                     className="spinner_9y7u"
                     x="1"
