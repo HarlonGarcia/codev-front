@@ -20,6 +20,12 @@
     }
 }
 
+@layer utilities {
+    .codev-dialog-description strong {
+        @apply mx-0.5 font-semibold text-green-800;
+    }
+}
+
 :root {
     --nav-size-base: 3.25rem;
 }

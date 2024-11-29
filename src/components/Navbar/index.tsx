@@ -26,7 +26,7 @@ export default function Navbar() {
     } = useContext(AuthContext);
 
     return (
-        <div className='nav-size flex justify-between items-center fixed w-full px-8 z-10
+        <div className='nav-size flex justify-between items-center fixed w-screen px-8 z-10
             border-b border-purple-800 backdrop-blur-sm'>
             <Link to='/'>
                 <h3 className='text-xl font-bold bg-gradient-to-r from-purple-300 to-pink-700 bg-clip-text text-[transparent]'>

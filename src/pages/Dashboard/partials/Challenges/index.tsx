@@ -1,7 +1,8 @@
 import { ChangeEvent, useContext, useMemo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
+import { Dialog } from 'components/Dialog';
 import { Select } from 'components/Select';
 import { AuthContext } from 'contexts/AuthContext';
 import { challengesOrderBy } from 'enums/challengeOrderBy';
@@ -14,7 +15,7 @@ import { useCategories } from 'services/category';
 import { useChallenges, useDeleteChallenge } from 'services/challenge';
 import { IGetChallengeParams } from 'services/challenge/types';
 import { useTechnologies } from 'services/technology';
-import { ChallengeStatusEnum } from 'types';
+import { ChallengeStatusEnum, IChallenge } from 'types';
 import { getBase64Image } from 'utils';
 import { NONE } from 'utils/constants';
 
@@ -35,6 +36,8 @@ export default function Challenges() {
     const [filters, setFilters] = useState<Filters>({});
     const [isAscOrder, setIsAscOrder] = useState(false);
     const [isGrid, setIsGrid] = useState(false);
+    const [isModalOpened, setIsModalOpened] = useState(false);
+    const [selectedChallenge, setSelectedChallenge] = useState<IChallenge | null>(null);
 
     const {
         data: challenges = [],
@@ -77,6 +80,19 @@ export default function Challenges() {
         return image ? getBase64Image(image) : imagePlaceholder;
     }
 
+    const handleChallengeAction = (challenge: IChallenge | null, visible = true) => {
+        setIsModalOpened(visible);
+        setSelectedChallenge(challenge);
+    };
+
+    const handleDeleteChange = () => {
+        if (selectedChallenge) {
+            deleteChallenge(selectedChallenge.id);
+        }
+
+        handleChallengeAction(null, false);
+    }
+
     const categories = useMemo(() => {
         return categoriesItems.map(({ id, name }) => ({
             key: id,
@@ -93,26 +109,41 @@ export default function Challenges() {
         }))
     }, [technologiesItems]);
 
-    const statuses = useMemo(() => {
-        return Object.values(challengeStatuses).map(({ id, label }) => ({
-            key: id,
-            value: id,
-            label,
-        }))
-    }, []);
+    const statuses = Object.values(challengeStatuses).map(({ id, label }) => ({
+        key: id,
+        value: id,
+        label,
+    }));
   
     return (
         <div>
-            <div className='flex justify-between items-center mb-16'>
-                <div>
-                    <h1 className='text-4xl font-semibold mb-4'>
+            <Dialog
+                visible={isModalOpened}
+                onCancel={() => handleChallengeAction(null, false)}
+                onConfirm={handleDeleteChange}
+                title={
+                    <Trans>
+                        {'pages.dashboard.challenges.delete.modal.title'}
+                    </Trans>
+                }
+                description={
+                    <Trans
+                        values={{ challenge: selectedChallenge?.title }}
+                    >
+                        {'pages.dashboard.challenges.delete.modal.description'}
+                    </Trans>
+                }
+            />
+            <div className='flex flex-col justify-between mb-16 md:flex-row md:items-center'>
+                <div className='mb-8'>
+                    <h1 className='text-3xl font-semibold mb-2 md:text-4xl md:mb-4'>
                         {t('pages.dashboard.challenges.title')}
                     </h1>
-                    <p className='text-xl'>{t('pages.dashboard.challenges.description')}</p>
+                    <p className='sm:text-xl'>{t('pages.dashboard.challenges.description')}</p>
                 </div>
                 <button
                     type="button"
-                    className='py-3 px-6 font-semibold text-md text-green-800 border
+                    className='w-fit py-3 px-6 font-semibold text-md text-green-800 border
                     border-green-800 rounded-lg transition-all duration-300 ease-in-out hover:border-green-900 hover:text-green-900'
                 >
                     <Link to={'new-challenge'}>
@@ -160,41 +191,35 @@ export default function Challenges() {
                 </S.ChallengesHeader>
                 {!isGrid ? (
                     <S.List>
-                        {challenges.map(({
-                            id,
-                            title,
-                            category,
-                            technologies,
-                            status,
-                        }, index) => (
-                            <S.ListItem key={id}>
+                        {challenges.map((challenge, index) => (
+                            <S.ListItem key={challenge.id}>
                                 <S.Title>
                                     <small>{(index + 1).toString().padStart(2, '0')}</small>
-                                    <strong>{title}</strong>
+                                    <strong>{challenge.title}</strong>
                                 </S.Title>
-                                <div className={'challenge'}>
-                                    <div className={'challenge-info'}>
+                                <div className={'flex items-center gap-8'}>
+                                    <div className={'hidden items-center gap-2 lg:flex'}>
                                         <span
-                                            style={{ color: challengeStatuses[status].color }}
-                                            className={'challenge-info-status'}
+                                            style={{ color: challengeStatuses[challenge.status].color }}
+                                            className={'flex items-center gap-2 py-2 px-3 bg-purple-900 text-xl font-semibold rounded-lg'}
                                         >
-                                            <GrStatusGoodSmall />
+                                            <GrStatusGoodSmall size={10} />
                                             <small>
-                                                {challengeStatuses[status].label}
+                                                {challengeStatuses[challenge.status].label}
                                             </small>
                                         </span>
-                                        <span className={'challenge-info-category'}>
-                                            {category?.name}
+                                        <span className={'py-2 px-3 bg-pink-700 font-semibold rounded-lg text-purple-700'}>
+                                            {challenge.category?.name}
                                         </span>
-                                        <span className={'challenge-info-techs'}>
-                                            {technologies.map((technology) => technology.name).join(' / ')}
+                                        <span className={'py-2 px-3 bg-green-800 font-semibold rounded-lg text-purple-700'}>
+                                            {challenge.technologies?.map((technology) => technology.name).join(' / ')}
                                         </span>
                                     </div>
                                     <S.ChallengeActions>
                                         <S.Action type='edit'>
                                             <MdEdit />
                                         </S.Action>
-                                        <S.Action type='delete' onClick={() => deleteChallenge(id)}>
+                                        <S.Action type='delete' onClick={() => handleChallengeAction(challenge)}>
                                             <IoMdTrash />
                                         </S.Action>
                                     </S.ChallengeActions>
@@ -219,7 +244,7 @@ export default function Challenges() {
                                         <span>{title}</span>
                                         <MdEdit />
                                     </strong>
-                                    <div className={'grid-item-info-badges'}>
+                                    <div className={'hidden grid-item-info-badges'}>
                                         <span style={{ color: challengeStatuses[status].color }}>
                                             <GrStatusGoodSmall />
                                             {challengeStatuses[status].label}

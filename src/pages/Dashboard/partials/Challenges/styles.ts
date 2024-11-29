@@ -94,48 +94,6 @@ const ListItem = styled('div', {
     padding: '1rem 1.5rem',
     borderRadius: '0.75rem',
     marginBottom: '0.5rem',
-
-    '.challenge': {
-        display: 'flex',
-        alignItems: 'center',
-        gap: '4rem',
-
-        '&-info': {
-            display: 'flex',
-            alignItems: 'center',
-            gap: '1rem',
-
-            '&-category, &-techs, &-status': {
-                padding: '0.25rem 0.375rem',
-                borderRadius: '0.25rem',
-                fontWeight: 600,
-            },
-
-            '&-category': {
-                color: '$primary',
-                background: '$text',
-            },
-
-            '&-techs': {
-                color: '$primary',
-                background: '$highlight',
-            },
-
-            '&-status':{
-                display: 'flex',
-                gap: '0.5rem',
-                alignItems: 'center',
-
-                '> small': {
-                    fontWeight: '600',
-                    fontSize: '1rem',
-                },
-                '> svg': {
-                    fontSize: '0.75rem',
-                },
-            },
-        },
-    },
 });
 
 const Title = styled('div', {

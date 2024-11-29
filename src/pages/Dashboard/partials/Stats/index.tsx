@@ -30,10 +30,10 @@ export default function Stats() {
     return (
         <Wrapper>
             <div className='mb-16'>
-                <h1 className='text-4xl font-semibold mb-4'>
+                <h1 className='text-3xl mb-2 font-semibold md:text-4xl md:mb-4'>
                     {t('pages.dashboard.stats.title')}
                 </h1>
-                <p className='text-xl'>{t('pages.dashboard.stats.description')}</p>
+                <p className='sm:text-xl'>{t('pages.dashboard.stats.description')}</p>
             </div>
             <div className='grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-6'>
                 <StatusPercentage

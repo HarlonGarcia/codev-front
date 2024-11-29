@@ -13,6 +13,10 @@
 
         "global.select.placeholder": "Selecionar",
         "global.translation.change": "Mudar idioma",
+        "global.label.yes": "Sim",
+        "global.label.no": "Não",
+        "global.label.ok": "Ok",
+        "global.label.cancel": "Cancelar",
 
         "pages.home.instructions.press": "Pressione",
         "pages.home.instructions.action": "para abrir a lista de comandos",
@@ -141,6 +145,8 @@
         "pages.dashboard.challenges.filters.order.placeholder": "Ordernar por",
         "pages.dashboard.challenges.filters.order.popularity": "Popularidade",
         "pages.dashboard.challenges.filters.order.created_at": "Data de criação",
+        "pages.dashboard.challenges.delete.modal.title": "Remover desafio",
+    "pages.dashboard.challenges.delete.modal.description": "Tem certeza que quer remover o desafio <strong>{{challenge}}</strong>? Este desafio não ficará mais visível a outros usuários.",
 
         "pages.not_found.title": "Página não encontrada",
         "pages.not_found.description": "A página que você está procurando não existe",

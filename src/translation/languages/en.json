@@ -13,6 +13,10 @@
 
     "global.select.placeholder": "Select",
     "global.translation.change": "Change language",
+    "global.label.yes": "Yes",
+    "global.label.no": "No",
+    "global.label.ok": "Okay",
+    "global.label.cancel": "Cancel",
 
     "pages.home.instructions.press": "Press",
     "pages.home.instructions.action": "to open the command list",
@@ -141,6 +145,8 @@
     "pages.dashboard.challenges.filters.order.placeholder": "Order by",
     "pages.dashboard.challenges.filters.order.popularity": "Popularity",
     "pages.dashboard.challenges.filters.order.created_at": "Created at",
+    "pages.dashboard.challenges.delete.modal.title": "Remove challenge",
+    "pages.dashboard.challenges.delete.modal.description": "Are you sure you want to remove this challenge <strong>{{challenge}}</strong>? The challenge will be not visible to other users.",
   
     "pages.not_found.title": "Page not found",
     "pages.not_found.description": "The page you are looking for does not exist",
