@@ -1,35 +1,48 @@
-import { createContext, PropsWithChildren, useEffect, useState } from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { createContext, PropsWithChildren, useEffect, useLayoutEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-import { QueryObserverResult, RefetchOptions } from '@tanstack/react-query';
-import dayjs from 'dayjs';
-import i18next from 'i18next';
-import { useLogin, useSignUp } from 'services/auth';
+import { api } from 'api';
+import { InternalAxiosRequestConfig } from 'axios';
+import { useLogin, useRefreshToken, useSignUp } from 'services/auth';
 import { useMe } from 'services/user';
 import { ILoginPayload, IUser } from 'types';
 import { ADMIN } from 'utils/constants';
 
 interface AuthContextProps {
-  user?: IUser,
-  invalidateUser: (options?: RefetchOptions) => Promise<QueryObserverResult<IUser, Error>>;
-  isUserLoading: boolean;
-  error: boolean;
-  isAdmin: boolean;
-  isAuthenticated: boolean;
-  isLoading: boolean;
-  signUp: (data: IUser, callback?: () => void ) => void;
-  login: (data: ILoginPayload, callback?: () => void) => void;
-  logout: () => void;
-  changeLanguage: () => void;
+    token: string | null;
+    user?: IUser;
+    error: boolean;
+    isAdmin: boolean;
+    isAuthenticated: boolean;
+    isLoading: boolean;
+    isUserLoading: boolean;
+    isRefreshTokenLoading: boolean;
+    signUp: (data: IUser, callback?: () => void) => void;
+    login: (data: ILoginPayload, callback?: () => void) => void;
+    logout: () => void;
 }
 
+type CustomAxiosRequestConfig = InternalAxiosRequestConfig<any> & { _retry?: boolean };
+
 export const AuthContext = createContext({} as AuthContextProps);
-  
+
 export const AuthProvider = ({ children }: PropsWithChildren) => {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location?.pathname || '/';
+
+    const [token, setToken] = useState<string | null>(null);
 
     const {
+        mutate: refreshToken,
+        isPending: isRefreshTokenLoading,
+        error: refreshTokenError,
+    } = useRefreshToken();
+
+    const {
+        refetch: getMe,
         data: user,
-        refetch: refetchUser,
         isFetching: isUserLoading,
     } = useMe();
 
@@ -45,80 +58,93 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
         error: signupError,
     } = useSignUp();
 
-    const handleUserAuthentication = (token: string) => {
-        localStorage.setItem('@auth', token);
-        setIsAuthenticated(true);
-        refetchUser();
-    }
-
     const logout = () => {
-        setIsAuthenticated(false);
-        localStorage.removeItem('@auth');
+        setToken(null);
     };
 
+    const getAuthMutationOptions = (callback?: () => void) => ({
+        onSuccess: (token: string) => {
+            setToken(token);
+            callback?.();
+        },
+    });
+
     const signUp = (user: IUser, callback?: () => void) => {
-        register(user, {
-            onSuccess: (token) => {
-                handleUserAuthentication(token);
-                callback?.();
-            },
-            onError: logout,
-        });
+        register(user, getAuthMutationOptions(callback));
     }
 
     const login = (data: ILoginPayload, callback?: () => void) => {
-        sendLogin(data, {
-            onSuccess: (token) => {
-                handleUserAuthentication(token);
-                callback?.();
-            },
-            onError: logout,
+        sendLogin(data, getAuthMutationOptions(callback));
+    };
+
+    useEffect(function getLoggedUserData() {
+        if (!token) {
+            return;
+        }
+
+        getMe();
+    }, [token]);
+
+    useLayoutEffect(function setAccessToken() {
+        const interceptor = api.interceptors.request.use((config: CustomAxiosRequestConfig) => {
+            const hasToken = !config._retry && token;
+
+            config.headers.Authorization =
+                hasToken
+                    ? `Bearer ${token}`
+                    : config.headers.Authorization;
+
+            return config;
         });
-    };
 
-    const handleLanguageChange = (value: string) => {
-        dayjs.locale(value);
-        i18next.changeLanguage(value);
-    };
+        return () => api.interceptors.request.eject(interceptor);
+    }, [token]);
 
-    const changeLanguage = () => {
-        const currentLanguage = i18next.resolvedLanguage;
-    
-        if ('en' === currentLanguage) {
-            handleLanguageChange('pt-BR');
-            return;
-        }
+    useLayoutEffect(function callRefreshToken() {
+        const interceptor = api.interceptors.response.use(
+            (response) => response,
+            async (error) => {
+                const request = error.config as CustomAxiosRequestConfig;
 
-        handleLanguageChange('en');
-    };
+                if (error.status === 401 || error.message === 'Unauthorized') {
+                    refreshToken(undefined, {
+                        onSuccess: (data) => {
+                            setToken(data.token);
 
-    useEffect(function setToken() {
-        const token = localStorage.getItem('@auth');
+                            request.headers.Authorization = `Bearer ${data.token}`;
+                            request._retry = true;
 
-        if (token) {
-            setIsAuthenticated(true);
-            return;
-        }
+                            navigate(from, { replace: true });
 
-        logout();
+                            return api(request);
+                        },
+                        onError: logout,
+                    });
+                }
+
+                return Promise.reject(error);
+            });
+
+        return () => api.interceptors.response.eject(interceptor);
     }, []);
 
-    const isAdmin = user && user.roles?.some(({ name }) => ADMIN === name);
+    const isAuthenticated = Boolean(user) && !refreshTokenError && !!token;
+    const isAdmin = isAuthenticated && Boolean(user?.roles?.some(({ name }) => ADMIN === name));
 
     return (
         <AuthContext.Provider
             value={{
+                token,
                 user,
-                invalidateUser: refetchUser,
-                isUserLoading,
                 error: !!loginError || !!signupError,
-                isAuthenticated: Boolean(user) && isAuthenticated,
-                isAdmin: Boolean(user) && isAuthenticated && Boolean(isAdmin),
                 isLoading: isLoggingIn || isSigningIn,
+                isUserLoading,
+                isRefreshTokenLoading,
+                isAdmin,
+                isAuthenticated,
                 signUp,
                 login,
                 logout,
-                changeLanguage,
             }}
         >
             {children}

@@ -4,7 +4,7 @@ import { Navigate, useLocation } from 'react-router-dom';
 import { AuthContext } from 'contexts/AuthContext';
 import { RequiredRouterProps } from 'types';
 
-export const AdminOnly = ({ children, redirectUrl = '/' }: RequiredRouterProps) => {
+export const AdminOnly = ({ children, redirectTo = '/' }: RequiredRouterProps) => {
     const location = useLocation();
     const { isAdmin } = useContext(AuthContext);
 
@@ -12,7 +12,7 @@ export const AdminOnly = ({ children, redirectUrl = '/' }: RequiredRouterProps) 
         isAdmin ? (
             <Fragment>{children}</Fragment>
         ) : (
-            <Navigate to={redirectUrl} state={{ from: location }} replace />
+            <Navigate to={redirectTo} state={{ from: location }} replace />
         )
     );
 

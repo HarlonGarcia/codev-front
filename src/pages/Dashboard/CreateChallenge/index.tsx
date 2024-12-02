@@ -58,7 +58,7 @@ const TechnologiesList = ({ technologies, onRemove }: TechnologyListPros) => {
 
 const CreateChallenge = () => {
     const { t } = useTranslation();
-    const { logout, user: currentUser } = useContext(AuthContext);
+    const { user: currentUser } = useContext(AuthContext);
     const navigate = useNavigate();
   
     const [selectedTechnologies, setSelectedTechnologies] = useState<ITechnologiesState>({
@@ -96,7 +96,6 @@ const CreateChallenge = () => {
 
         if (!currentUser) {
             toast(t('pages.create_challenge.fields.author.error'));
-            logout();
             return;
         }
 

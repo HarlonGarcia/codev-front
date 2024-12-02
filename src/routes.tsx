@@ -1,5 +1,5 @@
 import { lazy, Suspense, useContext, useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 import Navbar from 'components/Navbar';
 import ShortcutDialog from 'components/ShortcutDialog';
@@ -22,10 +22,6 @@ const ModifyUser = lazy(() => import('./pages/MyAccount/partials/ModifyUser'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
 const Stats = lazy(() => import('./pages/Dashboard/partials/Stats'));
 const DashboardChallenges = lazy(() => import('./pages/Dashboard/partials/Challenges'));
-
-const props = {
-    redirectUrl: '/signin'
-};
 
 export default function AppRoutes() {
     const { isShortcutDialogVisible, setIsShortcutDialogVisible } = useContext(GlobalContext);
@@ -58,7 +54,7 @@ export default function AppRoutes() {
     }, [isShortcutDialogVisible]);
 
     return (
-        <BrowserRouter>
+        <>
             <ShortcutDialog />
             <Navbar />
             <Suspense>
@@ -70,7 +66,7 @@ export default function AppRoutes() {
                         <Route
                             index
                             element={
-                                <AuthOnly {...props}>
+                                <AuthOnly>
                                     <MyAccount />
                                 </AuthOnly>
                             }
@@ -78,7 +74,7 @@ export default function AppRoutes() {
                         <Route
                             path='challenges'
                             element={
-                                <AuthOnly {...props}>
+                                <AuthOnly>
                                     <MyChallenges />
                                 </AuthOnly>
                             }
@@ -86,7 +82,7 @@ export default function AppRoutes() {
                         <Route
                             path='edit'
                             element={
-                                <AuthOnly {...props}>
+                                <AuthOnly>
                                     <ModifyUser />
                                 </AuthOnly>
                             }
@@ -96,7 +92,7 @@ export default function AppRoutes() {
                         <Route
                             index
                             element={
-                                <AuthOnly {...props}>
+                                <AuthOnly>
                                     <Challenges />
                                 </AuthOnly>
                             }
@@ -104,7 +100,7 @@ export default function AppRoutes() {
                         <Route
                             path=':id'
                             element={
-                                <AuthOnly {...props}>
+                                <AuthOnly>
                                     <ChallengeInformation />
                                 </AuthOnly>
                             }
@@ -112,7 +108,7 @@ export default function AppRoutes() {
                         <Route
                             path=':id/users'
                             element={
-                                <AuthOnly {...props}>
+                                <AuthOnly>
                                     <Participants />
                                 </AuthOnly>
                             }
@@ -122,7 +118,7 @@ export default function AppRoutes() {
                         <Route
                             index
                             element={
-                                <AdminOnly {...props}>
+                                <AdminOnly>
                                     <Stats />
                                 </AdminOnly>
                             }
@@ -130,7 +126,7 @@ export default function AppRoutes() {
                         <Route
                             path='challenges'
                             element={
-                                <AdminOnly {...props}>
+                                <AdminOnly>
                                     <DashboardChallenges />
                                 </AdminOnly>
                             }
@@ -138,7 +134,7 @@ export default function AppRoutes() {
                         <Route
                             path='challenges/new-challenge'
                             element={
-                                <AdminOnly {...props}>
+                                <AdminOnly>
                                     <CreateChallenge />
                                 </AdminOnly>
                             }
@@ -147,6 +143,6 @@ export default function AppRoutes() {
                     <Route path='*' element={<PageNotFound />} />
                 </Routes>
             </Suspense>
-        </BrowserRouter>
+        </>
     );
 }

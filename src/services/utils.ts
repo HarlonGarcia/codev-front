@@ -1,3 +1,4 @@
+
 import endpoints from 'api/endpoints.json';
 
 type Endpoint = typeof endpoints;

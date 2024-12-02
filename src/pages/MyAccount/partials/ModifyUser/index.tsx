@@ -9,7 +9,7 @@ import BackButton from 'components/shared/BackButton';
 import { Input } from 'components/shared/Input';
 import { InputFile } from 'components/shared/InputFile';
 import { AuthContext } from 'contexts/AuthContext';
-import { useUpdateUser } from 'services/user';
+import { useRefreshMe, useUpdateUser } from 'services/user';
 import { getBase64Image } from 'utils';
 
 import * as S from './styles';
@@ -19,8 +19,9 @@ export default function ModifyUser() {
     const { t } = useTranslation();
     const navigate = useNavigate();
 
-    const { user, invalidateUser } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const { mutate: updateUser } = useUpdateUser();
+    const { refresh: refreshMe } = useRefreshMe();
 
     const {
         formState: {
@@ -48,7 +49,7 @@ export default function ModifyUser() {
             onSuccess: () => {
                 toast.success(t('pages.account.edit.button.submit.success'));
                 resetForm(newValues);
-                invalidateUser();
+                refreshMe();
                 navigate('/account');
             },
         };

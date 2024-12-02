@@ -12,7 +12,7 @@ export const Loader = ({ color = '#c392ef' }: LoaderProps) => {
         return <></>
     }
     return (
-        <div className='fixed inset-0 flex justify-center items-center z-[999] bg-purple-900/60'>
+        <div className='fixed inset-0 flex justify-center items-center z-[999] bg-purple-900/85'>
             <svg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
                 <style>
                     {`

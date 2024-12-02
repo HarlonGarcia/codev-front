@@ -1,3 +1,4 @@
+import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
 import { Loader } from 'components/shared/Loader';
@@ -16,13 +17,15 @@ dayjs.locale('pt-br');
 
 function App() {
     return (
-        <GlobalProvider>
+        <BrowserRouter>
             <AuthProvider>
-                <ToastContainer {...defaultToastConfig} />
-                <Loader />
-                <Routes />
+                <GlobalProvider>
+                    <ToastContainer {...defaultToastConfig} />
+                    <Loader />
+                    <Routes />
+                </GlobalProvider>
             </AuthProvider>
-        </GlobalProvider>
+        </BrowserRouter>
     );
 }
 
