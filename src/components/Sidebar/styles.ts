@@ -4,6 +4,7 @@ const Container = styled('div', {
     position: 'fixed',
     top: '$navbarHeight',
     left: '0',
+    zIndex: 2,
 
     display: 'flex',
     flexDirection: 'column',
