@@ -6,19 +6,20 @@ import { z } from 'zod';
 // const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png"];
 
 export const createChallengeSchema = z.object({
-  title: z
-    .string()
-    .min(1, t('pages.create_challenge.fields.title.error')),
-  description: z
-    .string()
-    .min(1, t('pages.create_challenge.fields.description.error')),
-  categoryId: z
-    .string()
-    .min(1, t('pages.create_challenge.fields.category.error'))
-    .refine((value) => value !== NONE, t('pages.create_challenge.fields.category.error')),
-  status: z.string(),
-  image: z
-    .any()
+    title: z
+        .string()
+        .min(1, t('pages.create_challenge.fields.title.error')),
+    description: z
+        .string({ message: t('pages.create_challenge.fields.description.error') })
+        .trim()
+        .min(1, t('pages.create_challenge.fields.description.error')),
+    categoryId: z
+        .string()
+        .min(1, t('pages.create_challenge.fields.category.error'))
+        .refine((value) => value !== NONE, t('pages.create_challenge.fields.category.error')),
+    status: z.string(),
+    image: z
+        .any()
     // .refine((file) => file?.size <= MAX_FILE_SIZE, `Max image size is 5MB.`)
     // .refine(
     //   (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),

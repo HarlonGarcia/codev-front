@@ -5,10 +5,10 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { RichText } from 'components/RichText';
 import { Input } from 'components/shared/Input';
 import { InputFile } from 'components/shared/InputFile';
 import { Select } from 'components/shared/Select';
-import { TextArea } from 'components/shared/TextArea';
 import { AuthContext } from 'contexts/AuthContext';
 import { challengeStatuses } from 'enums/challengeStatus';
 import { t } from 'i18next';
@@ -16,7 +16,6 @@ import { MdOutlineClose } from 'react-icons/md';
 import { useCategories } from 'services/category';
 import { useCreateChallenge } from 'services/challenge';
 import { useTechnologies } from 'services/technology';
-import { ChallengeStatusEnum } from 'types';
 import { NONE } from 'utils/constants';
 
 import * as S from './styles';
@@ -60,12 +59,12 @@ const CreateChallenge = () => {
     const { t } = useTranslation();
     const { user: currentUser } = useContext(AuthContext);
     const navigate = useNavigate();
-  
+
     const [selectedTechnologies, setSelectedTechnologies] = useState<ITechnologiesState>({
         items: [],
         error: '',
     });
-  
+
     const { data: categories = [] } = useCategories();
     const { data: technologies = [] } = useTechnologies();
     const { mutate: createChallenge } = useCreateChallenge();
@@ -73,16 +72,22 @@ const CreateChallenge = () => {
     const {
         register,
         handleSubmit,
+        setValue,
+        setError,
+        getValues,
         formState: { errors: formErrors },
     } = useForm<CreateChallengeSchema>({
         resolver: zodResolver(createChallengeSchema),
     });
 
-    const onSubmit: SubmitHandler<CreateChallengeSchema> = (formValues) => {
-        const { items, error } = selectedTechnologies;
-  
-        if (error) {
-            return;
+    const validate = () => {
+        const { items } = selectedTechnologies;
+        const description = getValues('description');
+
+        const hasDescription = description?.replace(/<\/?[^>]+(>|$)/g, '');
+
+        if (!hasDescription) {
+            setDescriptionError(t('pages.create_challenge.fields.description.error'));
         }
 
         if (0 >= items.length) {
@@ -90,23 +95,23 @@ const CreateChallenge = () => {
                 ...technologies,
                 error: t('pages.create_challenge.fields.technologies.error.min'),
             }));
-
-            return;
         }
+    }
 
-        if (!currentUser) {
-            toast(t('pages.create_challenge.fields.author.error'));
+    const onSubmit: SubmitHandler<CreateChallengeSchema> = (formValues) => {
+        const { items: techs, error } = selectedTechnologies;
+
+        if (error) {
             return;
         }
 
         const file = formValues.image[0];
-   
+
         const newChallenge = {
             ...formValues,
             image: file,
-            technologies: items.map(({ id }) => id),
-            authorId: currentUser.id,
-            status: formValues.status as ChallengeStatusEnum,
+            technologies: techs.map(({ id }) => id),
+            authorId: currentUser?.id,
         };
 
         createChallenge(newChallenge, {
@@ -115,6 +120,25 @@ const CreateChallenge = () => {
                 navigate('/challenges')
             },
         });
+    };
+
+    const setDescriptionError = (message: string = '') => {
+        setError('description', {
+            type: 'required',
+            message,
+        })
+    };
+
+    const handleDescriptionChange = (value: string) => {
+        const text = value.replace(/<\/?p[^>]*>/g, '');
+        
+        if (!text) {
+            setDescriptionError(t('pages.create_challenge.fields.description.error'));
+        } else {
+            setDescriptionError();
+        }
+
+        setValue('description', value)
     };
 
     const addTechnology = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -139,7 +163,7 @@ const CreateChallenge = () => {
 
         setSelectedTechnologies((prevState) => ({
             error: '',
-            items: [ ...prevState.items, newTechnology ],
+            items: [...prevState.items, newTechnology],
         }));
     };
 
@@ -202,15 +226,12 @@ const CreateChallenge = () => {
                     size={'xl'}
                     weight={'bold'}
                 />
-                <TextArea
-                    {...register('description')}
-                    label={t('pages.create_challenge.fields.description.label')}
+                <RichText
+                    onChange={(value) => handleDescriptionChange(value)}
+                    error={formErrors.description?.message}
                     placeholder={
                         t('pages.create_challenge.fields.description.placeholder')
                     }
-                    error={formErrors.description?.message}
-                    size={'xl'}
-                    weight={'bold'}
                 />
                 <TechnologiesList
                     technologies={selectedTechnologies.items}
@@ -253,7 +274,12 @@ const CreateChallenge = () => {
                 />
                 <S.Submit
                     type="submit"
-                    onClick={handleSubmit(onSubmit)}
+                    onClick={(event) => {
+                        const submit = handleSubmit(onSubmit);
+
+                        validate();
+                        submit(event);
+                    }}
                     value={t('pages.create_challenge.submit.label')}
                 />
             </S.Form>

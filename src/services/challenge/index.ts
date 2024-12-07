@@ -1,7 +1,9 @@
 import { useContext } from 'react';
+import { toast } from 'react-toastify';
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { AuthContext } from 'contexts/AuthContext';
+import i18next from 'i18next';
 import { CustomQueryOptions, IChallenge, IUser } from 'types';
 
 import * as api from './requests';
@@ -97,6 +99,11 @@ export function useCreateChallenge() {
 
     return useMutation({
         mutationFn: async (challenge: ICreateChallengeDto) => {
+            if (!challenge.authorId) {
+                toast(i18next.t('pages.create_challenge.fields.author.error'));
+                return;
+            }
+
             const response = await api.createChallenge(challenge);
 
             return response;

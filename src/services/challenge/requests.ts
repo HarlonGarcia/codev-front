@@ -73,15 +73,17 @@ export const createChallenge = async ({
     image,
     ...challenge
 }: ICreateChallengeDto) => {
-    const fileBase64 = await toBase64(image);
+    const fileBase64 = !!image && await toBase64(image);
+
+    const imagePayload = {
+        file: fileBase64,
+        fileName: image?.name,
+    };
 
     const { data } = await api.post(
         generateUrl('challenges'), {
             ...challenge,
-            image: {
-                file: fileBase64,
-                fileName: image.name,
-            },
+            image: image ? imagePayload : undefined,
         },
     );
 

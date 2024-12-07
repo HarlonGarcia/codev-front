@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import Markdown from 'components/Markdown';
+import { RichText } from 'components/RichText';
 import { Avatar } from 'components/shared/Avatar';
 import { AvatarGroup } from 'components/shared/Avatar/AvatarGroup';
 import { AuthContext } from 'contexts/AuthContext';
@@ -57,7 +57,7 @@ export default function ChallengeInformation() {
 
     const {
         title = t('pages.challenge_information.unknown_title'),
-        description = t('pages.challenge_information.unknown_description'),
+        description,
         author,
         image,
         technologies = [],
@@ -65,6 +65,9 @@ export default function ChallengeInformation() {
 
     const imageSource = image?.file ? getBase64Image(image.file) : imagePlaceholder;
 
+    if (!currentChallenge) {
+        return;
+    }
     return (
         <S.Container>
             <S.Header>
@@ -75,7 +78,10 @@ export default function ChallengeInformation() {
                 </span>
             </S.Header>
             <S.Cover src={imageSource} />
-            <Markdown content={description} />
+            <RichText
+                readonly
+                content={description}
+            />
             <S.Details>
                 <S.Info>
                     {author ? (

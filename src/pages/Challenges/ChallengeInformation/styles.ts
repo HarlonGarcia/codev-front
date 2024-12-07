@@ -61,10 +61,12 @@ const Cover = styled('img', {
 const Details = styled('div', {
     display: 'flex',
     flexDirection: 'column',
+    marginTop: '1rem',
 
     '@md': {
         flexDirection: 'row',
         justifyContent: 'space-between',
+        marginTop: '2rem',
     },
 });
 
