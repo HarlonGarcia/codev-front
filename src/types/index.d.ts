@@ -3,8 +3,8 @@ export * from './challenge';
 export * from './technology';
 
 export type RequiredRouterProps = {
-  redirectUrl?: string;
-  children?: ReactNode;
+    redirectTo?: string;
+    children?: ReactNode;
 }
 
 export type CustomQueryOptions<T> = Partial<UseQueryOptions<T>>;

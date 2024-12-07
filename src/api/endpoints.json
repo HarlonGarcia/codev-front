@@ -1,6 +1,7 @@
 {
   "me": "/me",
   "login": "/users/login",
+  "refresh": "/users/refresh",
   "signup": "/users/signup",
   "user_challenges": "/users/{userId}/challenges",
   "user_metrics": "/users/{userId}/metrics",

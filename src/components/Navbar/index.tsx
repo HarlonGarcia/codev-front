@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Menu from 'components/Menu';
 import { Avatar } from 'components/shared/Avatar';
 import { AuthContext } from 'contexts/AuthContext';
+import { GlobalContext } from 'contexts/GlobalContext';
 import { AiFillHome } from 'react-icons/ai';
 import { FaCodeBranch } from 'react-icons/fa';
 import { IoLanguage } from "react-icons/io5";
@@ -17,12 +18,13 @@ import * as S from './styles';
 export default function Navbar() {
     const { t } = useTranslation();
     const navigate = useNavigate();
+
+    const { changeLanguage } = useContext(GlobalContext);
     const {
         user,
         isAuthenticated,
         isAdmin,
         logout,
-        changeLanguage,
     } = useContext(AuthContext);
 
     return (

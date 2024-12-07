@@ -1,12 +1,11 @@
 import { api } from 'api';
-import axios from 'axios';
 
 import { generateUrl, toBase64 } from '../utils';
 import { ICreateChallengeDto, IGetChallengeParams, IJoinChallengeDto } from './types';
 
 export const getChallenges = async (filters?: IGetChallengeParams) => {
 
-    const { data } = await axios.get(
+    const { data } = await api.get(
         generateUrl('challenges'),
         {
             params: filters,

@@ -1,17 +1,29 @@
 import { useContext } from 'react';
 
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { AuthContext } from 'contexts/AuthContext';
-import { IChallenge, IMetric, IUser } from 'types';
+import { CustomQueryOptions, IChallenge, IMetric, IUser } from 'types';
 
 import * as api from './requests';
 import { IUpdateUserDto } from './types';
 
-export function useMe() {
+export const useRefreshMe = () => {
+    const queryClient = useQueryClient();
+
+    return {
+        refresh: () => queryClient.invalidateQueries({
+            queryKey: ['cached', 'me'],
+        }),
+    }
+};
+
+export function useMe(options?: CustomQueryOptions<null>) {
+    const enabled = options?.enabled || false;
+
     return useQuery<IUser>({
-        enabled: false,
+        enabled,
         staleTime: Infinity,
-        queryKey: ['cached', 'me'],
+        queryKey: ['cached', 'me', enabled],
         queryFn: async () => {
             const response = await api.getMe();
 

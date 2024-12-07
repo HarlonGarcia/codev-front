@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import * as Popover from '@radix-ui/react-popover';
 import { AuthContext } from 'contexts/AuthContext';
+import { GlobalContext } from 'contexts/GlobalContext';
 import { AiFillHome } from 'react-icons/ai';
 import { FaCodeBranch } from 'react-icons/fa';
 import { IoLanguage } from 'react-icons/io5';
@@ -14,7 +15,8 @@ import * as S from './styles';
 
 export default function Menu() {
     const { t } = useTranslation();
-    const { isAuthenticated, logout, changeLanguage } = useContext(AuthContext);
+    const { isAuthenticated, logout } = useContext(AuthContext);
+    const { changeLanguage } = useContext(GlobalContext);
 
     return (
         <Popover.Root>

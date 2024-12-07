@@ -31,3 +31,16 @@ export const useSignUp = () => {
         },
     });
 };
+
+export const useRefreshToken = () => {
+    return useMutation({
+        mutationFn: async () => {
+            const response = await api.refreshToken();
+
+            return response;
+        },
+        onError: () => {
+            toast.error(i18next.t('global.alerts.errors.401'))
+        },
+    });
+};
