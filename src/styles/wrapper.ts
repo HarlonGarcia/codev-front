@@ -9,6 +9,7 @@ const Wrapper = styled(WrapperDefault, {
 });
 
 const WrapperWithPadding = styled(WrapperDefault, {
+    width: '100%',
     wrapperPadding: '2rem',
 
     '@xs': {

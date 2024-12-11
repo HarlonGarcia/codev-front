@@ -6,9 +6,9 @@ import { toast } from 'react-toastify';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { RichText } from 'components/RichText';
+import { Select } from 'components/Select';
 import { Input } from 'components/shared/Input';
 import { InputFile } from 'components/shared/InputFile';
-import { Select } from 'components/shared/Select';
 import { AuthContext } from 'contexts/AuthContext';
 import { challengeStatuses } from 'enums/challengeStatus';
 import { t } from 'i18next';
@@ -16,7 +16,6 @@ import { MdOutlineClose } from 'react-icons/md';
 import { useCategories } from 'services/category';
 import { useCreateChallenge } from 'services/challenge';
 import { useTechnologies } from 'services/technology';
-import { NONE } from 'utils/constants';
 
 import * as S from './styles';
 import { CreateChallengeSchema, createChallengeSchema } from './validation';
@@ -175,6 +174,12 @@ const CreateChallenge = () => {
     };
 
     const hydratedCategories = useMemo(() => {
+        if (0 === categories.length) {
+            return [];
+        }
+
+        setValue('categoryId', categories[0].id);
+
         return categories.map(({ id, name }) => ({
             key: id,
             label: name,
@@ -188,19 +193,11 @@ const CreateChallenge = () => {
                 return !selectedTechnologies.items.some((tech) => tech.id === id);
             });
 
-        return [
-            {
-                key: NONE,
-                label: t('global.select.placeholder'),
-                value: NONE,
-                disabled: true,
-            },
-            ...filteredTechnologies.map(({ id, name }) => ({
-                key: id,
-                label: name,
-                value: id,
-            })),
-        ];
+        return filteredTechnologies.map(({ id, name }) => ({
+            key: id,
+            label: name,
+            value: id,
+        }));
     }, [technologies, selectedTechnologies.items]);
 
     const statuses = useMemo(() => {
@@ -209,6 +206,8 @@ const CreateChallenge = () => {
             .values(challengeStatuses)
             .filter(({ id }) => !unwantedStatuses.includes(id));
 
+        setValue('status', filteredStatuses[0]?.id);
+    
         return filteredStatuses.map(({ id, label }) => ({
             key: id,
             value: id,
@@ -243,27 +242,23 @@ const CreateChallenge = () => {
                         label={t('pages.create_challenge.fields.category.label')}
                         error={formErrors.categoryId?.message}
                         options={hydratedCategories}
-                        size={'xl'}
-                        weight={'bold'}
+                        deselectable
                     />
                     <Select
-                        id='technologies'
-                        name='technologies'
+                        id={'technologies'}
+                        name={'technologies'}
                         onChange={addTechnology}
+                        placeholder={t('global.select.none')}
                         label={t('pages.create_challenge.fields.technologies.label')}
                         error={selectedTechnologies.error}
                         options={hydratedTechnologies}
-                        size={'xl'}
-                        weight={'bold'}
                     />
                     <Select
                         {...register('status')}
                         label={t('pages.create_challenge.fields.status.label')}
-                        default={statuses[0]}
                         error={formErrors.status?.message}
                         options={statuses}
-                        size={'xl'}
-                        weight={'bold'}
+                        deselectable
                     />
                 </S.Group>
                 <InputFile
