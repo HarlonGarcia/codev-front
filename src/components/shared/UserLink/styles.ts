@@ -1,19 +1,24 @@
 import { styled } from 'styles';
 
 const Content = styled('a', {
-  '&:hover': {
-    color: '$highlight',
-  },
+    maxWidth: '20rem',
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
 
-  variants: {
-    spacing: {
-      true: {
-        letterSpacing: '1px',
-      }
+    '&:hover': {
+        color: '$highlight',
     },
-  }
+
+    variants: {
+        spacing: {
+            true: {
+                letterSpacing: '1px',
+            },
+        },
+    }
 });
 
 export {
-  Content,
+    Content,
 };

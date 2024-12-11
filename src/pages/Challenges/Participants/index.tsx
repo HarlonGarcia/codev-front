@@ -4,11 +4,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Badge } from 'components/Badge';
 import { Avatar } from 'components/shared/Avatar';
 import { UserLink } from 'components/shared/UserLink';
-import PageNotFound from 'pages/PageNotFound';
+import { LuUser } from "react-icons/lu";
 import { MdArrowBackIosNew } from "react-icons/md";
 import { useParticipants } from 'services/challenge';
 import { getBase64Image } from 'utils';
 
+import { PreviewDemo } from './PreviewDemo';
 import * as S from './styles';
 
 export default function Participants() {
@@ -19,7 +20,7 @@ export default function Participants() {
     const { data: participants = [] } = useParticipants(challengeId);
 
     if (!participants || 0 >= participants.length) {
-        return <PageNotFound />;
+        return;
     };
     return (
         <S.Container>
@@ -31,7 +32,9 @@ export default function Participants() {
                 <table className='table w-full'>
                     <thead>
                         <tr className='*:text-start *:py-2 *:px-4 *:bg-purple-800 *:text-green-800 *:font-semibold'>
-                            <th className='rounded-tl-md'></th>
+                            <th className='rounded-tl-md'>
+                                <LuUser size={20} />
+                            </th>
                             <th>
                                 {t('pages.challenge_users.table.columns.name')}
                             </th>
@@ -39,7 +42,7 @@ export default function Participants() {
                                 {t('pages.challenge_users.table.columns.github')}
                             </th>
                             <th>
-                                {t('pages.challenge_users.table.columns.additional_url')}
+                                {t('pages.challenge_users.table.columns.solution')}
                             </th>
                             <th className='rounded-tr-md'>
                                 {t('pages.challenge_users.table.columns.labels')}
@@ -52,7 +55,6 @@ export default function Participants() {
                             name,
                             image,
                             githubUrl,
-                            additionalUrl,
                             labels,
                         }) => (
                             <tr className='*:p-4' key={id}>
@@ -72,15 +74,14 @@ export default function Participants() {
                                     />
                                 </td>
                                 <td>
-                                    <UserLink
-                                        href={additionalUrl}
-                                        spacing
-                                        prettify
+                                    <PreviewDemo
+                                        url='demo.com'
+                                        preview={'https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Ntb254amQzMmdhZzl0cnBjMnY4MjZ1a3I0cWFvdHdldmVvc3F3ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/kCVIL0CLNWv2E/giphy.webp'}
                                     />
                                 </td>
                                 <td>
                                     <div className='flex flex-wrap gap-2'>
-                                        {labels?.slice(0, 3).map(({ id, title }) => (
+                                        {labels?.slice(0, 2).map(({ id, title }) => (
                                             <Badge border='green' key={id}>
                                                 {title}
                                             </Badge>

@@ -49,7 +49,7 @@ export default function Sidebar({
             .findIndex(({ path }) => path === window.location.pathname.split('/')[2]);
 
         setActivePage(-1 === pathIndex ? 0 : pathIndex);
-    }, [activePage]);
+    }, []);
 
     return (
         <S.Container visible={visible}>
