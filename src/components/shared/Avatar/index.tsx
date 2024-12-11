@@ -1,4 +1,4 @@
-import { twJoin } from 'tailwind-merge';
+import { twJoin, twMerge } from 'tailwind-merge';
 import { tv } from 'tailwind-variants';
 
 interface AvatarProps {
@@ -6,6 +6,7 @@ interface AvatarProps {
     name?: string;
     size?: 'sm' | 'md' | 'lg' | 'xl';
     border?: boolean;
+    className?: string;
     onClick?: () => void;
 }
 
@@ -50,6 +51,7 @@ export const Avatar = ({
     url,
     size,
     border = false,
+    className = '',
     onClick = () => {},
 }: AvatarProps) => {
     const getPlaceholder = (text?: string): string => {
@@ -62,12 +64,14 @@ export const Avatar = ({
 
     const placeholder = getPlaceholder(name);
 
-    const classNames = twJoin(avatar({ size }),
+    const defaultClasses = twJoin(avatar({ size }),
         border && 'border-green-800',
     );
 
+    const classes = twMerge(defaultClasses, className);
+
     return (
-        <div title={name} className={classNames}>
+        <div title={name} className={classes}>
             <button type='button' onClick={onClick} className='overflow-hidden'>
                 {url
                     ? (

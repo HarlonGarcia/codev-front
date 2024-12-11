@@ -1,7 +1,7 @@
 import {
-  ReactNode,
-  SelectHTMLAttributes,
-  forwardRef,
+    ReactNode,
+    SelectHTMLAttributes,
+    forwardRef,
 } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -32,62 +32,62 @@ type SelectProps = DefaultSelectProps & {
 };
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
-  function Select(props, ref) {
-    const {
-      label,
-      error,
-      size = 'sm',
-      weight = 'normal',
-      options,
-      default: defaultOption,
-      ...rest
-    } = props;
+    function Select(props, ref) {
+        const {
+            label,
+            error,
+            size = 'sm',
+            weight = 'normal',
+            options,
+            default: defaultOption,
+            ...rest
+        } = props;
 
-    const { t } = useTranslation();
+        const { t } = useTranslation();
 
-    return (
-      <S.Wrapper size={size} weight={weight}>
-        {label && (
-          <label htmlFor={rest.id}>
-            {label}
-          </label>
-        )}
+        return (
+            <S.Wrapper size={size} weight={weight}>
+                {label && (
+                    <label htmlFor={rest.id}>
+                        {label}
+                    </label>
+                )}
 
-        <S.ContentArea ref={ref} {...rest}>
-          {!defaultOption && (
-            <S.Option
-              style={{ display: 'none' }}
-              value={NONE}
-            >
-              {t('global.select.placeholder')}
-            </S.Option>
-          )}
+                <S.ContentArea ref={ref} {...rest}>
+                    {!defaultOption && (
+                        <S.Option
+                            style={{ display: 'none' }}
+                            value={NONE}
+                        >
+                            {t('global.select.placeholder')}
+                        </S.Option>
+                    )}
 
-          {defaultOption && (
-            <S.Option
-              style={{ display: 'none' }}
-              value={defaultOption.value}
-            >
-              {defaultOption.label}
-            </S.Option>
-          )}
+                    {defaultOption && (
+                        <S.Option
+                            style={{ display: 'none' }}
+                            value={defaultOption.value}
+                        >
+                            {defaultOption.label}
+                        </S.Option>
+                    )}
 
-          {options.map(({ key, value, label, disabled = false }) => (
-            <S.Option
-              key={key}
-              value={value}
-              disabled={disabled}
-              isDisabled={disabled}
-            >
-              {label}
-            </S.Option>
-          ))}
-        </S.ContentArea>
+                    {options.map(({ key, value, label, disabled = false }) => (
+                        <S.Option
+                            key={key}
+                            value={value}
+                            disabled={disabled}
+                            isDisabled={disabled}
+                        >
+                            {label}
+                        </S.Option>
+                    ))}
+                </S.ContentArea>
 
-        {error && (
-          <span>{error}</span>
-        )}
-      </S.Wrapper>
-    );
-  },
+                {error && (
+                    <span>{error}</span>
+                )}
+            </S.Wrapper>
+        );
+    },
 );

@@ -12,6 +12,7 @@
         "global.challenges.status.canceled": "Cancelado",
 
         "global.select.placeholder": "Selecionar",
+        "global.select.none": "Nenhum",
         "global.translation.change": "Mudar idioma",
         "global.label.yes": "Sim",
         "global.label.no": "Não",
@@ -88,9 +89,9 @@
 
         "pages.challenge_users.button.return": "Retornar ao desafio",
         "pages.challenge_users.table.columns.name": "Nome",
-        "pages.challenge_users.table.columns.github": "Github",
-        "pages.challenge_users.table.columns.additional_url": "Link adicional",
+        "pages.challenge_users.table.columns.solution": "Demo",
         "pages.challenge_users.table.columns.labels": "Conquistas",
+        "pages.challenge_users.table.columns.demo": "Ver demo",
 
         "pages.signin.title": "Bem vindo de volta!",
         "pages.signin.description": "Faça login para continuar praticando e aprendendo",
