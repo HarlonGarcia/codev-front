@@ -8,7 +8,7 @@
         font-style: normal;
         font-weight: 400;
         font-display: swap;
-        src: url(../assets/fonts/FiraCode-VariableFont_wght.ttf) format('ttf');
+        src: url(../assets/fonts/FiraCode-VariableFont_wght.ttf) format('truetype');
     }
 
     @font-face {
@@ -16,13 +16,28 @@
         font-style: normal;
         font-weight: 400;
         font-display: swap;
-        src: url(../assets/fonts/Raleway-VariableFont_wght.ttf) format('ttf');
+        src: url(../assets/fonts/Raleway-VariableFont_wght.ttf) format('truetype');
     }
 }
 
 @layer utilities {
     .codev-dialog-description strong {
         @apply mx-0.5 font-semibold text-green-800;
+    }
+}
+
+@property --rotate {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@keyframes rotateLight {
+    from {
+        --rotate: 0turn;
+    }
+    to {
+        --rotate: 1turn;
     }
 }
 
@@ -38,6 +53,22 @@ body {
 
 h1 {
     color: theme('colors.purple.300')
+}
+
+.logo {
+    background-image: conic-gradient(
+        from var(--rotate) at 35% 10%,
+        theme('colors.purple.300') 45%,
+        theme('colors.pink.700'),
+        theme('colors.purple.300') 65%
+    );
+
+    font-weight: 800;
+    font-size: 1.25rem;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: rotateLight 2.825s ease-in-out infinite;
 }
 
 .nav-size {

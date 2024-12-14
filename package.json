@@ -34,6 +34,7 @@
     "cmdk": "^1.0.0",
     "dayjs": "^1.11.13",
     "framer-motion": "^11.11.10",
+    "gsap": "^3.12.5",
     "highlight.js": "^11.10.0",
     "i18next": "^23.16.4",
     "idb-keyval": "^6.2.1",
