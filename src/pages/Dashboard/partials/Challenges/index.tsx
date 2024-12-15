@@ -10,6 +10,7 @@ import { challengeStatuses } from 'enums/challengeStatus';
 import { FaArrowUpAZ, FaArrowDownAZ } from "react-icons/fa6";
 import { GrStatusGoodSmall } from "react-icons/gr";
 import { IoMdList, IoMdTrash } from "react-icons/io";
+import { LuPlus } from "react-icons/lu";
 import { MdEdit, MdGridView } from "react-icons/md";
 import { useCategories } from 'services/category';
 import { useChallenges, useDeleteChallenge } from 'services/challenge';
@@ -141,15 +142,17 @@ export default function Challenges() {
                     </h1>
                     <p className='sm:text-xl'>{t('pages.dashboard.challenges.description')}</p>
                 </div>
-                <button
-                    type="button"
-                    className='w-fit py-3 px-6 font-semibold text-md text-green-800 border
+                <Link
+                    to={'new-challenge'}
+                    className='flex gap-2 items-center w-fit p-3 font-semibold text-md text-green-800 border-4
                     border-green-800 rounded-lg transition-all duration-300 ease-in-out hover:border-green-900 hover:text-green-900'
                 >
-                    <Link to={'new-challenge'}>
+                    <LuPlus size={20} />
+                    <span>
+
                         {t('pages.dashboard.challenges.add_challenge')}
-                    </Link>
-                </button>
+                    </span>
+                </Link>
             </div>
             <div>
                 <S.ChallengesHeader>

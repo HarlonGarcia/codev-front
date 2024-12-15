@@ -1,25 +1,28 @@
 import { ChangeEvent, ComponentProps } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { NONE } from 'utils/constants';
 
 import './styles.scss';
 
 interface SelectProps extends ComponentProps<'select'> {
-  cannotBeEmpty?: boolean;
-  placeholder: string;
-  label?: string;
-  value?: string;
-  onChange: (event: ChangeEvent<HTMLSelectElement>) => void;
-  options: {
-    label: string;
-    value: string;
-    disabled?: boolean;
-  }[];
+    onChange: (event: ChangeEvent<HTMLSelectElement>) => void;
+    deselectable?: boolean;
+    error?: string;
+    placeholder?: string;
+    label?: string;
+    value?: string;
+    options: {
+        label: string;
+        value: string;
+        disabled?: boolean;
+    }[];
 }
 
 export const Select = ({
     id,
-    cannotBeEmpty = false,
+    deselectable = false,
+    error,
     placeholder,
     label,
     options,
@@ -27,10 +30,12 @@ export const Select = ({
     onChange,
     ...rest
 }: SelectProps) => {
+    const { t } = useTranslation();
+
     return (
         <div className='co-select'>
             {label && (
-                <label htmlFor={id}>{label}</label>
+                <label className='mb-2 text-green-800 sm:text-lg' htmlFor={id}>{label}</label>
             )}
             <select
                 id={id}
@@ -39,11 +44,9 @@ export const Select = ({
                 className='co-select-input'
                 {...rest}
             >
-                {placeholder && (
-                    <option value={NONE} defaultValue={NONE} disabled={cannotBeEmpty}>
-                        {placeholder}
-                    </option>
-                )}
+                <option value={NONE} defaultValue={NONE} disabled={deselectable}>
+                    {placeholder || t('global.select.placeholder')}
+                </option>
                 {options.map(({ label, value, disabled }) => (
                     <option
                         key={value}
@@ -54,6 +57,9 @@ export const Select = ({
                     </option>
                 ))}
             </select>
+            {error && (
+                <span className='mt-2 font-sm text-red-500'>{error}</span>
+            )}
         </div>
     );
 };

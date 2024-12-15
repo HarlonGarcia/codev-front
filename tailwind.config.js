@@ -43,6 +43,7 @@ export default {
                 '4xl': '132rem',
             },
             screens: {
+                xs: '400px',
                 '3xl': '1920px',
                 '4xl': '2560px',
             },
