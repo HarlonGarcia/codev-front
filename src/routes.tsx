@@ -26,13 +26,15 @@ const DashboardChallenges = lazy(() => import('./pages/Dashboard/partials/Challe
 export default function AppRoutes() {
     const { isShortcutDialogVisible, setIsShortcutDialogVisible } = useContext(GlobalContext);
 
-    useEffect(() => {
+    useEffect(function handleKeyDownActions() {
         const handleKeyDown = (event: KeyboardEvent) => {
             const isSpecialKey = event.metaKey || event.ctrlKey;
             const key = event.key?.toUpperCase();
+
             const shortcuts = { ...goToShortcuts, ...extraShortcuts };
 
             if (isSpecialKey && key === 'K') {
+                event.preventDefault();
                 setIsShortcutDialogVisible(true);
             }
 
