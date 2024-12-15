@@ -57,7 +57,7 @@ export const Preloader = () => {
 
     return (
         <div id='preloader' className='fixed top-0 left-0 w-screen h-screen z-50 bg-purple-900'>
-            <div className='space-x-4 flex justify-center items-center h-full text-8xl font-bold font-fira leading-6 text-pink-700 *:opacity-0'>
+            <div className='space-x-4 flex justify-center items-center h-full text-6xl font-bold font-fira leading-6 text-pink-700 *:opacity-0 md:text-8xl'>
                 <span id='one'>C</span>
                 <span id='two'>0</span>
                 <span id='three'>D</span>
