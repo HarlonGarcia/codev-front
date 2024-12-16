@@ -14,7 +14,7 @@ const Container = styled('div', {
     
     transition: 'all 300ms ease-in-out',
     backgroundColor: '$secondary',
-    boxShadow: '0 0 12px #000',
+    boxShadow: '0 8px 8px #000',
     borderRadius: '0 0.5rem 0 0',
 
     variants: {
