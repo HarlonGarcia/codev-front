@@ -1,8 +1,6 @@
-export default function ReactJs({ size }: { size: number }) {
+export default function ReactJs() {
     return (
         <svg
-            height={size}
-            width={size}
             viewBox="175.7 78 490.6 436.9"
             xmlns="http://www.w3.org/2000/svg"
         >

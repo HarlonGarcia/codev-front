@@ -19,6 +19,10 @@
         src: url('public/fonts/Raleway-Regular.woff2') format('woff2');
     }
 
+    * {
+        @apply tracking-wide;
+    }
+
     h1, h2, h3, h4, h5, h6 {
         @apply font-bold;
     }
@@ -30,6 +34,10 @@
     h3, h4, h5, h6 {
         @apply text-xl sm:text-2xl xl:text-3xl
     }
+
+    code {
+        @apply font-fira;
+    }
 }
 
 @layer utilities {
@@ -39,6 +47,10 @@
 
     .codev-home-section {
         @apply flex flex-col p-8 sm:p-12 lg:p-20;
+    }
+
+    .codev-home-hide-challenges {
+        @apply absolute bottom-0 left-0 w-full text-center m-0 p-36 bg-gradient-to-b from-[transparent] to-purple-900 lg:p-52;
     }
 }
 

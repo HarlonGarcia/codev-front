@@ -31,8 +31,8 @@ export default function Typer() {
 
     return (
         <div className='mb-6 font-bold text-center text-purple-300 font-fira text-3xl md:text-4xl md:mb-8'>
-            <div className='flex justify-center gap-2 text-4xl pr-4 mb-2 md:4'>
-                {'=>'}
+            <div className='flex justify-center gap-4 text-4xl pr-2 mb-2 md:4'>
+                {'~'}
                 <TypeIt
                     getBeforeInit={animateText}
                     options={{afterComplete}}

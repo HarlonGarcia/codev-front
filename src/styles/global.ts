@@ -1,18 +1,4 @@
-import { keyframes } from '@stitches/react';
-
 import { globalCss } from '.';
-
-export const floating = keyframes({
-    '0%': { transform: 'translateY(-5%)' },
-    '50%': { transform: 'translateY(5%)' },
-    '100%': { transform: 'translateY(-5%)' },
-});
-
-export const floating2 = keyframes({
-    '0%': { transform: 'translateY(5%)' },
-    '50%': { transform: 'translateY(10%)' },
-    '100%': { transform: 'translateY(5%)' },
-});
 
 export const globalStyles = globalCss({
     '*': {

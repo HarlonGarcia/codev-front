@@ -47,6 +47,25 @@ export default {
                 '3xl': '1920px',
                 '4xl': '2560px',
             },
+            keyframes: {
+                floating: {
+                    '0%': { transform: 'translateY(-5%)' },
+                    '50%': { transform: 'translateY(5%)' },
+                    '100%': { transform: 'translateY(-5%)' },
+                },
+                floatingDeeper: {
+                    '0%': { transform: 'translateY(5%)' },
+                    '50%': { transform: 'translateY(16%)' },
+                    '100%': { transform: 'translateY(5%)' },
+                },
+            },
+            animation: {
+                floating: 'floating 3s ease-in-out infinite',
+                floatingDeeper: 'floatingDeeper 3300ms ease-in-out infinite',
+            },
+            boxShadow: {
+                '3xl': '0 35px 60px -15px rgba(0, 0, 0, 0.3)',
+            }        
         },
     },
     plugins: [

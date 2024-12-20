@@ -1,8 +1,6 @@
-export default function Angular({ size }: { size: number }) {
+export default function Angular() {
     return (
         <svg
-            width={size}
-            height={size}
             viewBox="0 0 256 272"
             xmlns="http://www.w3.org/2000/svg"
             preserveAspectRatio="xMidYMid"

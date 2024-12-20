@@ -1,18 +1,18 @@
 import { useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 import { Wrapper } from 'components/shared/Wrapper';
 import { motion } from 'framer-motion';
 import { useChallenges } from 'services/challenge';
+import { twMerge } from 'tailwind-merge';
+import { gsap} from 'utils/gsap';
 
 import { WelcomeSection } from './partials/Welcome';
-import * as S from './styles';
 import {
     containerVariants,
     itemVariants,
     possibilities,
-    runInfiniteSliderAnimation,
     sectionAnimationProps,
     technologies,
 } from './utils';
@@ -24,9 +24,63 @@ export default function Home() {
         page: 0,
         size: 4,
     });
-
+    
     useEffect(function animateTechnologies() {
-        runInfiniteSliderAnimation();
+        const targetsShown = 4;
+
+        const duration = 1;
+        const pause = 0.75;
+        const itemSize = 140;
+        const unitOfMeasure = "px";
+
+        const targets = gsap.utils.toArray(".codev-home-technologies > div");
+
+        const repeatDelay = (targets.length - targetsShown) * (pause + duration) - duration;
+
+        gsap.set(targets, {
+            width: itemSize + unitOfMeasure,
+            right: -itemSize + unitOfMeasure,
+            scale: 0
+        });
+
+        gsap.set(".codev-home-technologies", {
+            width: itemSize * targetsShown + unitOfMeasure,
+            height: itemSize + unitOfMeasure
+        });
+
+        const parentTimeline = gsap.timeline();
+
+        (targets as HTMLElement[]).forEach((element, index) => {
+            element.style.zIndex = String(targetsShown - index);
+            
+            const timeline = gsap.timeline({
+                delay: index * (duration + pause),
+                defaults: { duration, ease: "power3.inOut" },
+                repeat: -1,
+                repeatDelay,
+            });
+
+            timeline.to(element, {
+                scale: 1,
+                transformOrigin: "left center",
+                xPercent: "100",
+            });
+
+            for (let i = 1; i < targetsShown; i++) {
+                timeline.to(element, { xPercent: "-=100" }, "+=" + pause);
+            }
+
+            timeline.to(
+                element,
+                { scale: 0, transformOrigin: "right center", xPercent: "-=100" },
+                "+=" + pause
+            );
+
+            parentTimeline.add(timeline, 0);
+        });
+
+        const prep = targetsShown * (duration + pause) - pause;
+        parentTimeline.time(prep);
     }, []);
     
 
@@ -40,26 +94,35 @@ export default function Home() {
                 <h2 className='mb-6 text-purple-300 text-center xl:mb-8'>
                     {t('pages.home.introduction.title')}
                 </h2>
-                <p className='mb-8 text-center text-lg font-semibold lg:text-xl'>
+                <p className='mb-8 text-center text-lg font-semibold lg:mb-12 lg:text-xl'>
                     {t('pages.home.introduction.description')}
                 </p>
-                <S.Possibilities
+                <motion.ul
+                    className='flex flex-wrap justify-center gap-8'
                     variants={containerVariants}
                     initial="hidden"
                     animate="visible"
                     transition={{ duration: 2.5 }}
                 >
-                    {possibilities.map(({ id, label, icon }, index) => (
-                        <S.CardItem
-                            key={id}
-                            animation={index % 2 !== 0 ? 'diff' : undefined}
-                            variants={itemVariants}
-                        >
-                            {label}
-                            {icon}
-                        </S.CardItem>
-                    ))}
-                </S.Possibilities>
+                    {possibilities.map(({ label, icon }, index) => {
+                        const classes = twMerge(
+                            'flex flex-col justify-center items-center h-44 w-4/5 gap-2 p-6 bg-purple-800 rounded-xl text-center transition-all duration-200 ease-in-out shadow-3xl shadow-purple-600/50 sm:w-48 xl:w-64',
+                            index % 2 !== 0 ? 'md:animate-floatingDeeper' : 'md:animate-floating',
+                        );
+
+                        return (
+                            <motion.li  
+                                key={index}
+                                className={classes}
+                                variants={itemVariants}
+                            >
+                                <span className='text-pink-100 mb-3'>
+                                    {label}
+                                </span>
+                                {icon}
+                            </motion.li>
+                        )})}
+                </motion.ul>
             </motion.div>
 
             <motion.div
@@ -69,12 +132,29 @@ export default function Home() {
                 <h2 className='mb-6 text-purple-300 text-center xl:mb-8'>
                     {t('pages.home.technologies.title')}
                 </h2>
-                <p className='mb-8 text-center text-lg font-semibold lg:text-xl'>
-                    {t('pages.home.technologies.description')}
+                <p className='mb-8 text-center text-lg font-semibold lg:mb-12 lg:text-xl'>
+                    <Trans
+                        components={{ code: <code className='text-sm font-semibold bg-pink-700 text-purple-900 py-1 px-1 rounded' /> }}
+                    >
+                        {'pages.home.technologies.description'}
+                    </Trans>
                 </p>
-                <div className='codev-home-technologies w-auto h-auto relative'>
+                <div className='hidden codev-home-technologies w-auto h-auto relative mx-auto xl:flex'>
                     {technologies.map((icon, index) => (
-                        <div className='aspect-square grid place-items-center absolute top-0 p-4 bg-purple-900' key={index}>
+                        <div
+                            className='grid aspect-square place-items-center absolute top-0 left-1/2 p-4 bg-purple-900'
+                            key={index}
+                        >
+                            {icon}
+                        </div>
+                    ))}
+                </div>
+                <div className='flex justify-center flex-wrap gap-4 xl:hidden'>
+                    {technologies.map((icon, index) => (
+                        <div
+                            className='w-16 md:w-20'
+                            key={index}
+                        >
                             {icon}
                         </div>
                     ))}
@@ -89,20 +169,25 @@ export default function Home() {
                     <h2 className='mb-6 text-purple-300 text-center xl:mb-8'>
                         {t('pages.home.challenges.title')}
                     </h2>
-                    <p className='mb-8 text-center text-lg font-semibold lg:text-xl'>
+                    <p className='mb-8 text-center text-lg font-semibold lg:mb-12 lg:text-xl'>
                         {t('pages.home.challenges.description')}
                     </p>
-                    <S.LatestChallenges>
-                        <S.ChallengeList>
+                    <div className='relative'>
+                        <div className='flex flex-col items-center gap-4'>
                             {challenges.map(({ id, title }) => (
-                                <div key={id}>
-                                    <small>{title}</small>
-                                    <span>{t('pages.home.challenges.badge')}</span>
+                                <div
+                                    key={id}
+                                    className='flex justify-between items-center w-11/12 p-5 bg-purple-800 rounded-lg'
+                                >
+                                    <span className='md:text-xl'>{title}</span>
+                                    <small className='py-1.5 px-2 text-xs text-green-800 font-semibold bg-green-900/30 border border-green-900 rounded-lg uppercase'>
+                                        {t('pages.home.challenges.badge')}
+                                    </small>
                                 </div>
                             ))}
-                        </S.ChallengeList>
-                        <div className='expand_challenges' />
-                    </S.LatestChallenges>
+                        </div>
+                        <div className='codev-home-hide-challenges' />
+                    </div>
                     <Link
                         className='text-center text-green-800 text-lg transition-all duration-300 ease-in-out hover:text-green-900 lg:text-xl'
                         to='/challenges'

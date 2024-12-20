@@ -24,12 +24,12 @@
 
         "pages.home.introduction.title": "Aumente seu nível na programação",
         "pages.home.introduction.description": "Desafios para uso pessoal, programação competitiva e processos seletivos",
-        "pages.home.introduction.cards.find_solutions": "Encontre soluções para problemas reais",
+        "pages.home.introduction.cards.find_solutions": "Resolva problemas reais",
         "pages.home.introduction.cards.coding": "Converta idéias em código",
-        "pages.home.introduction.cards.network": "Conecte-se com outros desenvolvedores",
+        "pages.home.introduction.cards.network": "Conecte-se com desenvolvedores",
 
         "pages.home.technologies.title": "Explorando as principais stacks",
-        "pages.home.technologies.description": "Pratique com as principais linguagens e tecnologias do mercado, como React, Spring, Node entre outras",
+        "pages.home.technologies.description": "Pratique com as principais linguagens e tecnologias do mercado, como <code>React</code>, <code>Spring</code>, <code>Node</code> entre outras",
 
         "pages.home.challenges.title": "Desafios adicionados recentemente",
         "pages.home.challenges.description": "Comece com projetos práticos para fortalecer seu conhecimento em diferentes áreas do desenvolvimento web",

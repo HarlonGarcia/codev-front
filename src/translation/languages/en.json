@@ -24,12 +24,12 @@
 
     "pages.home.introduction.title": "Elevate your code skills",
     "pages.home.introduction.description": "Challenges for personal use, competitive programming, and selection processes",
-    "pages.home.introduction.cards.find_solutions": "Find solutions to real problems",
+    "pages.home.introduction.cards.find_solutions": "Solve real problems",
     "pages.home.introduction.cards.coding": "Turn ideas into code",
-    "pages.home.introduction.cards.network": "Connect with other developers",
+    "pages.home.introduction.cards.network": "Connect with developers",
 
     "pages.home.technologies.title": "Exploring stacks",
-    "pages.home.technologies.description": "Practice with leading languages and technologies in the market, such as React, Spring, Node and more",
+    "pages.home.technologies.description": "Practice with leading languages and technologies in the market, such as <code>React</code>, <code>Spring</code>, <code>Node</code> and more",
 
     "pages.home.challenges.title": "Recently added challenges",
     "pages.home.challenges.description": "Start with practical projects to strengthen your knowledge in various areas of web development",
