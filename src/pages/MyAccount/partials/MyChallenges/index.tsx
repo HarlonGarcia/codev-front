@@ -1,13 +1,13 @@
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
+import imagePlaceholder from 'assets/images/card-image-placeholder-2.png';
 import { challengeStatuses, getChallengeStatus } from 'enums/challengeStatus';
 import { RiEmotionSadLine } from "react-icons/ri";
 import { useUserChallenges } from 'services/user';
 import { twMerge } from 'tailwind-merge';
 import { getBase64Image } from 'utils';
 
-import imagePlaceholder from '../../../../../public/images/card-image-placeholder-2.png';
 import { Wrapper } from '../Wrapper';
 
 const MAX_TECHS_DISPLAYED = 6;

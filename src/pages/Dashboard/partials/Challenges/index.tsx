@@ -2,6 +2,7 @@ import { ChangeEvent, useContext, useMemo, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
+import imagePlaceholder from 'assets/images/card-image-placeholder-2.png'
 import { Dialog } from 'components/Dialog';
 import { Select } from 'components/Select';
 import { AuthContext } from 'contexts/AuthContext';
@@ -20,7 +21,6 @@ import { ChallengeStatusEnum, IChallenge } from 'types';
 import { getBase64Image } from 'utils';
 import { NONE } from 'utils/constants';
 
-import imagePlaceholder from '../../../../../public/images/card-image-placeholder-2.png'
 import * as S from './styles';
 
 interface Filters {
@@ -117,7 +117,7 @@ export default function Challenges() {
     }));
   
     return (
-        <div>
+        <>
             <Dialog
                 visible={isModalOpened}
                 onCancel={() => handleChallengeAction(null, false)}
@@ -265,6 +265,6 @@ export default function Challenges() {
                     </S.Grid>
                 )}
             </div>
-        </div>
+        </>
     );
 }

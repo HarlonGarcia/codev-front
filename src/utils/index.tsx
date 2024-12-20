@@ -1,6 +1,23 @@
+import { ChangeHandler, RefCallBack } from 'react-hook-form';
+
+/* eslint-disable @typescript-eslint/no-unused-vars */
 type ObjectDiffParams = {
     base?: object;
     target?: object;
+}
+
+type RegisterProps = {
+    onChange: ChangeHandler;
+    onBlur: ChangeHandler;
+    ref: RefCallBack;
+    name: string;
+    min?: string | number;
+    max?: string | number;
+    maxLength?: number;
+    minLength?: number;
+    pattern?: string;
+    required?: boolean;
+    disabled?: boolean;
 }
 
 export const githubUrlRegex = new RegExp(/\bgithub.com\b/);
@@ -45,4 +62,10 @@ export const getObjectDiff = ({ base, target }: ObjectDiffParams) => {
     }
 
     return diffItems;
+}
+
+export const getPropsExcludeRef = (props: RegisterProps) => {
+    const { ref, ...rest } = props;
+
+    return rest;
 }

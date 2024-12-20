@@ -2,6 +2,8 @@ import { motion } from 'framer-motion';
 
 import { styled } from 'styles';
 
+import bgImage from '../../../../assets/images/programming.jpg';
+
 const Hero = styled(motion.section, {
     padding: '3rem',
 
@@ -11,7 +13,12 @@ const Hero = styled(motion.section, {
 
     '&::before': {
         content: '" "',
-        backgroundImage: 'radial-gradient(ellipse at center, #13121BAA 0%, #02010A 80%), url(/images/programming.jpg)',
+        backgroundImage: `radial-gradient(
+            ellipse at center,
+            #13121BAA 0%,
+            #02010A 80%
+            ),
+            url(${bgImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         opacity: 0.15,

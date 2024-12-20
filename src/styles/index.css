@@ -6,9 +6,9 @@
     @font-face {
         font-family: 'Fira Code';
         font-style: normal;
-        font-weight: 400;
+        font-weight: 100 700;
         font-display: swap;
-        src: url(../assets/fonts/FiraCode-VariableFont_wght.ttf) format('truetype');
+        src: url('public/fonts/FiraCode-VF.woff2') format('woff2');
     }
 
     @font-face {
@@ -16,13 +16,29 @@
         font-style: normal;
         font-weight: 400;
         font-display: swap;
-        src: url(../assets/fonts/Raleway-VariableFont_wght.ttf) format('truetype');
+        src: url('public/fonts/Raleway-Regular.woff2') format('woff2');
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        @apply font-bold;
+    }
+
+    h1, h2 {
+        @apply text-2xl sm:text-3xl xl:text-4xl
+    }
+
+    h3, h4, h5, h6 {
+        @apply text-xl sm:text-2xl xl:text-3xl
     }
 }
 
 @layer utilities {
     .codev-dialog-description strong {
         @apply mx-0.5 font-semibold text-green-800;
+    }
+
+    .codev-home-section {
+        @apply flex flex-col p-8 sm:p-12 lg:p-20;
     }
 }
 

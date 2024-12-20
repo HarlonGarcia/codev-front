@@ -12,7 +12,9 @@ export default function Dashboard() {
                 visible={isSiderbarVisible}
                 setVisible={setIsSidebarVisible}
             />
-            <Outlet />
+            <div className='mx-auto 4xl:max-w-screen-4xl'>
+                <Outlet />
+            </div>
         </div>
     );
 }

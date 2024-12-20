@@ -1,11 +1,17 @@
 @font-face {
-  font-family: 'Raleway';
-  src: url('../assets/fonts/Raleway-VariableFont_wght.ttf');
+  font-family: 'Fira Code';
+  font-style: normal;
+  font-weight: 100 700;
+  font-display: swap;
+  src: url('public/fonts/FiraCode-VF.woff2') format('woff2');
 }
 
 @font-face {
-  font-family: 'Fira Code';
-  src: url('../assets/fonts/FiraCode-VariableFont_wght.ttf');
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('public/fonts/Raleway-Regular.woff2') format('woff2');
 }
 
 @property --bg-angle {

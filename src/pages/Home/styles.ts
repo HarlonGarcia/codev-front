@@ -2,44 +2,6 @@ import { motion } from 'framer-motion';
 
 import { styled } from 'styles';
 import { floating, floating2 } from 'styles/global';
-import { WrapperWithPadding } from 'styles/wrapper';
-
-const Container = styled(WrapperWithPadding, {
-});
-
-const Section = styled(motion.section, {
-    display: 'flex',
-    flexDirection: 'column',
-
-    padding: '2rem',
-
-    '& > a': {
-        alignSelf: 'center',
-
-        fontSize: '1rem',
-        fontWeight: 600,
-
-        color: '$highlight',
-        transition: 'all 0.3s ease-in-out',
-        cursor: 'pointer',
-
-        '&:hover': {
-            filter: 'brightness(0.7)',
-        },
-    },
-
-    '@sm': {
-        padding: '3rem',
-    },
-
-    '@lg': {
-        padding: '4rem',
-
-        '& > a': {
-            fontSize: '1.25rem',
-        },
-    }
-});
 
 const Title = styled('h2', {
     marginBottom: '1.5rem',
@@ -275,8 +237,6 @@ const ChallengeList = styled('div', {
 });
 
 export {
-    Container,
-    Section,
     Title,
     Paragraph,
     Possibilities,

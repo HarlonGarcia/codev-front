@@ -2,13 +2,13 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
+import imagePlaceholder from 'assets/images/card-image-placeholder.png';
 import { getChallengeStatus } from 'enums/challengeStatus';
 import { motion } from 'framer-motion';
 import { GrStatusGoodSmall } from 'react-icons/gr';
 import { useChallenges } from 'services/challenge';
 import { getBase64Image } from 'utils';
 
-import imagePlaceholder from '../../../../../public/images/card-image-placeholder.png';
 import * as S from './styles';
 
 interface ChallengesGroupProps {

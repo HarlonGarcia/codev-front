@@ -23,16 +23,16 @@
     "pages.home.instructions.action": "to open the command list",
 
     "pages.home.introduction.title": "Elevate your code skills",
-    "pages.home.introduction.description": "Discover why practicing through projects is essential to solidify your skills, covering from frontend with major frameworks to backend, as well as the use of other types of tools",
+    "pages.home.introduction.description": "Challenges for personal use, competitive programming, and selection processes",
     "pages.home.introduction.cards.find_solutions": "Find solutions to real problems",
     "pages.home.introduction.cards.coding": "Turn ideas into code",
     "pages.home.introduction.cards.network": "Connect with other developers",
 
     "pages.home.technologies.title": "Exploring stacks",
-    "pages.home.technologies.description": "Practice with the major languages and technologies in the market, such as React, Angular, Vue, Node, Quarkus, Docker, among others",
+    "pages.home.technologies.description": "Practice with leading languages and technologies in the market, such as React, Spring, Node and more",
 
     "pages.home.challenges.title": "Recently added challenges",
-    "pages.home.challenges.description": "Start now with a variety of practical projects that will help you solidify knowledge in different areas of web development",
+    "pages.home.challenges.description": "Start with practical projects to strengthen your knowledge in various areas of web development",
     "pages.home.challenges.badge": "New",
     "pages.home.challenges.button.text": "View challenges",
 

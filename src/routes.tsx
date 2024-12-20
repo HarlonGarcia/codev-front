@@ -16,7 +16,7 @@ const SignUp = lazy(() => import('./pages/Auth/SignUp'));
 const Challenges = lazy(() => import('./pages/Challenges'));
 const Participants = lazy(() => import('./pages/Challenges/Participants'));
 const ChallengeInformation = lazy(() => import('./pages/Challenges/ChallengeInformation'));
-const CreateChallenge = lazy(() => import('./pages/Dashboard/CreateChallenge'));
+const CreateChallenge = lazy(() => import('./pages/Dashboard/partials/CreateChallenge'));
 const MyChallenges = lazy(() => import('./pages/MyAccount/partials/MyChallenges'));
 const ModifyUser = lazy(() => import('./pages/MyAccount/partials/ModifyUser'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));

@@ -23,16 +23,16 @@
         "pages.home.instructions.action": "para abrir a lista de comandos",
 
         "pages.home.introduction.title": "Aumente seu nível na programação",
-        "pages.home.introduction.description": "Desafios voltados para seu uso pessoal, programação competitiva e processos seletivos",
+        "pages.home.introduction.description": "Desafios para uso pessoal, programação competitiva e processos seletivos",
         "pages.home.introduction.cards.find_solutions": "Encontre soluções para problemas reais",
         "pages.home.introduction.cards.coding": "Converta idéias em código",
         "pages.home.introduction.cards.network": "Conecte-se com outros desenvolvedores",
 
         "pages.home.technologies.title": "Explorando as principais stacks",
-        "pages.home.technologies.description": "Pratique com as principais linguagens e tecnologias do mercado, como React, Angular, Vue, Node, Quarkus, Docker, entre outras",
+        "pages.home.technologies.description": "Pratique com as principais linguagens e tecnologias do mercado, como React, Spring, Node entre outras",
 
         "pages.home.challenges.title": "Desafios adicionados recentemente",
-        "pages.home.challenges.description": "Comece agora por uma variedade de projetos práticos que irão te ajudar a solidificar conhecimentos em diferentes áreas do web desenvolvimento",
+        "pages.home.challenges.description": "Comece com projetos práticos para fortalecer seu conhecimento em diferentes áreas do desenvolvimento web",
         "pages.home.challenges.badge": "Novo",
         "pages.home.challenges.button.text": "Ver desafios",
 

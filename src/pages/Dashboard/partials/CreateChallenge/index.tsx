@@ -16,6 +16,7 @@ import { MdOutlineClose } from 'react-icons/md';
 import { useCategories } from 'services/category';
 import { useCreateChallenge } from 'services/challenge';
 import { useTechnologies } from 'services/technology';
+import { getPropsExcludeRef } from 'utils';
 
 import * as S from './styles';
 import { CreateChallengeSchema, createChallengeSchema } from './validation';
@@ -238,7 +239,7 @@ const CreateChallenge = () => {
                 />
                 <S.Group>
                     <Select
-                        {...register('categoryId')}
+                        {...getPropsExcludeRef(register('categoryId'))}
                         label={t('pages.create_challenge.fields.category.label')}
                         error={formErrors.categoryId?.message}
                         options={hydratedCategories}
@@ -254,7 +255,7 @@ const CreateChallenge = () => {
                         options={hydratedTechnologies}
                     />
                     <Select
-                        {...register('status')}
+                        {...getPropsExcludeRef(register('status'))}
                         label={t('pages.create_challenge.fields.status.label')}
                         error={formErrors.status?.message}
                         options={statuses}

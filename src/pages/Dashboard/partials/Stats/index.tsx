@@ -9,7 +9,6 @@ import { LuUsers } from "react-icons/lu";
 import { useUserMetrics } from 'services/user';
 import { MONTH_FULL_NAME_FORMAT } from 'utils/constants';
 
-import { Wrapper } from '../Wrapper';
 import { StatusPercentage } from './partials/StatusPercentage';
 
 import './styles.scss';
@@ -28,7 +27,7 @@ export default function Stats() {
     const highestStreak = metrics?.highestStreak ?? challengesInCurrentMonth;
 
     return (
-        <Wrapper>
+        <>
             <div className='mb-16'>
                 <h1 className='text-3xl mb-2 font-semibold md:text-4xl md:mb-4'>
                     {t('pages.dashboard.stats.title')}
@@ -119,6 +118,6 @@ export default function Stats() {
                     </span>
                 </div>
             </div>
-        </Wrapper>
+        </>
     );
 }

@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import imagePlaceholder from 'assets/images/challenge-image-placeholder.png';
 import { RichText } from 'components/RichText';
 import { Avatar } from 'components/shared/Avatar';
 import { AvatarGroup } from 'components/shared/Avatar/AvatarGroup';
@@ -12,7 +13,6 @@ import { useChallenge, useJoinChallenge, useParticipants, useUnjoinChallenge } f
 import { getBase64Image } from 'utils';
 import { DATE_TIME } from 'utils/constants';
 
-import imagePlaceholder from '../../../../public/images/challenge-image-placeholder.png';
 import * as S from './styles';
 
 export default function ChallengeInformation() {
