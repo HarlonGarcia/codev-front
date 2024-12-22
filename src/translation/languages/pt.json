@@ -18,6 +18,8 @@
         "global.label.no": "Não",
         "global.label.ok": "Ok",
         "global.label.cancel": "Cancelar",
+        "global.label.click.remove": "Clique aqui para remover",
+
 
         "pages.home.instructions.press": "Pressione",
         "pages.home.instructions.action": "para abrir a lista de comandos",
@@ -92,6 +94,10 @@
         "pages.challenge_users.table.columns.solution": "Demo",
         "pages.challenge_users.table.columns.labels": "Conquistas",
         "pages.challenge_users.table.columns.demo": "Ver demo",
+        "pages.challenge_users.solution.submit": "Envie sua solução aqui",
+        "pages.challenge_users.solution.modal.fields.deploy": "Url da demonstração",
+        "pages.challenge_users.solution.modal.fields.repository": "Url do repositório",
+        "pages.challenge_users.solution.modal.fields.image.insert": "Adicionar capa",
 
         "pages.signin.title": "Bem vindo de volta!",
         "pages.signin.description": "Faça login para continuar praticando e aprendendo",

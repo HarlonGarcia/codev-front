@@ -1,11 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { Badge } from 'components/Badge';
+import { CreateSolutionModal } from 'components/Modal/CreateSolutionModal';
 import { Avatar } from 'components/shared/Avatar';
-import { MdArrowBackIosNew } from "react-icons/md";
+import { LuPlus, LuArrowLeft } from "react-icons/lu";
 import { useParticipants } from 'services/challenge';
+import { useSolutions } from 'services/solutions';
 import { getBase64Image } from 'utils';
 
 import { PreviewDemo } from './PreviewDemo';
@@ -16,8 +18,22 @@ export default function Participants() {
     const { id: challengeId } = useParams();
     const navigate = useNavigate();
 
+    const [isModalVisible, setIsModalVisible] = useState(false);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-    const { data: participants = [] } = useParticipants(challengeId);
+
+    const { data: allParticipants = [] } = useParticipants(challengeId);
+    const { data: solutions = [] } = useSolutions(challengeId);
+
+    const participants = useMemo(() => {
+        return allParticipants.map((participant) => {
+            const linkedSolution = solutions.find(({ author }) => author.id === participant.id);
+
+            return {
+                ...participant,
+                solution: linkedSolution,
+            };
+        });
+    }, [allParticipants, solutions]);
 
     useEffect(function handleWindowResize() {
         const handleResize = () => {
@@ -30,27 +46,37 @@ export default function Participants() {
     }, []);
 
 
-    if (!participants || 0 >= participants.length) {
-        return;
-    };
     return (
         <S.Container>
+            <CreateSolutionModal
+                visible={isModalVisible}
+                onConfirm={() => setIsModalVisible(false)}
+                onCancel={() => setIsModalVisible(false)}
+            />
             <button onClick={() => navigate(`/challenges/${challengeId}`)}>
-                <MdArrowBackIosNew />
+                <LuArrowLeft />
                 <span>{t('pages.challenge_users.button.return')}</span>
             </button>
-            <div className='flex flex-col gap-4 *:bg-purple-800'>
+            <div className='flex flex-col gap-4'>
+                <button
+                    onClick={() => setIsModalVisible(true)}
+                    className='flex items-center text-green-800 bg-green-900/10 border border-green-900 p-4 gap-2 rounded-xl'
+                >
+                    <LuPlus size={20} />
+                    <span>{t('pages.challenge_users.solution.submit')}</span>
+                </button>
                 {participants.map(({
                     id,
                     name,
                     image,
                     labels,
+                    solution,
                 }) => {
-
                     const labelsShown = windowWidth > 778 ? 2 : 1;
+                    const solutionUrl = solution?.deployUrl || solution?.repositoryUrl;
 
                     return (
-                        <div key={id} className='flex items-center text-pink-700 py-4 px-6 gap-6 rounded-xl'>
+                        <div key={id} className='flex items-center bg-purple-800 text-pink-700 py-4 px-6 gap-6 rounded-xl'>
                             <Avatar
                                 size='sm'
                                 name={name}
@@ -69,8 +95,8 @@ export default function Participants() {
                                     {t('pages.challenge_users.table.columns.solution')}
                                 </span>
                                 <PreviewDemo
-                                    url='demo.com'
-                                    preview={'https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Ntb254amQzMmdhZzl0cnBjMnY4MjZ1a3I0cWFvdHdldmVvc3F3ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/kCVIL0CLNWv2E/giphy.webp'}
+                                    url={solutionUrl}
+                                    preview={undefined}
                                 />
                             </div>
                             <div className='hidden flex-wrap justify-end gap-2 ml-auto sm:flex'>

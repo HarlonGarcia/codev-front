@@ -5,6 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import { Preloader } from 'components/Preloader';
 import { Loader } from 'components/shared/Loader';
 import dayjs from 'dayjs';
+import Lenis from 'lenis';
 
 import { AuthProvider } from './contexts/AuthContext';
 import { GlobalProvider } from './contexts/GlobalContext';
@@ -26,6 +27,17 @@ function App() {
         }, 3400);
 
         return () => clearTimeout(timeout);
+    }, [])
+
+    useEffect(function smoothScroll() {
+        const lenis = new Lenis();
+
+        function raf(time: number) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+
+        requestAnimationFrame(raf);
     }, [])
 
     return (

@@ -50,6 +50,7 @@ export const joinChallenge = async ({ userId, challengeId }: IJoinChallengeDto) 
 
     return response.data;
 }
+
 export const unjoinChallenge = async ({ userId, challengeId }: IJoinChallengeDto) => {
     if (!challengeId || !userId) {
         throw new Error('The user or challenge is not valid.');

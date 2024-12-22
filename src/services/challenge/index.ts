@@ -26,6 +26,7 @@ export function useChallenges(
 ) {
     return useQuery<IChallenge[]>({
         staleTime: Infinity,
+        retry: false,
         ...options,
         queryKey: ['challenges', filters],
         queryFn: async () => {

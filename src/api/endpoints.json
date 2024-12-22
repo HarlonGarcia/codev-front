@@ -9,5 +9,7 @@
   "challenge_users": "/challenges/{challengeId}/users",
   "challenges": "/challenges",
   "categories": "/categories",
+  "solutions": "/challenges/{challengeId}/solutions",
+  "challenge_solutions": "/challenges/solutions",
   "technologies": "/technologies"
 }

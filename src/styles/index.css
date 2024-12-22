@@ -8,7 +8,7 @@
         font-style: normal;
         font-weight: 100 700;
         font-display: swap;
-        src: url('public/fonts/FiraCode-VF.woff2') format('woff2');
+        src: url('/fonts/FiraCode-VF.woff2') format('woff2');
     }
 
     @font-face {
@@ -16,7 +16,7 @@
         font-style: normal;
         font-weight: 400;
         font-display: swap;
-        src: url('public/fonts/Raleway-Regular.woff2') format('woff2');
+        src: url('/fonts/Raleway-Regular.woff2') format('woff2');
     }
 
     * {
@@ -101,4 +101,20 @@ h1 {
 
 .nav-size {
     height: var(--nav-size-base);
+}
+
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+    overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+    pointer-events: none;
 }

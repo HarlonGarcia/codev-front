@@ -60,11 +60,10 @@ export default function Home() {
                 repeatDelay,
             });
 
-            timeline.to(element, {
-                scale: 1,
-                transformOrigin: "left center",
-                xPercent: "100",
-            });
+            timeline.fromTo(
+                element,
+                { scale: 0, transformOrigin: "right center", xPercent: "100" },
+                { scale: 1, transformOrigin: "left center", xPercent: "-=100" });
 
             for (let i = 1; i < targetsShown; i++) {
                 timeline.to(element, { xPercent: "-=100" }, "+=" + pause);
@@ -106,7 +105,7 @@ export default function Home() {
                 >
                     {possibilities.map(({ label, icon }, index) => {
                         const classes = twMerge(
-                            'flex flex-col justify-center items-center h-44 w-4/5 gap-2 p-6 bg-purple-800 rounded-xl text-center transition-all duration-200 ease-in-out shadow-3xl shadow-purple-600/50 sm:w-48 xl:w-64',
+                            'flex flex-col justify-center items-center h-44 w-4/5 gap-2 p-6 bg-purple-800 rounded-xl text-center transition-all duration-200 ease-in-out shadow-3xl shadow-purple-600/50 sm:w-48 xl:w-56',
                             index % 2 !== 0 ? 'md:animate-floatingDeeper' : 'md:animate-floating',
                         );
 
@@ -142,7 +141,7 @@ export default function Home() {
                 <div className='hidden codev-home-technologies w-auto h-auto relative mx-auto xl:flex'>
                     {technologies.map((icon, index) => (
                         <div
-                            className='grid aspect-square place-items-center absolute top-0 left-1/2 p-4 bg-purple-900'
+                            className='grid aspect-square place-items-center absolute top-0 left-3/4 p-4 bg-purple-900'
                             key={index}
                         >
                             {icon}
@@ -177,7 +176,7 @@ export default function Home() {
                             {challenges.map(({ id, title }) => (
                                 <div
                                     key={id}
-                                    className='flex justify-between items-center w-11/12 p-5 bg-purple-800 rounded-lg'
+                                    className='flex justify-between items-center w-11/12 p-5 bg-purple-800 rounded-lg xl:rounded-2xl'
                                 >
                                     <span className='md:text-xl'>{title}</span>
                                     <small className='py-1.5 px-2 text-xs text-green-800 font-semibold bg-green-900/30 border border-green-900 rounded-lg uppercase'>

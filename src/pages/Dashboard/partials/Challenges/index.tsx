@@ -3,7 +3,7 @@ import { Trans, useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 import imagePlaceholder from 'assets/images/card-image-placeholder-2.png'
-import { Dialog } from 'components/Dialog';
+import { DeleteChallengeDialog } from 'components/Dialog/DeleteChallengeDialog';
 import { Select } from 'components/Select';
 import { AuthContext } from 'contexts/AuthContext';
 import { challengesOrderBy } from 'enums/challengeOrderBy';
@@ -118,7 +118,7 @@ export default function Challenges() {
   
     return (
         <>
-            <Dialog
+            <DeleteChallengeDialog
                 visible={isModalOpened}
                 onCancel={() => handleChallengeAction(null, false)}
                 onConfirm={handleDeleteChange}

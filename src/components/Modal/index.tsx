@@ -1,29 +1,32 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, ReactNode } from 'react';
 import { Trans } from 'react-i18next';
 
 import { twMerge } from 'tailwind-merge';
 
-export interface DialogProps {
+export interface ModalProps {
     visible?: boolean;
-    buttons?: boolean;
+    buttons?: ReactNode;
+    className?: string;
     onConfirm?: () => void;
     onCancel?: () => void;
 };
 
-export const Dialog = ({
-    children,
+export const Modal = ({
     visible = true,
-    buttons = true,
+    children,
+    buttons,
+    className,
     onConfirm,
     onCancel,
-}: PropsWithChildren<DialogProps>) => {
+}: PropsWithChildren<ModalProps>) => {
     const classes = twMerge('px-4 pb-4 pt-5 sm:p-6 sm:pb-4',
-        buttons ? '' : 'p-4 sm:pb-6',
+        className,
     );
 
     if (!visible) {
         return null;
     }
+
     return (
         <div className="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
             <div className="fixed inset-0 bg-purple-900/75 transition-opacity" aria-hidden="true"></div>
@@ -33,7 +36,8 @@ export const Dialog = ({
                         <div className={classes}>
                             {children}
                         </div>
-                        {buttons && (
+                        {buttons}
+                        {!buttons && (
                             <div className="bg-purple-600/50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                                 <button
                                     onClick={onCancel}
