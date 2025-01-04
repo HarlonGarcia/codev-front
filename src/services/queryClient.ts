@@ -31,7 +31,7 @@ export const queryClient = new QueryClient({
             staleTime: DEFAULT_STALE_TIME,
             gcTime: GARBAGE_COLLECTION_INTERVAL,
             refetchOnWindowFocus: false,
-            retry: 3,
+            retry: 1,
         },
     },
 });

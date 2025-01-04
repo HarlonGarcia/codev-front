@@ -39,8 +39,5 @@ export const useRefreshToken = () => {
 
             return response;
         },
-        onError: () => {
-            toast.error(i18next.t('global.alerts.errors.401'))
-        },
     });
 };
