@@ -27,10 +27,10 @@ const NavItems = styled('div', {
         fontWeight: 600,
         color: '$text',
 
-        transition: 'all 250ms ease-in-out',
+        transition: 'all 300ms ease-in-out',
 
         '&:hover': {
-            color: '$title',
+            color: '$textDarker',
         },
     },
 });
@@ -43,7 +43,11 @@ const LanguageToggle = styled('button', {
 
     '> svg': {
         color: '$primary',
-    }
+    },
+
+    '&:hover': {
+        backgroundColor: '$textDarker',
+    },
 });
 
 export { Navigation, NavItems, LanguageToggle };

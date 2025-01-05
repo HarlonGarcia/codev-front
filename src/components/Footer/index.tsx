@@ -11,34 +11,26 @@ import { URL_DISCORD } from 'utils/constants';
 const iconContainer = {
     visible: {
         transition: {
-            delayChildren: 0.2,
-            staggerChildren: 0.075
-        }
-    }
+            ease: 'easeInOut',
+            duration: 0.5,
+            staggerChildren: 0.2,
+        },
+    },
 }
 
 const iconVariants = {
     hidden: { y: 10, opacity: 0 },
-    visible: {
-        y: 0,
-        opacity: 1,
-    }
+    visible: { y: 0, opacity: 1 },
 }
 
 const inputVariants = {
     hidden: { x: -10, opacity: 0 },
-    visible: {
-        x: 0,
-        opacity: 1,
-    }
+    visible: { x: 0, opacity: 1 },
 }
 
-const submitVariants = {
+const buttonVariants = {
     hidden: { x: 20, opacity: 0 },
-    visible: {
-        x: 0,
-        opacity: 1,
-    }
+    visible: { x: 0, opacity: 1 },
 }
 
 export const Footer = () => {
@@ -47,7 +39,7 @@ export const Footer = () => {
     const isInView = useInView(ref, { once: true });
     const animation = useAnimation();
 
-    useEffect(() => {
+    useEffect(function startAnimations() {
         if (isInView) {
             animation.start('visible');
         }
@@ -60,8 +52,11 @@ export const Footer = () => {
         >
             <div className='fixed bottom-0 h-[26rem] w-full sm:h-[30rem] xl:h-[34rem]'>
                 <div className='w-full h-full p-16 bg-gradient-to-r from-purple-800 to-purple-800/45 xl:p-20'>
-                    <div ref={ref} className='flex flex-col items-center justify-center'>
-                        <h3 className='mb-8 text-center text-xl text-pink-100 leading-[150%] lg:text-2xl 2xl:text-3xl'>
+                    <div className='flex flex-col items-center justify-center'>
+                        <h3
+                            ref={ref}
+                            className='mb-8 text-center text-xl text-pink-100 leading-[150%] lg:text-2xl 2xl:text-3xl'
+                        >
                             <Trans
                                 components={{ span: <span className='text-green-800' /> }}
                             >
@@ -73,7 +68,7 @@ export const Footer = () => {
                                 variants={inputVariants}
                                 initial='hidden'
                                 animate={animation}
-                                transition={{ duration: 0.75, delay: 0.5 }}
+                                transition={{ duration: 1, ease: 'easeInOut' }}
                                 className='relative text-sm xl:text-base'
                             >
                                 <LuUser2 className='text-pink-700 absolute bottom-3 left-4 xl:bottom-3.5' />
@@ -81,14 +76,14 @@ export const Footer = () => {
                                     type='email'
                                     spellCheck={false}
                                     placeholder={t('pages.home.footer.email.input.placeholder')}
-                                    className='text-pink-100 bg-[transparent] border border-pink-900 rounded-full px-4 py-2 pl-10 outline-none placeholder:text-pink-700 xl:pl-10 xl:w-80'
+                                    className='caret-pink-700 text-pink-100 bg-[transparent] border border-pink-900 rounded-full px-4 py-2 pl-10 outline-none placeholder:text-pink-700 xl:pl-10 xl:w-80'
                                 />
                             </motion.div>
                             <motion.button
-                                variants={submitVariants}
+                                variants={buttonVariants}
                                 initial='hidden'
                                 animate={animation}
-                                transition={{ duration: 0.75, delay: 0.5 }}
+                                transition={{ duration: 1, ease: 'easeInOut' }}
                                 disabled
                                 type='submit'
                                 className='px-4 py-2 font-semibold text-purple-800 bg-pink-700 rounded-full disabled:bg-pink-700/50 disabled:cursor-not-allowed xl:px-6'
@@ -100,7 +95,6 @@ export const Footer = () => {
                             initial='hidden'
                             animate={animation}
                             variants={iconContainer}
-                            transition={{ duration: 1, delay: 0.5 }}
                             className='flex items-center gap-12 mb-8 text-pink-100 sm:gap-16 xl:gap-20 xl:mb-16'
                         >
                             <motion.li variants={iconVariants}>

@@ -7,6 +7,7 @@ import { Dialog, DialogProps } from '.';
 interface DeleteChallengeDialogProps extends DialogProps {
     title: ReactNode;
     description: ReactNode;
+    icon?: ReactNode;
 };
 
 export const DeleteChallengeDialog = ({
@@ -21,7 +22,7 @@ export const DeleteChallengeDialog = ({
         >
             <div className="sm:flex sm:items-start">
                 {icon && (
-                    <div className="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full text-red-500 sm:mx-0 sm:size-10">
+                    <div className="flex items-center justify-center mx-auto text-red-500 rounded-full size-12 shrink-0 sm:mx-0 sm:size-10">
                         <LuAlertTriangle size={30} />
                     </div>
                 )}
@@ -33,7 +34,7 @@ export const DeleteChallengeDialog = ({
                         {title}
                     </h3>
                     <div className="mt-2">
-                        <p className="codev-dialog-description text-md text-pink-100">
+                        <p className="text-pink-100 codev-dialog-description text-md">
                             {description}
                         </p>
                     </div>

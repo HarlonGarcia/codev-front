@@ -60,7 +60,7 @@ export default function Participants() {
             <div className='flex flex-col gap-4'>
                 <button
                     onClick={() => setIsModalVisible(true)}
-                    className='flex items-center text-green-800 bg-green-900/10 border border-green-900 p-4 gap-2 rounded-xl'
+                    className='flex items-center gap-2 p-4 text-green-800 border border-green-900 bg-green-900/10 rounded-xl'
                 >
                     <LuPlus size={20} />
                     <span>{t('pages.challenge_users.solution.submit')}</span>
@@ -76,22 +76,22 @@ export default function Participants() {
                     const solutionUrl = solution?.deployUrl || solution?.repositoryUrl;
 
                     return (
-                        <div key={id} className='flex items-center bg-purple-800 text-pink-700 py-4 px-6 gap-6 rounded-xl'>
+                        <div key={id} className='flex items-center gap-6 px-6 py-4 text-pink-700 bg-purple-800 rounded-xl'>
                             <Avatar
                                 size='sm'
                                 name={name}
                                 url={getBase64Image(image?.file)}
                             />
                             <div className='flex flex-col w-20 xs:w-32 sm:w-40 md:w-48'>
-                                <span className='text-pink-900/60 text-sm font-semibold'>
+                                <span className='text-sm font-semibold text-pink-900/60'>
                                     {t('pages.challenge_users.table.columns.name')}
                                 </span>
-                                <span className='font-fira text-nowrap overflow-hidden text-ellipsis'>
+                                <span className='overflow-hidden font-fira text-nowrap text-ellipsis'>
                                     {name}
                                 </span>
                             </div>
                             <div className='flex flex-col ml-auto sm:ml-0'>
-                                <span className='text-pink-900/60 text-sm font-semibold'>
+                                <span className='text-sm font-semibold text-pink-900/60'>
                                     {t('pages.challenge_users.table.columns.solution')}
                                 </span>
                                 <PreviewDemo
@@ -99,7 +99,7 @@ export default function Participants() {
                                     preview={undefined}
                                 />
                             </div>
-                            <div className='hidden flex-wrap justify-end gap-2 ml-auto sm:flex'>
+                            <div className='flex-wrap justify-end hidden gap-2 ml-auto sm:flex'>
                                 {labels?.slice(0, labelsShown).map(({ id, title }) => (
                                     <Badge border='green' key={id}>
                                         {title}
