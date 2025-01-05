@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
+import { Footer } from 'components/Footer';
 import { Wrapper } from 'components/shared/Wrapper';
 import { motion } from 'framer-motion';
 import { useChallenges } from 'services/challenge';
@@ -82,119 +83,121 @@ export default function Home() {
         parentTimeline.time(prep);
     }, []);
     
-
     return (
-        <Wrapper>
-            <WelcomeSection />
-            <motion.div
-                className='codev-home-section'
-                {...sectionAnimationProps}
-            >
-                <h2 className='mb-6 text-purple-300 text-center xl:mb-8'>
-                    {t('pages.home.introduction.title')}
-                </h2>
-                <p className='mb-8 text-center text-lg font-semibold lg:mb-12 lg:text-xl'>
-                    {t('pages.home.introduction.description')}
-                </p>
-                <motion.ul
-                    className='flex flex-wrap justify-center gap-8'
-                    variants={containerVariants}
-                    initial="hidden"
-                    animate="visible"
-                    transition={{ duration: 2.5 }}
-                >
-                    {possibilities.map(({ label, icon }, index) => {
-                        const classes = twMerge(
-                            'flex flex-col justify-center items-center h-44 w-4/5 gap-2 p-6 bg-purple-800 rounded-xl text-center transition-all duration-200 ease-in-out shadow-3xl shadow-purple-600/50 sm:w-48 xl:w-56',
-                            index % 2 !== 0 ? 'md:animate-floatingDeeper' : 'md:animate-floating',
-                        );
-
-                        return (
-                            <motion.li  
-                                key={index}
-                                className={classes}
-                                variants={itemVariants}
-                            >
-                                <span className='text-pink-100 mb-3'>
-                                    {label}
-                                </span>
-                                {icon}
-                            </motion.li>
-                        )})}
-                </motion.ul>
-            </motion.div>
-
-            <motion.div
-                className='codev-home-section'
-                {...sectionAnimationProps}
-            >
-                <h2 className='mb-6 text-purple-300 text-center xl:mb-8'>
-                    {t('pages.home.technologies.title')}
-                </h2>
-                <p className='mb-8 text-center text-lg font-semibold lg:mb-12 lg:text-xl'>
-                    <Trans
-                        components={{ code: <code className='text-sm font-semibold bg-pink-700 text-purple-900 py-1 px-1 rounded' /> }}
-                    >
-                        {'pages.home.technologies.description'}
-                    </Trans>
-                </p>
-                <div className='hidden codev-home-technologies w-auto h-auto relative mx-auto xl:flex'>
-                    {technologies.map((icon, index) => (
-                        <div
-                            className='grid aspect-square place-items-center absolute top-0 left-3/4 p-4 bg-purple-900'
-                            key={index}
-                        >
-                            {icon}
-                        </div>
-                    ))}
-                </div>
-                <div className='flex justify-center flex-wrap gap-4 xl:hidden'>
-                    {technologies.map((icon, index) => (
-                        <div
-                            className='w-16 md:w-20'
-                            key={index}
-                        >
-                            {icon}
-                        </div>
-                    ))}
-                </div>
-            </motion.div>
-
-            {challenges.length > 0 && (
+        <>
+            <Wrapper>
+                <WelcomeSection />
                 <motion.div
                     className='codev-home-section'
                     {...sectionAnimationProps}
                 >
-                    <h2 className='mb-6 text-purple-300 text-center xl:mb-8'>
-                        {t('pages.home.challenges.title')}
+                    <h2 className='mb-6 text-center text-purple-300 xl:mb-8'>
+                        {t('pages.home.introduction.title')}
                     </h2>
-                    <p className='mb-8 text-center text-lg font-semibold lg:mb-12 lg:text-xl'>
-                        {t('pages.home.challenges.description')}
+                    <p className='mb-8 text-lg font-semibold text-center lg:mb-12 lg:text-xl'>
+                        {t('pages.home.introduction.description')}
                     </p>
-                    <div className='relative'>
-                        <div className='flex flex-col items-center gap-4'>
-                            {challenges.map(({ id, title }) => (
-                                <div
-                                    key={id}
-                                    className='flex justify-between items-center w-11/12 p-5 bg-purple-800 rounded-lg xl:rounded-2xl'
-                                >
-                                    <span className='md:text-xl'>{title}</span>
-                                    <small className='py-1.5 px-2 text-xs text-green-800 font-semibold bg-green-900/30 border border-green-900 rounded-lg uppercase'>
-                                        {t('pages.home.challenges.badge')}
-                                    </small>
-                                </div>
-                            ))}
-                        </div>
-                        <div className='codev-home-hide-challenges' />
-                    </div>
-                    <Link
-                        className='text-center text-green-800 text-lg transition-all duration-300 ease-in-out hover:text-green-900 lg:text-xl'
-                        to='/challenges'
+                    <motion.ul
+                        className='flex flex-wrap justify-center gap-8'
+                        variants={containerVariants}
+                        initial="hidden"
+                        animate="visible"
+                        transition={{ duration: 2.5 }}
                     >
-                        {t('pages.home.challenges.button.text')}
-                    </Link>
+                        {possibilities.map(({ label, icon }, index) => {
+                            const classes = twMerge(
+                                'flex flex-col justify-center items-center h-44 w-4/5 gap-2 p-6 bg-purple-800 rounded-xl text-center transition-all duration-200 ease-in-out shadow-3xl shadow-purple-600/50 sm:w-48 xl:w-56',
+                                index % 2 !== 0 ? 'md:animate-floatingDeeper' : 'md:animate-floating',
+                            );
+
+                            return (
+                                <motion.li  
+                                    key={index}
+                                    className={classes}
+                                    variants={itemVariants}
+                                >
+                                    <span className='mb-3 text-pink-100'>
+                                        {label}
+                                    </span>
+                                    {icon}
+                                </motion.li>
+                            )})}
+                    </motion.ul>
                 </motion.div>
-            )}
-        </Wrapper>
+
+                <motion.div
+                    className='codev-home-section'
+                    {...sectionAnimationProps}
+                >
+                    <h2 className='mb-6 text-center text-purple-300 xl:mb-8'>
+                        {t('pages.home.technologies.title')}
+                    </h2>
+                    <p className='mb-8 text-lg font-semibold text-center lg:mb-12 lg:text-xl'>
+                        <Trans
+                            components={{ code: <code className='px-1 py-1 text-sm font-semibold text-purple-900 bg-pink-700 rounded' /> }}
+                        >
+                            {'pages.home.technologies.description'}
+                        </Trans>
+                    </p>
+                    <div className='relative hidden w-auto h-auto mx-auto codev-home-technologies xl:flex'>
+                        {technologies.map((icon, index) => (
+                            <div
+                                className='absolute top-0 grid p-4 bg-purple-900 aspect-square place-items-center left-3/4'
+                                key={index}
+                            >
+                                {icon}
+                            </div>
+                        ))}
+                    </div>
+                    <div className='flex flex-wrap justify-center gap-4 xl:hidden'>
+                        {technologies.map((icon, index) => (
+                            <div
+                                className='w-16 md:w-20'
+                                key={index}
+                            >
+                                {icon}
+                            </div>
+                        ))}
+                    </div>
+                </motion.div>
+
+                {challenges.length > 0 && (
+                    <motion.div
+                        className='codev-home-section'
+                        {...sectionAnimationProps}
+                    >
+                        <h2 className='mb-6 text-center text-purple-300 xl:mb-8'>
+                            {t('pages.home.challenges.title')}
+                        </h2>
+                        <p className='mb-8 text-lg font-semibold text-center lg:mb-12 lg:text-xl'>
+                            {t('pages.home.challenges.description')}
+                        </p>
+                        <div className='relative'>
+                            <div className='flex flex-col items-center gap-4'>
+                                {challenges.map(({ id, title }) => (
+                                    <div
+                                        key={id}
+                                        className='flex items-center justify-between w-11/12 p-5 bg-purple-800 rounded-lg xl:rounded-2xl'
+                                    >
+                                        <span className='md:text-xl'>{title}</span>
+                                        <small className='py-1.5 px-2 text-xs text-green-800 font-semibold bg-green-900/30 border border-green-900 rounded-lg uppercase'>
+                                            {t('pages.home.challenges.badge')}
+                                        </small>
+                                    </div>
+                                ))}
+                            </div>
+                            <div className='codev-home-hide-challenges' />
+                        </div>
+                        <Link
+                            className='text-lg text-center text-green-800 transition-all duration-300 ease-in-out hover:text-green-900 lg:text-xl'
+                            to='/challenges'
+                        >
+                            {t('pages.home.challenges.button.text')}
+                        </Link>
+                    </motion.div>
+                )}
+            </Wrapper>
+            <Footer />
+        </>
     );
 }

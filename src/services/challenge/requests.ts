@@ -4,14 +4,11 @@ import { generateUrl, toBase64 } from '../utils';
 import { ICreateChallengeDto, IGetChallengeParams, IJoinChallengeDto } from './types';
 
 export const getChallenges = async (filters?: IGetChallengeParams) => {
-
     const { data } = await api.get(
         generateUrl('challenges'),
-        {
-            params: filters,
-        }
+        { params: filters }
     );
-
+        
     return data ?? [];
 }
 

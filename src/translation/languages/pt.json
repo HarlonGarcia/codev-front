@@ -19,7 +19,7 @@
         "global.label.ok": "Ok",
         "global.label.cancel": "Cancelar",
         "global.label.click.remove": "Clique aqui para remover",
-
+        "global.label.soon": "Em breve",
 
         "pages.home.instructions.press": "Pressione",
         "pages.home.instructions.action": "para abrir a lista de comandos",
@@ -37,6 +37,15 @@
         "pages.home.challenges.description": "Comece com projetos práticos para fortalecer seu conhecimento em diferentes áreas do desenvolvimento web",
         "pages.home.challenges.badge": "Novo",
         "pages.home.challenges.button.text": "Ver desafios",
+
+        "pages.home.footer.call_to_action": "Crie seus próprios desafios<br/>ou use <span>Codev</span> na sua empresa",
+        "pages.home.footer.email.input.placeholder": "Insira seu email",
+        "pages.home.footer.email.button.label": "Enviar",
+        "pages.home.footer.links.about_us": "Sobre nós",
+        "pages.home.footer.links.collaborate": "Como colaborar",
+        "pages.home.footer.links.support": "Suporte",
+        "pages.home.footer.links.terms": "Termos",
+        "pages.home.footer.links.privacy": "Privacidade",
 
         "pages.account.options.challenges": "Desafios que estou participando",
         "pages.account.options.edit_information": "Editar minhas informações",
