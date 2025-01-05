@@ -19,6 +19,7 @@
     "global.label.ok": "Okay",
     "global.label.cancel": "Cancel",
     "global.label.click.remove": "Click here to remove",
+    "global.label.soon": "Soon",
 
     "pages.home.instructions.press": "Press",
     "pages.home.instructions.action": "to open the command list",
@@ -36,6 +37,15 @@
     "pages.home.challenges.description": "Start with practical projects to strengthen your knowledge in various areas of web development",
     "pages.home.challenges.badge": "New",
     "pages.home.challenges.button.text": "View challenges",
+  
+    "pages.home.footer.call_to_action": "Create your own challenges<br/>or use <span>Codev</span> in your company",
+    "pages.home.footer.email.input.placeholder": "Enter your email",
+    "pages.home.footer.email.button.label": "Submit",
+    "pages.home.footer.links.about_us": "About us",
+    "pages.home.footer.links.collaborate": "How to collaborate",
+    "pages.home.footer.links.support": "Support",
+    "pages.home.footer.links.terms": "Terms",
+    "pages.home.footer.links.privacy": "Privacy",
 
     "pages.account.options.challenges": "Challenges I am taking part in",
     "pages.account.options.edit_information": "Edit information",
