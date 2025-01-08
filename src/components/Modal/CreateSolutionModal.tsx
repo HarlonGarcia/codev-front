@@ -34,6 +34,8 @@ export const CreateSolutionModal = ({
     const { user } = useContext(AuthContext);
     const { id: challengeId } = useParams();
 
+    const [cover, setCover] = useState<File | undefined>();
+
     const { mutate: createSolution } = useCreateSolution();
 
     const {
@@ -44,8 +46,6 @@ export const CreateSolutionModal = ({
     } = useForm<CreateSolutionSchema>({
         resolver: zodResolver(createSolutionSchema),
     });
-
-    const [cover, setCover] = useState<File | undefined>();
 
     const onSubmit: SubmitHandler<CreateSolutionSchema> = (formValues) => {
         const newSolution = {
@@ -65,7 +65,7 @@ export const CreateSolutionModal = ({
 
     return (
         <Modal
-            className='flex flex-col gap-4'
+            className='flex flex-col gap-6'
             onConfirm={handleSubmit(onSubmit)}
             onCancel={() => {
                 onCancel?.();
