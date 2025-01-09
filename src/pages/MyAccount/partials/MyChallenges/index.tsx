@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import imagePlaceholder from 'assets/images/card-image-placeholder-2.png';
 import { challengeStatuses, getChallengeStatus } from 'enums/challengeStatus';
+import { motion } from 'framer-motion';
 import { RiEmotionSadLine } from "react-icons/ri";
 import { useUserChallenges } from 'services/user';
 import { twMerge } from 'tailwind-merge';
@@ -11,6 +12,38 @@ import { getBase64Image } from 'utils';
 import { Wrapper } from '../Wrapper';
 
 const MAX_TECHS_DISPLAYED = 6;
+
+const containerVariants = {
+    visible: {
+        transition: {
+            ease: 'easeInOut',
+            staggerChildren: 0.1,
+        },
+    },
+};
+
+const itemVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            duration: 1,
+            ease: 'easeInOut',
+        },
+    },
+};
+
+const statusesVariants = {
+    hidden: { x: 30, opacity: 0 },
+    visible: {
+        x: 0,
+        opacity: 1,
+        transition: {
+            duration: 1,
+            ease: 'easeInOut',
+        },
+    },
+};
 
 export default function MyChallenges() {
     const { t } = useTranslation();
@@ -32,22 +65,36 @@ export default function MyChallenges() {
             title={t('pages.account.challenges.title')}
         >
             {!hasChallenges && (
-                <div className='flex flex-col items-center self-center text-center text-xl text-pink-900'>
-                    <RiEmotionSadLine className='text-7xl mb-4' />
+                <div className='flex flex-col items-center self-center text-xl text-center text-pink-900'>
+                    <RiEmotionSadLine className='mb-4 text-7xl' />
                     {t('pages.account.challenges.none_challenge')}
                 </div>
             )}
             {hasChallenges && (
-                <div className='flex flex-wrap gap-4 mb-16 lg:gap-8'>
+                <motion.div
+                    variants={containerVariants}
+                    initial='hidden'
+                    animate='visible'
+                    className='flex flex-wrap gap-4 mb-16 lg:gap-8'
+                >
                     {Object.values(challengeStatuses).map(({ id, label, color }) => (
-                        <div className='flex items-center gap-2 text-pink-100' key={id}>
+                        <motion.div
+                            key={id}
+                            variants={statusesVariants}
+                            className='flex items-center gap-2 text-pink-100'
+                        >
                             <div className='w-2 h-2 rounded-full' style={{ backgroundColor: color }}></div>
                             <span>{label}</span>
-                        </div>
+                        </motion.div>
                     ))}
-                </div>
+                </motion.div>
             )}
-            <section className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:gap-8 2xl:grid-cols-4'>
+            <motion.section
+                variants={containerVariants}
+                initial='hidden'
+                animate='visible'
+                className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:gap-8 2xl:grid-cols-4'
+            >
                 {challenges.map(({
                     id,
                     title,
@@ -76,17 +123,18 @@ export default function MyChallenges() {
                     );
 
                     return (
-                        <div
-                            className={classes}
-                            title={challengeStatus?.label}
+                        <motion.div
                             key={id}
+                            title={challengeStatus?.label}
+                            variants={itemVariants}
+                            className={classes}
                         >
                             <img
-                                className='max-h-72 w-full mb-6 rounded-lg'
+                                className='w-full mb-6 rounded-lg max-h-72'
                                 src={imageSource}
                                 alt={title}
                             />
-                            <h3 className='mb-3 text-green-800 text-lg'>{title}</h3>                  
+                            <h3 className='mb-3 text-lg text-green-800'>{title}</h3>                  
                             <div className='flex flex-wrap gap-2 font-fira'>
                                 {techs.map(({ id, name, color }) => (
                                     <span
@@ -104,16 +152,16 @@ export default function MyChallenges() {
                             <hr className='my-6 border-t border-purple-700' />
                             <div className='flex justify-center w-full'>
                                 <button
-                                    className='w-full p-3 font-semibold text-white bg-purple-700 rounded-lg transition-all duration-300 ease-in-out hover:bg-purple-700/80 hover:text-pink-900'
+                                    className='w-full p-3 font-semibold text-white transition-all duration-300 ease-in-out bg-purple-700 rounded-lg hover:bg-purple-700/80 hover:text-pink-900'
                                     onClick={() => navigate(`/challenges/${id}`)}
                                 >
                                     {t('pages.challenges.see_challenge')}
                                 </button>
                             </div>
-                        </div>            
+                        </motion.div>            
                     )
                 })}
-            </section>
+            </motion.section>
         </Wrapper>
     );
 }
