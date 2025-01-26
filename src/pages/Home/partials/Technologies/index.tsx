@@ -63,7 +63,7 @@ export const Technologies = () => {
     }, []);
 
     return (
-        <div className='codev-home-section'>
+        <div className='flex codev-home-section'>
             <h2 className='mb-6 text-center text-purple-300 xl:mb-8'>
                 <Trans>{'pages.home.technologies.title'}</Trans>
             </h2>

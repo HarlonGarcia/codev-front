@@ -5,7 +5,7 @@ import { twMerge } from 'tailwind-merge';
 
 export const Possibilities = () => {
     return (
-        <div className='codev-home-section'>
+        <div className='flex codev-home-section'>
             <h2 className='mb-6 text-center text-purple-300 xl:mb-8'>
                 <Trans>{'pages.home.introduction.title'}</Trans>
             </h2>

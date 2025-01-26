@@ -80,6 +80,8 @@ const CreateChallenge = () => {
         resolver: zodResolver(createChallengeSchema),
     });
 
+    console.log(getValues('categoryId'), register('categoryId'));
+
     const validate = () => {
         const { items } = selectedTechnologies;
         const description = getValues('description');
@@ -239,9 +241,10 @@ const CreateChallenge = () => {
                 />
                 <S.Group>
                     <Select
-                        {...getPropsExcludeRef(register('categoryId'))}
+                        {...register('categoryId')}
                         label={t('pages.create_challenge.fields.category.label')}
                         error={formErrors.categoryId?.message}
+                        onChange={(e) => setValue('categoryId', e.target.value)}
                         options={hydratedCategories}
                         deselectable
                     />

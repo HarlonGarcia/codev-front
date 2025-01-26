@@ -46,7 +46,7 @@
     }
 
     .codev-home-section {
-        @apply flex flex-col p-8 sm:p-12 lg:p-20;
+        @apply flex-col p-8 sm:p-12 lg:p-20;
     }
 
     .codev-home-hide-challenges {

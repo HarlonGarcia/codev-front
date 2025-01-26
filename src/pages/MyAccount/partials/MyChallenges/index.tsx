@@ -49,7 +49,9 @@ export default function MyChallenges() {
     const { t } = useTranslation();
     const navigate = useNavigate();
 
-    const { data: challenges = [] } = useUserChallenges();
+    const { data: challenges = [] } = useUserChallenges({
+        enabled: true,
+    });
 
     const getTechsRemaining = (techs: ITechnology[]) => {
         return MAX_TECHS_DISPLAYED < techs.length

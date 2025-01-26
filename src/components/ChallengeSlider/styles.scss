@@ -1,0 +1,12 @@
+.slick-track {
+    display: flex;
+    gap: 1rem;
+}
+
+.left-aligned-slider .slick-track {
+    width: 100% !important;
+}
+
+.slick-disabled > svg {
+    fill: theme('colors.purple.600');
+}

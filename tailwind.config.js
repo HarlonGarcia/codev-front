@@ -62,6 +62,7 @@ export default {
             animation: {
                 floating: 'floating 3s ease-in-out infinite',
                 floatingDeeper: 'floatingDeeper 3300ms ease-in-out infinite',
+                'spin-delayed': 'spin 1s linear infinite 0.5s',
             },
             boxShadow: {
                 '3xl': '0 35px 60px -15px rgba(0, 0, 0, 0.3)',

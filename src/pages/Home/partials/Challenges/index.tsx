@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { motion, useAnimation, useInView } from 'framer-motion';
 import { useChallenges } from 'services/challenge';
+import { twMerge } from 'tailwind-merge';
 
 const containerVariants = {
     hidden: { y: 50, opacity: 0 },
@@ -28,10 +29,12 @@ const itemVariants = {
 
 export const Challenges = () => {
     const ref = useRef(null);
-    const isInView = useInView(ref, { once: true });
+    const isInView = useInView(ref, { once: false });
     const animation = useAnimation();
 
-    const { data: challenges = [] } = useChallenges({
+    const {
+        data: challenges = [],
+    } = useChallenges({
         page: 0,
         size: 4,
     });
@@ -41,14 +44,18 @@ export const Challenges = () => {
             animation.start('visible');
         }
     }, [isInView]);
-    
+
+    const classes = twMerge('codev-home-section',
+        0 === challenges.length ? 'hidden' : 'flex'
+    )
+
     return (
         <motion.div
             ref={ref}
             variants={containerVariants}
             initial='hidden'
             animate={animation}
-            className='codev-home-section'
+            className={classes}
         >
             <h2 className='mb-6 text-center text-purple-300 xl:mb-8'>
                 <Trans>{'pages.home.challenges.title'}</Trans>

@@ -17,7 +17,7 @@ export const useRefreshMe = () => {
     }
 };
 
-export function useMe(options?: CustomQueryOptions<null>) {
+export function useMe(options?: CustomQueryOptions<IUser>) {
     const enabled = options?.enabled || false;
 
     return useQuery<IUser>({
@@ -53,10 +53,13 @@ export function useUpdateUser() {
     })
 }
 
-export function useUserChallenges() {
+export function useUserChallenges(
+    options?: CustomQueryOptions<IChallenge[]>,
+) {
     const { user } = useContext(AuthContext);
 
     return useQuery<IChallenge[]>({
+        ...options,
         queryKey: ['userChallenges', user],
         queryFn: async () => {
             const response = await api.getUserChallenges(user?.id);
