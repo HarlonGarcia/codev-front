@@ -51,7 +51,7 @@ export const Card = ({ challenge }: CardProps) => {
                         <Trans>{'pages.challenges.see_challenge'}</Trans>
                     </span>
                     <IoArrowForwardSharp
-                        className='w-5 h-5 z-[2] transition-all duration-1000 ease-in-out group-hover:translate-x-60'
+                        className='w-5 h-5 z-[2] transition-all duration-1000 ease-in-out group-hover:translate-x-4'
                     />
                 </button>
                 <div className='absolute inset-0 z-0 w-full rounded-full bg-purple-900/15 h-14'></div>
