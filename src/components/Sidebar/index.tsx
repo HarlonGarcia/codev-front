@@ -43,8 +43,8 @@ const links = [
 ];
 
 const Menu = ({ isVisible, onClick }: MenuProps) => {
-    const classes = twMerge('relative flex flex-col items-center justify-center w-5 h-5 gap-1',
-        isVisible ? '*:bg-red-500' : '*:bg-green-800 ml-4'
+    const classes = twMerge('relative flex flex-col items-center justify-center w-5 h-5 gap-1 transition-all duration-300 ease-in-out',
+        isVisible ? '*:bg-red-500 *:hover:bg-red-500/60' : 'ml-4 *:bg-green-800 *:hover:bg-green-800/60'
     );
 
     const baseClasses = 'block w-full h-0.5 bg-green-800 transition-all duration-300';

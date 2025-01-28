@@ -7,7 +7,7 @@ import './styles.scss';
 
 interface SelectProps extends ComponentProps<'select'> {
     onChange: (event: ChangeEvent<HTMLSelectElement>) => void;
-    deselectable?: boolean;
+    canDeselect?: boolean;
     error?: string;
     placeholder?: string;
     label?: string;
@@ -21,7 +21,7 @@ interface SelectProps extends ComponentProps<'select'> {
 
 export const Select = ({
     id,
-    deselectable = false,
+    canDeselect = false,
     error,
     placeholder,
     label,
@@ -44,7 +44,12 @@ export const Select = ({
                 className='co-select-input'
                 {...rest}
             >
-                <option value={NONE} defaultValue={NONE} disabled={deselectable}>
+                <option
+                    value={NONE}
+                    defaultValue={NONE}
+                    disabled={!canDeselect}
+                    className={canDeselect ? 'cursor-pointer' : 'cursor-not-allowed'}
+                >
                     {placeholder || t('global.select.placeholder')}
                 </option>
                 {options.map(({ label, value, disabled }) => (
@@ -52,13 +57,14 @@ export const Select = ({
                         key={value}
                         value={value}
                         disabled={disabled}
+                        className='cursor-pointer'
                     >
                         {label}
                     </option>
                 ))}
             </select>
             {error && (
-                <span className='mt-2 font-sm text-red-500'>{error}</span>
+                <span className='mt-2 text-red-500 font-sm'>{error}</span>
             )}
         </div>
     );

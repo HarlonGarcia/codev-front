@@ -1,14 +1,14 @@
 import { ChangeEvent, useContext, useMemo, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { FileUploader } from 'components/FileUploader';
 import { RichText } from 'components/RichText';
 import { Select } from 'components/Select';
 import { Input } from 'components/shared/Input';
-import { InputFile } from 'components/shared/InputFile';
 import { AuthContext } from 'contexts/AuthContext';
 import { challengeStatuses } from 'enums/challengeStatus';
 import { t } from 'i18next';
@@ -60,10 +60,15 @@ const CreateChallenge = () => {
     const { user: currentUser } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    const [selectedTechnologies, setSelectedTechnologies] = useState<ITechnologiesState>({
+    const [technologiesState, setTechnologiesState] = useState<ITechnologiesState>({
         items: [],
         error: '',
     });
+
+    const {
+        items: selectedTechnologies,
+        error: technologiesError,
+    } = technologiesState;
 
     const { data: categories = [] } = useCategories();
     const { data: technologies = [] } = useTechnologies();
@@ -80,20 +85,16 @@ const CreateChallenge = () => {
         resolver: zodResolver(createChallengeSchema),
     });
 
-    console.log(getValues('categoryId'), register('categoryId'));
-
     const validate = () => {
-        const { items } = selectedTechnologies;
         const description = getValues('description');
-
         const hasDescription = description?.replace(/<\/?[^>]+(>|$)/g, '');
 
         if (!hasDescription) {
             setDescriptionError(t('pages.create_challenge.fields.description.error'));
         }
 
-        if (0 >= items.length) {
-            setSelectedTechnologies((technologies) => ({
+        if (0 >= selectedTechnologies.length) {
+            setTechnologiesState((technologies) => ({
                 ...technologies,
                 error: t('pages.create_challenge.fields.technologies.error.min'),
             }));
@@ -101,18 +102,13 @@ const CreateChallenge = () => {
     }
 
     const onSubmit: SubmitHandler<CreateChallengeSchema> = (formValues) => {
-        const { items: techs, error } = selectedTechnologies;
-
-        if (error) {
+        if (technologiesError) {
             return;
         }
 
-        const file = formValues.image[0];
-
         const newChallenge = {
             ...formValues,
-            image: file,
-            technologies: techs.map(({ id }) => id),
+            technologies: selectedTechnologies.map(({ id }) => id),
             authorId: currentUser?.id,
         };
 
@@ -144,13 +140,13 @@ const CreateChallenge = () => {
     };
 
     const addTechnology = (event: ChangeEvent<HTMLSelectElement>) => {
-        if (5 <= selectedTechnologies.items.length) {
+        if (5 <= selectedTechnologies.length) {
             toast(t('pages.create_challenge.fields.technologies.error.limit'));
             return;
         }
 
         const technologyId = event.target.value;
-        const isTechAlreadyAdded = selectedTechnologies.items
+        const isTechAlreadyAdded = selectedTechnologies
             .some(({ id }) => id === technologyId)
 
         if (isTechAlreadyAdded) {
@@ -163,17 +159,21 @@ const CreateChallenge = () => {
             return;
         }
 
-        setSelectedTechnologies((prevState) => ({
+        setTechnologiesState((prevState) => ({
             error: '',
             items: [...prevState.items, newTechnology],
         }));
     };
 
-    const removeChallenge = (id: string) => {
-        setSelectedTechnologies((prevState) => ({
+    const removeChallenge = (technologyId: string) => {
+        setTechnologiesState((prevState) => ({
             ...prevState,
-            items: prevState.items.filter((tech) => tech.id !== id),
+            items: prevState.items.filter(({ id }) => id !== technologyId),
         }));
+    };
+
+    const handleFieldChange = (field: keyof CreateChallengeSchema, value: unknown) => {
+        setValue(field, value);
     };
 
     const hydratedCategories = useMemo(() => {
@@ -193,7 +193,7 @@ const CreateChallenge = () => {
     const hydratedTechnologies = useMemo(() => {
         const filteredTechnologies = technologies
             .filter(({ id }) => {
-                return !selectedTechnologies.items.some((tech) => tech.id === id);
+                return !selectedTechnologies.some((tech) => tech.id === id);
             });
 
         return filteredTechnologies.map(({ id, name }) => ({
@@ -201,7 +201,7 @@ const CreateChallenge = () => {
             label: name,
             value: id,
         }));
-    }, [technologies, selectedTechnologies.items]);
+    }, [technologies, selectedTechnologies]);
 
     const statuses = useMemo(() => {
         const unwantedStatuses = [challengeStatuses.CANCELED.id, challengeStatuses.FINISHED.id];
@@ -236,7 +236,7 @@ const CreateChallenge = () => {
                     }
                 />
                 <TechnologiesList
-                    technologies={selectedTechnologies.items}
+                    technologies={selectedTechnologies}
                     onRemove={removeChallenge}
                 />
                 <S.Group>
@@ -244,9 +244,8 @@ const CreateChallenge = () => {
                         {...register('categoryId')}
                         label={t('pages.create_challenge.fields.category.label')}
                         error={formErrors.categoryId?.message}
-                        onChange={(e) => setValue('categoryId', e.target.value)}
+                        onChange={(e) => handleFieldChange('categoryId', e.target.value)}
                         options={hydratedCategories}
-                        deselectable
                     />
                     <Select
                         id={'technologies'}
@@ -254,23 +253,26 @@ const CreateChallenge = () => {
                         onChange={addTechnology}
                         placeholder={t('global.select.none')}
                         label={t('pages.create_challenge.fields.technologies.label')}
-                        error={selectedTechnologies.error}
+                        error={technologiesError}
                         options={hydratedTechnologies}
                     />
                     <Select
                         {...getPropsExcludeRef(register('status'))}
                         label={t('pages.create_challenge.fields.status.label')}
+                        onChange={(e) => handleFieldChange('status', e.target.value)}
                         error={formErrors.status?.message}
                         options={statuses}
-                        deselectable
                     />
                 </S.Group>
-                <InputFile
-                    label={t('pages.create_challenge.fields.image.label')}
-                    showButton
-                    error={formErrors.image?.message as string}
-                    register={register}
-                />
+                <div className='flex flex-col gap-4'>
+                    <label className='text-green-800 sm:text-lg'>
+                        <Trans>{'pages.create_challenge.fields.image.label'}</Trans>
+                    </label>
+                    <FileUploader
+                        label={t('pages.create_challenge.fields.image.add')}
+                        onChange={(file) => handleFieldChange('image', file)}
+                    />
+                </div>
                 <S.Submit
                     type="submit"
                     onClick={(event) => {

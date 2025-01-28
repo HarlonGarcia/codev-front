@@ -13,7 +13,7 @@ export type IGetChallengeParams = {
 
 export type ICreateChallengeDto =
   Pick<IChallenge, 'title' | 'description'> & {
-  image: File;
+  image?: File;
   status: string;
   authorId?: string;
   categoryId: string;

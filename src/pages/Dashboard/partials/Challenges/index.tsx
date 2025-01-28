@@ -135,23 +135,19 @@ export default function Challenges() {
                     </Trans>
                 }
             />
-            <div className='flex flex-col justify-between mb-16 md:flex-row md:items-center'>
+            <div className='flex flex-col justify-between mb-16 lg:flex-row lg:items-center'>
                 <div className='mb-8'>
-                    <h1 className='text-3xl font-semibold mb-2 md:text-4xl md:mb-4'>
+                    <h1 className='mb-2 text-3xl font-semibold md:text-4xl md:mb-4'>
                         {t('pages.dashboard.challenges.title')}
                     </h1>
                     <p className='sm:text-xl'>{t('pages.dashboard.challenges.description')}</p>
                 </div>
                 <Link
                     to={'new-challenge'}
-                    className='flex gap-2 items-center w-fit p-3 font-semibold text-md text-green-800 border-4
-                    border-green-800 rounded-lg transition-all duration-300 ease-in-out hover:border-green-900 hover:text-green-900'
+                    className='flex items-center gap-2 p-3 font-semibold text-green-800 transition-all duration-300 ease-in-out border-4 border-green-800 rounded-lg w-fit text-md hover:border-green-900 hover:text-green-900'
                 >
                     <LuPlus size={20} />
-                    <span>
-
-                        {t('pages.dashboard.challenges.add_challenge')}
-                    </span>
+                    <Trans>{'pages.dashboard.challenges.add_challenge'}</Trans>
                 </Link>
             </div>
             <div>
