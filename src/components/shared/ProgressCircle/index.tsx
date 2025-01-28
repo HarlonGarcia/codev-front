@@ -61,8 +61,8 @@ export const CircleProgress = ({
     
     return (
         <svg width={200} height={200}>
-            <g transform={`rotate(-90 ${"100 100"})`}>
-                <Circle size={size} color={'#25163C'} percentage={100} />
+            <g transform={`rotate(-90 100 100)`}>
+                <Circle size={size} color={'#02010A55'} percentage={100} />
                 <Circle size={size} color={color} percentage={formattedPercentage} />
             </g>
             <Text

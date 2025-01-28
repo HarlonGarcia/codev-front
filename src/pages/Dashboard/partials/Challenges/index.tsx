@@ -144,7 +144,7 @@ export default function Challenges() {
                 </div>
                 <Link
                     to={'new-challenge'}
-                    className='flex items-center gap-2 p-3 font-semibold text-green-800 transition-all duration-300 ease-in-out border-4 border-green-800 rounded-lg w-fit text-md hover:border-green-900 hover:text-green-900'
+                    className='flex items-center gap-2 px-3 py-2.5 font-semibold text-green-800 transition-all duration-300 ease-in-out border-2 border-green-800 rounded-lg w-fit text-md hover:text-purple-900 hover:bg-green-800'
                 >
                     <LuPlus size={20} />
                     <Trans>{'pages.dashboard.challenges.add_challenge'}</Trans>
@@ -200,7 +200,7 @@ export default function Challenges() {
                                     <div className={'hidden items-center gap-2 lg:flex'}>
                                         <span
                                             style={{ color: challengeStatuses[challenge.status].color }}
-                                            className={'flex items-center gap-2 py-2 px-3 bg-purple-900 text-xl font-semibold rounded-lg'}
+                                            className={'flex items-center gap-2 py-2 px-3 bg-purple-900/50 text-xl font-semibold rounded-lg'}
                                         >
                                             <GrStatusGoodSmall size={10} />
                                             <small>

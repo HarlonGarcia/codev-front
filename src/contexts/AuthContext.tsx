@@ -36,6 +36,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
     const {
         mutate: refreshToken,
+        reset: clearRefreshTokenState, 
         isPending: isRefreshTokenLoading,
         error: refreshTokenError,
     } = useRefreshToken();
@@ -47,34 +48,33 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     } = useMe();
 
     const {
-        mutate: sendLogin,
+        mutate: login,
         isPending: isLoggingIn,
         error: loginError,
     } = useLogin();
 
     const {
-        mutate: register,
+        mutate: signUp,
         isPending: isSigningIn,
         error: signupError,
     } = useSignUp();
 
-    const logout = () => {
-        setToken(null);
-    };
+    const logout = () => setToken(null);
 
     const getAuthMutationOptions = (callback?: () => void) => ({
         onSuccess: (token: string) => {
             setToken(token);
             callback?.();
+            clearRefreshTokenState();
         },
     });
 
-    const signUp = (user: IUser, callback?: () => void) => {
-        register(user, getAuthMutationOptions(callback));
+    const handleSignUp = (user: IUser, callback?: () => void) => {
+        signUp(user, getAuthMutationOptions(callback));
     }
 
-    const login = (data: ILoginPayload, callback?: () => void) => {
-        sendLogin(data, getAuthMutationOptions(callback));
+    const handleLogin = (data: ILoginPayload, callback?: () => void) => {
+        login(data, getAuthMutationOptions(callback));
     };
 
     useEffect(function getLoggedUserData() {
@@ -142,8 +142,8 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
                 isRefreshTokenLoading,
                 isAdmin,
                 isAuthenticated,
-                signUp,
-                login,
+                signUp: handleSignUp,
+                login: handleLogin,
                 logout,
             }}
         >

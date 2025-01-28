@@ -80,38 +80,10 @@ const Group = styled('div', {
     },
 });
 
-const Submit = styled('input', {
-    width: 'fit-content',
-    padding: '0.75rem 2rem',
-    marginTop: '2rem',
-
-    color: '$text',
-    backgroundColor: '$secondary',
-    fontWeight: '600',
-
-    border: '1px solid $text',
-    borderRadius: '0.25rem',
-    outline: 'none',
-
-    transition: 'all 0.3s ease-in-out',
-    cursor: 'pointer',
-
-    '&:hover': {
-        color: '$secondary',
-        backgroundColor: '$text',
-    },
-
-    '@xs': {
-        padding: '1rem 3rem',
-        fontSize: '1.125rem',
-    }
-});
-
 export {
     Container,
     Form,
     SelectedTechnologies,
     Technology,
     Group,
-    Submit,
 };

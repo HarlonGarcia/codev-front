@@ -9,12 +9,12 @@ interface BackButtonProps {
 }
 
 export default function BackButton({ path }: BackButtonProps) {
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
-  return (
-    <S.Button onClick={() => navigate(path)}>
-      <MdArrowBackIosNew />
-    </S.Button>
-  );
+    return (
+        <S.Button onClick={() => navigate(path)}>
+            <MdArrowBackIosNew />
+        </S.Button>
+    );
 }
         

@@ -99,7 +99,7 @@ const CreateChallenge = () => {
                 error: t('pages.create_challenge.fields.technologies.error.min'),
             }));
         }
-    }
+    };
 
     const onSubmit: SubmitHandler<CreateChallengeSchema> = (formValues) => {
         if (technologiesError) {
@@ -271,18 +271,22 @@ const CreateChallenge = () => {
                     <FileUploader
                         label={t('pages.create_challenge.fields.image.add')}
                         onChange={(file) => handleFieldChange('image', file)}
+                        color='secondary'
+                        size='xl'
                     />
                 </div>
-                <S.Submit
-                    type="submit"
+                <button
+                    type='submit'
                     onClick={(event) => {
                         const submit = handleSubmit(onSubmit);
 
                         validate();
                         submit(event);
                     }}
-                    value={t('pages.create_challenge.submit.label')}
-                />
+                    className='px-5 py-3 font-semibold text-purple-900 transition-all duration-300 ease-in-out bg-green-800 rounded w-fit md:rounded-lg xl:px-8 xl:text-lg hover:bg-green-900'
+                >
+                    <Trans>{'pages.create_challenge.submit.label'}</Trans>
+                </button>
             </S.Form>
         </S.Container>
     );

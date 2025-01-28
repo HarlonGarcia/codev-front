@@ -1,10 +1,11 @@
 import { twJoin, twMerge } from 'tailwind-merge';
 import { tv } from 'tailwind-variants';
+import { ISizeVariant } from 'types';
 
 interface AvatarProps {
     url?: string;
     name?: string;
-    size?: 'sm' | 'md' | 'lg' | 'xl';
+    size?: ISizeVariant;
     border?: boolean;
     className?: string;
     onClick?: () => void;

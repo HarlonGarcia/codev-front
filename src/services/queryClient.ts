@@ -10,7 +10,9 @@ export const createIDBPersister = (key: IDBValidKey = 'codev-idb') => {
                 ...client,
                 clientState: {
                     mutations: [],
-                    queries: client.clientState.queries.filter((query) => query.queryKey.includes('cached')),
+                    queries: client.clientState.queries
+                        .filter((query) => query.queryKey.includes('cached'))
+                        .map((query) => ({ ...query })),
                 },
             };
 

@@ -3,26 +3,32 @@ import { Trans } from 'react-i18next';
 
 import { LuTrash } from 'react-icons/lu';
 import { twMerge } from 'tailwind-merge';
+import { ISizeVariant } from 'types';
+
+import { tvPreview, tvUploadArea, tvUploadDragOver } from './variants';
 
 interface FileUploaderProps {
     label: string;
     onChange: (value?: File) => void;
+    color?: 'primary' | 'secondary';
+    size?: ISizeVariant;
 }
 
 const supportedTypes = ['image/jpeg', 'image/png', 'image/gif'];
 
-export const FileUploader = ({ label, onChange }: FileUploaderProps) => {
+export const FileUploader = ({
+    label,
+    color,
+    size,
+    onChange,
+}: FileUploaderProps) => {
     const inputRef = useRef<HTMLInputElement>(null);
     const [isDraggingOver, setIsDraggingOver] = useState<boolean>(false);
     const [preview, setPreview] = useState<string | undefined>();
 
-    const preventDefaultBehavior = (event: React.DragEvent<HTMLDivElement>) => {
+    const handleDragOver = (dragging: boolean) => (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
         event.stopPropagation();
-    };
-
-    const handleDragOver = (dragging: boolean) => (e: React.DragEvent<HTMLDivElement>) => {
-        preventDefaultBehavior(e);
         setIsDraggingOver(dragging);
     };
 
@@ -46,7 +52,8 @@ export const FileUploader = ({ label, onChange }: FileUploaderProps) => {
     };
 
     const handleDrop = (event: DragEvent<HTMLDivElement>) => {
-        preventDefaultBehavior(event);
+        event.preventDefault();
+        event.stopPropagation();
       
         const files = event.dataTransfer.files;
         const fileInput = inputRef.current;
@@ -66,17 +73,20 @@ export const FileUploader = ({ label, onChange }: FileUploaderProps) => {
         }
     };
 
-    const classes = twMerge('flex justify-center items-center w-full h-56 text-center leading-10 border border-purple-800 border-dashed rounded-lg cursor-pointer transition-all duration-300 ease-in-out hover:bg-purple-900/30',
-        isDraggingOver ? 'border-pink-700 bg-purple-900/30' : 'bg-purple-900/20',
+    const classes = twMerge(tvUploadArea({ color, size }),
+        isDraggingOver ? tvUploadDragOver({ color }) : '',
     );
 
     return (
-        <div className='w-full flex flex-col'>
+        <div className='flex flex-col w-full'>
             {!preview && (
                 <div
                     onDragOver={handleDragOver(true)}
                     onDragLeave={handleDragOver(false)}
-                    onDragEnter={preventDefaultBehavior}
+                    onDragEnter={(event) => {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }}
                     onDrop={handleDrop}
                     className={classes}
                     onClick={() => inputRef.current?.click()}
@@ -96,17 +106,18 @@ export const FileUploader = ({ label, onChange }: FileUploaderProps) => {
                         onChange(undefined);
                         setPreview(undefined);
                     }}
-                    className={'group relative w-full h-56 border-2 border-dashed border-pink-900/70 rounded-lg overflow-hidden transition-all duration-300 ease-in-out cursor-pointer hover:border-red-500'}
+                    className={tvPreview({ size })}
                 >                        
-                    <div className="hidden absolute inset-0 bg-purple-900/85 items-center justify-center transition-all duration-300 ease-in-out backdrop-blur-[1px] group-hover:flex">
-                        
-                        <p className="flex items-center gap-2 text-red-500 text-center text-xl font-bold">
+                    <div
+                        className="hidden absolute inset-0 bg-purple-900/85 items-center justify-center transition-all duration-300 ease-in-out backdrop-blur-[1px] group-hover:flex"
+                    >
+                        <p className="flex items-center gap-2 text-xl font-bold text-center text-red-500">
                             <Trans>{'global.label.click.remove'}</Trans>
                             <LuTrash />
                         </p>
                     </div>
                     <img
-                        className='aspect-square object-cover w-full h-full'
+                        className='object-cover w-full h-full aspect-square'
                         src={preview}
                     />
                 </div>

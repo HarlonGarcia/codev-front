@@ -50,7 +50,7 @@ const Menu = ({ isVisible, onClick }: MenuProps) => {
     const baseClasses = 'block w-full h-0.5 bg-green-800 transition-all duration-300';
 
     return (
-        <button
+        <span
             className={classes}
             onClick={onClick}
         >
@@ -63,7 +63,7 @@ const Menu = ({ isVisible, onClick }: MenuProps) => {
             <span
                 className={twMerge(baseClasses, isVisible ? '-rotate-45 -translate-y-1.5' : '')}
             ></span>
-        </button>
+        </span>
     );
 }
 

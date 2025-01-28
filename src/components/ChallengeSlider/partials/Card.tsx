@@ -44,7 +44,7 @@ export const Card = ({ challenge }: CardProps) => {
             <div className='relative'>
                 <button
                     onClick={() => navigate(`/challenges/${id}`)}
-                    className='group flex mt-4 justify-center items-center min-w-[170.52px] min-h-14 bg-none text-pink-700 text-lg before:content-[""] before:block before:w-16 before:h-full before:bg-purple-700 before:absolute before:rounded-full before:left-0 before:z-[1] before:transition-all before:animate-spin-delayed before:duration-500 before:ease-in-out hover:before:delay-150 hover:before:w-full hover:before:animate-none'
+                    className='group flex mt-4 justify-center items-center min-w-[170.52px] min-h-14 bg-none text-pink-700 text-lg before:content-[""] before:inline-block before:w-16 before:h-full before:bg-purple-700 before:absolute before:rounded-full before:left-0 before:z-[1] before:transition-all before:animate-spin-delayed before:duration-500 before:ease-in-out hover:before:delay-150 hover:before:w-full hover:before:animate-none'
                     disabled={challenge.status === 'FINISHED'}
                 >
                     <span className='z-[2] px-3 font-semibold'>

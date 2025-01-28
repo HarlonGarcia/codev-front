@@ -34,6 +34,7 @@ export const useSignUp = () => {
 
 export const useRefreshToken = () => {
     return useMutation({
+        mutationKey: ['refreshToken'],
         mutationFn: async () => {
             const response = await api.refreshToken();
 

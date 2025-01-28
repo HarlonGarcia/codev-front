@@ -11,6 +11,8 @@ export type CustomQueryOptions<T> = Partial<UseQueryOptions<T>>;
 
 export type IRoleName = 'ADMIN' | 'USER';
 
+export type ISizeVariant = 'sm' | 'md' | 'lg' | 'xl';
+
 export interface IShortcuts {
     [key: string]: {
         icon: JSX.Element;
