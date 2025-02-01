@@ -140,7 +140,10 @@
     "pages.signup.submit.label": "Continue",
     
     "pages.dashboard.sidebar.routes.stats": "Stats",
+    "pages.dashboard.sidebar.routes.stats.list": "See stats",
     "pages.dashboard.sidebar.routes.challenges": "Challenges",
+    "pages.dashboard.sidebar.routes.challenges.list": "See challenges",
+    "pages.dashboard.sidebar.routes.challenges.create": "Create challenge",
     "pages.dashboard.sidebar.support": "Support",
 
     "pages.dashboard.stats.title": "See your activity",

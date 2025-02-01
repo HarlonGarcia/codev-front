@@ -71,7 +71,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
     const handleSignUp = (user: IUser, callback?: () => void) => {
         signUp(user, getAuthMutationOptions(callback));
-    }
+    };
 
     const handleLogin = (data: ILoginPayload, callback?: () => void) => {
         login(data, getAuthMutationOptions(callback));
