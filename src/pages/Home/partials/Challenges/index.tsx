@@ -13,10 +13,8 @@ const containerVariants = {
         opacity: 1,
         transition: {
             duration: 1,
-            delay: 0.5,
             ease: 'easeInOut',
-            delayChildren: 0.75,
-            staggerChildren: 0.2,
+            staggerChildren: 0.3,
             staggerDirection: 1,
         },
     },
