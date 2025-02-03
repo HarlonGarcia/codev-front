@@ -47,11 +47,13 @@ export const Slider = ({ challenges }: SliderProps) => {
 };
 
 export const ChallengeSlider = ({ category }: ChallengeSliderProps) => {
-    const { data: allChallenges = [] } = useChallenges();
+    const {
+        data: { items = [] } = {},
+    } = useChallenges();
     
     const challenges = useMemo(
-        () => allChallenges.filter((challenge) => challenge.category?.id === category.id),
-        [allChallenges, category.id],
+        () => items.filter((challenge) => challenge.category?.id === category.id),
+        [items, category.id],
     );
 
     if (0 === challenges.length) {

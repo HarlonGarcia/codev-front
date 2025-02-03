@@ -65,7 +65,7 @@ export default function Sidebar(props: SidebarProps) {
         isVisible ? 'fixed' : 'hidden'
     );
 
-    const toggleClasses = twMerge('fixed top-0 right-0 flex justify-center w-16 h-full py-5',
+    const toggleClasses = twMerge('fixed top-0 right-0 flex justify-center w-16 h-full py-5 outline-none',
         'before:content-[""] before:absolute before:inset-0 before:w-16 before:bg-purple-800 before:translation-all before:duration-300 before:ease-in-out',
         isVisible ? 'before:-translate-x-0 before:h-32' : 'before:translate-x-0'
     );

@@ -2,25 +2,25 @@ import { ChangeEvent, useContext, useMemo, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import imagePlaceholder from 'assets/images/card-image-placeholder-2.png'
 import { DeleteChallengeDialog } from 'components/Dialog/DeleteChallengeDialog';
+import { Pagination } from 'components/Pagination';
 import { Select } from 'components/Select';
 import { AuthContext } from 'contexts/AuthContext';
 import { challengesOrderBy } from 'enums/challengeOrderBy';
 import { challengeStatuses } from 'enums/challengeStatus';
 import { FaArrowUpAZ, FaArrowDownAZ } from "react-icons/fa6";
-import { GrStatusGoodSmall } from "react-icons/gr";
-import { IoMdList, IoMdTrash } from "react-icons/io";
+import { IoMdList } from "react-icons/io";
 import { LuPlus } from "react-icons/lu";
-import { MdEdit, MdGridView } from "react-icons/md";
+import { MdGridView } from "react-icons/md";
 import { useCategories } from 'services/category';
 import { useChallenges, useDeleteChallenge } from 'services/challenge';
 import { IGetChallengeParams } from 'services/challenge/types';
 import { useTechnologies } from 'services/technology';
 import { ChallengeStatusEnum, IChallenge } from 'types';
-import { getBase64Image } from 'utils';
-import { NONE } from 'utils/constants';
+import { DEFAULT_ITEMS_PAGE, NONE } from 'utils/constants';
 
+import { Grid } from './partials/Grid';
+import { List } from './partials/List';
 import * as S from './styles';
 
 interface Filters {
@@ -38,29 +38,22 @@ export default function Challenges() {
     const [isAscOrder, setIsAscOrder] = useState(false);
     const [isGrid, setIsGrid] = useState(false);
     const [isModalOpened, setIsModalOpened] = useState(false);
+    const [page, setPage] = useState(0);
     const [selectedChallenge, setSelectedChallenge] = useState<IChallenge | null>(null);
 
     const {
-        data: challenges = [],
+        data: { items = [], pagination } = {},
     } = useChallenges({
         ...filters,
+        page,
+        size: DEFAULT_ITEMS_PAGE,
         authorId: user?.id,
         order: isAscOrder ? 'asc' : 'desc',
     });
 
+    const { data: allCategories = [] } = useCategories();
+    const { data: allTechnologies = [] } = useTechnologies();
     const { mutate: deleteChallenge } = useDeleteChallenge();
-
-    const {
-        data: categoriesItems = [],
-    } = useCategories();
-
-    const {
-        data: technologiesItems = [],
-    } = useTechnologies();
-
-    const toggleAlphabeticalOrder = () => {
-        setIsAscOrder((prevState) => !prevState);
-    };
 
     const handleFilterChange = (key: string) => (event: ChangeEvent<HTMLSelectElement>) => {
         const value = event.target.value;
@@ -77,13 +70,15 @@ export default function Challenges() {
         onChange: handleFilterChange(id),
     });
 
-    const getChallengeImage = (image?: string) => {
-        return image ? getBase64Image(image) : imagePlaceholder;
-    }
-
     const handleChallengeAction = (challenge: IChallenge | null, visible = true) => {
         setIsModalOpened(visible);
         setSelectedChallenge(challenge);
+    };
+    
+    const handlePageChange = (newPage: number) => {
+        setPage(newPage);
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+
     };
 
     const handleDeleteChange = () => {
@@ -95,20 +90,20 @@ export default function Challenges() {
     }
 
     const categories = useMemo(() => {
-        return categoriesItems.map(({ id, name }) => ({
+        return allCategories.map(({ id, name }) => ({
             key: id,
             value: id,
             label: name,
         }))
-    }, [categoriesItems]);
+    }, [allCategories]);
 
     const technologies = useMemo(() => {
-        return technologiesItems.map(({ id, name }) => ({
+        return allTechnologies.map(({ id, name }) => ({
             key: id,
             value: id,
             label: name,
         }))
-    }, [technologiesItems]);
+    }, [allTechnologies]);
 
     const statuses = Object.values(challengeStatuses).map(({ id, label }) => ({
         key: id,
@@ -175,7 +170,7 @@ export default function Challenges() {
                         />
                     </S.Filters>
                     <S.Actions>
-                        <S.Order onClick={toggleAlphabeticalOrder}>
+                        <S.Order onClick={() => setIsAscOrder((prev) => !prev)}>
                             {isAscOrder ? <FaArrowUpAZ /> : <FaArrowDownAZ />}
                         </S.Order>
                         <S.Toggle active={isGrid ? 'grid' : 'list'}>
@@ -188,78 +183,26 @@ export default function Challenges() {
                         </S.Toggle>
                     </S.Actions>
                 </S.ChallengesHeader>
-                {!isGrid ? (
-                    <S.List>
-                        {challenges.map((challenge, index) => (
-                            <S.ListItem key={challenge.id}>
-                                <S.Title>
-                                    <small>{(index + 1).toString().padStart(2, '0')}</small>
-                                    <strong>{challenge.title}</strong>
-                                </S.Title>
-                                <div className={'flex items-center gap-8'}>
-                                    <div className={'hidden items-center gap-2 lg:flex'}>
-                                        <span
-                                            style={{ color: challengeStatuses[challenge.status].color }}
-                                            className={'flex items-center gap-2 py-2 px-3 bg-purple-900/50 text-xl font-semibold rounded-lg'}
-                                        >
-                                            <GrStatusGoodSmall size={10} />
-                                            <small>
-                                                {challengeStatuses[challenge.status].label}
-                                            </small>
-                                        </span>
-                                        <span className={'py-2 px-3 bg-pink-700 font-semibold rounded-lg text-purple-700'}>
-                                            {challenge.category?.name}
-                                        </span>
-                                        <span className={'py-2 px-3 bg-green-800 font-semibold rounded-lg text-purple-700'}>
-                                            {challenge.technologies?.map((technology) => technology.name).join(' / ')}
-                                        </span>
-                                    </div>
-                                    <S.ChallengeActions>
-                                        <S.Action type='edit'>
-                                            <MdEdit />
-                                        </S.Action>
-                                        <S.Action type='delete' onClick={() => handleChallengeAction(challenge)}>
-                                            <IoMdTrash />
-                                        </S.Action>
-                                    </S.ChallengeActions>
-                                </div>
-                            </S.ListItem>
-                        ))}
-                    </S.List>
+                {isGrid ? (
+                    <Grid
+                        items={items}
+                        onEdit={handleChallengeAction}
+                        onDelete={handleChallengeAction}
+                    />
                 ) : (
-                    <S.Grid>
-                        {challenges.map(({
-                            id,
-                            title,
-                            status,
-                            category,
-                            technologies,
-                            image,
-                        }) => (
-                            <S.GridItem key={id}>
-                                <img src={getChallengeImage(image?.file)} alt="" />
-                                <div className={'grid-item-info'}>
-                                    <strong>
-                                        <span>{title}</span>
-                                        <MdEdit />
-                                    </strong>
-                                    <div className={'hidden grid-item-info-badges'}>
-                                        <span style={{ color: challengeStatuses[status].color }}>
-                                            <GrStatusGoodSmall />
-                                            {challengeStatuses[status].label}
-                                        </span>
-                                        <span>
-                                            {category?.name}
-                                        </span>
-                                        <span className={'grid-item-info-badges-techs'}>
-                                            {technologies.map((technology) => technology.name).join(' / ')}
-                                        </span>
-                                    </div>
-                                </div>
-                            </S.GridItem>
-                        ))}
-                    </S.Grid>
+                    <List
+                        items={items}
+                        onEdit={handleChallengeAction}
+                        onDelete={handleChallengeAction}
+                    />
                 )}
+                <Pagination
+                    page={page}
+                    total={pagination?.total}
+                    size={pagination?.size}
+                    onPageChange={handlePageChange}
+                    className='mx-auto mt-8'
+                />
             </div>
         </>
     );

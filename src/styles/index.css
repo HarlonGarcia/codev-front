@@ -41,6 +41,10 @@
 }
 
 @layer utilities {
+    .codev-transition-default {
+        @apply transition-all duration-300 ease-in-out;
+    }
+
     .codev-dialog-description strong {
         @apply mx-0.5 font-semibold text-green-800;
     }

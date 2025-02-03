@@ -33,7 +33,7 @@ export const Challenges = () => {
     const animation = useAnimation();
 
     const {
-        data: challenges = [],
+        data: { items = [] } = {},
     } = useChallenges({
         page: 0,
         size: 4,
@@ -46,7 +46,7 @@ export const Challenges = () => {
     }, [isInView]);
 
     const classes = twMerge('codev-home-section',
-        0 === challenges.length ? 'hidden' : 'flex'
+        0 === items.length ? 'hidden' : 'flex'
     )
 
     return (
@@ -65,7 +65,7 @@ export const Challenges = () => {
             </p>
             <div className='relative'>
                 <div className='flex flex-col items-center gap-4'>
-                    {challenges.map(({ id, title }) => (
+                    {items.map(({ id, title }) => (
                         <motion.div
                             key={id}
                             variants={itemVariants}

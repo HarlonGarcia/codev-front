@@ -13,6 +13,17 @@ export type IRoleName = 'ADMIN' | 'USER';
 
 export type ISizeVariant = 'sm' | 'md' | 'lg' | 'xl';
 
+export interface IPagination {
+    size: number;
+    page: number;
+    total: number;
+}
+
+export interface IItemsWithPagination<T> {
+    items: T[];
+    pagination: IPagination; 
+}
+
 export interface IShortcuts {
     [key: string]: {
         icon: JSX.Element;

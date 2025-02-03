@@ -2,8 +2,10 @@ export const URL_DEPLOY = 'https://codev.com.br/';
 export const URL_REPOSITORY = 'https://github.com/HarlonGarcia/codev-front';
 export const URL_DISCORD = 'https://discord.gg/UcGmUfqxp6';
 
-export const MIN_SEARCH_LENGTH = 2;
 export const AUTH_KEY = 'codev_auth';
+
+export const MIN_SEARCH_LENGTH = 2;
+export const DEFAULT_ITEMS_PAGE = 10;
 
 export const ALL = 'all';
 export const NONE = 'none';

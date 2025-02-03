@@ -4,10 +4,12 @@ import { toast } from 'react-toastify';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { AuthContext } from 'contexts/AuthContext';
 import i18next from 'i18next';
-import { CustomQueryOptions, IChallenge, IUser } from 'types';
+import { CustomQueryOptions, IChallenge, IItemsWithPagination, IUser } from 'types';
 
 import * as api from './requests';
 import { ICreateChallengeDto, IGetChallengeParams } from './types';
+
+type ChallengesWithPagination = IItemsWithPagination<IChallenge>;
 
 const useRefresh = () => {
     const queryClient = useQueryClient();
@@ -22,9 +24,9 @@ const useRefresh = () => {
 
 export function useChallenges(
     filters?: IGetChallengeParams,
-    options?: CustomQueryOptions<IChallenge[]>,
+    options?: CustomQueryOptions<ChallengesWithPagination>,
 ) {
-    return useQuery<IChallenge[]>({
+    return useQuery<ChallengesWithPagination>({
         staleTime: Infinity,
         ...options,
         queryKey: ['challenges', filters],
