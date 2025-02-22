@@ -77,7 +77,10 @@ export default function Sidebar(props: SidebarProps) {
 
     return (
         <div>
-            <div className={overlayClasses}></div>
+            <div
+                className={overlayClasses}
+                onClick={() => setIsVisible((prevState) => !prevState)}
+            ></div>
             <div className={sidebarClasses}>
                 <button
                     className={toggleClasses}

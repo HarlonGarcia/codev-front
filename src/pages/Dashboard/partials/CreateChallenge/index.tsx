@@ -11,14 +11,12 @@ import { Select } from 'components/Select';
 import { Input } from 'components/shared/Input';
 import { AuthContext } from 'contexts/AuthContext';
 import { challengeStatuses } from 'enums/challengeStatus';
-import { t } from 'i18next';
-import { MdOutlineClose } from 'react-icons/md';
 import { useCategories } from 'services/category';
 import { useCreateChallenge } from 'services/challenge';
 import { useTechnologies } from 'services/technology';
 import { getPropsExcludeRef } from 'utils';
 
-import * as S from './styles';
+import { SelectedTechnologies } from './partials/SelectedTechnologies';
 import { CreateChallengeSchema, createChallengeSchema } from './validation';
 
 interface ITechnologiesState {
@@ -26,39 +24,10 @@ interface ITechnologiesState {
     error: string;
 }
 
-interface TechnologyListPros {
-    technologies: ITechnology[];
-    onRemove: (id: string) => void;
-}
-
-const TechnologiesList = ({ technologies, onRemove }: TechnologyListPros) => {
-    if (0 < technologies.length) {
-        return (
-            <S.SelectedTechnologies>
-                <strong>
-                    {t('pages.create_challenge.fields.selected_technologies.label')}
-                </strong>
-                <S.Technology>
-                    {technologies.map(({ id, name, color }) => (
-                        <li key={id}>
-                            <span style={{ color }}>{name}</span>
-                            <button onClick={() => onRemove(id)}>
-                                <MdOutlineClose />
-                            </button>
-                        </li>
-                    ))}
-                </S.Technology>
-            </S.SelectedTechnologies>
-        );
-    }
-
-    return <></>;
-};
-
 const CreateChallenge = () => {
     const { t } = useTranslation();
-    const { user: currentUser } = useContext(AuthContext);
     const navigate = useNavigate();
+    const { user: currentUser } = useContext(AuthContext);
 
     const [technologiesState, setTechnologiesState] = useState<ITechnologiesState>({
         items: [],
@@ -219,8 +188,8 @@ const CreateChallenge = () => {
     }, [technologies]);
 
     return (
-        <S.Container>
-            <S.Form>
+        <div className='max-w-[80rem] mx-auto'>
+            <div className='flex flex-col gap-8'>
                 <Input
                     {...register('title')}
                     label={t('pages.create_challenge.fields.title.label')}
@@ -235,11 +204,11 @@ const CreateChallenge = () => {
                         t('pages.create_challenge.fields.description.placeholder')
                     }
                 />
-                <TechnologiesList
-                    technologies={selectedTechnologies}
-                    onRemove={removeChallenge}
+                <SelectedTechnologies
+                    items={selectedTechnologies}
+                    onClick={removeChallenge}
                 />
-                <S.Group>
+                <div className='grid grid-cols-1 gap-12 mb-6 sm:grid-cols-2 sm:gap-6 md:flex md:flex-wrap md:gap-10'>
                     <Select
                         {...register('categoryId')}
                         label={t('pages.create_challenge.fields.category.label')}
@@ -255,6 +224,7 @@ const CreateChallenge = () => {
                         label={t('pages.create_challenge.fields.technologies.label')}
                         error={technologiesError}
                         options={hydratedTechnologies}
+                        canDeselect
                     />
                     <Select
                         {...getPropsExcludeRef(register('status'))}
@@ -263,7 +233,7 @@ const CreateChallenge = () => {
                         error={formErrors.status?.message}
                         options={statuses}
                     />
-                </S.Group>
+                </div>
                 <div className='flex flex-col gap-4'>
                     <label className='text-green-800 sm:text-lg'>
                         <Trans>{'pages.create_challenge.fields.image.label'}</Trans>
@@ -287,8 +257,8 @@ const CreateChallenge = () => {
                 >
                     <Trans>{'pages.create_challenge.submit.label'}</Trans>
                 </button>
-            </S.Form>
-        </S.Container>
+            </div>
+        </div>
     );
 }
 

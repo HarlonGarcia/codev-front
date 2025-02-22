@@ -11,7 +11,6 @@ import { useSolutions } from 'services/solutions';
 import { getBase64Image } from 'utils';
 
 import { PreviewDemo } from './PreviewDemo';
-import * as S from './styles';
 
 export default function Participants() {
     const { t } = useTranslation();
@@ -36,9 +35,7 @@ export default function Participants() {
     }, [allParticipants, solutions]);
 
     useEffect(function handleWindowResize() {
-        const handleResize = () => {
-            setWindowWidth(window.innerWidth);
-        };
+        const handleResize = () => setWindowWidth(window.innerWidth);
 
         window.addEventListener('resize', handleResize);
 
@@ -47,14 +44,19 @@ export default function Participants() {
 
 
     return (
-        <S.Container>
+        <div className='max-w-[80rem] mx-auto pt-32 px-6 sm:px-10'>
             <CreateSolutionModal
                 visible={isModalVisible}
                 onConfirm={() => setIsModalVisible(false)}
                 onCancel={() => setIsModalVisible(false)}
             />
-            <button onClick={() => navigate(`/challenges/${challengeId}`)}>
-                <LuArrowLeft />
+            <button
+                className='flex items-center gap-2 px-4 py-2 mb-8 transition-all duration-300 ease-in-out bg-purple-800 rounded-lg group'
+                onClick={() => navigate(-1)}
+            >
+                <LuArrowLeft
+                    className='transition-all duration-200 ease-in-out group-hover:-translate-x-0.5'
+                />
                 <span>{t('pages.challenge_users.button.return')}</span>
             </button>
             <div className='flex flex-col gap-4'>
@@ -110,6 +112,6 @@ export default function Participants() {
                     )
                 })}
             </div>
-        </S.Container>
+        </div>
     );
 }

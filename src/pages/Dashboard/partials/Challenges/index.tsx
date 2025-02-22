@@ -16,12 +16,12 @@ import { useCategories } from 'services/category';
 import { useChallenges, useDeleteChallenge } from 'services/challenge';
 import { IGetChallengeParams } from 'services/challenge/types';
 import { useTechnologies } from 'services/technology';
+import { twMerge } from 'tailwind-merge';
 import { ChallengeStatusEnum, IChallenge } from 'types';
-import { DEFAULT_ITEMS_PAGE, NONE } from 'utils/constants';
+import { NONE } from 'utils/constants';
 
 import { Grid } from './partials/Grid';
 import { List } from './partials/List';
-import * as S from './styles';
 
 interface Filters {
     technology?: string;
@@ -46,7 +46,7 @@ export default function Challenges() {
     } = useChallenges({
         ...filters,
         page,
-        size: DEFAULT_ITEMS_PAGE,
+        size: 12,
         authorId: user?.id,
         order: isAscOrder ? 'asc' : 'desc',
     });
@@ -110,22 +110,28 @@ export default function Challenges() {
         value: id,
         label,
     }));
-  
+
+    const classes = 'text-2xl py-2 bg-purple-800 transition-all duration-300 ease-in-out hover:text-pink-900/80';
+
+    const listButtonClasses = twMerge(classes,
+        'pl-2 pr-1 rounded-l-lg',
+        !isGrid ? 'text-green-800' : ''
+    );
+
+    const gridButtonClasses = twMerge(classes,
+        'pr-2 pl-1 rounded-r-lg',
+        isGrid ? 'text-green-800' : ''
+    );
+
     return (
         <>
             <DeleteChallengeDialog
                 visible={isModalOpened}
                 onCancel={() => handleChallengeAction(null, false)}
                 onConfirm={handleDeleteChange}
-                title={
-                    <Trans>
-                        {'pages.dashboard.challenges.delete.modal.title'}
-                    </Trans>
-                }
+                title={t('pages.dashboard.challenges.delete.modal.title')}
                 description={
-                    <Trans
-                        values={{ challenge: selectedChallenge?.title }}
-                    >
+                    <Trans values={{ challenge: selectedChallenge?.title }}>
                         {'pages.dashboard.challenges.delete.modal.description'}
                     </Trans>
                 }
@@ -135,7 +141,9 @@ export default function Challenges() {
                     <h1 className='mb-2 text-3xl font-semibold md:text-4xl md:mb-4'>
                         {t('pages.dashboard.challenges.title')}
                     </h1>
-                    <p className='sm:text-xl'>{t('pages.dashboard.challenges.description')}</p>
+                    <p className='sm:text-xl'>
+                        {t('pages.dashboard.challenges.description')}
+                    </p>
                 </div>
                 <Link
                     to={'new-challenge'}
@@ -146,43 +154,56 @@ export default function Challenges() {
                 </Link>
             </div>
             <div>
-                <S.ChallengesHeader>
-                    <S.Filters>
+                <div className='flex flex-wrap items-center justify-between gap-4 mb-8'>
+                    <div className='flex flex-wrap gap-4'>
                         <Select
                             {...getFilterProps('category')}
                             placeholder={t('pages.dashboard.challenges.filters.category.placeholder')}
                             options={categories}
+                            canDeselect
                         />
                         <Select
                             {...getFilterProps('technology')}
                             placeholder={t('pages.dashboard.challenges.filters.technology.placeholder')}
                             options={technologies}
+                            canDeselect
                         />
                         <Select
                             {...getFilterProps('status')}
                             placeholder={t('pages.dashboard.challenges.filters.status.placeholder')}
                             options={statuses}
+                            canDeselect
                         />
                         <Select
                             {...getFilterProps('orderBy')}
                             placeholder={t('pages.dashboard.challenges.filters.order.placeholder')}
                             options={Object.values(challengesOrderBy)}
+                            canDeselect
                         />
-                    </S.Filters>
-                    <S.Actions>
-                        <S.Order onClick={() => setIsAscOrder((prev) => !prev)}>
+                    </div>
+                    <div className='flex items-center justify-center gap-4'>
+                        <button 
+                            className='text-2xl transition-all duration-300 ease-in-out hover:text-pink-900/80'
+                            onClick={() => setIsAscOrder((prev) => !prev)}
+                        >
                             {isAscOrder ? <FaArrowUpAZ /> : <FaArrowDownAZ />}
-                        </S.Order>
-                        <S.Toggle active={isGrid ? 'grid' : 'list'}>
-                            <button onClick={() => setIsGrid(false)}>
+                        </button>
+                        <div className='flex items-center justify-center'>
+                            <button
+                                className={listButtonClasses}
+                                onClick={() => setIsGrid(false)}
+                            >
                                 <IoMdList />
                             </button>
-                            <button onClick={() => setIsGrid(true)}>
+                            <button
+                                className={gridButtonClasses}
+                                onClick={() => setIsGrid(true)}
+                            >
                                 <MdGridView />
                             </button>
-                        </S.Toggle>
-                    </S.Actions>
-                </S.ChallengesHeader>
+                        </div>
+                    </div>
+                </div>
                 {isGrid ? (
                     <Grid
                         items={items}
